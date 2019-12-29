@@ -14,6 +14,19 @@ Description:
     that can be easily modified via regular ggplot2 syntax. In addition, a 
     large set of visualization tools for exploratory data analysis based on 
     correlation matrices is provided.
+Depends: 
+    R (>= 3.6.2)
+Imports:
+    ggplot2 (>= 3.2.1),
+    grid,
+    gtable,
+    grDevices,
+    rlang,
+    scales,
+    utils,
+    dplyr (>= 0.8.3),
+    tidyr (>= 1.0.0),
+    magrittr
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
