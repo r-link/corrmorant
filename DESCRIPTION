@@ -1,11 +1,19 @@
 Package: corrmorant
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Flexible Correlation Matrices Based on 'ggplot2'
+Version: 0.0.1
+Authors@R:
+    person(
+      given = "Roman M.",
+      family = "Link",
+      role = c("aut", "cre"),
+      email = "roman.link@uni-wuerzburg.de"
+    )
+Description: 
+    Extends ggplot2 by an automated framework for plots of correlation matrices
+    that can be easily modified via regular ggplot2 syntax. In addition, a 
+    large set of visualization tools for exploratory data analysis based on 
+    correlation matrices is provided.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
