@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+sinew_workflow.R
+data-raw/
