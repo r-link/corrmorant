@@ -6,14 +6,14 @@
 #' @param x PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname is.infinite.data.frame
-#' @export 
+#' @export
 is.infinite.data.frame <- function(x) do.call(cbind, lapply(x, is.infinite))
 
 # is.nan method for data.frames ---------------------------------------------
@@ -22,14 +22,14 @@ is.infinite.data.frame <- function(x) do.call(cbind, lapply(x, is.infinite))
 #' @param x PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname is.nan.data.frame
-#' @export 
+#' @export
 is.nan.data.frame <- function(x) do.call(cbind, lapply(x, is.nan))
 
 # recale_var() - function for rescaling variables ----------------------------
@@ -46,14 +46,14 @@ is.nan.data.frame <- function(x) do.call(cbind, lapply(x, is.nan))
 #' @param append_x PARAM_DESCRIPTION, Default: NULL
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname rescale_var
-#' @export 
+#' @export
 rescale_var <- function(x, lower, upper, range, append_x = NULL){
   # scale into the range from 0 to 1...
     if (!any((x - mean(x)) > 1e-10)  && is.null(append_x)) {
@@ -65,7 +65,7 @@ rescale_var <- function(x, lower, upper, range, append_x = NULL){
   }
   # rescale to the right percent range
   x2 <- lower + x1 * (upper - lower)
-  
+
   # return rescaled variable
   return(range[1] + x2 * diff(range))
 }
@@ -76,16 +76,16 @@ rescale_var <- function(x, lower, upper, range, append_x = NULL){
 #' @param x PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
+#' @seealso
 #'  \code{\link[stats]{na.fail}}
 #' @rdname skew
-#' @export 
+#' @export
 #' @importFrom stats na.omit
 skew <- function (x) {
   x <- stats::na.omit(x)
@@ -102,21 +102,61 @@ skew <- function (x) {
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname add
-#' @export 
+#' @export
 add <- function(.object, .fun, ...) .object + {{.fun}}(...)
+
+
+# modify_list() - copied internal function from ggplot2 -----------------------
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param old PARAM_DESCRIPTION
+#' @param new PARAM_DESCRIPTION
+#' @param ... PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname modify_list
+modify_list <- function (old, new) {
+  for (i in names(new)) old[[i]] <- new[[i]]
+  old
+}
+
+
+
+# is.waive() - copied internal function from ggplot2 --------------------------
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param x PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname is.waive
+is.waive <- function (x) {
+  inherits(x, "waiver")
+}
 
 # fixrange() - add fixed cartesian range --------------------------------------
 # # .deprecated, just a placeholder to remember it has to be rewritten
 # fixrange <- function(.object, range = c(-2.5, 2.5)){
 #   data <- attr(.object, "corrdat")
-#   outrange <- attr(data, "range") %>% 
+#   outrange <- attr(data, "range") %>%
 #     mutate(min = range[1], max = range[2], center = mean(range), span = abs(diff(range)))
 #   attr(data, "range") <- outrange
 #   attr(.object, "corrdat") <- data
