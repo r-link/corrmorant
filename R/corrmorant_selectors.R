@@ -6,7 +6,7 @@
 # modifiers instead to illustrate that what they are doing is outside regular
 # ggplot syntax.
 # Basically, the three selectors just take the (unevaluated) geom and make sure
-# that when ggplot_build is called all calculations are performed only for the 
+# that when ggplot_build is called all calculations are performed only for the
 # data from the right subset of facets. To achieve this, the data slot in the
 # corresponding geoms is replaced by a subsetting function. In cases where there
 # are already (user-specified) data, these are filtered for the right facets, and
@@ -21,35 +21,34 @@
 
 # layer_data_fun() function factory for layer_data functions ------------------
 # returns a layer_data function that filters the data of a layer by the desired
-# type (upper, lower, diag) 
+# type (upper, lower, diag)
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param data PARAM_DESCRIPTION
 #' @param pos PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
+#' @seealso
 #'  \code{\link[ggplot2]{character(0)}}
 #'  \code{\link[methods]{is}}
 #'  \code{\link[dplyr]{filter}},\code{\link[dplyr]{select}},\code{\link[dplyr]{join}},\code{\link[dplyr]{mutate}},\code{\link[dplyr]{group_by}}
 #'  \code{\link[tidyr]{nest}}
 #' @rdname update_data
-#' @export 
-#' @importFrom ggplot2 is.waive
+#' @export
 #' @importFrom methods is
 #' @importFrom dplyr filter select full_join mutate group_by ungroup
 #' @importFrom tidyr unnest
 update_data <- function(data, pos){
   # prepare function for subset computation if nothing is specified
   # (common case)
-  if (ggplot2:::is.waive(data)) {
-    datafun <- function(plot_data){ 
+  if (is.waive(data)) {
+    datafun <- function(plot_data){
       if(!methods::is(plot_data, "tidy_corrm")){
         stop("corrmorant selectors can only be used in ggcorrm() calls\n")
       }
@@ -76,20 +75,20 @@ update_data <- function(data, pos){
           dplyr::filter(data, type == pos)
         } else {
           # get identifiers for panels
-          panel_ids <- plot_data %>% 
-            dplyr::select(var_x, var_y, type) %>% 
-            dplyr::filter(!duplicated(paste(var_x, var_y)), 
+          panel_ids <- plot_data %>%
+            dplyr::select(var_x, var_y, type) %>%
+            dplyr::filter(!duplicated(paste(var_x, var_y)),
                           type == pos)
           if (any((c("var_x", "var_y", "type") %in% names(data)))){
           # if some are present, merge with correct identifiers
-          panel_ids %>% 
+          panel_ids %>%
             dplyr::full_join(data)
           } else {
             # else combine with all levels
             dat <- replicate(nrow(panel_ids), data, simplify = FALSE)
-            dplyr::mutate(panel_ids, dat = dat) %>% 
-              dplyr::group_by(var_x, var_y, type) %>% 
-              tidyr::unnest(cols = c(dat)) %>% 
+            dplyr::mutate(panel_ids, dat = dat) %>%
+              dplyr::group_by(var_x, var_y, type) %>%
+              tidyr::unnest(cols = c(dat)) %>%
               dplyr::ungroup()
           }
         }
@@ -104,14 +103,14 @@ update_data <- function(data, pos){
 #' @param geom PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname lotri
-#' @export 
+#' @export
 lotri <- function(geom) {
   geom$data <- update_data(geom$data, "lower")
   return(geom)
@@ -123,14 +122,14 @@ lotri <- function(geom) {
 #' @param geom PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname utri
-#' @export 
+#' @export
 utri <- function(geom) {
   geom$data <- update_data(geom$data, "upper")
   return(geom)
@@ -142,14 +141,14 @@ utri <- function(geom) {
 #' @param geom PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname dia
-#' @export 
+#' @export
 dia <- function(geom) {
   geom$data <- update_data(geom$data, "diag")
   return(geom)
