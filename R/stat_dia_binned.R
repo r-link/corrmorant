@@ -3,6 +3,10 @@
 #        (do not know why at the moment it looks so messy)
 
 # StatDiaBin - ggproto object for stat_dia_bin --------------------------------
+#' @rdname stat_dia_bin
+#' @format NULL
+#' @usage NULL
+#' @export
 StatDiaBin <- ggproto("StatDiaBin", Stat,
                       required_aes = "x",
                       # compute panel - standard function just slightly updated to pass ranges

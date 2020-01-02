@@ -1,6 +1,10 @@
 # dia_names() - function for names on the diagonal ----------------------------
 
 # ggproto object for stat_dia_density
+#' @rdname stat_dia_names
+#' @format NULL
+#' @usage NULL
+#' @export
 StatDiaNames <- ggproto("StatDiaNames", Stat,
                         required_aes = c("x", "label"),
                         compute_group = function(data, scales, y_pos = 0.2) {

@@ -2,6 +2,10 @@
 
 S3method(is.infinite,data.frame)
 S3method(is.nan,data.frame)
+export(StatCortext)
+export(StatDiaBin)
+export(StatDiaDensity)
+export(StatDiaNames)
 export(add)
 export(corrmorant)
 export(dia)

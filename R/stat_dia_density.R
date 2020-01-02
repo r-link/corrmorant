@@ -1,6 +1,10 @@
 # dia_density() - function for density plots on the diagonal ------------------
 
 # StatDiaDensity - ggproto object for stat_dia_density ------------------------
+#' @rdname stat_dia_density
+#' @format NULL
+#' @usage NULL
+#' @export
 StatDiaDensity <- ggproto("StatDiaDensity", Stat,
                           required_aes = "x",
                           # compute panel - standard function just slightly updated to pass ranges
