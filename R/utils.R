@@ -162,3 +162,16 @@ is.waive <- function (x) {
 #   attr(.object, "corrdat") <- data
 #   return(.object + coord_cartesian(xlim = range, ylim = range))
 # }
+
+# import functions from other packages ----------------------------------------
+# entire ggplot2 package
+#' @import ggplot2
+
+# magrittr style pipelines
+#' @importFrom magrittr `%>%`
+NULL
+
+# some non-standard evaluation from rlang (probably only quos is needed)
+#' @importFrom rlang quo quos enquo enquos
+NULL
+
