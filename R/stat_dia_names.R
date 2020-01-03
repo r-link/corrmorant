@@ -1,7 +1,7 @@
 # dia_names() - function for names on the diagonal ----------------------------
 
 # ggproto object for stat_dia_density
-#' @rdname stat_dia_names
+#' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
 #' @export

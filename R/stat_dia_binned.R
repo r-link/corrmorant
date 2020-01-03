@@ -3,7 +3,7 @@
 #        (do not know why at the moment it looks so messy)
 
 # StatDiaBin - ggproto object for stat_dia_bin --------------------------------
-#' @rdname stat_dia_bin
+#' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
 #' @export

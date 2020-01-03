@@ -1,7 +1,7 @@
 # dia_density() - function for density plots on the diagonal ------------------
 
 # StatDiaDensity - ggproto object for stat_dia_density ------------------------
-#' @rdname stat_dia_density
+#' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
 #' @export

@@ -1,10 +1,9 @@
 # scripts for cortext and related functions -----------------------------------
 
 # StatCortext - ggproto object for stat_Cortext -------------------------------
-#' @rdname stat_cortext
+#' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
-#' @export
 StatCortext <- ggproto("StatCortext", Stat,
                        required_aes = c("x", "y"),
                        # compute panel - standard function just slightly updated to pass ranges
