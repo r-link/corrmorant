@@ -15,7 +15,7 @@ Description:
     large set of visualization tools for exploratory data analysis based on 
     correlation matrices is provided.
 Depends: 
-    R (>= 3.6.2),
+    R (>= 3.6.0),
     ggplot2 (>= 3.2.1),
     rlang
 Imports:
