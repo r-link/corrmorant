@@ -1,4 +1,4 @@
-#' @title Corrmorant selectors
+#' @title corrmorant selectors
 #' @description Selector functions that can be used to modify the mapping of
 #'     ggplot \code{\link[ggplot2:layer]{layers}} to a subset of panels in
 #'     \code{ggcorrm} plots.

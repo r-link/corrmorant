@@ -5,7 +5,7 @@
 \alias{lotri}
 \alias{utri}
 \alias{dia}
-\title{Corrmorant selectors}
+\title{corrmorant selectors}
 \usage{
 lotri(layer)
 
