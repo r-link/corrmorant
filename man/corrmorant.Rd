@@ -2,7 +2,7 @@
 % Please edit documentation in R/corrmorant.R
 \name{corrmorant}
 \alias{corrmorant}
-\title{FUNCTION_TITLE}
+\title{Automated correlation plots}
 \usage{
 corrmorant(
   data,
@@ -13,29 +13,50 @@ corrmorant(
 )
 }
 \arguments{
-\item{data}{PARAM_DESCRIPTION}
+\item{data}{A \code{data.frame} or \code{matrix} with the raw data used
+for the correlation plot. If a \code{data.frame}, all numeric variables
+are used as rows/columns of the correlation plot, while all other
+variables are appended to the original dataset as additional columns.}
 
-\item{style}{PARAM_DESCRIPTION, Default: c("dark", "light", "blue_red")}
+\item{style}{character string defining the plot style. One of "dark", "light"
+and "blue_red".}
 
-\item{rescale}{PARAM_DESCRIPTION, Default: c("by_sd", "by_range", NULL)}
+\item{rescale}{a character string specifying the type of transformation
+performed on the numeric variables in the plot. The standard argument
+\code{"by.sd"} scales by the standard deviation of the data and centers
+around zero.  \code{"by.range"} rescales the range of the data to the
+interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
+values. Default: \code{"by_sd"}}
 
-\item{labels}{PARAM_DESCRIPTION, Default: NULL}
+\item{labels}{(optional) character vector with labels for the names of all
+numeric columns that are used to replace the column names in the plot
+axis and text labels. Must be of the same length as the number of
+numeric columns displayed in the plot. Default: \code{NULL}}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Additional arguments to \code{\link{ggcorrm}()}.}
 }
 \value{
-OUTPUT_DESCRIPTION
+An object of class \code{ggcorrm}.
 }
 \description{
-FUNCTION_DESCRIPTION
+\code{corrmorant()} is a wrapper around \code{\link{ggcorrm}()}
+   that creates scatterplot matrices with correlation output using
+   reasonable standard values for initial data inspection. For more advanced
+   plots, refer to  \code{\link{ggcorrm}()}.
 }
 \details{
-DETAILS
+\code{corrmorant()} is a simplified wrapper around \code{\link{ggcorrm}()}
+   that creates scatterplot matrices with reasonable standard settings.
+   Refer to the documentation of \code{\link{ggcorrm}()} and
+   \code{\link{tidy_corrm}()} for details.
 }
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+ # plot the iris dataset with 3 different styles
+ corrmorant(iris, style = "dark")
+ corrmorant(iris, style = "light")
+ corrmorant(iris, style = "blue_red")
  }
 }
 }

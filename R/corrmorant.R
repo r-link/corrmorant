@@ -1,38 +1,46 @@
-# corrmorant() - automated correlation matrix plots ---------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param style PARAM_DESCRIPTION, Default: c("dark", "light", "blue_red")
-#' @param rescale PARAM_DESCRIPTION, Default: c("by_sd", "by_range", NULL)
-#' @param labels PARAM_DESCRIPTION, Default: NULL
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
+#' @title Automated correlation plots
+#' @description \code{corrmorant()} is a wrapper around \code{\link{ggcorrm}()}
+#'    that creates scatterplot matrices with correlation output using
+#'    reasonable standard values for initial data inspection. For more advanced
+#'    plots, refer to  \code{\link{ggcorrm}()}.
+#' @param style character string defining the plot style. One of "dark", "light"
+#'      and "blue_red".
+#' @param ... Additional arguments to \code{\link{ggcorrm}()}.
+#' @inheritParams tidy_corrm
+#' @return An object of class \code{ggcorrm}.
+#' @details \code{corrmorant()} is a simplified wrapper around \code{\link{ggcorrm}()}
+#'    that creates scatterplot matrices with reasonable standard settings.
+#'    Refer to the documentation of \code{\link{ggcorrm}()} and
+#'    \code{\link{tidy_corrm}()} for details.
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # plot the iris dataset with 3 different styles
+#'  corrmorant(iris, style = "dark")
+#'  corrmorant(iris, style = "light")
+#'  corrmorant(iris, style = "blue_red")
 #'  }
 #' }
 #' @rdname corrmorant
-#' @export 
-corrmorant <- function(data, style = c("dark", "light", "blue_red"), 
+#' @export
+corrmorant <- function(data, style = c("dark", "light", "blue_red"),
                        rescale     = c("by_sd", "by_range", NULL),
                        labels       = NULL,
                        ...){
   # match arguments
   rescale <- match.arg(rescale)
   style   <- match.arg(style)
-  
+
   # prepare plot
-  p0 <- ggcorrm(data, 
-                rescale = rescale, 
-                bg_dia =  switch(style, dark = "grey20", NULL), 
-                labels = labels) 
-  
+  p0 <- ggcorrm(data,
+                rescale = rescale,
+                bg_dia =  switch(style, dark = "grey20", NULL),
+                labels = labels,
+                ...)
+
   # prepare layers
   layers <- list(
-  lotri(geom_point(alpha = min(1 / log10(nrow(data)), 1), 
+  lotri(geom_point(alpha = min(1 / log10(nrow(data)), 1),
                    mapping = switch(style, blue_red = aes(col = .corr), NULL))),
   utri(geom_cortext(mapping = switch(style, blue_red = aes(col = .corr), NULL))),
   dia_density(lower = .4, fill = switch(style, dark = "grey90", "grey80"), col = 1),
@@ -40,9 +48,7 @@ corrmorant <- function(data, style = c("dark", "light", "blue_red"),
   switch(style, blue_red = scale_color_corr(option = "A",
                                             aesthetics = c("fill", "color")), NULL)
   )
-  
+
   # return output
   p0 + layers
 }
-
-  
