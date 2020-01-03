@@ -126,8 +126,8 @@ if(interactive()){
 
    # use of mutates argument
    corrdat2 <- tidy_corrm(iris,
-               mutates = quos(leaf_type   = substr(var_x, 1, 5),
-                               dimmension = substr(var_x, 7, nchar(var_x))
+               mutates = quos(leaf_type  = substr(var_x, 1, 5),
+                               dimension = substr(var_x, 7, 13)
                                )
                 )
    head(corrdat2)
