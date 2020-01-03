@@ -2,49 +2,143 @@
 % Please edit documentation in R/tidy_corrm.R
 \name{tidy_corrm}
 \alias{tidy_corrm}
-\title{FUNCTION_TITLE}
+\title{Reshape data for correlation matrices to a tidy format}
 \usage{
 tidy_corrm(
   data,
   labels = NULL,
   rescale = c("by_sd", "by_range", NULL),
-  corr_group = NULL,
   corr_method = "pearson",
+  corr_group = NULL,
   mutates = NULL
 )
 }
 \arguments{
-\item{data}{PARAM_DESCRIPTION}
+\item{data}{A \code{data.frame} or \code{matrix} with the raw data used
+for the correlation plot. If a \code{data.frame}, all numeric variables
+are used as rows/columns of the correlation plot, while all other
+variables are appended to the original dataset as additional columns.}
 
-\item{labels}{PARAM_DESCRIPTION, Default: NULL}
+\item{labels}{(optional) character vector with labels for the names of all
+numeric columns that are used to replace the column names in the plot
+axis and text labels. Must be of the same length as the number of
+numeric columns displayed in the plot. Default: \code{NULL}}
 
-\item{rescale}{PARAM_DESCRIPTION, Default: c("by_sd", "by_range", NULL)}
+\item{rescale}{a character string specifying the type of transformation
+performed on the numeric variables in the plot. The standard argument
+\code{"by.sd"} scales by the standard deviation of the data and centers
+around zero.  \code{"by.range"} rescales the range of the data to the
+interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
+values. Default: \code{"by_sd"}}
 
-\item{corr_group}{PARAM_DESCRIPTION, Default: NULL}
+\item{corr_method}{character string with the correlation method passed to
+\code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
+ and \code{"spearman"}
+ Default: \code{"pearson"}}
 
-\item{corr_method}{PARAM_DESCRIPTION, Default: 'pearson'}
+\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
+a grouping variable is specified, \code{.corr} which can be used for
+conditional coloring will be calculated separately for each of these
+groups.
+Default: \code{NULL}}
 
-\item{mutates}{PARAM_DESCRIPTION, Default: NULL}
+\item{mutates}{(optional) list of named quosures created with
+\code{\link[rlang:quos]{rlang::quos}}. Can be any expressions that specify
+ changes to the `tidy_corrm` \emph{after} reshaping, using regular
+\code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Default: NULL}
 }
 \value{
-OUTPUT_DESCRIPTION
+An object of class \code{tidy_corrm} (a tibble with structured
+   correlation data) containing the following columns:
+   \describe{
+     \item{var_x}{name of the variable on the x-axis in
+       the order of appearance in the raw data (ordered factor).}
+     \item{var_y}{name of the variable on the y-axis in
+       the order of appearance in the raw data (ordered factor)}
+     \item{x}{data of the variable on the x axis (numeric).}
+     \item{y}{data of the variable on the y axis (numeric).}
+     \item{type}{type of panel (character, \code{"upper"}, code{"lower"} or
+       code{"diag"}).}
+     \item{.corr}{correlation between x and y calculated with
+       \code{\link[stats]{cor}} using
+       the method specified with \code{corr_method} and optionally
+       within the groups specified with \code{corr_group} (numeric).}
+     \item{corr_group}{grouping variable for .corr (1 for all observations
+       if no groups are specified).}
+     \item{Additional columns}{All other columns specified in the dataset
+       and/or created via \code{mutates}.}
+     }
 }
 \description{
-FUNCTION_DESCRIPTION
+\code{tidy_corrm()} takes a \code{data.frame} or \code{matrix}
+   and reshapes it to a long-table format that enables plotting with
+   \code{\link{ggcorrm}}.
 }
 \details{
-DETAILS
+\code{tidy_corrm()} is used to reshape a \code{data.frame} or
+   \code{matrix} with raw data for a correlation plot to a long-table
+   format that can be plotted with \code{\link{ggcorrm}}. The function
+   creates a tibble with all combinations of all numeric variables in the
+   dataset that are labelled with their column names (or, alternatively,
+   a vector with new labels) in the order of their appearance in the raw
+   data. All other variables are appended to the reshaped data.frame and
+   can be accessed in the plots.
+
+   By default, the data are scaled and centered using their standard
+   deviation (\code{rescale = "by.sd"}), but it is also possible to
+   rescale them into the range from 0 to 1 (\code{rescale = "by.range"}) or
+   to maintain the original scale of the data (\code{rescale = NULL}).
+
+   An additional variable called \code{.corr} with the bivariate correlation
+   of the two variables (by default, Pearson correlation,
+   see \code{\link[stats]{cor}}) is appended to the dataset. This variable
+   can e.g. be used to specify the colour or fill of geoms conditional of
+   the strength of the correlation (see examples in \code{\link{ggcorrm}}).
+   If the correlations displayed with \code{\link{geom_cortext}}) are separated
+   by groups, it may make sense to also calculate \code{.corr} separately for
+   these groups. In this case, it is possible to specify a grouping variable
+   for the calculation of \code{.corr} using \code{corr_group}.
+
+   In many cases, the variables in the correlation matrix belong to
+   different groups.As the input for \code{tidy_corrm} is based on a wide
+   table format, it is not possible to include this information as an
+   additional column. There are two ways to include variable-specific
+   information \emph{after the fact}: a) \code{tidy_corrm()} can be
+   called directly, and its output can be modified manually before passing
+   it to \code{ggcorrm()} or b) the \code{mutates} argument can be used to
+   pass a list of named quosures created with
+   \code{\link[rlang:quos]{rlang::quos}} that contain a set of mutating
+   operations based on regular \code{\link[dplyr:mutate]{dplyr::mutate}}
+   syntax that are evaluated inside the reshaped dataset (see examples).
+   For the standard column names of \code{tidy_corr} objects, that can be
+   used in \code{mutates}, see the Value section.
 }
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+   # general shape of the output
+   corrdat <- tidy_corrm(iris)
+   head(corrdat)
+
+   # relabeling variables
+   corrdat1 <- tidy_corrm(iris, labels = c("Some", "very", "nice", "labels"))
+   head(corrdat1)
+
+   # use of mutates argument
+   corrdat2 <- tidy_corrm(iris,
+               mutates = quos(leaf_type   = substr(var_x, 1, 5),
+                               dimmension = substr(var_x, 7, nchar(var_x))
+                               )
+                )
+   head(corrdat2)
  }
 }
 }
 \seealso{
-\code{\link[dplyr]{mutate_all}},\code{\link[dplyr]{mutate}},\code{\link[dplyr]{group_nest}},\code{\link[dplyr]{select}},\code{\link[dplyr]{arrange}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{case_when}}
- \code{\link[stats]{sd}}
- \code{\link[tidyr]{gather}},\code{\link[tidyr]{expand_grid}},\code{\link[tidyr]{nest}}
- \code{\link[purrr]{map}}
+\code{\link{ggcorrm}},
+ \code{\link{corrmorant}},
+ \code{\link[ggplot2:ggplot]{ggplot2::ggplot}},
+ \code{\link[ggplot2:theme]{ggplot2::theme}},
+ \code{\link[dplyr:mutate]{dplyr::mutate}},
+ \code{\link[rlang:quos]{rlang::quos}}
 }
