@@ -16,37 +16,16 @@
 # in addition, lotri(), utri() and dia() perform the necessary testing whether
 # the data corrmorant functions are called upon are of the right class.
 
-# there may be a better solution for all this, but I yet have to find it.
 
-
-# layer_data_fun() function factory for layer_data functions ------------------
+# update_data() function factory for layer_data functions ------------------
 # returns a layer_data function that filters the data of a layer by the desired
 # type (upper, lower, diag)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param pos PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[ggplot2]{character(0)}}
-#'  \code{\link[methods]{is}}
-#'  \code{\link[dplyr]{filter}},\code{\link[dplyr]{select}},\code{\link[dplyr]{join}},\code{\link[dplyr]{mutate}},\code{\link[dplyr]{group_by}}
-#'  \code{\link[tidyr]{nest}}
-#' @rdname update_data
-#' @export
 #' @importFrom methods is
 #' @importFrom dplyr filter select full_join mutate group_by ungroup
 #' @importFrom tidyr unnest
 update_data <- function(data, pos){
   # prepare function for subset computation if nothing is specified
-  # (common case)
+  # (regular case)
   if (is.waive(data)) {
     datafun <- function(plot_data){
       if(!methods::is(plot_data, "tidy_corrm")){
