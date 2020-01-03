@@ -15,26 +15,8 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
                         }
 )
 
-# stat for dia_density
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param geom PARAM_DESCRIPTION, Default: 'text'
-#' @param position PARAM_DESCRIPTION, Default: 'identity'
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @param y_pos PARAM_DESCRIPTION, Default: 0.2
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname stat_dia_names
+# stat_dia_names() - stat function based on StatDiaNames ----------------------
+#' @rdname dia_names
 #' @export
 stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
                            position = "identity", show.legend = NA,
@@ -47,14 +29,24 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
   )
 }
 
-# add_map has to be called with the add_aes function
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param y_pos PARAM_DESCRIPTION, Default: 0.2
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+# dia_names() - label diagonal facets by variable names -----------------------
+#' @title Add variable names to diagonal facets
+#' @description \code{dia_names()} is a wrapper around \code{stat_dia_names()}
+#'    which plots the names of variables in a \code{ggcorrm} plot at the
+#'    required position in the diagonal facets.
+#' @param y_pos numeric between 0 and 1 specifying the relative position of the
+#'     text labels along the x axis (defaults to 0.2).
+#' @param mapping (optional) mapping for the internal
+#'    \code{\link[ggplot2:geom_text]{geom_text}()} call. Must be created with
+#'    \code{\link[ggplot2:aes]{aes}()}, and must not contain \code{x} or
+#'    \code{y}. Can e.g. be used to color text labels by groups (see example).
+#'    Defaults to NULL.
+#' @param ... Additional parameters passed to
+#'    \code{\link[ggplot2:geom_text]{geom_text}()}.
+#' @return A layer containing text labels on the diagonal facets.
+#' @details \code{dia_names()} plots text labels on the plot diagonal and takes
+#'    care of the often complicated positioning in plots with different x and y
+#'    ranges.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
@@ -62,7 +54,12 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #'  }
 #' }
 #' @seealso
-#'  \code{\link[ggplot2]{character(0)}}
+#'   \code{\link[ggplot2:geom_text]{geom_text}()},
+#'   \code{\link{ggcorrm}},
+#'   \code{\link{tidy_corrm}},
+#'   \code{\link{dia_density}},
+#'   \code{\link{dia_histogram}},
+#'   \code{\link{dia_freqpoly}}
 #' @rdname dia_names
 #' @export
 dia_names <- function(y_pos = 0.2, mapping = NULL, ...) {
