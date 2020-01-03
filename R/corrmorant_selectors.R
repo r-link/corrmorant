@@ -20,6 +20,7 @@
 # update_data() function factory for layer_data functions ------------------
 # returns a layer_data function that filters the data of a layer by the desired
 # type (upper, lower, diag)
+#' @keywords internal
 #' @importFrom methods is
 #' @importFrom dplyr filter select full_join mutate group_by ungroup
 #' @importFrom tidyr unnest

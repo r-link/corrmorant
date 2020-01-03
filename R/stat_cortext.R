@@ -141,26 +141,7 @@ geom_cortext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
 
 # get_cortext_pos() function for cortext label positions ----------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param stats PARAM_DESCRIPTION
-#' @param nrow PARAM_DESCRIPTION, Default: NULL
-#' @param ncol PARAM_DESCRIPTION, Default: NULL
-#' @param squeeze PARAM_DESCRIPTION
-#' @param xrange PARAM_DESCRIPTION
-#' @param yrange PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[dplyr]{mutate}}
-#' @rdname get_cortext_pos
-#' @export
+#' @keywords internal
 #' @importFrom dplyr mutate
 get_cortext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
                             xrange, yrange){
