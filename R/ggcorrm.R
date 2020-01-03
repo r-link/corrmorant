@@ -1,28 +1,117 @@
-# ggcorm() - the workhorse function -------------------------------------------
-# define ggcorm function 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param labels PARAM_DESCRIPTION, Default: NULL
-#' @param rescale PARAM_DESCRIPTION, Default: c("by_sd", "by_max", NULL)
-#' @param corr_group PARAM_DESCRIPTION, Default: NULL
-#' @param corr_method PARAM_DESCRIPTION, Default: 'pearson'
-#' @param mutates PARAM_DESCRIPTION, Default: NULL
-#' @param bg_dia PARAM_DESCRIPTION, Default: NULL
-#' @param bg_lotri PARAM_DESCRIPTION, Default: NULL
-#' @param bg_utri PARAM_DESCRIPTION, Default: NULL
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
+#' @title Create a ggcorrm correlation plot
+#' @description \code{ggcorrm()} initializes a \code{ggcorrm} object (inheriting
+#'     from class \code{ggplot}). It can be called either with a raw data frame
+#'     with input data, which is then internally passed to
+#'     \code{\link{tidy_corrm()}}, or with a prepared correlation object of class
+#'     \code{tidy_corrm}.
+#' @param data Dataset used to compute the correlation matrix. Can be either a
+#'     \code{data.frame} or \code{matrix}, or an object of class \code{tidy_corrm}.
+#'     If specifying a \code{data.frame} or \code{matrix}, it will internally be
+#'     passed to \code{\link{tidy_corrm()}} with the settings for \code{labels},
+#'     \code{rescale}, \code{corr_group}, \code{corr_method} and \code{mutates}
+#'     specified in the \code{ggcorrm()} call. \code{\link{tidy_corrm()}}
+#'     prepares the dataset for plotting by creating a \code{data.frame} with
+#'     all possible combinations of all numeric variables while retaining all
+#'     discrete variables in additional columns. If a \code{tidy_corrm} object
+#'     is supplied, all arguments passed to \code{\link{tidy_corrm()}} will be
+#'     ignored and the \code{tidy_corrm} object wil be used directly to
+#'     initialize the \code{ggcorrm} plot.
+#' @param labels (optional) character vector with labels for the names of all
+#'     numeric columns that are used to replace the column names in the plot
+#'     axis and text labels. Must be of the same length as the number of
+#'     numeric columns displayed in the plot. Default: \code{NULL}
+#' @param rescale a character string specifying the type of transformation
+#'     performed on the numeric variables in the plot. The standard argument
+#'     \code{"by.sd"} scales by the standard deviation of the data and centers
+#'     around zero.  \code{"by.range"} rescales the range of the data to the
+#'     interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
+#'     values. Default: \code{"by_sd"}
+#' @param corr_group NULL or the name of a numeric variable in \code{data}. If
+#'     a grouping variable is specified, \code{.corr} which can be used for
+#'     conditional coloring will be calculated separately for each of these
+#'     groups (see documentation of \code{\link{tidy_corrm}} for details).
+#'     Default: \code{NULL}
+#' @param corr_method character string with the correlation method passed to
+#'    \code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
+#'     and \code{"spearman"}
+#'     Default: \code{"pearson"}
+#' @param mutates (optional) list of named quosures created with
+#'     \code{\link[rlang::quos]{quos}}. Can be any expressions that specify
+#'      changes to the `tidy_corrm` AFTER reshaping, using regular
+#'     \code{\link[dplyr::mutate]{mutate}} syntax. Default: NULL
+#' @param bg_dia (optional) background color specification for the diagonal panels.
+#'     Either a character string with a hexadecimal color code, a character string
+#'     specifying a color name in \code{\link[grDevices]{colors}}, or an integer
+#'     specifying a position in \code{\link[grDevices]{palette}}. The default value
+#'     of \code{NULL} used the standard background color defined in the corresponding
+#'     \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#' @param bg_lotri (optional) background color specification for the panels in the
+#'     lower triangle. Either a character string with a hexadecimal color code, a
+#'     character string specifying a color name in \code{\link[grDevices]{colors}},
+#'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
+#'     default value of \code{NULL} used the standard background color defined in the
+#'     corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#' @param bg_utri (optional) background color specification for the panels in the
+#'     lower triangle. Either a character string with a hexadecimal color code, a
+#'     character string specifying a color name in \code{\link[grDevices]{colors}},
+#'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
+#'     default value of \code{NULL} used the standard background color defined in the
+#'     corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#' @details \code{ggcorrm} creates the initial plot object containing information
+#'     about panel placement, correlations, ...
+#'
+#' @return An object of class \code{ggcorrm} containing the reshaped dataset for the
+#'     correlation plot and an empty \code{ggplot} object with appropriate facet and
+#'     theme specifications.
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#' # correlation matrix for the iris dataset
+#' ggcorrm(iris, bg_dia = "grey20") +
+#'   lotri(geom_point(alpha = 0.4)) +
+#'   utri(geom_cortext()) +
+#'   dia_histogram(lower = .3, upper = 1, fill = "grey90", col = 1) +
+#'   dia_names(y_pos = .1, col = "white", size = 3)
+#'
+#' # iris data with conditional coloring by pearson correlation
+#' ggcorrm(iris, rescale = "by_sd") +
+#'   lotri(geom_point(aes(col = .corr), alpha = 0.6)) +
+#'   lotri(geom_smooth(aes(fill = .corr, col = .corr),
+#'                     method = "lm", size = 0.3, alpha = 0.6)) +
+#'   utri(geom_cortext(aes(color = .corr))) +
+#'   dia_density(fill = "grey80", lower = .4) +
+#'   dia_names(y_pos = .1) +
+#'   scale_color_corr(option = "A", aesthetics = c("fill", "color"))
+#'
+#' # correlation separated by groups
+#' ggcorrm(iris, rescale = "by_sd", bg_dia = "grey95") +
+#'   lotri(geom_point(aes(col = Species), alpha = 0.4)) +
+#'   lotri(geom_smooth(aes(x, y, fill = Species), col = 1, method = "lm"))  +
+#'   utri(geom_cortext(aes(col = Species), nrow = 2)) +
+#'   dia_density(aes(fill = Species), alpha = 0.5, lower = 0.4) +
+#'   dia_names(y_pos = 0.15)
+#'
+#' # using the 'mutates' argument to color diagonal panels by leaf type
+#' ggcorrm(iris, rescale = "by_sd",
+#'         mutates = quos(leaftype = ifelse(substr(var_x, 1, 1) == "S",
+#'                                          "Sepal", "Petal"))) +
+#'   lotri(geom_point(alpha = 0.4))+
+#'   utri(geom_cortext()) +
+#'   dia_density(lower = .3,
+#'               mapping = aes(fill = leaftype)) +
+#'   dia_names(y_pos = .1,
+#'             mapping = aes(col = leaftype))
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{reexports}}
+#' @seealso
+#'  \code{\link{tidy_corrm}}
+#'  \code{\link{corrmorant}}
+#'  \code{\link[ggplot2::ggplot]{ggplot2::ggplot}},
+#'  \code{\link[ggplot2::theme]{ggplot2::theme}},
+#'  \code{\link[dplyr::mutate]{dplyr::mutate}},
+#'  \code{\link[rlang::quos]{rlang::quos}}
 #' @rdname ggcorrm
-#' @export 
+#' @export
 #' @importFrom dplyr tibble
 ggcorrm <- function(data,          # dataset
                     labels = NULL, # replacement labels for facet names
@@ -32,26 +121,26 @@ ggcorrm <- function(data,          # dataset
                     corr_method = "pearson",
                     mutates = NULL,    # post-reshaping mutates
                     # background options
-                    bg_dia = NULL, 
-                    bg_lotri = NULL, 
-                    bg_utri = NULL){ 
+                    bg_dia = NULL,
+                    bg_lotri = NULL,
+                    bg_utri = NULL){
   # if rescale argument is not changed, pick first
   rescale <- match.arg(rescale)
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
-    if (!is_quosures(mutates)) 
+    if (!is_quosures(mutates))
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
-  
+
   # catch grouping variable
   corr_group <- enquo(corr_group)
-  
+
   # prepare data
-  corrdat <- tidy_corrm(data, 
-                        labels      = labels, 
-                        rescale     = rescale, 
+  corrdat <- tidy_corrm(data,
+                        labels      = labels,
+                        rescale     = rescale,
                         corr_group  = corr_group,
-                        corr_method = corr_method, 
+                        corr_method = corr_method,
                         mutates     = mutates)
 
   # prepare plot
@@ -60,26 +149,26 @@ ggcorrm <- function(data,          # dataset
     facet_grid(var_x ~ var_y, scales = "free") +
     geom_blank() + # add geom_blank to set dimensions
     theme_corrm()
-  
+
   # add background layer if desired
   if(any(!is.null(list(bg_dia, bg_lotri, bg_utri)))){
     bgdat <- dplyr::tibble(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
     bgs <- vector(mode = "list", length = 3)
     if(!is.null(bg_dia)){
-      bgs[[1]] <- dia(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
+      bgs[[1]] <- dia(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                 data = bgdat, fill = bg_dia, inherit.aes = FALSE))
     }
     if(!is.null(bg_lotri)){
-      bgs[[2]] <- lotri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
+      bgs[[2]] <- lotri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                   data = bgdat, fill = bg_lotri, inherit.aes = FALSE))
     }
     if(!is.null(bg_utri)){
-      bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
+      bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                  data = bgdat, fill = bg_utri, inherit.aes = FALSE))
     }
     plot_out <- plot_out + bgs
   }
-  
+
   # return plot with updated class
   return(structure(plot_out,
                    class = c(class(plot_out), "ggcorrm")))

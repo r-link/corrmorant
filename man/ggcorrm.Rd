@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggcorrm.R
 \name{ggcorrm}
 \alias{ggcorrm}
-\title{FUNCTION_TITLE}
+\title{Create a ggcorrm correlation plot}
 \usage{
 ggcorrm(
   data,
@@ -17,40 +17,130 @@ ggcorrm(
 )
 }
 \arguments{
-\item{data}{PARAM_DESCRIPTION}
+\item{data}{Dataset used to compute the correlation matrix. Can be either a
+\code{data.frame} or \code{matrix}, or an object of class \code{tidy_corrm}.
+If specifying a \code{data.frame} or \code{matrix}, it will internally be
+passed to \code{\link{tidy_corrm()}} with the settings for \code{labels},
+\code{rescale}, \code{corr_group}, \code{corr_method} and \code{mutates}
+specified in the \code{ggcorrm()} call. \code{\link{tidy_corrm()}}
+prepares the dataset for plotting by creating a \code{data.frame} with
+all possible combinations of all numeric variables while retaining all
+discrete variables in additional columns. If a \code{tidy_corrm} object
+is supplied, all arguments passed to \code{\link{tidy_corrm()}} will be
+ignored and the \code{tidy_corrm} object wil be used directly to
+initialize the \code{ggcorrm} plot.}
 
-\item{labels}{PARAM_DESCRIPTION, Default: NULL}
+\item{labels}{(optional) character vector with labels for the names of all
+numeric columns that are used to replace the column names in the plot
+axis and text labels. Must be of the same length as the number of
+numeric columns displayed in the plot. Default: \code{NULL}}
 
-\item{rescale}{PARAM_DESCRIPTION, Default: c("by_sd", "by_max", NULL)}
+\item{rescale}{a character string specifying the type of transformation
+performed on the numeric variables in the plot. The standard argument
+\code{"by.sd"} scales by the standard deviation of the data and centers
+around zero.  \code{"by.range"} rescales the range of the data to the
+interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
+values. Default: \code{"by_sd"}}
 
-\item{corr_group}{PARAM_DESCRIPTION, Default: NULL}
+\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
+a grouping variable is specified, \code{.corr} which can be used for
+conditional coloring will be calculated separately for each of these
+groups (see documentation of \code{\link{tidy_corrm}} for details).
+Default: \code{NULL}}
 
-\item{corr_method}{PARAM_DESCRIPTION, Default: 'pearson'}
+\item{corr_method}{character string with the correlation method passed to
+\code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
+ and \code{"spearman"}
+ Default: \code{"pearson"}}
 
-\item{mutates}{PARAM_DESCRIPTION, Default: NULL}
+\item{mutates}{(optional) list of named quosures created with
+\code{\link[rlang::quos]{quos}}. Can be any expressions that specify
+ changes to the `tidy_corrm` AFTER reshaping, using regular
+\code{\link[dplyr::mutate]{mutate}} syntax. Default: NULL}
 
-\item{bg_dia}{PARAM_DESCRIPTION, Default: NULL}
+\item{bg_dia}{(optional) background color specification for the diagonal panels.
+Either a character string with a hexadecimal color code, a character string
+specifying a color name in \code{\link[grDevices]{colors}}, or an integer
+specifying a position in \code{\link[grDevices]{palette}}. The default value
+of \code{NULL} used the standard background color defined in the corresponding
+\code{\link[ggplot2::theme]{ggplot2::theme}}.}
 
-\item{bg_lotri}{PARAM_DESCRIPTION, Default: NULL}
+\item{bg_lotri}{(optional) background color specification for the panels in the
+lower triangle. Either a character string with a hexadecimal color code, a
+character string specifying a color name in \code{\link[grDevices]{colors}},
+or an integer specifying a position in \code{\link[grDevices]{palette}}. The
+default value of \code{NULL} used the standard background color defined in the
+corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.}
 
-\item{bg_utri}{PARAM_DESCRIPTION, Default: NULL}
+\item{bg_utri}{(optional) background color specification for the panels in the
+lower triangle. Either a character string with a hexadecimal color code, a
+character string specifying a color name in \code{\link[grDevices]{colors}},
+or an integer specifying a position in \code{\link[grDevices]{palette}}. The
+default value of \code{NULL} used the standard background color defined in the
+corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.}
 }
 \value{
-OUTPUT_DESCRIPTION
+An object of class \code{ggcorrm} containing the reshaped dataset for the
+    correlation plot and an empty \code{ggplot} object with appropriate facet and
+    theme specifications.
 }
 \description{
-FUNCTION_DESCRIPTION
+\code{ggcorrm()} initializes a \code{ggcorrm} object (inheriting
+    from class \code{ggplot}). It can be called either with a raw data frame
+    with input data, which is then internally passed to
+    \code{\link{tidy_corrm()}}, or with a prepared correlation object of class
+    \code{tidy_corrm}.
 }
 \details{
-DETAILS
+\code{ggcorrm} creates the initial plot object containing information
+    about panel placement, correlations, ...
 }
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+# correlation matrix for the iris dataset
+ggcorrm(iris, bg_dia = "grey20") +
+  lotri(geom_point(alpha = 0.4)) +
+  utri(geom_cortext()) +
+  dia_histogram(lower = .3, upper = 1, fill = "grey90", col = 1) +
+  dia_names(y_pos = .1, col = "white", size = 3)
+
+# iris data with conditional coloring by pearson correlation
+ggcorrm(iris, rescale = "by_sd") +
+  lotri(geom_point(aes(col = .corr), alpha = 0.6)) +
+  lotri(geom_smooth(aes(fill = .corr, col = .corr),
+                    method = "lm", size = 0.3, alpha = 0.6)) +
+  utri(geom_cortext(aes(color = .corr))) +
+  dia_density(fill = "grey80", lower = .4) +
+  dia_names(y_pos = .1) +
+  scale_color_corr(option = "A", aesthetics = c("fill", "color"))
+
+# correlation separated by groups
+ggcorrm(iris, rescale = "by_sd", bg_dia = "grey95") +
+  lotri(geom_point(aes(col = Species), alpha = 0.4)) +
+  lotri(geom_smooth(aes(x, y, fill = Species), col = 1, method = "lm"))  +
+  utri(geom_cortext(aes(col = Species), nrow = 2)) +
+  dia_density(aes(fill = Species), alpha = 0.5, lower = 0.4) +
+  dia_names(y_pos = 0.15)
+
+# using the 'mutates' argument to color diagonal panels by leaf type
+ggcorrm(iris, rescale = "by_sd",
+        mutates = quos(leaftype = ifelse(substr(var_x, 1, 1) == "S",
+                                         "Sepal", "Petal"))) +
+  lotri(geom_point(alpha = 0.4))+
+  utri(geom_cortext()) +
+  dia_density(lower = .3,
+              mapping = aes(fill = leaftype)) +
+  dia_names(y_pos = .1,
+            mapping = aes(col = leaftype))
  }
 }
 }
 \seealso{
-\code{\link[dplyr]{reexports}}
+\code{\link{tidy_corrm}}
+ \code{\link{corrmorant}}
+ \code{\link[ggplot2::ggplot]{ggplot2::ggplot}},
+ \code{\link[ggplot2::theme]{ggplot2::theme}},
+ \code{\link[dplyr::mutate]{dplyr::mutate}},
+ \code{\link[rlang::quos]{rlang::quos}}
 }
