@@ -107,11 +107,19 @@ tidy_corrm <- function(data,
                        corr_method = "pearson",
                        corr_group = NULL,
                        mutates = NULL) {
+  # control class of data
+  if (!inherits(data, "data.frame") | is.matrix(data)) {
+    stop("data must be a data.frame or matrix.")
+  }
+
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
     if (!is_quosures(mutates))
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
+
+  # if data is a matrix, convert to data.frame
+  if (is.matrix(data)) data <- as.data.frame(data)
 
   # replace infinite values and NaN values by NA values to avoid problems
   # during transformation and when calculating correlations
