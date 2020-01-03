@@ -144,6 +144,11 @@ ggcorrm <- function(data,          # dataset
                     bg_dia = NULL,
                     bg_lotri = NULL,
                     bg_utri = NULL){
+  # control class of data
+  if (!inherits(data, "data.frame") | is.matrix(data)) {
+    stop("data must be a data.frame or matrix.")
+  }
+
   # if rescale argument is not changed, pick first
   rescale <- match.arg(rescale)
   # if post-rescaling transformations were specified, test if they are valid
@@ -152,9 +157,12 @@ ggcorrm <- function(data,          # dataset
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
+  # if data is already in correct form, do not change...
+  if (is(data, "tidy_corrm")){
+    corrdat <- data
+  } else { # ...else reshape to appropriate format
   # catch grouping variable
   corr_group <- enquo(corr_group)
-
   # prepare data
   corrdat <- tidy_corrm(data,
                         labels      = labels,
@@ -162,6 +170,7 @@ ggcorrm <- function(data,          # dataset
                         corr_group  = corr_group,
                         corr_method = corr_method,
                         mutates     = mutates)
+  }
 
   # prepare plot
   plot_out <- ggplot(data = corrdat, mapping = aes(x = x, y = y),
