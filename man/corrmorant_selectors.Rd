@@ -14,19 +14,20 @@ utri(layer)
 dia(layer)
 }
 \arguments{
-\item{layer}{a ggplot2 \code{link[ggplot2]{layer}}}
+\item{layer}{a ggplot2 \code{\link[ggplot2]{layer}} (a call to a
+geom, stat or \code{\link[ggplot2]{layer}}).}
 }
 \value{
-A ggplot2 \code{link[ggplot2]{layer}} with modified data.
+A ggplot2 \code{\link[ggplot2]{layer}} with modified data.
 }
 \description{
 Selector functions that can be used to modify the mapping of
-    ggplot \code{link[ggplot2:layer]{layers}} to a subset of panels in
+    ggplot \code{\link[ggplot2:layer]{layers}} to a subset of panels in
     \code{ggcorrm} plots.
 }
 \details{
 The corrmorant selector functions \code{lotri()}, \code{utri()}
-    and \code{dia()} modify the data slot of ggplot code{link[ggplot2:layer]{layers}}
+    and \code{dia()} modify the data slot of ggplot \code{\link[ggplot2:layer]{layers}}
     (i.e. invoked by a call to a geom or a stat) to make sure that the
     corresponding layers are only displayed in the desired panels.
 
@@ -64,11 +65,10 @@ ggcorrm(iris) +
 
 # same plot with inverted lower and upper triangle
 ggcorrm(iris) +
-  lori(geom_point(alpha = 0.4)) +
+  lotri(geom_point(alpha = 0.4)) +
   utri(geom_cortext()) +
   dia_density(fill = "grey50") +
   dia_names(size = 3)
-
  }
 }
 }

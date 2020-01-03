@@ -78,11 +78,12 @@ update_data <- function(data, pos){
 
 #' @title Corrmorant selectors
 #' @description Selector functions that can be used to modify the mapping of
-#'     ggplot \code{link[ggplot2:layer]{layers}} to a subset of panels in
+#'     ggplot \code{\link[ggplot2:layer]{layers}} to a subset of panels in
 #'     \code{ggcorrm} plots.
-#' @param layer a ggplot2 \code{link[ggplot2]{layer}}
+#' @param layer a ggplot2 \code{\link[ggplot2]{layer}} (a call to a
+#'     geom, stat or \code{\link[ggplot2]{layer}}).
 #' @details The corrmorant selector functions \code{lotri()}, \code{utri()}
-#'     and \code{dia()} modify the data slot of ggplot code{link[ggplot2:layer]{layers}}
+#'     and \code{dia()} modify the data slot of ggplot \code{\link[ggplot2:layer]{layers}}
 #'     (i.e. invoked by a call to a geom or a stat) to make sure that the
 #'     corresponding layers are only displayed in the desired panels.
 #'
@@ -108,7 +109,7 @@ update_data <- function(data, pos){
 #'    \code{\link{dia_freqpoly}}, which automatically take care of the correct
 #'    placement.
 #'
-#' @return A ggplot2 \code{link[ggplot2]{layer}} with modified data.
+#' @return A ggplot2 \code{\link[ggplot2]{layer}} with modified data.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
@@ -121,11 +122,10 @@ update_data <- function(data, pos){
 #'
 #' # same plot with inverted lower and upper triangle
 #' ggcorrm(iris) +
-#'   lori(geom_point(alpha = 0.4)) +
+#'   lotri(geom_point(alpha = 0.4)) +
 #'   utri(geom_cortext()) +
 #'   dia_density(fill = "grey50") +
 #'   dia_names(size = 3)
-#'
 #'  }
 #' }
 #' @seealso
