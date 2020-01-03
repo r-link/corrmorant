@@ -76,59 +76,89 @@ update_data <- function(data, pos){
   }
 }
 
-# lotri() - modify dataset of an existing geom  -------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param geom PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Corrmorant selectors
+#' @description Selector functions that can be used to modify the mapping of
+#'     ggplot \code{link[ggplot2:layer]{layers}} to a subset of panels in
+#'     \code{ggcorrm} plots.
+#' @param layer a ggplot2 \code{link[ggplot2]{layer}}
+#' @details The corrmorant selector functions \code{lotri()}, \code{utri()}
+#'     and \code{dia()} modify the data slot of ggplot code{link[ggplot2:layer]{layers}}
+#'     (i.e. invoked by a call to a geom or a stat) to make sure that the
+#'     corresponding layers are only displayed in the desired panels.
+#'
+#'    \code{lotri()} shows the panel only in the lower triangle, \code{utri()} in
+#'    the upper triangle and \code{dia()} in the panels of the plot diagonal.
+#'
+#'    If no data are specified explicitly in the layer, the selectors filter the
+#'    data for the desired panels from the \code{\link{tidy_corrm}} data the
+#'    plot is based upon. If data are specified in \code{layer} via its \code{data}
+#'    argument, it either plots it to all upper/lower triangle or diagonal panels,
+#'    or matches it to the desired rows/columns if any of \code{var_x},
+#'    \code{var_y} and \code{type} are present in the new dataset.
+#'
+#'    The combination of \code{lotri()} and \code{utri()} in combination
+#'    with \code{\link{geom_cortext}} and regular ggplot2 geoms should be
+#'    sufficient for the majority of use cases in the lower and upper triangle
+#'    of a correlation plot. However, \code{dia()} in combination with regular
+#'    geoms is often problematic for useful displays on the diagonal facets,
+#'    as they are often reserved for data summaries that are difficult to display
+#'    when the data have different ranges. A series of common data summaries for
+#'    the plot diagonal provided with the functions \code{\link{dia_names}},
+#'    \code{\link{dia_density}}, \code{\link{dia_histogram}} and
+#'    \code{\link{dia_freqpoly}}, which automatically take care of the correct
+#'    placement.
+#'
+#' @return A ggplot2 \code{link[ggplot2]{layer}} with modified data.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#' # plot with points on the lower triangle
+#' ggcorrm(iris) +
+#'   utri(geom_point(alpha = 0.4)) +
+#'   lotri(geom_cortext()) +
+#'   dia_density(fill = "grey50") +
+#'   dia_names(size = 3)
+#'
+#' # same plot with inverted lower and upper triangle
+#' ggcorrm(iris) +
+#'   lori(geom_point(alpha = 0.4)) +
+#'   utri(geom_cortext()) +
+#'   dia_density(fill = "grey50") +
+#'   dia_names(size = 3)
+#'
 #'  }
 #' }
-#' @rdname lotri
+#' @seealso
+#'   \code{\link{tidy_corrm}},
+#'   \code{\link{corrmorant}},
+#'   \code{\link{dia_names}},
+#'   \code{\link{dia_density}},
+#'   \code{\link{dia_histogram}},
+#'   \code{\link{dia_freqpoly}}
+#' @name corrmorant_selectors
+NULL
+
+
+# lotri() - modify dataset of an existing geom  -------------------------------
+#' @rdname corrmorant_selectors
 #' @export
-lotri <- function(geom) {
-  geom$data <- update_data(geom$data, "lower")
-  return(geom)
+lotri <- function(layer) {
+  layer$data <- update_data(layer$data, "lower")
+  return(layer)
 }
 
 # utri() - modify dataset of an existing geom  --------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param geom PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname utri
+#' @rdname corrmorant_selectors
 #' @export
-utri <- function(geom) {
-  geom$data <- update_data(geom$data, "upper")
-  return(geom)
+utri <- function(layer) {
+  layer$data <- update_data(layer$data, "upper")
+  return(layer)
 }
 
 # dia() - modify dataset of an existing geom  ---------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param geom PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname dia
+#' @rdname corrmorant_selectors
 #' @export
-dia <- function(geom) {
-  geom$data <- update_data(geom$data, "diag")
-  return(geom)
+dia <- function(layer) {
+  layer$data <- update_data(layer$data, "diag")
+  return(layer)
 }
