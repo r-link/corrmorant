@@ -57,8 +57,27 @@
 #'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
 #'     default value of \code{NULL} used the standard background color defined in the
 #'     corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.
-#' @details \code{ggcorrm} creates the initial plot object containing information
-#'     about panel placement, correlations, ...
+#' @details \code{ggcorrm} creates the initial correlation plot object containing
+#'     information about panel placement, correlations, themes etc. Its output is a
+#'     modified empty \code{ggplot} object with appropriate facet and theme
+#'     specifications. If a \code{tidy_corrm} object is supplied as \code{data},
+#'     it will be directly plotted without invoking \code{link{tidy_corrm}}, else,
+#'     \code{ggcorrm} passes the raw data and additional arguments to
+#'     \code{link{tidy_corrm}} before plotting (see documentation of this function
+#'     for details).
+#'
+#'     New layers can be added using classical \code{\link[ggplot::ggplot_add](ggplot_add)}
+#'     syntax, though in most cases it will be more useful to add layers using the
+#'     \code{\link[corrmorant_selectors]{corrmorant selector functions}} which allow
+#'     to map geoms to a subset of panels on the plot diagonal, lower or upper
+#'     triangle with (\code{dia()}), (\code{lotri()}) and (\code{utri()}), respectively
+#'     (see examples).
+#'
+#'     \code{bg_dia}, \code{bg_lotri} and \code{bg_utri} allow to specify different
+#'     background color settings for the plot diagonal, the lower and the upper
+#'     triangle of the correlation plot matrix, respectively. All other graphics
+#'     settings can be modified using regular ggplot2 \code{\link[ggplot2]{theme}}
+#'     syntax, building upon the ggcorrm standard theme (\code{\link{theme_corrm}}).#'
 #'
 #' @return An object of class \code{ggcorrm} containing the reshaped dataset for the
 #'     correlation plot and an empty \code{ggplot} object with appropriate facet and
