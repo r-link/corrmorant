@@ -81,8 +81,8 @@
 #'
 #'    # use of mutates argument
 #'    corrdat2 <- tidy_corrm(iris,
-#'                mutates = quos(leaf_type   = substr(var_x, 1, 5),
-#'                                dimmension = substr(var_x, 7, nchar(var_x))
+#'                mutates = quos(leaf_type  = substr(var_x, 1, 5),
+#'                                dimension = substr(var_x, 7, 13)
 #'                                )
 #'                 )
 #'    head(corrdat2)
@@ -189,7 +189,9 @@ tidy_corrm <- function(data,
     # get indicator for position
     dplyr::mutate(type = dplyr::case_when(var_x <  var_y ~ "upper",
                                           var_x >  var_y ~ "lower",
-                                          var_x == var_y ~ "diag"))
+                                          var_x == var_y ~ "diag")) %>%
+    dplyr::select(var_x, var_y, x, y, type, .corr, corr_group,
+                  tidyr::everything())
 
   # if specified, perform desired mutations (must be list of quosures)
   if(!is.null(mutates)) out <- dplyr::mutate(out, !!!mutates)
