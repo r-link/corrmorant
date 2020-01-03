@@ -1,4 +1,4 @@
-#' @title Automated correlation plots
+#' @title Simple automated correlation plots
 #' @description \code{corrmorant()} is a wrapper around \code{\link{ggcorrm}()}
 #'    that creates scatterplot matrices with correlation output using
 #'    reasonable standard values for initial data inspection. For more advanced
@@ -21,6 +21,9 @@
 #'  corrmorant(iris, style = "blue_red")
 #'  }
 #' }
+#' @seealso
+#'   \code{\link{ggcorrm}},
+#'   \code{\link{tidy_corrm}}
 #' @rdname corrmorant
 #' @export
 corrmorant <- function(data, style = c("dark", "light", "blue_red"),

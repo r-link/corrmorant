@@ -2,7 +2,7 @@
 % Please edit documentation in R/corrmorant.R
 \name{corrmorant}
 \alias{corrmorant}
-\title{Automated correlation plots}
+\title{Simple automated correlation plots}
 \usage{
 corrmorant(
   data,
@@ -59,4 +59,8 @@ if(interactive()){
  corrmorant(iris, style = "blue_red")
  }
 }
+}
+\seealso{
+\code{\link{ggcorrm}},
+  \code{\link{tidy_corrm}}
 }
