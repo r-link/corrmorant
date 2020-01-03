@@ -36,27 +36,27 @@
 #'     and \code{"spearman"}
 #'     Default: \code{"pearson"}
 #' @param mutates (optional) list of named quosures created with
-#'     \code{\link[rlang::quos]{quos}}. Can be any expressions that specify
+#'     \code{\link[rlang:quos]{rlang::quos}}. Can be any expressions that specify
 #'      changes to the `tidy_corrm` AFTER reshaping, using regular
-#'     \code{\link[dplyr::mutate]{mutate}} syntax. Default: NULL
+#'     \code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Default: NULL
 #' @param bg_dia (optional) background color specification for the diagonal panels.
 #'     Either a character string with a hexadecimal color code, a character string
 #'     specifying a color name in \code{\link[grDevices]{colors}}, or an integer
 #'     specifying a position in \code{\link[grDevices]{palette}}. The default value
 #'     of \code{NULL} used the standard background color defined in the corresponding
-#'     \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#'     \code{\link[ggplot2:theme]{ggplot2::theme}}.
 #' @param bg_lotri (optional) background color specification for the panels in the
 #'     lower triangle. Either a character string with a hexadecimal color code, a
 #'     character string specifying a color name in \code{\link[grDevices]{colors}},
 #'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
 #'     default value of \code{NULL} used the standard background color defined in the
-#'     corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#'     corresponding \code{\link[ggplot2:theme]{ggplot2::theme}}.
 #' @param bg_utri (optional) background color specification for the panels in the
 #'     lower triangle. Either a character string with a hexadecimal color code, a
 #'     character string specifying a color name in \code{\link[grDevices]{colors}},
 #'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
 #'     default value of \code{NULL} used the standard background color defined in the
-#'     corresponding \code{\link[ggplot2::theme]{ggplot2::theme}}.
+#'     corresponding \code{\link[ggplot2:theme]{ggplot2::theme}}.
 #' @details \code{ggcorrm} creates the initial correlation plot object containing
 #'     information about panel placement, correlations, themes etc. Its output is a
 #'     modified empty \code{ggplot} object with appropriate facet and theme
@@ -66,18 +66,19 @@
 #'     \code{link{tidy_corrm}} before plotting (see documentation of this function
 #'     for details).
 #'
-#'     New layers can be added using classical \code{\link[ggplot::ggplot_add](ggplot_add)}
+#'     New layers can be added using classical
+#'     \code{\link[ggplot:ggplot_add]{ggplot::ggplot_add}}
 #'     syntax, though in most cases it will be more useful to add layers using the
 #'     \code{\link[corrmorant_selectors]{corrmorant selector functions}} which allow
 #'     to map geoms to a subset of panels on the plot diagonal, lower or upper
-#'     triangle with (\code{dia()}), (\code{lotri()}) and (\code{utri()}), respectively
+#'     triangle with \code{dia()}, \code{lotri()} and \code{utri()}, respectively
 #'     (see examples).
 #'
 #'     \code{bg_dia}, \code{bg_lotri} and \code{bg_utri} allow to specify different
 #'     background color settings for the plot diagonal, the lower and the upper
 #'     triangle of the correlation plot matrix, respectively. All other graphics
 #'     settings can be modified using regular ggplot2 \code{\link[ggplot2]{theme}}
-#'     syntax, building upon the ggcorrm standard theme (\code{\link{theme_corrm}}).#'
+#'     syntax, building upon the ggcorrm standard theme (\code{\link{theme_corrm}}).
 #'
 #' @return An object of class \code{ggcorrm} containing the reshaped dataset for the
 #'     correlation plot and an empty \code{ggplot} object with appropriate facet and
@@ -125,10 +126,10 @@
 #' @seealso
 #'  \code{\link{tidy_corrm}}
 #'  \code{\link{corrmorant}}
-#'  \code{\link[ggplot2::ggplot]{ggplot2::ggplot}},
-#'  \code{\link[ggplot2::theme]{ggplot2::theme}},
-#'  \code{\link[dplyr::mutate]{dplyr::mutate}},
-#'  \code{\link[rlang::quos]{rlang::quos}}
+#'  \code{\link[ggplot2:ggplot]{ggplot2::ggplot}},
+#'  \code{\link[ggplot2:theme]{ggplot2::theme}},
+#'  \code{\link[dplyr:mutate]{dplyr::mutate}},
+#'  \code{\link[rlang:quos]{rlang::quos}}
 #' @rdname ggcorrm
 #' @export
 #' @importFrom dplyr tibble
