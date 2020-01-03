@@ -8,8 +8,8 @@ ggcorrm(
   data,
   labels = NULL,
   rescale = c("by_sd", "by_max", NULL),
-  corr_group = NULL,
   corr_method = "pearson",
+  corr_group = NULL,
   mutates = NULL,
   bg_dia = NULL,
   bg_lotri = NULL,
@@ -42,20 +42,20 @@ around zero.  \code{"by.range"} rescales the range of the data to the
 interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
 values. Default: \code{"by_sd"}}
 
-\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
-a grouping variable is specified, \code{.corr} which can be used for
-conditional coloring will be calculated separately for each of these
-groups (see documentation of \code{\link{tidy_corrm}} for details).
-Default: \code{NULL}}
-
 \item{corr_method}{character string with the correlation method passed to
 \code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
  and \code{"spearman"}
  Default: \code{"pearson"}}
 
+\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
+a grouping variable is specified, \code{.corr} which can be used for
+conditional coloring will be calculated separately for each of these
+groups.
+Default: \code{NULL}}
+
 \item{mutates}{(optional) list of named quosures created with
 \code{\link[rlang:quos]{rlang::quos}}. Can be any expressions that specify
- changes to the `tidy_corrm` AFTER reshaping, using regular
+ changes to the `tidy_corrm` \emph{after} reshaping, using regular
 \code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Default: NULL}
 
 \item{bg_dia}{(optional) background color specification for the diagonal panels.
@@ -157,8 +157,8 @@ ggcorrm(iris, rescale = "by_sd",
 }
 }
 \seealso{
-\code{\link{tidy_corrm}}
- \code{\link{corrmorant}}
+\code{\link{tidy_corrm}},
+ \code{\link{corrmorant}},
  \code{\link[ggplot2:ggplot]{ggplot2::ggplot}},
  \code{\link[ggplot2:theme]{ggplot2::theme}},
  \code{\link[dplyr:mutate]{dplyr::mutate}},
