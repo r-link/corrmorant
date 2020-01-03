@@ -73,7 +73,8 @@ ggcorrm(iris) +
 }
 }
 \seealso{
-\code{\link{tidy_corrm}},
+\code{\link{ggcorrm}},
+  \code{\link{tidy_corrm}},
   \code{\link{corrmorant}},
   \code{\link{dia_names}},
   \code{\link{dia_density}},

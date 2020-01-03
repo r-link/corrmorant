@@ -51,6 +51,7 @@
 #'  }
 #' }
 #' @seealso
+#'   \code{\link{ggcorrm}},
 #'   \code{\link{tidy_corrm}},
 #'   \code{\link{corrmorant}},
 #'   \code{\link{dia_names}},
