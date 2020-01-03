@@ -1,82 +1,3 @@
-# corrmorant selector functions -----------------------------------------------
-# corrmorant selectors (utri(), lotri() and dia()) must be able to manipulate
-# the data displayed in each layer without interfering with any of the steps
-# happening during the rendering process. While it would be possible to specify
-# update function directly within the function call, I decided to use external
-# modifiers instead to illustrate that what they are doing is outside regular
-# ggplot syntax.
-# Basically, the three selectors just take the (unevaluated) geom and make sure
-# that when ggplot_build is called all calculations are performed only for the
-# data from the right subset of facets. To achieve this, the data slot in the
-# corresponding geoms is replaced by a subsetting function. In cases where there
-# are already (user-specified) data, these are filtered for the right facets, and
-# in the unlikely case that there is a user-specified data function a new
-# selector function is created that combines both selections.
-
-# in addition, lotri(), utri() and dia() perform the necessary testing whether
-# the data corrmorant functions are called upon are of the right class.
-
-
-# update_data() function factory for layer_data functions ------------------
-# returns a layer_data function that filters the data of a layer by the desired
-# type (upper, lower, diag)
-#' @keywords internal
-#' @importFrom methods is
-#' @importFrom dplyr filter select full_join mutate group_by ungroup
-#' @importFrom tidyr unnest
-update_data <- function(data, pos){
-  # prepare function for subset computation if nothing is specified
-  # (regular case)
-  if (is.waive(data)) {
-    datafun <- function(plot_data){
-      if(!methods::is(plot_data, "tidy_corrm")){
-        stop("corrmorant selectors can only be used in ggcorrm() calls\n")
-      }
-      dplyr::filter(plot_data, type == pos)
-    }
-  } else {
-    # specify updated function if there is already a function for data computation
-    # (unlikely to ever happen, but possible)
-    if (is.function(data)){
-      datafun <- function(plot_data){
-        if(!methods::is(plot_data, "tidy_corrm")){
-          stop("corrmorant selectors can only be used in ggcorrm() calls\n")
-        }
-        dplyr::filter(plot_data, type == pos) %>% data
-      }
-    } else {
-      # if there are user-specified data:
-      datafun <- function(plot_data){
-        if(!methods::is(plot_data, "tidy_corrm")){
-          stop("corrmorant selectors can only be used in ggcorrm() calls\n")
-        }
-        # if columns for facet identification are there return filtered dataset
-        if (!any(!(c("var_x", "var_y", "type") %in% names(data)))){
-          dplyr::filter(data, type == pos)
-        } else {
-          # get identifiers for panels
-          panel_ids <- plot_data %>%
-            dplyr::select(var_x, var_y, type) %>%
-            dplyr::filter(!duplicated(paste(var_x, var_y)),
-                          type == pos)
-          if (any((c("var_x", "var_y", "type") %in% names(data)))){
-          # if some are present, merge with correct identifiers
-          panel_ids %>%
-            dplyr::full_join(data)
-          } else {
-            # else combine with all levels
-            dat <- replicate(nrow(panel_ids), data, simplify = FALSE)
-            dplyr::mutate(panel_ids, dat = dat) %>%
-              dplyr::group_by(var_x, var_y, type) %>%
-              tidyr::unnest(cols = c(dat)) %>%
-              dplyr::ungroup()
-          }
-        }
-      }
-    }
-  }
-}
-
 #' @title Corrmorant selectors
 #' @description Selector functions that can be used to modify the mapping of
 #'     ggplot \code{\link[ggplot2:layer]{layers}} to a subset of panels in
@@ -162,4 +83,64 @@ utri <- function(layer) {
 dia <- function(layer) {
   layer$data <- update_data(layer$data, "diag")
   return(layer)
+}
+
+# update_data() - function factory for layer_data functions -------------------
+# returns a layer_data function that filters the data of a layer by the desired
+# type (upper, lower, diag)
+#' @keywords internal
+#' @importFrom methods is
+#' @importFrom dplyr filter select full_join mutate group_by ungroup
+#' @importFrom tidyr unnest
+update_data <- function(data, pos){
+  # prepare function for subset computation if nothing is specified
+  # (regular case)
+  if (is.waive(data)) {
+    datafun <- function(plot_data){
+      if(!methods::is(plot_data, "tidy_corrm")){
+        stop("corrmorant selectors can only be used in ggcorrm() calls\n")
+      }
+      dplyr::filter(plot_data, type == pos)
+    }
+  } else {
+    # specify updated function if there is already a function for data computation
+    # (unlikely to ever happen, but possible)
+    if (is.function(data)){
+      datafun <- function(plot_data){
+        if(!methods::is(plot_data, "tidy_corrm")){
+          stop("corrmorant selectors can only be used in ggcorrm() calls\n")
+        }
+        dplyr::filter(plot_data, type == pos) %>% data
+      }
+    } else {
+      # if there are user-specified data:
+      datafun <- function(plot_data){
+        if(!methods::is(plot_data, "tidy_corrm")){
+          stop("corrmorant selectors can only be used in ggcorrm() calls\n")
+        }
+        # if columns for facet identification are there return filtered dataset
+        if (!any(!(c("var_x", "var_y", "type") %in% names(data)))){
+          dplyr::filter(data, type == pos)
+        } else {
+          # get identifiers for panels
+          panel_ids <- plot_data %>%
+            dplyr::select(var_x, var_y, type) %>%
+            dplyr::filter(!duplicated(paste(var_x, var_y)),
+                          type == pos)
+          if (any((c("var_x", "var_y", "type") %in% names(data)))){
+            # if some are present, merge with correct identifiers
+            panel_ids %>%
+              dplyr::full_join(data)
+          } else {
+            # else combine with all levels
+            dat <- replicate(nrow(panel_ids), data, simplify = FALSE)
+            dplyr::mutate(panel_ids, dat = dat) %>%
+              dplyr::group_by(var_x, var_y, type) %>%
+              tidyr::unnest(cols = c(dat)) %>%
+              dplyr::ungroup()
+          }
+        }
+      }
+    }
+  }
 }
