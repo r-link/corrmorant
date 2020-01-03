@@ -94,25 +94,6 @@ skew <- function (x) {
   sqrt(n) * sum(x^3)/(sum(x^2)^(3/2))
 }
 
-# add() - function to add layers to ggplot objects via pipelines --------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param .object PARAM_DESCRIPTION
-#' @param .fun PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname add
-#' @export
-add <- function(.object, .fun, ...) .object + {{.fun}}(...)
-
-
 # modify_list() - copied internal function from ggplot2 -----------------------
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
