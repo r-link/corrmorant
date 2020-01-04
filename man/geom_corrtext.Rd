@@ -9,7 +9,7 @@ geom_corrtext(
   nrow = NULL,
   ncol = NULL,
   digits = 2,
-  corrsize = TRUE,
+  corr_size = TRUE,
   corr_method = "pearson",
   squeeze = 0.7,
   ...
@@ -32,8 +32,8 @@ setting of \code{ncol}).}
 \item{digits}{integer: Number of digits the correlations are rounded to
 (defaults to 2).}
 
-\item{corrsize}{logical - should the \code{size} aesthetic be expressed
-as a function of correlation strength? \code{corrsize = TRUE}, is a
+\item{corr_size}{logical - should the \code{size} aesthetic be expressed
+as a function of correlation strength? \code{corr_size = TRUE}, is a
 shorthand for \code{aes(size = abs(..corr..))}. Similar expressions
 can be used to access the correlation calculated by
 \code{stat_corrtext} manually. Defaults to \code{TRUE}.}
@@ -66,7 +66,7 @@ A \code{ggplot2} layer with text labels for correlation strength.
    \code{geom_corrtext()} is a wrapper around
    \code{\link[stat_corrtext]{stat_corrtext()}} that additionally takes
    care of the right specification of aesthetics and allows to easily
-   adjust size by correlation strength via \code{corrsize}.
+   adjust size by correlation strength via \code{corr_size}.
 }
 \seealso{
 \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},

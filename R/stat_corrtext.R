@@ -106,8 +106,8 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
 #'    setting of \code{ncol}).
 #' @param digits integer: Number of digits the correlations are rounded to
 #'    (defaults to 2).
-#' @param corrsize logical - should the \code{size} aesthetic be expressed
-#'    as a function of correlation strength? \code{corrsize = TRUE}, is a
+#' @param corr_size logical - should the \code{size} aesthetic be expressed
+#'    as a function of correlation strength? \code{corr_size = TRUE}, is a
 #'    shorthand for \code{aes(size = abs(..corr..))}. Similar expressions
 #'    can be used to access the correlation calculated by
 #'    \code{stat_corrtext} manually. Defaults to \code{TRUE}.
@@ -128,7 +128,7 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
 #'    \code{geom_corrtext()} is a wrapper around
 #'    \code{\link[stat_corrtext]{stat_corrtext()}} that additionally takes
 #'    care of the right specification of aesthetics and allows to easily
-#'    adjust size by correlation strength via \code{corrsize}.
+#'    adjust size by correlation strength via \code{corr_size}.
 #'
 #' @seealso
 #'   \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
@@ -136,14 +136,14 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
 #' @rdname geom_corrtext
 #' @export
 geom_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
-                         digits = 2, corrsize = TRUE,
+                         digits = 2, corr_size = TRUE,
                          corr_method = "pearson", squeeze = 0.7, ...) {
   if (any(c("x", "y") %in% names(mapping))) {
     stop("x and y coordinates in geom_corrtext() may not be manipulated.")
   }
 
     # add size by correlation manually if specified
-  if(corrsize) mapping <- modify_list(aes(size = abs(..corr..)),
+  if(corr_size) mapping <- modify_list(aes(size = abs(..corr..)),
                                                 mapping)
 
   # return plot with labels
