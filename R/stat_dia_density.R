@@ -51,25 +51,23 @@ StatDiaDensity <- ggproto("StatDiaDensity", Stat,
 )
 
 # stat_dia_density() - stat function for StatDiaDensity -----------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param geom PARAM_DESCRIPTION, Default: 'polygon'
-#' @param position PARAM_DESCRIPTION, Default: 'identity'
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @param lower PARAM_DESCRIPTION, Default: 0.25
-#' @param upper PARAM_DESCRIPTION, Default: 1
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title Compute density curves for ggcorrm plots
+#' @description code{stat_dia_density()} computes the density curves for the
+#'     diagonal panels of \code{\link{ggcorrm}} plots that are created with
+#'     \code{\link{dia_density}}.
+#' @inheritParams ggplot2::layer
+#' @inheritParams stat_dia_bin
+#' @param ... additional arguments passed to
+#'     \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
+#'     \code{\link[ggplot2:stat_density]{stat_density()}} are permitted).
+#' @return An object of class \code{layer}.
+#' @details \code{stat_density()} computes density curves for display
+#'     in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
+#'     \code{upper} arguments can be used to offset the density curves from
+#'     zero and optimally fit them to the range of each panel.
+#' @seealso
+#'     \code{\link[ggplot2:stat_bin]{ggplot2::stat_density}},
+#'     \code{\link{dia_density}}
 #' @rdname stat_dia_density
 #' @export
 stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
@@ -83,23 +81,30 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
   )
 }
 
-# dia_density - wrapper around stat_dia_density -------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param lower PARAM_DESCRIPTION, Default: 0.25
-#' @param upper PARAM_DESCRIPTION, Default: 1
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+# dia_density() - wrapper around stat_dia_density -----------------------------
+#' @title Density curves for ggcorrm plots
+#' @description Add density curves to the diagonal panels of
+#'     \code{\link{ggcorrm}} plots.
+#' @inheritParams ggplot2::layer
+#' @inheritParams stat_dia_bin
+#' @param mapping Set of aesthetic mappings created by
+#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
+#'    automatically and must not be changed, but all other aesthetics
+#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
+#' @param ... additional parameters for \code{\link{stat_dia_density}}.
+#' @return A \code{ggplot2} layer with histograms or frequency polygons for the
+#'    variables on the plot diagonal of \code{ggcorrm} plots.
+#' @details \code{dia_density()} adds density curves to the diagonal panels
+#'     of \code{ggcorrm} plots. The placement of the curves is adjusted
+#'     based on \code{\link{stat_dia_density}}.
+#'     The \code{lower} and\code{upper} arguments can be used to offset
+#'     the density curves from zero and optimally fit them to
+#'     the range of each panel.The standard values are chosen to work well
+#'     when placing text labels under the histograms/frequency polygons with
+#'     \code{\link{dia_names}}.
 #' @seealso
-#'  \code{\link[ggplot2]{character(0)}}
+#'  \code{\link[ggplot2:geom_density]{ggplot2::geom_density}},
+#'  \code{\link{stat_dia_density}}
 #' @rdname dia_density
 #' @export
 dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
