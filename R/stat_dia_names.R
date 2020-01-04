@@ -1,5 +1,4 @@
-# dia_names() - function for names on the diagonal ----------------------------
-
+# StatDiaNames - ggproto object for the labelling function --------------------
 # ggproto object for stat_dia_density
 #' @rdname corrmorant_ggproto
 #' @format NULL

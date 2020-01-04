@@ -1,5 +1,3 @@
-# scripts for cortext and related functions -----------------------------------
-
 # StatCortext - ggproto object for stat_Cortext -------------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
