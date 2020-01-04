@@ -3,8 +3,8 @@
 #'     the \code{corrmorant} package.
 #' @section New stats:
 #' \itemize{
-#'   \item \code{StatCortext}: create and position text labels for correlation strength
-#'      (see \code{\link{stat_cortext}} for details).
+#'   \item \code{StatCorrtext}: create and position text labels for correlation strength
+#'      (see \code{\link{stat_corrtext}} for details).
 #'   \item \code{StatDiaNames}: create and position text labels for variable names in the
 #'      diagonal facets of corrmoran plots (see \code{\link{dia_names}} for details).
 #'   \item \code{StatDiaDensity}: create and position density plots of variables in the
@@ -16,7 +16,7 @@
 #'   }
 #' @seealso
 #'  \code{\link[ggplot2]{ggplot2-ggproto}},
-#'  \code{\link{stat_cortext}},
+#'  \code{\link{stat_corrtext}},
 #'  \code{\link{dia_names}},
 #'  \code{\link{dia_density}},
 #'  \code{\link{dia_histogram}},

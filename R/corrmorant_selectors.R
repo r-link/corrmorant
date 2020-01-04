@@ -20,7 +20,7 @@
 #'    \code{var_y} and \code{type} are present in the new dataset.
 #'
 #'    The combination of \code{lotri()} and \code{utri()} in combination
-#'    with \code{\link{geom_cortext}} and regular ggplot2 geoms should be
+#'    with \code{\link{geom_corrtext}} and regular ggplot2 geoms should be
 #'    sufficient for the majority of use cases in the lower and upper triangle
 #'    of a correlation plot. However, \code{dia()} in combination with regular
 #'    geoms is often problematic for useful displays on the diagonal facets,
@@ -38,14 +38,14 @@
 #' # plot with points on the lower triangle
 #' ggcorrm(iris) +
 #'   utri(geom_point(alpha = 0.4)) +
-#'   lotri(geom_cortext()) +
+#'   lotri(geom_corrtext()) +
 #'   dia_density(fill = "grey50") +
 #'   dia_names(size = 3)
 #'
 #' # same plot with inverted lower and upper triangle
 #' ggcorrm(iris) +
 #'   lotri(geom_point(alpha = 0.4)) +
-#'   utri(geom_cortext()) +
+#'   utri(geom_corrtext()) +
 #'   dia_density(fill = "grey50") +
 #'   dia_names(size = 3)
 #'  }

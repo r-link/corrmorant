@@ -71,7 +71,7 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #' @export
 dia_names <- function(y_pos = 0.2, mapping = NULL, ...) {
   if (any(c("x", "y", "label") %in% names(mapping))) {
-    stop("x and y coordinates and labels in geom_cortext() may not be manipulated.")
+    stop("x and y coordinates and labels in dia_names() may not be manipulated.")
   }
   # update mapping with standard aesthetics
   mapping <- modify_list(aes(x = x, label = var_x), mapping)

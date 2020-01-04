@@ -94,7 +94,7 @@ An object of class \code{tidy_corrm} (a tibble with structured
    see \code{\link[stats]{cor}}) is appended to the dataset. This variable
    can e.g. be used to specify the colour or fill of geoms conditional of
    the strength of the correlation (see examples in \code{\link{ggcorrm}}).
-   If the correlations displayed with \code{\link{geom_cortext}}) are separated
+   If the correlations displayed with \code{\link{geom_corrtext}}) are separated
    by groups, it may make sense to also calculate \code{.corr} separately for
    these groups. In this case, it is possible to specify a grouping variable
    for the calculation of \code{.corr} using \code{corr_group}.

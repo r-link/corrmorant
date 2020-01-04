@@ -29,7 +29,7 @@
 #'   lotri(geom_point(aes(col = .corr), alpha = 0.6)) +
 #'   lotri(geom_smooth(aes(fill = .corr, col = .corr),
 #'                     method = "lm", size = 0.3, alpha = 0.6)) +
-#'   utri(geom_cortext(aes(color = .corr))) +
+#'   utri(geom_corrtext(aes(color = .corr))) +
 #'   dia_density(fill = "grey80", lower = .4) +
 #'   dia_names(y_pos = .1) +
 #'   scale_color_corr(option = "A", aesthetics = c("fill", "color"))
