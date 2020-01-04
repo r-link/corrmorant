@@ -1,5 +1,4 @@
-# dia_names() - function for names on the diagonal ----------------------------
-
+# StatDiaNames - ggproto object for the labelling function --------------------
 # ggproto object for stat_dia_density
 #' @rdname corrmorant_ggproto
 #' @format NULL
@@ -16,7 +15,7 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 )
 
 # stat_dia_names() - stat function based on StatDiaNames ----------------------
-#' @rdname dia_names
+#' @rdname corrmorant_stats
 #' @export
 stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
                            position = "identity", show.legend = NA,

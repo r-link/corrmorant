@@ -1,7 +1,3 @@
-# functions for binned geoms on the plot diagonal -----------------------------
-# FIXME: improve placement of bars on the y axis
-#        (do not know why at the moment it looks so messy)
-
 # StatDiaBin - ggproto object for stat_dia_bin --------------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
@@ -101,28 +97,8 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
                       }
 )
 
-# stat for dia_histogram() - corresponding stat function ----------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param geom PARAM_DESCRIPTION, Default: 'rect'
-#' @param position PARAM_DESCRIPTION, Default: 'identity'
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @param lower PARAM_DESCRIPTION, Default: 0.25
-#' @param upper PARAM_DESCRIPTION, Default: 1
-#' @param barwidth PARAM_DESCRIPTION, Default: 0.9
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname stat_dia_bin
+# stat_dia_bin() - stat function for StatDiaBin -------------------------------
+#' @rdname corrmorant_stats
 #' @export
 stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
                          position = "identity", show.legend = NA,
@@ -135,7 +111,7 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
   )
 }
 
-# dia_histogram - wrapper around stat_dia_histogram ---------------------------
+# dia_histogram - wrapper around stat_dia_bin ---------------------------......
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param mapping PARAM_DESCRIPTION, Default: NULL
@@ -165,7 +141,7 @@ dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9
 }
 
 
-# dia_histogram - wrapper around stat_dia_histogram ---------------------------
+# dia_freqpoly - wrapper around stat_dia_bin ---------------------------.......
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param mapping PARAM_DESCRIPTION, Default: NULL

@@ -1,5 +1,3 @@
-# scripts for cortext and related functions -----------------------------------
-
 # StatCortext - ggproto object for stat_Cortext -------------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
@@ -60,30 +58,8 @@ StatCortext <- ggproto("StatCortext", Stat,
                        }
 )
 
-# stat for Cortext() - corresponding stat function -------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param geom PARAM_DESCRIPTION, Default: 'text'
-#' @param position PARAM_DESCRIPTION, Default: 'identity'
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @param nrow PARAM_DESCRIPTION, Default: nrow
-#' @param ncol PARAM_DESCRIPTION, Default: ncol
-#' @param digits PARAM_DESCRIPTION, Default: 2
-#' @param corr_method PARAM_DESCRIPTION, Default: 'pearson'
-#' @param squeeze PARAM_DESCRIPTION, Default: 0.7
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname stat_cortext
+# stat_cortext() - stat function for StatCortext ------------------------------
+#' @rdname corrmorant_stats
 #' @export
 stat_cortext <- function(mapping = NULL, data = NULL, geom = "text",
                          position = "identity", show.legend = NA,
