@@ -61,8 +61,22 @@ StatCortext <- ggproto("StatCortext", Stat,
                        }
 )
 
-# stat for Cortext() - corresponding stat function -------------------------------
-#' @rdname geom_cortext
+# stat_cortext() - stat function based on CorText -----------------------------
+#' @title Text labels for correlation strength in ggcorrm plots
+#' @description \code{stat_dia_names()} is used to compute bivariate correlations
+#'     and appropriate positions of text labels indicating correlation strength
+#'     for the facets of \code{\link{ggcorrm}} plots.
+#' @inheritParams geom_cortext
+#' @inheritParams ggplot2::layer
+#' @param ... additional arguments to \code{\link[ggplot2:layer]{ggplot2::layer}}.
+#' @return An object of class \code{layer}.
+#' @details  \code{stat_cortext()} computes the correlation between variables in
+#'     the facets of \code{ggcorrm} plots and places text labels indicating the
+#'     strength of correlation in appropriate positions within the facets.
+#' @rdname stat_cortext
+#'@seealso
+#'   \code{\link[ggplot2:layer]{ggplot2::layer}},
+#'   \code{\link{geom_cortext}}
 #' @export
 stat_cortext <- function(mapping = NULL, data = NULL, geom = "text",
                          position = "identity", show.legend = NA,
