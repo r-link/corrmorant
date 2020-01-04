@@ -20,7 +20,7 @@ Defaults to NULL.}
 \code{\link[ggplot2:geom_text]{geom_text}()}.}
 }
 \value{
-A layer containing text labels on the diagonal facets.
+A \code{ggplot2} layer containing text labels on the diagonal facets.
 }
 \description{
 \code{dia_names()} is a wrapper around
@@ -34,7 +34,7 @@ A layer containing text labels on the diagonal facets.
    ranges.
 }
 \seealso{
-\code{\link[ggplot2:geom_text]{geom_text}},
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
   \code{\link{stat_dia_names}},
   \code{\link{dia_density}},
   \code{\link{dia_histogram}},

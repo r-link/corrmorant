@@ -23,7 +23,7 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 #' @param ... additional arguments passed to \code{\link[ggplot2:layer]{layer()}}
 #' @inheritParams ggplot2::layer
 #' @inheritParams dia_names
-#' @return An object of class layer.
+#' @return An object of class \code{layer}.
 #' @details \code{stat_dia_names()} uses the range of variables on the diagonal
 #'     facets of \code{\link{ggcorrm}} plots to compute appropriate positions
 #'     for text labels of variable names.
@@ -58,12 +58,12 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #'    Defaults to NULL.
 #' @param ... Additional parameters passed to
 #'    \code{\link[ggplot2:geom_text]{geom_text}()}.
-#' @return A layer containing text labels on the diagonal facets.
+#' @return A \code{ggplot2} layer containing text labels on the diagonal facets.
 #' @details \code{dia_names()} plots text labels on the plot diagonal and takes
 #'    care of the often complicated positioning in plots with different x and y
 #'    ranges.
 #' @seealso
-#'   \code{\link[ggplot2:geom_text]{geom_text}},
+#'   \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
 #'   \code{\link{stat_dia_names}},
 #'   \code{\link{dia_density}},
 #'   \code{\link{dia_histogram}},

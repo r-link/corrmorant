@@ -58,7 +58,7 @@ text labels along the x axis (defaults to 0.2).}
 \item{...}{additional arguments passed to \code{\link[ggplot2:layer]{layer()}}}
 }
 \value{
-An object of class layer.
+An object of class \code{layer}.
 }
 \description{
 \code{stat_dia_names()} is used by
