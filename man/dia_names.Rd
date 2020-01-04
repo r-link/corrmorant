@@ -14,7 +14,7 @@ text labels along the x axis (defaults to 0.2).}
 \code{\link[ggplot2:geom_text]{geom_text}()} call. Must be created with
 \code{\link[ggplot2:aes]{aes}()}, and must not contain \code{x} or
 \code{y}. Can e.g. be used to color text labels by groups (see example).
-Defaults to NULL.}
+Defaults to \code{NULL} (use standard mapping).}
 
 \item{...}{Additional parameters passed to
 \code{\link[ggplot2:geom_text]{geom_text}()}.}

@@ -22,8 +22,8 @@ stat_corrtext(
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by
 \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed, but it is possible to set font
-size and colour.}
+automatically and must not be changed,  but all other aesthetics
+may be manipulated. Defaults to \code{NULL} (use standard mapping).}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -76,7 +76,8 @@ width/height the facet labels are restricted to when multiple labels
 are present (defaults to 0.7 - labels extend over 70\% of the extent
 of the plot).}
 
-\item{...}{additional arguments to \code{\link[ggplot2:layer]{ggplot2::layer}}.}
+\item{...}{additional arguments passed to
+\code{\link[ggplot2:layer]{ggplot2::layer}}.}
 }
 \value{
 An object of class \code{layer}.

@@ -54,7 +54,7 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #'    \code{\link[ggplot2:geom_text]{geom_text}()} call. Must be created with
 #'    \code{\link[ggplot2:aes]{aes}()}, and must not contain \code{x} or
 #'    \code{y}. Can e.g. be used to color text labels by groups (see example).
-#'    Defaults to NULL.
+#'    Defaults to \code{NULL} (use standard mapping).
 #' @param ... Additional parameters passed to
 #'    \code{\link[ggplot2:geom_text]{geom_text}()}.
 #' @return A \code{ggplot2} layer containing text labels on the diagonal facets.

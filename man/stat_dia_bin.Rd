@@ -73,8 +73,8 @@ width. Defaults to 0.9.}
 An object of class \code{layer}.
 }
 \description{
-\code{stat_dia_bin()} computes binned data summaries for the
-    diagonal panels of \code{\link{ggcorrm}} plots created with
+\code{stat_dia_bin()} computes the binned data summaries for
+    the diagonal panels of \code{\link{ggcorrm}} plots that are created with
     \code{\link{dia_histogram}} and \code{\link{dia_freqpoly}}.
 }
 \details{

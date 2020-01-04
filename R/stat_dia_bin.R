@@ -99,8 +99,8 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
 
 # stat_dia_bin() - stat function for StatDiaBin -------------------------------
 #' @title Compute histograms and frequency polygons for ggcorrm plots.
-#' @description \code{stat_dia_bin()} computes binned data summaries for the
-#'     diagonal panels of \code{\link{ggcorrm}} plots created with
+#' @description \code{stat_dia_bin()} computes the binned data summaries for
+#'     the diagonal panels of \code{\link{ggcorrm}} plots that are created with
 #'     \code{\link{dia_histogram}} and \code{\link{dia_freqpoly}}.
 #' @inheritParams ggplot2::layer
 #' @param lower numeric between 0 and 1. Lower limit of the
@@ -144,7 +144,7 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 #' @param mapping Set of aesthetic mappings created by
 #'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
 #'    automatically and must not be changed, but all other aesthetics
-#'    may be manipulated.
+#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
 #' @param ... Additional parameters for \code{\link{stat_dia_bin}}.
 #' @return A \code{ggplot2} layer with histograms or frequency polygons for the
 #'    variables on the plot diagonal of \code{ggcorrm} plots.

@@ -18,8 +18,8 @@ geom_corrtext(
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by
 \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed, but it is possible to set font
-size and colour.}
+automatically and must not be changed,  but all other aesthetics
+may be manipulated. Defaults to \code{NULL} (use standard mapping).}
 
 \item{nrow}{integer - the number of rows for the correlation labels if
 grouping aesthetics are present (defaults to NULL - automatic setting

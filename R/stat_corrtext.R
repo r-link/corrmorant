@@ -66,7 +66,8 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
 #'     for the facets of \code{\link{ggcorrm}} plots.
 #' @inheritParams geom_corrtext
 #' @inheritParams ggplot2::layer
-#' @param ... additional arguments to \code{\link[ggplot2:layer]{ggplot2::layer}}.
+#' @param ... additional arguments passed to
+#'     \code{\link[ggplot2:layer]{ggplot2::layer}}.
 #' @return An object of class \code{layer}.
 #' @details  \code{stat_corrtext()} computes the correlation between variables in
 #'     the facets of \code{ggcorrm} plots and places text labels indicating the
@@ -96,8 +97,8 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
 #'     for the facets of \code{\link{ggcorrm}} plots.
 #' @param mapping Set of aesthetic mappings created by
 #'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-#'    automatically and must not be changed, but it is possible to set font
-#'    size and colour.
+#'    automatically and must not be changed,  but all other aesthetics
+#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
 #' @param nrow integer - the number of rows for the correlation labels if
 #'    grouping aesthetics are present (defaults to NULL - automatic setting
 #'    of \code{nrow}).

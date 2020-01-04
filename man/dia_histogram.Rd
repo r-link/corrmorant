@@ -20,7 +20,7 @@ dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, ...)
 \item{mapping}{Set of aesthetic mappings created by
 \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
 automatically and must not be changed, but all other aesthetics
-may be manipulated.}
+may be manipulated. Defaults to \code{NULL} (use standard mapping).}
 
 \item{lower}{numeric between 0 and 1. Lower limit of the
 histograms/frequency polygons relative to the range of the \code{y}
@@ -40,7 +40,7 @@ a call to a position adjustment function.}
 }
 \value{
 A \code{ggplot2} layer with histograms or frequency polygons for the
-   variables on the plot diagonal of \code{ggcorrm} plots.#'
+   variables on the plot diagonal of \code{ggcorrm} plots.
 }
 \description{
 Add histograms or frequency polygons to the diagonal panels of
