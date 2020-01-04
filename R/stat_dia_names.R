@@ -45,7 +45,8 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 
 # dia_names() - label diagonal facets by variable names -----------------------
 #' @title Add variable names to diagonal facets
-#' @description \code{dia_names()} is a wrapper around \code{stat_dia_names()}
+#' @description \code{dia_names()} is a wrapper around
+#'    \code{\link[stat_dia_names]{stat_dia_names()}}
 #'    which plots the names of variables in a \code{ggcorrm} plot at the
 #'    required position in the diagonal facets.
 #' @param y_pos numeric between 0 and 1 specifying the relative position of the
@@ -76,5 +77,5 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ...) {
   # update mapping with standard aesthetics
   mapping <- modify_list(aes(x = x, label = var_x), mapping)
   # return plot with labels
-  dia(geom_text(mapping = mapping, stat = "dia_names", y_pos = y_pos, ...))
+  dia(stat_dia_names(mapping = mapping, geom = "text", y_pos = y_pos, ...))
 }
