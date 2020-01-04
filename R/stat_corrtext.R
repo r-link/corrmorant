@@ -143,9 +143,15 @@ geom_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
     stop("x and y coordinates in geom_corrtext() may not be manipulated.")
   }
 
-    # add size by correlation manually if specified
+  # print warning if size is specified more than once
+  if ("size" %in% names(mapping) && corr_size){
+    warning("corr_size overridden by manually specified size.")
+  }
+
+  # add size by correlation manually if specified
   if(corr_size) mapping <- modify_list(aes(size = abs(..corr..)),
                                                 mapping)
+
 
   # return plot with labels
   stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
