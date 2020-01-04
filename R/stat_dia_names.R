@@ -16,7 +16,21 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 )
 
 # stat_dia_names() - stat function based on StatDiaNames ----------------------
-#' @rdname dia_names
+#' @title Positions for variable names in ggcorrm plots
+#' @description \code{stat_dia_names()} is used by
+#'      \code{\link[dia_names]{dia_names()}} to compute the positions of layer
+#'      names in the diagonal panels of \code{\link{ggcorrm}} plots.
+#' @param ... additional arguments passed to \code{\link[ggplot2:layer]{layer()}}
+#' @inheritParams ggplot2::layer
+#' @inheritParams dia_names
+#' @return An object of class layer.
+#' @details \code{stat_dia_names()} uses the range of variables on the diagonal
+#'     facets of \code{\link{ggcorrm}} plots to compute appropriate positions
+#'     for text labels of variable names.
+#'@seealso
+#'   \code{\link[ggplot2:layer]{ggplot2::layer}},
+#'   \code{\link{dia_names}}
+#' @rdname stat_dia_names
 #' @export
 stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
                            position = "identity", show.legend = NA,
@@ -47,16 +61,9 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #' @details \code{dia_names()} plots text labels on the plot diagonal and takes
 #'    care of the often complicated positioning in plots with different x and y
 #'    ranges.
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
 #' @seealso
-#'   \code{\link[ggplot2:geom_text]{geom_text}()},
-#'   \code{\link{ggcorrm}},
-#'   \code{\link{tidy_corrm}},
+#'   \code{\link[ggplot2:geom_text]{geom_text}},
+#'   \code{\link{stat_dia_names}},
 #'   \code{\link{dia_density}},
 #'   \code{\link{dia_histogram}},
 #'   \code{\link{dia_freqpoly}}
