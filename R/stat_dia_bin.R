@@ -180,9 +180,9 @@ dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9
 #' }
 #' @seealso
 #'  \code{\link[ggplot2]{character(0)}}
-#' @rdname dia_freqpoly
+#' @rdname dia_histogram
 #' @export
-dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9, ...) {
+dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1, ...) {
   if (any(c("x", "y") %in% names(mapping))) {
     stop("x and y coordinates in dia_freqpoly() may not be manipulated.")
   }
