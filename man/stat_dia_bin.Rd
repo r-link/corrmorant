@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_dia_bin.R
 \name{stat_dia_bin}
 \alias{stat_dia_bin}
-\title{FUNCTION_TITLE}
+\title{Compute histograms and frequency polygons for ggcorrm plots.}
 \usage{
 stat_dia_bin(
   mapping = NULL,
@@ -18,39 +18,68 @@ stat_dia_bin(
 )
 }
 \arguments{
-\item{mapping}{PARAM_DESCRIPTION, Default: NULL}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{PARAM_DESCRIPTION, Default: NULL}
+\item{data}{The data to be displayed in this layer. There are three
+options:
 
-\item{geom}{PARAM_DESCRIPTION, Default: 'rect'}
+If \code{NULL}, the default, the data is inherited from the plot
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
-\item{position}{PARAM_DESCRIPTION, Default: 'identity'}
+A \code{data.frame}, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
-\item{show.legend}{PARAM_DESCRIPTION, Default: NA}
+A \code{function} will be called with a single argument,
+the plot data. The return value must be a \code{data.frame}, and
+will be used as the layer data. A \code{function} can be created
+from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{inherit.aes}{PARAM_DESCRIPTION, Default: TRUE}
+\item{geom}{The geometric object to use display the data}
 
-\item{lower}{PARAM_DESCRIPTION, Default: 0.25}
+\item{position}{Position adjustment, either as a string, or the result of
+a call to a position adjustment function.}
 
-\item{upper}{PARAM_DESCRIPTION, Default: 1}
+\item{show.legend}{logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped.
+\code{FALSE} never includes, and \code{TRUE} always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.}
 
-\item{barwidth}{PARAM_DESCRIPTION, Default: 0.9}
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{lower}{numeric between 0 and 1. Lower limit of the
+histograms/frequency polygons relative to the range of the \code{y}
+axis. Defaults to 0.25.}
+
+\item{upper}{numeric between 0 and 1. Upper limit of the
+histograms/frequency polygons relative to the range of the \code{y}
+axis. Defaults to 1.}
+
+\item{barwidth}{Width of the histograms relative to the maximum possible
+width. Defaults to 0.9.}
+
+\item{...}{additional arguments passed to
+\code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
+\code{\link[ggplot2:stat_bin]{stat_bin()}} are permitted).}
 }
 \value{
-OUTPUT_DESCRIPTION
+An object of class \code{layer}.
 }
 \description{
-FUNCTION_DESCRIPTION
+\code{stat_dia_bin()} computes binned data summaries for the
+    diagonal panels of \code{\link{ggcorrm}} plots created with
+    \code{\link{dia_histogram}} and \code{\link{dia_freqpoly}}.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+\code{stat_dia_bin()} computes binned data summaries for display
+    in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
+    \code{upper} arguments can be used to offset the histograms/frequency
+    polygons from zero and optimally fit them to the range of each panel.
 }
