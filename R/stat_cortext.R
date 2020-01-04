@@ -62,8 +62,8 @@ StatCortext <- ggproto("StatCortext", Stat,
 )
 
 # stat_cortext() - stat function based on CorText -----------------------------
-#' @title Text labels for correlation strength in ggcorrm plots
-#' @description \code{stat_dia_names()} is used to compute bivariate correlations
+#' @title Compute correlation strength in ggcorrm plots
+#' @description \code{stat_cortext()} is used to compute bivariate correlations
 #'     and appropriate positions of text labels indicating correlation strength
 #'     for the facets of \code{\link{ggcorrm}} plots.
 #' @inheritParams geom_cortext
@@ -93,25 +93,48 @@ stat_cortext <- function(mapping = NULL, data = NULL, geom = "text",
 
 # geom_cortext - wrapper around stat_cortext ----------------------------------
 #' @title Text labels for correlations in off-diagonal ggcorrm facets
-#' @description FUNCTION_DESCRIPTION
-#' @inheritParams ggplot2::layer
-#' @param nrow PARAM_DESCRIPTION, Default: NULL
-#' @param ncol PARAM_DESCRIPTION, Default: NULL
-#' @param digits PARAM_DESCRIPTION, Default: 2
-#' @param corrsize PARAM_DESCRIPTION, Default: TRUE
-#' @param corr_method PARAM_DESCRIPTION, Default: 'pearson'
-#' @param squeeze PARAM_DESCRIPTION, Default: 0.7
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @description \code{geom_cortext()} is used to display bivariate correlations
+#'     and appropriate positions of text labels indicating correlation strength
+#'     for the facets of \code{\link{ggcorrm}} plots.
+#' @param mapping Set of aesthetic mappings created by
+#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
+#'    automatically and must not be changed, but it is possible to set font
+#'    size and colour.
+#' @param nrow integer - the number of rows for the correlation labels if
+#'    grouping aesthetics are present (defaults to NULL - automatic setting
+#'    of \code{nrow}).
+#' @param ncol integer - the number of columns for the correlation labels if
+#'    grouping aesthetics are present (defaults to NULL - automatic
+#'    setting of \code{ncol}).
+#' @param digits integer: Number of digits the correlations are rounded to
+#'    (defaults to 2).
+#' @param corrsize logical - should the \code{size} aesthetic be expressed
+#'    as a function of correlation strength? \code{corrsize = TRUE}, is a
+#'    shorthand for \code{aes(size = abs(..corr..))}. Similar expressions
+#'    can be used to access the correlation calculated by
+#'    \code{stat_cortext} manually. Defaults to \code{TRUE}.
+#' @param corr_method character string with the correlation method passed
+#'    to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
+#'    "spearman". Defaults to "pearson".
+#' @param squeeze numeric between 0 an 1. Proportion of the facet
+#'    width/height the facet labels are restricted to when multiple labels
+#'    are present (defaults to 0.7 - labels extend over 70\% of the extent
+#'    of the plot).
+#' @param ... additional arguments to \code{\link{stat_cortext}}.
+#' @return A \code{ggplot2} layer with text labels for correlation strength.
+#' @details \code{geom_cortext()} can be used to display the correlation
+#'    between variables in the facets of \code{ggcorrm} plots. Correlations
+#'    can be calculated for single groups by using grouping aesthetics such
+#'    as \code{aes(color = group)}.
+#'
+#'    \code{geom_cortext()} is a wrapper around
+#'    \code{\link[stat_cortext]{stat_cortext()}} that additionally takes
+#'    care of the right specification of aesthetics and allows to easily
+#'    adjust size by correlation strength via \code{corrsize}.
+#'
 #' @seealso
-#'  \code{\link[ggplot2]{character(0)}}
+#'   \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
+#'   \code{\link{stat_cortext}}
 #' @rdname geom_cortext
 #' @export
 geom_cortext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
@@ -126,7 +149,7 @@ geom_cortext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                                                 mapping)
 
   # return plot with labels
-  geom_text(mapping = mapping, stat = "cortext", show.legend = FALSE,
+  stat_cortext(mapping = mapping, geom = "text", show.legend = FALSE,
             ncol = ncol, nrow = nrow, corr_method = corr_method,
             squeeze = squeeze, ...)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_cortext.R
 \name{stat_cortext}
 \alias{stat_cortext}
-\title{Text labels for correlation strength in ggcorrm plots}
+\title{Compute correlation strength in ggcorrm plots}
 \usage{
 stat_cortext(
   mapping = NULL,
@@ -20,10 +20,10 @@ stat_cortext(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by
+\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
+automatically and must not be changed, but it is possible to set font
+size and colour.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -56,15 +56,25 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{nrow}{PARAM_DESCRIPTION, Default: NULL}
+\item{nrow}{integer - the number of rows for the correlation labels if
+grouping aesthetics are present (defaults to NULL - automatic setting
+of \code{nrow}).}
 
-\item{ncol}{PARAM_DESCRIPTION, Default: NULL}
+\item{ncol}{integer - the number of columns for the correlation labels if
+grouping aesthetics are present (defaults to NULL - automatic
+setting of \code{ncol}).}
 
-\item{digits}{PARAM_DESCRIPTION, Default: 2}
+\item{digits}{integer: Number of digits the correlations are rounded to
+(defaults to 2).}
 
-\item{corr_method}{PARAM_DESCRIPTION, Default: 'pearson'}
+\item{corr_method}{character string with the correlation method passed
+to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
+"spearman". Defaults to "pearson".}
 
-\item{squeeze}{PARAM_DESCRIPTION, Default: 0.7}
+\item{squeeze}{numeric between 0 an 1. Proportion of the facet
+width/height the facet labels are restricted to when multiple labels
+are present (defaults to 0.7 - labels extend over 70\% of the extent
+of the plot).}
 
 \item{...}{additional arguments to \code{\link[ggplot2:layer]{ggplot2::layer}}.}
 }
@@ -72,7 +82,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 An object of class \code{layer}.
 }
 \description{
-\code{stat_dia_names()} is used to compute bivariate correlations
+\code{stat_cortext()} is used to compute bivariate correlations
     and appropriate positions of text labels indicating correlation strength
     for the facets of \code{\link{ggcorrm}} plots.
 }

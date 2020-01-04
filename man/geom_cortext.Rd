@@ -16,41 +16,59 @@ geom_cortext(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by
+\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
+automatically and must not be changed, but it is possible to set font
+size and colour.}
 
-\item{nrow}{PARAM_DESCRIPTION, Default: NULL}
+\item{nrow}{integer - the number of rows for the correlation labels if
+grouping aesthetics are present (defaults to NULL - automatic setting
+of \code{nrow}).}
 
-\item{ncol}{PARAM_DESCRIPTION, Default: NULL}
+\item{ncol}{integer - the number of columns for the correlation labels if
+grouping aesthetics are present (defaults to NULL - automatic
+setting of \code{ncol}).}
 
-\item{digits}{PARAM_DESCRIPTION, Default: 2}
+\item{digits}{integer: Number of digits the correlations are rounded to
+(defaults to 2).}
 
-\item{corrsize}{PARAM_DESCRIPTION, Default: TRUE}
+\item{corrsize}{logical - should the \code{size} aesthetic be expressed
+as a function of correlation strength? \code{corrsize = TRUE}, is a
+shorthand for \code{aes(size = abs(..corr..))}. Similar expressions
+can be used to access the correlation calculated by
+\code{stat_cortext} manually. Defaults to \code{TRUE}.}
 
-\item{corr_method}{PARAM_DESCRIPTION, Default: 'pearson'}
+\item{corr_method}{character string with the correlation method passed
+to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
+"spearman". Defaults to "pearson".}
 
-\item{squeeze}{PARAM_DESCRIPTION, Default: 0.7}
+\item{squeeze}{numeric between 0 an 1. Proportion of the facet
+width/height the facet labels are restricted to when multiple labels
+are present (defaults to 0.7 - labels extend over 70\% of the extent
+of the plot).}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{additional arguments to \code{\link{stat_cortext}}.}
 }
 \value{
-OUTPUT_DESCRIPTION
+A \code{ggplot2} layer with text labels for correlation strength.
 }
 \description{
-FUNCTION_DESCRIPTION
+\code{geom_cortext()} is used to display bivariate correlations
+    and appropriate positions of text labels indicating correlation strength
+    for the facets of \code{\link{ggcorrm}} plots.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+\code{geom_cortext()} can be used to display the correlation
+   between variables in the facets of \code{ggcorrm} plots. Correlations
+   can be calculated for single groups by using grouping aesthetics such
+   as \code{aes(color = group)}.
+
+   \code{geom_cortext()} is a wrapper around
+   \code{\link[stat_cortext]{stat_cortext()}} that additionally takes
+   care of the right specification of aesthetics and allows to easily
+   adjust size by correlation strength via \code{corrsize}.
 }
 \seealso{
-\code{\link[ggplot2]{character(0)}}
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
+  \code{\link{stat_cortext}}
 }
