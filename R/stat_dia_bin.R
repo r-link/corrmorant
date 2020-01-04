@@ -139,7 +139,7 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 # dia_histogram() - wrapper around stat_dia_bin -------------------------------
 #' @title Histograms and frequency polygons for ggcorrm plots
 #' @description Add histograms or frequency polygons to the diagonal panels of
-#'      \code{\link{ggcorrm}} plots.
+#'      \code{\link{ggcorrm}} plots
 #' @inheritParams stat_dia_bin
 #' @param mapping Set of aesthetic mappings created by
 #'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set

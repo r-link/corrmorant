@@ -44,7 +44,7 @@ A \code{ggplot2} layer with histograms or frequency polygons for the
 }
 \description{
 Add histograms or frequency polygons to the diagonal panels of
-     \code{\link{ggcorrm}} plots.
+     \code{\link{ggcorrm}} plots
 }
 \details{
 The \code{lower} and\code{upper} arguments can be used to offset
