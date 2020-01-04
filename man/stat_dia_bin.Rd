@@ -83,3 +83,8 @@ An object of class \code{layer}.
     \code{upper} arguments can be used to offset the histograms/frequency
     polygons from zero and optimally fit them to the range of each panel.
 }
+\seealso{
+\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
+    \code{\link{dia_histogram}},
+    \code{\link{dia_freqpoly}}
+}

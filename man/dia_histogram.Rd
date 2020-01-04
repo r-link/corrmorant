@@ -2,7 +2,8 @@
 % Please edit documentation in R/stat_dia_bin.R
 \name{dia_histogram}
 \alias{dia_histogram}
-\title{FUNCTION_TITLE}
+\alias{dia_freqpoly}
+\title{Histograms and frequency polygons for ggcorrm plots}
 \usage{
 dia_histogram(
   mapping = NULL,
@@ -12,33 +13,53 @@ dia_histogram(
   position = "dodge",
   ...
 )
+
+dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, ...)
 }
 \arguments{
-\item{mapping}{PARAM_DESCRIPTION, Default: NULL}
+\item{mapping}{Set of aesthetic mappings created by
+\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
+automatically and must not be changed, but all other aesthetics
+may be manipulated.}
 
-\item{lower}{PARAM_DESCRIPTION, Default: 0.25}
+\item{lower}{numeric between 0 and 1. Lower limit of the
+histograms/frequency polygons relative to the range of the \code{y}
+axis. Defaults to 0.25.}
 
-\item{upper}{PARAM_DESCRIPTION, Default: 1}
+\item{upper}{numeric between 0 and 1. Upper limit of the
+histograms/frequency polygons relative to the range of the \code{y}
+axis. Defaults to 1.}
 
-\item{barwidth}{PARAM_DESCRIPTION, Default: 0.9}
+\item{barwidth}{Width of the histograms relative to the maximum possible
+width. Defaults to 0.9.}
 
-\item{position}{PARAM_DESCRIPTION, Default: 'dodge'}
+\item{position}{Position adjustment, either as a string, or the result of
+a call to a position adjustment function.}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Additional parameters for \code{\link{stat_dia_bin}}.}
 }
 \value{
-OUTPUT_DESCRIPTION
+A \code{ggplot2} layer with histograms or frequency polygons for the
+   variables on the plot diagonal of \code{ggcorrm} plots.#'
 }
 \description{
-FUNCTION_DESCRIPTION
+Add histograms or frequency polygons to the diagonal panels of
+     \code{\link{ggcorrm}} plots.
 }
 \details{
-DETAILS
+The \code{lower} and\code{upper} arguments can be used to offset
+    the histograms/frequency polygons from zero and optimally fit them to
+    the range of each panel.
+    The standard values are chosen to work well when placing text labels
+    under the histograms/frequency polygons with \code{\link{dia_names}}.
+
+   \code{dia_histogram()} adds histograms of the numeric variables in a
+   \code{ggcorrm} plot to the plot diagonal. The bar width can be adjusted
+   with \code{barwidth}. Frequency polygons can be created with
+   \code{dia_freqpoly()}. Both functions use the same stat,
+   \code{\link{stat_dia_bin}}.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+\seealso{
+\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
+    \code{\link{stat_dia_bin}}
 }
