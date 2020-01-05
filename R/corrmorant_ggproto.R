@@ -6,11 +6,11 @@
 #'   \item \code{StatCorrtext}: create and position text labels for correlation strength
 #'      (see \code{\link{stat_corrtext}} for details).
 #'   \item \code{StatDiaNames}: create and position text labels for variable names in the
-#'      diagonal facets of corrmoran plots (see \code{\link{dia_names}} for details).
+#'      diagonal facets of \code{ggcorrm} plots (see \code{\link{dia_names}} for details).
 #'   \item \code{StatDiaDensity}: create and position density plots of variables in the
-#'      diagonal facets of corrmoran plots (see \code{\link{dia_density}} for details).
+#'      diagonal facets of \code{ggcorrm} plots (see \code{\link{dia_density}} for details).
 #'   \item \code{StatDiaBin}: create and position plots of binned data (histograms or
-#'     frequency polygons) of variables in the diagonal facets of corrmoran plots
+#'     frequency polygons) of variables in the diagonal facets of \code{ggcorrm} plots
 #'     (see \code{\link{dia_histogram}} and  \code{\link{dia_freqpoly}}
 #'     for details).
 #'   }
