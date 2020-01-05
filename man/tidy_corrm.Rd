@@ -14,57 +14,60 @@ tidy_corrm(
 )
 }
 \arguments{
-\item{data}{A \code{data.frame} or \code{matrix} with the raw data used
+\item{data}{\code{data.frame} or \code{matrix} with the raw data used
 for the correlation plot. If a \code{data.frame}, all numeric variables
 are used as rows/columns of the correlation plot, while all other
-variables are appended to the original dataset as additional columns.}
+variables are appended to the reshaped dataset as additional columns.}
 
-\item{labels}{(optional) character vector with labels for the names of all
+\item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot
 axis and text labels. Must be of the same length as the number of
-numeric columns displayed in the plot. Default: \code{NULL}}
+numeric columns displayed in the plot. Defaults to \code{NULL} (use
+original column names as labels).}
 
-\item{rescale}{a character string specifying the type of transformation
+\item{rescale}{Character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
 \code{"by.sd"} scales by the standard deviation of the data and centers
 around zero.  \code{"by.range"} rescales the range of the data to the
 interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
-values. Default: \code{"by_sd"}}
+values. Defaults to \code{"by_sd"}.}
 
-\item{corr_method}{character string with the correlation method passed to
-\code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
- and \code{"spearman"}
- Default: \code{"pearson"}}
+\item{corr_method}{Character string with the correlation method passed t
+\code{\link[stats]{cor}}. Used for the \code{.corr} variable appended to
+the \code{tidy_corr} dataset and passed on to
+\code{\link[geom_cortext]{geom_cortext()}} layers. Can be one of
+\code{"pearson"}, \code{"kendall"}  and \code{"spearman"}. Defaults to
+\code{"pearson"}.}
 
-\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
-a grouping variable is specified, \code{.corr} which can be used for
-conditional coloring will be calculated separately for each of these
-groups.
-Default: \code{NULL}}
+\item{corr_group}{\code{NULL} or the name of a numeric variable in \code{data}.
+If a grouping variable is specified, \code{.corr} will be calculated
+separately for each of these groups (which may be useful for conditional
+coloring). Defaults to \code{NULL}.}
 
-\item{mutates}{(optional) list of named quosures created with
+\item{mutates}{(Optional) list of named quosures created with
 \code{\link[rlang:quos]{rlang::quos}}. Can be any expressions that specify
- changes to the `tidy_corrm` \emph{after} reshaping, using regular
-\code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Default: NULL}
+ changes to the `tidy_corrm` dataset \emph{after} reshaping, using regular
+\code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Defaults to \code{NULL}
+(no \code{mutate} operations on the raw data).}
 }
 \value{
 An object of class \code{tidy_corrm} (a tibble with structured
    correlation data) containing the following columns:
    \describe{
-     \item{var_x}{name of the variable on the x-axis in
+     \item{var_x}{Name of the variable on the x-axis in
        the order of appearance in the raw data (ordered factor).}
-     \item{var_y}{name of the variable on the y-axis in
+     \item{var_y}{Name of the variable on the y-axis in
        the order of appearance in the raw data (ordered factor)}
-     \item{x}{data of the variable on the x axis (numeric).}
-     \item{y}{data of the variable on the y axis (numeric).}
-     \item{type}{type of panel (character, \code{"upper"}, code{"lower"} or
-       code{"diag"}).}
-     \item{.corr}{correlation between x and y calculated with
-       \code{\link[stats]{cor}} using
-       the method specified with \code{corr_method} and optionally
+     \item{x}{Data of the variable on the x axis (numeric).}
+     \item{y}{Data of the variable on the y axis (numeric).}
+     \item{type}{Type of panel (character, \code{"upper"}, \code{"lower"} or
+       \code{"diag"}).}
+     \item{.corr}{Correlation between x and y for the respective panel/group,
+       calculated with \code{\link[stats]{cor}} using
+       the method specified by \code{corr_method} and optionally
        within the groups specified with \code{corr_group} (numeric).}
-     \item{corr_group}{grouping variable for .corr (1 for all observations
-       if no groups are specified).}
+     \item{corr_group}{grouping variable for \code{.corr} (1 for all
+     observations if no groups are specified).}
      \item{Additional columns}{All other columns specified in the dataset
        and/or created via \code{mutates}.}
      }
@@ -72,12 +75,12 @@ An object of class \code{tidy_corrm} (a tibble with structured
 \description{
 \code{tidy_corrm()} takes a \code{data.frame} or \code{matrix}
    and reshapes it to a long-table format that enables plotting with
-   \code{\link{ggcorrm}}.
+   \code{\link[ggcorrm]{ggcorrm()}}.
 }
 \details{
 \code{tidy_corrm()} is used to reshape a \code{data.frame} or
    \code{matrix} with raw data for a correlation plot to a long-table
-   format that can be plotted with \code{\link{ggcorrm}}. The function
+   format that can be plotted with \code{\link[ggcorrm]{ggcorrm()}}. The function
    creates a tibble with all combinations of all numeric variables in the
    dataset that are labelled with their column names (or, alternatively,
    a vector with new labels) in the order of their appearance in the raw
@@ -100,18 +103,18 @@ An object of class \code{tidy_corrm} (a tibble with structured
    for the calculation of \code{.corr} using \code{corr_group}.
 
    In many cases, the variables in the correlation matrix belong to
-   different groups.As the input for \code{tidy_corrm} is based on a wide
-   table format, it is not possible to include this information as an
-   additional column. There are two ways to include variable-specific
-   information \emph{after the fact}: a) \code{tidy_corrm()} can be
-   called directly, and its output can be modified manually before passing
-   it to \code{ggcorrm()} or b) the \code{mutates} argument can be used to
-   pass a list of named quosures created with
+   different groups of variables. As the input for \code{tidy_corrm} is
+   based on a wide table format, it is usually not possible to include this
+   information as an additional column in the raw data. There are two ways to
+   include variable-specific information \emph{after the fact}: a)
+   \code{tidy_corrm()} can be called directly, and its output can be modified
+   manually before passing it to \code{ggcorrm()} or b) the \code{mutates}
+   argument can be used to pass a list of named quosures created with
    \code{\link[rlang:quos]{rlang::quos}} that contain a set of mutating
    operations based on regular \code{\link[dplyr:mutate]{dplyr::mutate}}
    syntax that are evaluated inside the reshaped dataset (see examples).
-   For the standard column names of \code{tidy_corr} objects, that can be
-   used in \code{mutates}, see the Value section.
+   For the standard column names of \code{tidy_corr} objects see the Value
+   section.
 }
 \examples{
 \dontrun{

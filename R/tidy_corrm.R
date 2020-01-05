@@ -3,36 +3,36 @@
 #' @title Reshape data for correlation matrices to a tidy format
 #' @description \code{tidy_corrm()} takes a \code{data.frame} or \code{matrix}
 #'    and reshapes it to a long-table format that enables plotting with
-#'    \code{\link{ggcorrm}}.
-#' @param data A \code{data.frame} or \code{matrix} with the raw data used
+#'    \code{\link[ggcorrm]{ggcorrm()}}.
+#' @param data \code{data.frame} or \code{matrix} with the raw data used
 #'    for the correlation plot. If a \code{data.frame}, all numeric variables
 #'    are used as rows/columns of the correlation plot, while all other
-#'    variables are appended to the original dataset as additional columns.
+#'    variables are appended to the reshaped dataset as additional columns.
 #' @inheritParams ggcorrm
 #' @return An object of class \code{tidy_corrm} (a tibble with structured
 #'    correlation data) containing the following columns:
 #'    \describe{
-#'      \item{var_x}{name of the variable on the x-axis in
+#'      \item{var_x}{Name of the variable on the x-axis in
 #'        the order of appearance in the raw data (ordered factor).}
-#'      \item{var_y}{name of the variable on the y-axis in
+#'      \item{var_y}{Name of the variable on the y-axis in
 #'        the order of appearance in the raw data (ordered factor)}
-#'      \item{x}{data of the variable on the x axis (numeric).}
-#'      \item{y}{data of the variable on the y axis (numeric).}
-#'      \item{type}{type of panel (character, \code{"upper"}, code{"lower"} or
-#'        code{"diag"}).}
-#'      \item{.corr}{correlation between x and y calculated with
-#'        \code{\link[stats]{cor}} using
-#'        the method specified with \code{corr_method} and optionally
+#'      \item{x}{Data of the variable on the x axis (numeric).}
+#'      \item{y}{Data of the variable on the y axis (numeric).}
+#'      \item{type}{Type of panel (character, \code{"upper"}, \code{"lower"} or
+#'        \code{"diag"}).}
+#'      \item{.corr}{Correlation between x and y for the respective panel/group,
+#'        calculated with \code{\link[stats]{cor}} using
+#'        the method specified by \code{corr_method} and optionally
 #'        within the groups specified with \code{corr_group} (numeric).}
-#'      \item{corr_group}{grouping variable for .corr (1 for all observations
-#'        if no groups are specified).}
+#'      \item{corr_group}{grouping variable for \code{.corr} (1 for all
+#'      observations if no groups are specified).}
 #'      \item{Additional columns}{All other columns specified in the dataset
 #'        and/or created via \code{mutates}.}
 #'      }
 #'
 #' @details \code{tidy_corrm()} is used to reshape a \code{data.frame} or
 #'    \code{matrix} with raw data for a correlation plot to a long-table
-#'    format that can be plotted with \code{\link{ggcorrm}}. The function
+#'    format that can be plotted with \code{\link[ggcorrm]{ggcorrm()}}. The function
 #'    creates a tibble with all combinations of all numeric variables in the
 #'    dataset that are labelled with their column names (or, alternatively,
 #'    a vector with new labels) in the order of their appearance in the raw
@@ -55,18 +55,18 @@
 #'    for the calculation of \code{.corr} using \code{corr_group}.
 #'
 #'    In many cases, the variables in the correlation matrix belong to
-#'    different groups.As the input for \code{tidy_corrm} is based on a wide
-#'    table format, it is not possible to include this information as an
-#'    additional column. There are two ways to include variable-specific
-#'    information \emph{after the fact}: a) \code{tidy_corrm()} can be
-#'    called directly, and its output can be modified manually before passing
-#'    it to \code{ggcorrm()} or b) the \code{mutates} argument can be used to
-#'    pass a list of named quosures created with
+#'    different groups of variables. As the input for \code{tidy_corrm} is
+#'    based on a wide table format, it is usually not possible to include this
+#'    information as an additional column in the raw data. There are two ways to
+#'    include variable-specific information \emph{after the fact}: a)
+#'    \code{tidy_corrm()} can be called directly, and its output can be modified
+#'    manually before passing it to \code{ggcorrm()} or b) the \code{mutates}
+#'    argument can be used to pass a list of named quosures created with
 #'    \code{\link[rlang:quos]{rlang::quos}} that contain a set of mutating
 #'    operations based on regular \code{\link[dplyr:mutate]{dplyr::mutate}}
 #'    syntax that are evaluated inside the reshaped dataset (see examples).
-#'    For the standard column names of \code{tidy_corr} objects, that can be
-#'    used in \code{mutates}, see the Value section.
+#'    For the standard column names of \code{tidy_corr} objects see the Value
+#'    section.
 #'
 #' @examples
 #' \dontrun{
