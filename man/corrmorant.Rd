@@ -21,7 +21,7 @@ variables are appended to the reshaped dataset as additional columns.}
 \item{style}{Character string defining the plot style. One of "dark", "light"
 or "blue_red".}
 
-\item{rescale}{Character string specifying the type of transformation
+\item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
 \code{"by.sd"} scales by the standard deviation of the data and centers
 around zero.  \code{"by.range"} rescales the range of the data to the
