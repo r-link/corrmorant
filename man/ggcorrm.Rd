@@ -23,61 +23,64 @@ If specifying a \code{data.frame} or \code{matrix}, it will internally be
 passed to \code{\link{tidy_corrm()}} with the settings for \code{labels},
 \code{rescale}, \code{corr_group}, \code{corr_method} and \code{mutates}
 specified in the \code{ggcorrm()} call. \code{\link{tidy_corrm()}}
-prepares the dataset for plotting by creating a \code{data.frame} with
-all possible combinations of all numeric variables while retaining all
+prepares the data for plotting by creating a \code{data.frame} with
+all possible combinations of all numeric variables, while retaining all
 discrete variables in additional columns. If a \code{tidy_corrm} object
 is supplied, all arguments passed to \code{\link{tidy_corrm()}} will be
 ignored and the \code{tidy_corrm} object wil be used directly to
 initialize the \code{ggcorrm} plot.}
 
-\item{labels}{(optional) character vector with labels for the names of all
+\item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot
 axis and text labels. Must be of the same length as the number of
-numeric columns displayed in the plot. Default: \code{NULL}}
+numeric columns displayed in the plot. Defaults to \code{NULL} (use
+original column names as labels).}
 
-\item{rescale}{a character string specifying the type of transformation
+\item{rescale}{Character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
 \code{"by.sd"} scales by the standard deviation of the data and centers
 around zero.  \code{"by.range"} rescales the range of the data to the
 interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
-values. Default: \code{"by_sd"}}
+values. Defaults to \code{"by_sd"}.}
 
-\item{corr_method}{character string with the correlation method passed to
-\code{\link[stats]{cor}}. Can be of \code{"pearson"}, \code{"kendall"}
- and \code{"spearman"}
- Default: \code{"pearson"}}
+\item{corr_method}{Character string with the correlation method passed t
+\code{\link[stats]{cor}}. Used for the \code{.corr} variable appended to
+the \code{tidy_corr} dataset and passed on to
+\code{\link[geom_cortext]{geom_cortext()}} layers. Can be one of
+\code{"pearson"}, \code{"kendall"}  and \code{"spearman"}. Defaults to
+\code{"pearson"}.}
 
-\item{corr_group}{NULL or the name of a numeric variable in \code{data}. If
-a grouping variable is specified, \code{.corr} which can be used for
-conditional coloring will be calculated separately for each of these
-groups.
-Default: \code{NULL}}
+\item{corr_group}{\code{NULL} or the name of a numeric variable in \code{data}.
+If a grouping variable is specified, \code{.corr} will be calculated
+separately for each of these groups (which may be useful for conditional
+coloring). Defaults to \code{NULL}.}
 
-\item{mutates}{(optional) list of named quosures created with
+\item{mutates}{(Optional) list of named quosures created with
 \code{\link[rlang:quos]{rlang::quos}}. Can be any expressions that specify
- changes to the `tidy_corrm` \emph{after} reshaping, using regular
-\code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Default: NULL}
+ changes to the `tidy_corrm` dataset \emph{after} reshaping, using regular
+\code{\link[dplyr:mutate]{dplyr::mutate}} syntax. Defaults to \code{NULL}
+(no \code{mutate} operations on the raw data).}
 
-\item{bg_dia}{(optional) background color specification for the diagonal panels.
+\item{bg_dia}{(Optional) background color specification for the diagonal panels.
 Either a character string with a hexadecimal color code, a character string
 specifying a color name in \code{\link[grDevices]{colors}}, or an integer
 specifying a position in \code{\link[grDevices]{palette}}. The default value
-of \code{NULL} used the standard background color defined in the corresponding
-\code{\link[ggplot2:theme]{ggplot2::theme}}.}
+of \code{NULL} uses the standard background color defined in the corresponding
+ggplot2 theme.}
 
 \item{bg_lotri}{(optional) background color specification for the panels in the
 lower triangle. Either a character string with a hexadecimal color code, a
 character string specifying a color name in \code{\link[grDevices]{colors}},
 or an integer specifying a position in \code{\link[grDevices]{palette}}. The
-default value of \code{NULL} used the standard background color defined in the
-corresponding \code{\link[ggplot2:theme]{ggplot2::theme}}.}
+default value of \code{NULL} uses the standard background color defined in the
+corresponding ggplot2 theme.}
 
 \item{bg_utri}{(optional) background color specification for the panels in the
 lower triangle. Either a character string with a hexadecimal color code, a
 character string specifying a color name in \code{\link[grDevices]{colors}},
 or an integer specifying a position in \code{\link[grDevices]{palette}}. The
-default value of \code{NULL} used the standard background color defined in the
-corresponding \code{\link[ggplot2:theme]{ggplot2::theme}}.}
+default value of \code{NULL} uses the standard background color defined in the
+corresponding ggplot2 theme.}
 }
 \value{
 An object of class \code{ggcorrm} containing the reshaped dataset for the
@@ -86,9 +89,9 @@ An object of class \code{ggcorrm} containing the reshaped dataset for the
 }
 \description{
 \code{ggcorrm()} initializes a \code{ggcorrm} object (inheriting
-    from class \code{ggplot}). It can be called either with a raw data frame
-    with input data, which is then internally passed to
-    \code{\link{tidy_corrm()}}, or with a prepared correlation object of class
+    from class \code{ggplot}). It can be called either using the raw data for
+    the correlation plot as input, which is then internally passed to
+    \code{\link{tidy_corrm()}}, or with a prepared correlation dataset of class
     \code{tidy_corrm}.
 }
 \details{
@@ -106,14 +109,15 @@ An object of class \code{ggcorrm} containing the reshaped dataset for the
     syntax, though in most cases it will be more useful to add layers using the
     \code{\link[corrmorant_selectors]{corrmorant selector functions}} which allow
     to map geoms to a subset of panels on the plot diagonal, lower or upper
-    triangle with \code{dia()}, \code{lotri()} and \code{utri()}, respectively
+    triangle using \code{dia()}, \code{lotri()} or \code{utri()}, respectively
     (see examples).
 
     \code{bg_dia}, \code{bg_lotri} and \code{bg_utri} allow to specify different
     background color settings for the plot diagonal, the lower and the upper
     triangle of the correlation plot matrix, respectively. All other graphics
     settings can be modified using regular ggplot2 \code{\link[ggplot2]{theme}}
-    syntax, building upon the ggcorrm standard theme (\code{\link{theme_corrm}}).
+    syntax, building upon the corrmorant standard theme
+    (\code{\link{theme_corrm}}).
 }
 \examples{
 \dontrun{
