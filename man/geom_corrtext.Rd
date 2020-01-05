@@ -33,29 +33,31 @@ setting of \code{ncol}).}
 (defaults to 2).}
 
 \item{corr_size}{logical - should the \code{size} aesthetic be expressed
-as a function of correlation strength? \code{corr_size = TRUE}, is a
-shorthand for \code{aes(size = abs(..corr..))}. Similar expressions
-can be used to access the correlation calculated by
-\code{stat_corrtext} manually. Defaults to \code{TRUE}.}
+as a function of correlation strength? \code{corr_size = TRUE} is a
+shorthand for setting \code{aes(size = abs(..corr..))}. Similar
+expressions can be used to access the correlation calculated by
+\code{stat_corrtext} manually in \code{aes()}. Defaults to
+\code{TRUE}.}
 
 \item{corr_method}{character string with the correlation method passed
 to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson".}
+"spearman". Defaults to "pearson" (or is inherited from the setting
+in \code{\link[ggcorrm]{ggcorrm()}}).}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet
 width/height the facet labels are restricted to when multiple labels
 are present (defaults to 0.7 - labels extend over 70\% of the extent
 of the plot).}
 
-\item{...}{additional arguments to \code{\link{stat_corrtext}}.}
+\item{...}{Additional arguments to \code{\link{stat_corrtext}}.}
 }
 \value{
 A \code{ggplot2} layer with text labels for correlation strength.
 }
 \description{
-\code{geom_corrtext()} is used to display bivariate correlations
-    and appropriate positions of text labels indicating correlation strength
-    for the facets of \code{\link{ggcorrm}} plots.
+\code{geom_corrtext()} is used to display text labels for the
+    strength of bivariate correlations in the off-diagonal facets of
+    \code{\link{ggcorrm}} plots.
 }
 \details{
 \code{geom_corrtext()} can be used to display the correlation

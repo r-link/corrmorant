@@ -69,7 +69,8 @@ setting of \code{ncol}).}
 
 \item{corr_method}{character string with the correlation method passed
 to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson".}
+"spearman". Defaults to "pearson" (or is inherited from the setting
+in \code{\link[ggcorrm]{ggcorrm()}}).}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet
 width/height the facet labels are restricted to when multiple labels
@@ -80,7 +81,7 @@ of the plot).}
 \code{\link[ggplot2:layer]{ggplot2::layer}}.}
 }
 \value{
-An object of class \code{layer}.
+An object of class \code{Layer}.
 }
 \description{
 \code{stat_corrtext()} is used to compute bivariate correlations
