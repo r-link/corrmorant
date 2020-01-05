@@ -2,4 +2,8 @@
 ^\.Rproj\.user$
 ^.*\.yml$
 ^data-raw$
-^sinew_workflow.R$
+^sinew_workflow\.R$
+^README\.Rmd$
+^README\.md$
+^README_cache$
+^README_files$
