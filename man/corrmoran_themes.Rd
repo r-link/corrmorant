@@ -13,13 +13,13 @@ theme_corrm(
 )
 }
 \arguments{
-\item{base_size}{base font size (defaults to 9).}
+\item{base_size}{Base font size (defaults to 9).}
 
-\item{base_family}{base font familiy (defaults to "").}
+\item{base_family}{Base font family (defaults to "").}
 
-\item{base_line_size}{base size for line elements (defaults to base_size/22).}
+\item{base_line_size}{Base size for line elements (defaults to base_size/22).}
 
-\item{base_rect_size}{base sie for rect elements  (defaults to base_size/22).}
+\item{base_rect_size}{Base sie for rect elements (defaults to base_size/22).}
 }
 \description{
 ggplot themes controlling all non-data display meant

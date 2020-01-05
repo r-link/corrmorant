@@ -34,18 +34,18 @@ color scale. Defaults to "A".}
 
 \item{limits}{Limits of the color gradient By default, the limits are set
 to c(-1, 1), and it is likely not a wise idea to change it as it might
-over-emphasise weak correlation}
+over-emphasise weak correlations.}
 
 \item{na.value}{the color to use for missing values. Defaults to '#55FF55'.}
 
 \item{guide}{Type of legend ("colourbar" for continuous legend, "legend"
 for legend with discrete values). Defaults to "colourbar".}
 
-\item{aesthetics}{character string or vector of character strings with the
+\item{aesthetics}{Character string or vector of character strings with the
 aesthetics linked to the scale.  Defaults to  "color" for
 \code{scale_color_corr()} and "fill" for \code{scale_fill_corr()}.}
 
-\item{direction}{numeric indicating the order of the scale. Defaults to 1;
+\item{direction}{Numeric indicating the order of the scale. Defaults to 1;
 negative values reverse the order of the scale.}
 }
 \description{

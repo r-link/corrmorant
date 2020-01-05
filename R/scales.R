@@ -8,14 +8,14 @@
 #'    color scale. Defaults to "A".
 #' @param limits Limits of the color gradient By default, the limits are set
 #'    to c(-1, 1), and it is likely not a wise idea to change it as it might
-#'    over-emphasise weak correlation
+#'    over-emphasise weak correlations.
 #' @param na.value the color to use for missing values. Defaults to '#55FF55'.
 #' @param guide Type of legend ("colourbar" for continuous legend, "legend"
 #'    for legend with discrete values). Defaults to "colourbar".
-#' @param aesthetics character string or vector of character strings with the
+#' @param aesthetics Character string or vector of character strings with the
 #'     aesthetics linked to the scale.  Defaults to  "color" for
 #'     \code{scale_color_corr()} and "fill" for \code{scale_fill_corr()}.
-#' @param direction numeric indicating the order of the scale. Defaults to 1;
+#' @param direction Numeric indicating the order of the scale. Defaults to 1;
 #'     negative values reverse the order of the scale.
 #' @details The color and fill scales specified via \code{option} are built upon
 #'     \code{\link[ggplot2:scale_colour_gradient]{ggplot2::scale_color_gradient1}},

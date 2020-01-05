@@ -2,10 +2,10 @@
 #' @description ggplot themes controlling all non-data display meant
 #'     for the use with \code{ggcorrm}. Single elements of a theme can
 #'     be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
-#' @param base_size base font size (defaults to 9).
-#' @param base_family base font familiy (defaults to "").
-#' @param base_line_size base size for line elements (defaults to base_size/22).
-#' @param base_rect_size base sie for rect elements  (defaults to base_size/22).
+#' @param base_size Base font size (defaults to 9).
+#' @param base_family Base font family (defaults to "").
+#' @param base_line_size Base size for line elements (defaults to base_size/22).
+#' @param base_rect_size Base sie for rect elements (defaults to base_size/22).
 #' @details Available themes:
 #'     \describe{
 #'         \item{theme_corrm()}{The standard corrmorant theme with white background and
