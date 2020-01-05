@@ -11,9 +11,9 @@ Authors@R:
     )
 Description: 
     Extends ggplot2 by an automated framework for plots of correlation matrices
-    that can be easily modified via regular ggplot2 syntax. In addition, a 
-    large set of visualization tools for exploratory data analysis based on 
-    correlation matrices is provided.
+    that can be easily modified via regular ggplot2 syntax. In addition, it 
+    provides a large set of visualization tools for exploratory data analysis 
+    based on correlation matrices.
 Depends: 
     R (>= 3.6.0),
     ggplot2 (>= 3.2.1),
