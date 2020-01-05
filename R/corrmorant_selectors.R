@@ -71,6 +71,9 @@ NULL
 #' @rdname corrmorant_selectors
 #' @export
 lotri <- function(layer) {
+  if (!inherits(layer, "Layer")) {
+    stop("lotri() has to be called on ggplot layers.")
+  }
   layer$data <- update_data(layer$data, "lower")
   return(layer)
 }
@@ -79,6 +82,9 @@ lotri <- function(layer) {
 #' @rdname corrmorant_selectors
 #' @export
 utri <- function(layer) {
+  if (!inherits(layer, "Layer")) {
+    stop("utri() has to be called on ggplot layers.")
+  }
   layer$data <- update_data(layer$data, "upper")
   return(layer)
 }
@@ -87,6 +93,9 @@ utri <- function(layer) {
 #' @rdname corrmorant_selectors
 #' @export
 dia <- function(layer) {
+  if (!inherits(layer, "Layer")) {
+    stop("dia() has to be called on ggplot layers.")
+  }
   layer$data <- update_data(layer$data, "diag")
   return(layer)
 }
