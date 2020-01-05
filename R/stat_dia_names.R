@@ -19,10 +19,10 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 #' @description \code{stat_dia_names()} is used by
 #'      \code{\link[dia_names]{dia_names()}} to compute the positions of layer
 #'      names in the diagonal panels of \code{\link{ggcorrm}} plots.
-#' @param ... additional arguments passed to \code{\link[ggplot2:layer]{layer()}}
+#' @param ... Additional arguments passed to \code{\link[ggplot2:layer]{layer()}}
 #' @inheritParams ggplot2::layer
 #' @inheritParams dia_names
-#' @return An object of class \code{layer}.
+#' @return An object of class \code{Layer}.
 #' @details \code{stat_dia_names()} uses the range of variables on the diagonal
 #'     facets of \code{\link{ggcorrm}} plots to compute appropriate positions
 #'     for text labels of variable names.
@@ -46,23 +46,22 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #' @title Add variable names to diagonal facets
 #' @description \code{dia_names()} is a wrapper around
 #'    \code{\link[stat_dia_names]{stat_dia_names()}}
-#'    which plots the names of variables in a \code{ggcorrm} plot at the
-#'    required position in the diagonal facets.
+#'    which plots the names of variables in a \code{ggcorrm} plot at
+#'    appropriate positions in the diagonal facets.
 #' @param y_pos numeric between 0 and 1 specifying the relative position of the
 #'     text labels along the x axis (defaults to 0.2).
-#' @param mapping (optional) mapping for the internal
-#'    \code{\link[ggplot2:geom_text]{geom_text}()} call. Must be created with
-#'    \code{\link[ggplot2:aes]{aes}()}, and must not contain \code{x} or
+#' @param mapping (optional) mapping for the internal call to
+#'    \code{\link[stat_dia_names]{stat_dia_names()}}. Must be created with
+#'    \code{\link[ggplot2:aes]{aes()}}, and must not contain \code{x} or
 #'    \code{y}. Can e.g. be used to color text labels by groups (see example).
 #'    Defaults to \code{NULL} (use standard mapping).
 #' @param ... Additional parameters passed to
-#'    \code{\link[ggplot2:geom_text]{geom_text}()}.
+#'    \code{\link[stat_dia_names]{stat_dia_names()}}.
 #' @return A \code{ggplot2} layer containing text labels on the diagonal facets.
 #' @details \code{dia_names()} plots text labels on the plot diagonal and takes
 #'    care of the often complicated positioning in plots with different x and y
 #'    ranges.
 #' @seealso
-#'   \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
 #'   \code{\link{stat_dia_names}},
 #'   \code{\link{dia_density}},
 #'   \code{\link{dia_histogram}},

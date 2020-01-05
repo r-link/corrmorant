@@ -61,12 +61,12 @@ axis. Defaults to 0.25.}
 histograms/frequency polygons relative to the range of the \code{y}
 axis. Defaults to 1.}
 
-\item{...}{additional arguments passed to
+\item{...}{Additional arguments passed to
 \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
 \code{\link[ggplot2:stat_density]{stat_density()}} are permitted).}
 }
 \value{
-An object of class \code{layer}.
+An object of class \code{Layer}.
 }
 \description{
 code{stat_dia_density()} computes the density curves for the

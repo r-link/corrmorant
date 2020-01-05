@@ -57,10 +57,10 @@ StatDiaDensity <- ggproto("StatDiaDensity", Stat,
 #'     \code{\link{dia_density}}.
 #' @inheritParams ggplot2::layer
 #' @inheritParams stat_dia_bin
-#' @param ... additional arguments passed to
+#' @param ... Additional arguments passed to
 #'     \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
 #'     \code{\link[ggplot2:stat_density]{stat_density()}} are permitted).
-#' @return An object of class \code{layer}.
+#' @return An object of class \code{Layer}.
 #' @details \code{stat_density()} computes density curves for display
 #'     in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
 #'     \code{upper} arguments can be used to offset the density curves from
@@ -91,7 +91,7 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
 #'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
 #'    automatically and must not be changed, but all other aesthetics
 #'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
-#' @param ... additional parameters for \code{\link{stat_dia_density}}.
+#' @param ... Additional parameters for \code{\link{stat_dia_density}}.
 #' @return A \code{ggplot2} layer with histograms or frequency polygons for the
 #'    variables on the plot diagonal of \code{ggcorrm} plots.
 #' @details \code{dia_density()} adds density curves to the diagonal panels

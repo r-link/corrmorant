@@ -10,14 +10,14 @@ dia_names(y_pos = 0.2, mapping = NULL, ...)
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
 text labels along the x axis (defaults to 0.2).}
 
-\item{mapping}{(optional) mapping for the internal
-\code{\link[ggplot2:geom_text]{geom_text}()} call. Must be created with
-\code{\link[ggplot2:aes]{aes}()}, and must not contain \code{x} or
+\item{mapping}{(optional) mapping for the internal call to
+\code{\link[stat_dia_names]{stat_dia_names()}}. Must be created with
+\code{\link[ggplot2:aes]{aes()}}, and must not contain \code{x} or
 \code{y}. Can e.g. be used to color text labels by groups (see example).
 Defaults to \code{NULL} (use standard mapping).}
 
 \item{...}{Additional parameters passed to
-\code{\link[ggplot2:geom_text]{geom_text}()}.}
+\code{\link[stat_dia_names]{stat_dia_names()}}.}
 }
 \value{
 A \code{ggplot2} layer containing text labels on the diagonal facets.
@@ -25,8 +25,8 @@ A \code{ggplot2} layer containing text labels on the diagonal facets.
 \description{
 \code{dia_names()} is a wrapper around
    \code{\link[stat_dia_names]{stat_dia_names()}}
-   which plots the names of variables in a \code{ggcorrm} plot at the
-   required position in the diagonal facets.
+   which plots the names of variables in a \code{ggcorrm} plot at
+   appropriate positions in the diagonal facets.
 }
 \details{
 \code{dia_names()} plots text labels on the plot diagonal and takes
@@ -34,8 +34,7 @@ A \code{ggplot2} layer containing text labels on the diagonal facets.
    ranges.
 }
 \seealso{
-\code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
-  \code{\link{stat_dia_names}},
+\code{\link{stat_dia_names}},
   \code{\link{dia_density}},
   \code{\link{dia_histogram}},
   \code{\link{dia_freqpoly}}

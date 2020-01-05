@@ -65,12 +65,12 @@ axis. Defaults to 1.}
 \item{barwidth}{Width of the histograms relative to the maximum possible
 width. Defaults to 0.9.}
 
-\item{...}{additional arguments passed to
+\item{...}{Additional arguments passed to
 \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
 \code{\link[ggplot2:stat_bin]{stat_bin()}} are permitted).}
 }
 \value{
-An object of class \code{layer}.
+An object of class \code{Layer}.
 }
 \description{
 \code{stat_dia_bin()} computes the binned data summaries for

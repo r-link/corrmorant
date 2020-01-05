@@ -111,10 +111,10 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
 #'     axis. Defaults to 1.
 #' @param barwidth Width of the histograms relative to the maximum possible
 #'     width. Defaults to 0.9.
-#' @param ... additional arguments passed to
+#' @param ... Additional arguments passed to
 #'     \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
 #'     \code{\link[ggplot2:stat_bin]{stat_bin()}} are permitted).
-#' @return An object of class \code{layer}.
+#' @return An object of class \code{Layer}.
 #' @details \code{stat_dia_bin()} computes binned data summaries for display
 #'     in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
 #'     \code{upper} arguments can be used to offset the histograms/frequency

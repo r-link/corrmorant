@@ -20,7 +20,7 @@ axis. Defaults to 0.25.}
 histograms/frequency polygons relative to the range of the \code{y}
 axis. Defaults to 1.}
 
-\item{...}{additional parameters for \code{\link{stat_dia_density}}.}
+\item{...}{Additional parameters for \code{\link{stat_dia_density}}.}
 }
 \value{
 A \code{ggplot2} layer with histograms or frequency polygons for the
