@@ -21,13 +21,13 @@
 #'     axis and text labels. Must be of the same length as the number of
 #'     numeric columns displayed in the plot. Defaults to \code{NULL} (use
 #'     original column names as labels).
-#' @param rescale Character string specifying the type of transformation
+#' @param rescale character string specifying the type of transformation
 #'     performed on the numeric variables in the plot. The standard argument
 #'     \code{"by.sd"} scales by the standard deviation of the data and centers
 #'     around zero.  \code{"by.range"} rescales the range of the data to the
 #'     interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
 #'     values. Defaults to \code{"by_sd"}.
-#' @param corr_method Character string with the correlation method passed t
+#' @param corr_method character string with the correlation method passed t
 #'     \code{\link[stats]{cor}}. Used for the \code{.corr} variable appended to
 #'     the \code{tidy_corr} dataset and passed on to
 #'     \code{\link[geom_cortext]{geom_cortext()}} layers. Can be one of
@@ -48,13 +48,13 @@
 #'     specifying a position in \code{\link[grDevices]{palette}}. The default value
 #'     of \code{NULL} uses the standard background color defined in the corresponding
 #'     ggplot2 theme.
-#' @param bg_lotri (optional) background color specification for the panels in the
+#' @param bg_lotri (Optional) background color specification for the panels in the
 #'     lower triangle. Either a character string with a hexadecimal color code, a
 #'     character string specifying a color name in \code{\link[grDevices]{colors}},
 #'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
 #'     default value of \code{NULL} uses the standard background color defined in the
 #'     corresponding ggplot2 theme.
-#' @param bg_utri (optional) background color specification for the panels in the
+#' @param bg_utri (Optional) background color specification for the panels in the
 #'     lower triangle. Either a character string with a hexadecimal color code, a
 #'     character string specifying a color name in \code{\link[grDevices]{colors}},
 #'     or an integer specifying a position in \code{\link[grDevices]{palette}}. The
