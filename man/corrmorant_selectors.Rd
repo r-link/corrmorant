@@ -14,41 +14,46 @@ utri(layer)
 dia(layer)
 }
 \arguments{
-\item{layer}{a ggplot2 \code{\link[ggplot2]{layer}} (a call to a
-geom, stat or \code{\link[ggplot2]{layer}}).}
+\item{layer}{A \code{ggplot} \code{\link[ggplot2]{layer}} (created by a call
+to a geom or a stat, or to the \code{\link[ggplot2]{layer}} function).}
 }
 \value{
 A ggplot2 \code{\link[ggplot2]{layer}} with modified data.
 }
 \description{
 Selector functions that can be used to modify the mapping of
-    ggplot \code{\link[ggplot2:layer]{layers}} to a subset of panels in
-    \code{ggcorrm} plots.
+    \code{ggplot} \code{\link[ggplot2:layer]{layers}} to a subset of panels
+    in \code{ggcorrm} plots.
 }
 \details{
 The corrmorant selector functions \code{lotri()}, \code{utri()}
-    and \code{dia()} modify the data slot of ggplot \code{\link[ggplot2:layer]{layers}}
-    (i.e. invoked by a call to a geom or a stat) to make sure that the
-    corresponding layers are only displayed in the desired panels.
+    and \code{dia()} modify the data slot of \code{ggplot} layers
+    (invoked by a call to a geom, a stat or
+    \code{\link[ggplot2:layer]{layer()}}) to make sure that they
+    are only displayed in the desired panels of \code{ggcorrm} plot.
 
-   \code{lotri()} shows the panel only in the lower triangle, \code{utri()} in
-   the upper triangle and \code{dia()} in the panels of the plot diagonal.
+   \code{lotri()} shows the layer only in panels of the lower triangle,
+    \code{utri()} in  the upper triangle and \code{dia()} in the panels
+    of the plot diagonal.
 
    If no data are specified explicitly in the layer, the selectors filter the
    data for the desired panels from the \code{\link{tidy_corrm}} data the
    plot is based upon. If data are specified in \code{layer} via its \code{data}
-   argument, it either plots it to all upper/lower triangle or diagonal panels,
-   or matches it to the desired rows/columns if any of \code{var_x},
-   \code{var_y} and \code{type} are present in the new dataset.
+   argument, it either plots it to all upper/lower triangle or diagonal panels
+   (depending on the type of selector) or matches it to the desired rows/columns
+   if any variables named \code{var_x}, \code{var_y} and/or \code{type} are
+   present in the new dataset.
 
    The combination of \code{lotri()} and \code{utri()} in combination
-   with \code{\link{geom_corrtext}} and regular ggplot2 geoms should be
-   sufficient for the majority of use cases in the lower and upper triangle
-   of a correlation plot. However, \code{dia()} in combination with regular
+   with \code{\link[geom_corrtext]{geom_corrtext()}} and regular ggplot2 geoms
+   should be sufficient for the majority of use cases in the lower and upper
+   triangle of a correlation plot.
+   However, \code{dia()} in combination with regular
    geoms is often problematic for useful displays on the diagonal facets,
-   as they are often reserved for data summaries that are difficult to display
-   when the data have different ranges. A series of common data summaries for
-   the plot diagonal provided with the functions \code{\link{dia_names}},
+   as they are often reserved for data summaries that are difficult to place
+   correctly in the facets when the data have different ranges.
+   A series of common data summaries for
+   the plot diagonal are provided with the functions \code{\link{dia_names}},
    \code{\link{dia_density}}, \code{\link{dia_histogram}} and
    \code{\link{dia_freqpoly}}, which automatically take care of the correct
    placement.
