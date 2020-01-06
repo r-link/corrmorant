@@ -4,7 +4,7 @@
 \alias{dia_names}
 \title{Add variable names to diagonal facets}
 \usage{
-dia_names(y_pos = 0.2, mapping = NULL, ...)
+dia_names(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE)
 }
 \arguments{
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
@@ -18,6 +18,11 @@ Defaults to \code{NULL} (use standard mapping).}
 
 \item{...}{Additional parameters passed to
 \code{\link[stat_dia_names]{stat_dia_names()}}.}
+
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \value{
 A \code{ggplot2} layer containing text labels on the diagonal facets.
@@ -32,6 +37,9 @@ A \code{ggplot2} layer containing text labels on the diagonal facets.
 \code{dia_names()} plots text labels on the plot diagonal and takes
    care of the often complicated positioning in plots with different x and y
    ranges.
+
+   On default, `inherit.aes` is set to `FALSE` as in most cases this is the
+   preferred behavior for the labels for variable names.
 }
 \seealso{
 \code{\link{stat_dia_names}},

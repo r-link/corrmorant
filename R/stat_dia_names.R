@@ -57,10 +57,14 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #'    Defaults to \code{NULL} (use standard mapping).
 #' @param ... Additional parameters passed to
 #'    \code{\link[stat_dia_names]{stat_dia_names()}}.
+#' @inheritParams ggplot2::layer
 #' @return A \code{ggplot2} layer containing text labels on the diagonal facets.
 #' @details \code{dia_names()} plots text labels on the plot diagonal and takes
 #'    care of the often complicated positioning in plots with different x and y
 #'    ranges.
+#'
+#'    On default, `inherit.aes` is set to `FALSE` as in most cases this is the
+#'    preferred behavior for the labels for variable names.
 #' @seealso
 #'   \code{\link{stat_dia_names}},
 #'   \code{\link{dia_density}},
@@ -68,12 +72,13 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #'   \code{\link{dia_freqpoly}}
 #' @rdname dia_names
 #' @export
-dia_names <- function(y_pos = 0.2, mapping = NULL, ...) {
+dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
   if (any(c("x", "y", "label") %in% names(mapping))) {
     stop("x and y coordinates and labels in dia_names() may not be manipulated.")
   }
   # update mapping with standard aesthetics
   mapping <- modify_list(aes(x = x, label = var_x), mapping)
   # return plot with labels
-  dia(stat_dia_names(mapping = mapping, geom = "text", y_pos = y_pos, ...))
+  dia(stat_dia_names(mapping = mapping, geom = "text", y_pos = y_pos,
+                     inherit.aes = inherit.aes, ...))
 }
