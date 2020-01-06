@@ -173,12 +173,13 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
                                             y = mean(yrange)))
   else {
     # get number of groups
-    ngr <- length(stats$group)
+    ngr <- sum(!duplicated(stats$group))
     # set dimensions of output (depending on which of nrow and ncol is set)
     if (is.null(nrow) & !is.null(ncol)){
-      nrow <-  floor(ngr / ncol)
+      nrow <-  round(sqrt(ngr))
+      ncol <- ceiling(ngr / nrow)
     } else {
-      if (is.null(nrow)) nrow <- 1
+      if (is.null(nrow)) nrow <- ceiling(ngr / ncol)
       if (is.null(ncol)) ncol <- ceiling(ngr / nrow)
       # throw an error if both nrow and ncol exist and do not add up to the right number
       else if (ncol != ceiling(ngr / nrow)) stop("Check dimensions in geom_corrtext: nrow and ncol values do not match")
