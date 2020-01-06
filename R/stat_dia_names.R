@@ -6,11 +6,16 @@
 #' @export
 StatDiaNames <- ggproto("StatDiaNames", Stat,
                         required_aes = c("x", "label"),
-                        compute_group = function(data, scales, y_pos = 0.2) {
+                        compute_panel = function(data, scales, y_pos = 0.2) {
                           rx <- range(data$x, na.rm = TRUE)
-                          data.frame(x = mean(rx),
-                                     y = rx[1] + y_pos * diff(rx),
-                                     label = data$label[1])
+                          data %>%
+                            filter(!duplicated(group)) %>%
+                            mutate(x = rep(mean(rx)),
+                                   y = rx[1] + y_pos * diff(rx),
+                                   label = data$label[1])
+                          },
+                        compute_group = function(data, scales, y_pos = 0.2) {
+                          data
                         }
 )
 
