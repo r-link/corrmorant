@@ -6,6 +6,7 @@
 \usage{
 ggcorrm(
   data,
+  mapping = NULL,
   labels = NULL,
   rescale = c("by_sd", "by_max", NULL),
   corr_method = "pearson",
@@ -29,6 +30,12 @@ discrete variables in additional columns. If a \code{tidy_corrm} object
 is supplied, all arguments passed to \code{\link{tidy_corrm()}} will be
 ignored and the \code{tidy_corrm} object wil be used directly to
 initialize the \code{ggcorrm} plot.}
+
+\item{mapping}{Set of aesthetic mappings created by
+\code{\link[ggplot2:aes]{aes()}} that are passed on to subsequent layers.
+\code{x} and \code{y} are set automatically and must not be changed,  but
+ all other aesthetics may be manipulated. Defaults to \code{NULL}
+ (use standard \code{ggcorrm} mapping).}
 
 \item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot

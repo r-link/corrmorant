@@ -16,6 +16,11 @@
 #'     is supplied, all arguments passed to \code{\link{tidy_corrm()}} will be
 #'     ignored and the \code{tidy_corrm} object wil be used directly to
 #'     initialize the \code{ggcorrm} plot.
+#' @param mapping Set of aesthetic mappings created by
+#'    \code{\link[ggplot2:aes]{aes()}} that are passed on to subsequent layers.
+#'    \code{x} and \code{y} are set automatically and must not be changed,  but
+#'     all other aesthetics may be manipulated. Defaults to \code{NULL}
+#'     (use standard \code{ggcorrm} mapping).
 #' @param labels (Optional) character vector with labels for the names of all
 #'     numeric columns that are used to replace the column names in the plot
 #'     axis and text labels. Must be of the same length as the number of
@@ -137,20 +142,23 @@
 #' @rdname ggcorrm
 #' @export
 #' @importFrom dplyr tibble
-ggcorrm <- function(data,          # dataset
-                    labels = NULL, # replacement labels for facet names
-                    rescale = c("by_sd", "by_max", NULL),  # rescaling options
-                    # settings for data-level correlations
+ggcorrm <- function(data,
+                    mapping = NULL,
+                    labels = NULL,
+                    rescale = c("by_sd", "by_max", NULL),
                     corr_method = "pearson",
                     corr_group = NULL,
-                    mutates = NULL,    # post-reshaping mutates
-                    # background options
+                    mutates = NULL,
                     bg_dia = NULL,
                     bg_lotri = NULL,
                     bg_utri = NULL){
   # control class of data
   if (!inherits(data, "data.frame") | is.matrix(data)) {
     stop("data must be a data.frame or matrix.")
+  }
+  # check if mapping is appropriate
+  if (any(c("x", "y") %in% names(mapping))) {
+    stop("x and y coordinates in ggcorrm() may not be manipulated.")
   }
 
   # if rescale argument is not changed, pick first
@@ -176,8 +184,11 @@ ggcorrm <- function(data,          # dataset
                         mutates     = mutates)
   }
 
+  # update mapping
+  new_mapping <- modify_list(aes(x = x, y = y), mapping)
+
   # prepare plot
-  plot_out <- ggplot(data = corrdat, mapping = aes(x = x, y = y),
+  plot_out <- ggplot(data = corrdat, mapping = new_mapping,
                      corr_method = corr_method, corr_use = corr_use) +
     facet_grid(var_x ~ var_y, scales = "free") +
     geom_blank() + # add geom_blank to set dimensions
