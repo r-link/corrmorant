@@ -98,16 +98,15 @@ p1 + lotri(geom_smooth(method = "lm"))
 
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by splitting the three groups:
+The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
 
 ``` r
-ggcorrm(iris) +
-  lotri(geom_smooth(aes(col = Species, fill = Species),
-                    method = "lm")) +
-  lotri(geom_point(aes(col = Species), alpha = 0.5)) +
-  utri(geom_corrtext(aes(col = Species))) +
+ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
+  lotri(geom_smooth(method = "lm")) +
+  lotri(geom_point(alpha = 0.5)) +
+  utri(geom_corrtext(nrow = 2)) +
   dia_names(y_pos = 0.1, size = 3) +
-  dia_density(aes(fill = Species), lower = 0.4, color = 1)
+  dia_density(lower = 0.4, color = 1)
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
