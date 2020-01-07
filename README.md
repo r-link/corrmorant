@@ -190,15 +190,4 @@ ggcorrm(aes(col = .corr)) +
   scale_size(range = c(1, 15))
 ```
 
-    ## Warning: Some variables are highly skewed (abs(skew) > 1).
-    ## Consider transformation for better display.
-
-    ## Warning: Removed 218 rows containing non-finite values (stat_heatmap).
-    
-    ## Warning: Removed 218 rows containing non-finite values (stat_heatmap).
-
-    ## Warning: Removed 44 rows containing non-finite values (stat_dia_names).
-
-    ## Warning: Removed 44 rows containing non-finite values (stat_dia_density).
-
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->

@@ -109,7 +109,7 @@ ggcorrm() +
 With `geom_heatpoint()`, you can scale the diameter of any character you want by correlation strength.
 And yes, your right, this means you can display correlation strength with purple skulls and angry cat faces:
 
-```{r}
+```{r, warning = FALSE}
 airquality %>% 
 ggcorrm(aes(col = .corr)) +
   lotri(geom_heatpoint(pch = "\U1F63E")) +
