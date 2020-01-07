@@ -27,11 +27,11 @@ analysis), there is an entire class of models that traditionally is
 estimated directly from the covariance matrix of a multivariate dataset.
 
 Long story short - there are plenty of reasons why one might want to
-have a look at the interrelationships between the variables in a
-dataset. However, while R provides plenty of functions and packages to
-display this type of relationship, so far (at least to my knowledge) all
-of them are only able to display certain types of correlation plots, and
-none of them leverages the full flexibility of `ggplot2`.
+visually inspect the interrelationships between all variables in a
+dataset simultaneously. However, while R provides plenty of functions
+and packages to display correlations, so far (at least to my knowledge)
+all of them are only able to display certain types of correlation plots,
+and none of them truly leverages the full flexibility of `ggplot2`.
 
 `corrmorant` is meant to give you this flexibility. It is designed to
 blend in seamlessly in a data analysis framework based on the
@@ -43,8 +43,9 @@ itself.
 In case you wonder about the name: One day when I was riding my bike to
 work and thinking about stupid puns related to **corr**elation
 **m**atrices, a shiny black bird appeared. In this very moment I knew
-that I’d have to convert the loose collection of ideas concerning
-correlation plots that was haunting me for a while into a real package…
+that I’d have to take the loose collection of ideas concerning
+correlation plots that was haunting me for a while and convert it into a
+real package…
 
 ## Installation
 
@@ -153,4 +154,24 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-…to be continued…
+## Correlation heatmaps and more
+
+`corrmorant` offers a series of new geoms and stats that are designed to
+improve the display of correlation strength.
+
+For example, there is a set of geoms for correlation heatmaps and the
+likes, which can be very useful when inspecting datasets with large
+numbers of variables:
+
+``` r
+select(mtcars, mpg, disp:qsec) %>% 
+ggcorrm() +
+  utri(geom_heatmap(alpha = 0.5)) +
+  lotri(geom_heatcircle(alpha = 0.5, col = 1)) +
+  utri(geom_corrtext(nrow = 2)) +
+  dia_names(y_pos = 0.1, size = 3) +
+  dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
+  scale_fill_corr() 
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->

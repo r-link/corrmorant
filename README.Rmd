@@ -6,6 +6,7 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+library(dplyr)
 ```
 
 ## Description
@@ -87,5 +88,21 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   dia_density(lower = 0.4, color = 1)
 ```
 
-...to be continued...
+
+## Correlation heatmaps and more 
+`corrmorant` offers a series of new geoms and stats that are designed to improve the display of correlation strength.
+
+For example, there is a set of geoms for correlation heatmaps and the likes, which can be very useful when inspecting datasets with large numbers of variables:
+
+```{r}
+select(mtcars, mpg, disp:qsec) %>% 
+ggcorrm() +
+  utri(geom_heatmap(alpha = 0.5)) +
+  lotri(geom_heatcircle(alpha = 0.5, col = 1)) +
+  utri(geom_corrtext(nrow = 2)) +
+  dia_names(y_pos = 0.1, size = 3) +
+  dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
+  scale_fill_corr() 
+```
+
 
