@@ -168,10 +168,37 @@ select(mtcars, mpg, disp:qsec) %>%
 ggcorrm() +
   utri(geom_heatmap(alpha = 0.5)) +
   lotri(geom_heatcircle(alpha = 0.5, col = 1)) +
-  utri(geom_corrtext(nrow = 2)) +
+  utri(geom_corrtext()) +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
   scale_fill_corr() 
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+With `geom_heatpoint()`, you can scale the diameter of any character you
+want by correlation strength. And yes, your right, this means you can
+display correlation strength with purple skulls and angry cat faces:
+
+``` r
+airquality %>% 
+ggcorrm(aes(col = .corr)) +
+  lotri(geom_heatpoint(pch = "\U1F63E")) +
+  utri(geom_heatpoint(pch = "\U2620", col = "#660066")) +
+  dia_names(y_pos = 0.1, size = 3) +
+  dia_density(lower = 0.4, fill = "#89DFA3", color = 1) +
+  scale_size(range = c(1, 15))
+```
+
+    ## Warning: Some variables are highly skewed (abs(skew) > 1).
+    ## Consider transformation for better display.
+
+    ## Warning: Removed 218 rows containing non-finite values (stat_heatmap).
+    
+    ## Warning: Removed 218 rows containing non-finite values (stat_heatmap).
+
+    ## Warning: Removed 44 rows containing non-finite values (stat_dia_names).
+
+    ## Warning: Removed 44 rows containing non-finite values (stat_dia_density).
+
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
