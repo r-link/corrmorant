@@ -23,9 +23,9 @@
 #'    present in the new dataset.
 #'
 #'    The combination of \code{lotri()} and \code{utri()} in combination
-#'    with \code{\link[geom_corrtext]{geom_corrtext()}} and regular ggplot2 geoms
-#'    should be sufficient for the majority of use cases in the lower and upper
-#'    triangle of a correlation plot.
+#'    with  regular ggplot2 geoms should be sufficient for the a large number of
+#'    use cases for data displa in the lower and upper triangle of a correlation
+#'    plot.
 #'    However, \code{dia()} in combination with regular
 #'    geoms is often problematic for useful displays on the diagonal facets,
 #'    as they are often reserved for data summaries that are difficult to place
@@ -36,6 +36,10 @@
 #'    \code{\link{dia_freqpoly}}, which automatically take care of the correct
 #'    placement.
 #'
+#'    In addition, there are plenty of stats specifically designed for the use
+#'    in offdiagonal corrmorant facets that all exist in two versions, e.g.
+#'    \code{\link{lotri_corrtext}} and  \code{\link{utri_corrtext}}.
+#'
 #' @return A ggplot2 \code{\link[ggplot2]{layer}} with modified data.
 #' @examples
 #' \dontrun{
@@ -43,14 +47,14 @@
 #' # plot with points on the lower triangle
 #' ggcorrm(iris) +
 #'   utri(geom_point(alpha = 0.4)) +
-#'   lotri(geom_corrtext()) +
+#'   lotri_corrtext() +
 #'   dia_density(fill = "grey50") +
 #'   dia_names(size = 3)
 #'
 #' # same plot with inverted lower and upper triangle
 #' ggcorrm(iris) +
 #'   lotri(geom_point(alpha = 0.4)) +
-#'   utri(geom_corrtext()) +
+#'   utri_corrtext() +
 #'   dia_density(fill = "grey50") +
 #'   dia_names(size = 3)
 #'  }

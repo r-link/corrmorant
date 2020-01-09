@@ -132,7 +132,7 @@ if(interactive()){
 # correlation matrix for the iris dataset
 ggcorrm(iris, bg_dia = "grey20") +
   lotri(geom_point(alpha = 0.4)) +
-  utri(geom_corrtext()) +
+  utri_corrtext() +
   dia_histogram(lower = .3, fill = "grey90", col = 1) +
   dia_names(y_pos = .1, col = "white", size = 3)
 
@@ -140,7 +140,7 @@ ggcorrm(iris, bg_dia = "grey20") +
 ggcorrm(iris, aes(col = .corr, fill = .corr)) +
   lotri(geom_point(alpha = 0.6)) +
   lotri(geom_smooth(method = "lm", size = 0.3, alpha = 0.6)) +
-  utri(geom_corrtext()) +
+  utri_corrtext() +
   dia_density(fill = "grey80", col = 1, lower = .4) +
   dia_names(y_pos = .1) +
   scale_color_corr(option = "A", aesthetics = c("fill", "color"))
@@ -150,7 +150,7 @@ ggcorrm(iris, aes(col = Species, fill = Species),
         rescale = "by_sd", bg_dia = "grey95") +
   lotri(geom_point(alpha = 0.4)) +
   lotri(geom_smooth(col = 1, method = "lm"))  +
-  utri(geom_corrtext(nrow = 2)) +
+  utri_corrtext(nrow = 2) +
   dia_density(col = 1, alpha = 0.5, lower = 0.4) +
   dia_names(y_pos = 0.15)
 
@@ -159,7 +159,7 @@ ggcorrm(iris, rescale = "by_sd",
         mutates = quos(leaftype = ifelse(substr(var_x, 1, 1) == "S",
                                          "Sepal", "Petal"))) +
   lotri(geom_point(alpha = 0.4))+
-  utri(geom_corrtext()) +
+  utri_corrtext() +
   dia_density(lower = .3,
               mapping = aes(fill = leaftype)) +
   dia_names(y_pos = .1,

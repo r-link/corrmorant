@@ -95,5 +95,5 @@ An object of class \code{Layer}.
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer}},
-  \code{\link{geom_corrtext}}
+  \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}}
 }

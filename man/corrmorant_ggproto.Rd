@@ -37,7 +37,7 @@ Class definitions for the new \code{ggproto} classes defined in
 
 \seealso{
 \code{\link[ggplot2]{ggplot2-ggproto}},
- \code{\link{geom_corrtext}},
+ \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}},
  \code{\link{geom_heatmap}},
  \code{\link{geom_heatcircle}},
  \code{\link{dia_names}},

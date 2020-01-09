@@ -64,7 +64,7 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
 #' @description \code{stat_corrtext()} is used to compute bivariate correlations
 #'     and appropriate positions of text labels indicating correlation strength
 #'     for the facets of \code{\link{ggcorrm}} plots.
-#' @inheritParams geom_corrtext
+#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
 #' @param ... additional arguments passed to
 #'     \code{\link[ggplot2:layer]{ggplot2::layer}}.
@@ -75,7 +75,8 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
 #' @rdname stat_corrtext
 #'@seealso
 #'   \code{\link[ggplot2:layer]{ggplot2::layer}},
-#'   \code{\link{geom_corrtext}}
+#'   \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}}
+
 #' @export
 stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
                          position = "identity", show.legend = NA,
@@ -90,78 +91,6 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
                   nrow = nrow, ncol = ncol, ...)
   )
 }
-
-# geom_corrtext - wrapper around stat_corrtext ----------------------------------
-#' @title Text labels for correlations in off-diagonal ggcorrm facets
-#' @description \code{geom_corrtext()} is used to display text labels for the
-#'     strength of bivariate correlations in the off-diagonal facets of
-#'     \code{\link{ggcorrm}} plots.
-#' @param mapping Set of aesthetic mappings created by
-#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-#'    automatically and must not be changed,  but all other aesthetics
-#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
-#' @param nrow integer - the number of rows for the correlation labels if
-#'    grouping aesthetics are present (defaults to NULL - automatic setting
-#'    of \code{nrow}).
-#' @param ncol integer - the number of columns for the correlation labels if
-#'    grouping aesthetics are present (defaults to NULL - automatic
-#'    setting of \code{ncol}).
-#' @param digits integer: Number of digits the correlations are rounded to
-#'    (defaults to 2).
-#' @param corr_size logical - should the \code{size} aesthetic be expressed
-#'    as a function of correlation strength? \code{corr_size = TRUE} is a
-#'    shorthand for setting \code{aes(size = abs(..corr..))}. Similar
-#'    expressions can be used to access the correlation calculated by
-#'    \code{stat_corrtext} manually in \code{aes()}. Defaults to
-#'    \code{TRUE}.
-#' @param corr_method character string with the correlation method passed
-#'    to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-#'    "spearman". Defaults to "pearson" (or is inherited from the setting
-#'    in \code{\link[ggcorrm]{ggcorrm()}}).
-#' @param squeeze numeric between 0 an 1. Proportion of the facet
-#'    width/height the facet labels are restricted to when multiple labels
-#'    are present (defaults to 0.7 - labels extend over 70\% of the extent
-#'    of the plot).
-#' @param ... Additional arguments to \code{\link{stat_corrtext}}.
-#' @return A \code{ggplot2} layer with text labels for correlation strength.
-#' @details \code{geom_corrtext()} can be used to display the correlation
-#'    between variables in the facets of \code{ggcorrm} plots. Correlations
-#'    can be calculated for single groups by using grouping aesthetics such
-#'    as \code{aes(color = group)}.
-#'
-#'    \code{geom_corrtext()} is a wrapper around
-#'    \code{\link[stat_corrtext]{stat_corrtext()}} that additionally takes
-#'    care of the right specification of aesthetics and allows to easily
-#'    adjust size by correlation strength via \code{corr_size}.
-#'
-#' @seealso
-#'   \code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
-#'   \code{\link{stat_corrtext}}
-#' @rdname geom_corrtext
-#' @export
-geom_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
-                         digits = 2, corr_size = TRUE,
-                         corr_method = "pearson", squeeze = 0.7, ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in geom_corrtext() may not be manipulated.")
-  }
-
-  # print warning if size is specified more than once
-  if ("size" %in% names(mapping) && corr_size){
-    warning("corr_size overridden by manually specified size.")
-  }
-
-  # add size by correlation manually if specified
-  if(corr_size) mapping <- modify_list(aes(size = abs(..corr..)),
-                                                mapping)
-
-
-  # return plot with labels
-  stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
-            ncol = ncol, nrow = nrow, corr_method = corr_method,
-            squeeze = squeeze, ...)
-}
-
 
 # get_corrtext_pos() function for corrtext label positions ----------------------
 #' @keywords internal
@@ -182,7 +111,7 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
       if (is.null(nrow)) nrow <- ceiling(ngr / ncol)
       if (is.null(ncol)) ncol <- ceiling(ngr / nrow)
       # throw an error if both nrow and ncol exist and do not add up to the right number
-      else if (ncol != ceiling(ngr / nrow)) stop("Check dimensions in geom_corrtext: nrow and ncol values do not match")
+      else if (ncol != ceiling(ngr / nrow)) stop("Check dimensions in stat_corrtext: nrow and ncol values do not match")
     }
     # edit stats
     dplyr::mutate(stats,
