@@ -58,14 +58,14 @@ corrmorant(iris, style = "blue_red")
 ```
 
 ## Basic usage of ggcorrm()
-While `corrmorant()` may be useful for many basic data inspection tasks, its functionality is rather limited. If you want to take control of the elements in a plot, you can use `ggcorrm()` together with the corrmorant selector functions `lotri()`, `utri()` and `dia()` that direct ggplot layers to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. In addition, corrmorant offers a series of utility functions for readymade data summaries on the plot diagonal (`dia_names()`, `dia_density()`, `dia_histogram` and `dia_freqpoly()`) as well as a new geom meant for displaying correlation strength in correlation plot facets (`geom_corrtext()`). 
+While `corrmorant()` may be useful for many basic data inspection tasks, its functionality is rather limited. If you want to take control of the elements in a plot, you can use `ggcorrm()` together with the corrmorant selector functions `lotri()`, `utri()` and `dia()` that direct ggplot layers to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. In addition, corrmorant offers a series of utility functions for readymade data summaries on the plot diagonal (`dia_names()`, `dia_density()`, `dia_histogram` and `dia_freqpoly()`) as well as a couple of new stats, e.g. `stat_corrtext()` for displaying correlation strength in correlation plot facets. The new `corrmorant` stats can generally be called in a simplified form by prefixing their name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and `utri_corrtext()`
 
 For example, `corrmorant(iris, style = "light")` can be recreated by the following code:
 
 ```{r}
 p1 <- ggcorrm(iris) +
   lotri(geom_point(alpha = 0.5)) +
-  utri(geom_corrtext()) +
+  utri_corrtext() +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, fill = "grey80", color = 1)
 p1
@@ -83,7 +83,7 @@ The horrific fit of these linear regressions results from the fact that the iris
 ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   lotri(geom_smooth(method = "lm")) +
   lotri(geom_point(alpha = 0.5)) +
-  utri(geom_corrtext(nrow = 2)) +
+  utri_corrtext(nrow = 2) +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, color = 1)
 ```
@@ -92,30 +92,31 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
 ## Correlation heatmaps and more 
 `corrmorant` offers a series of new geoms and stats that are designed to improve the display of correlation strength.
 
-For example, there is a set of geoms for correlation heatmaps and the likes, which can be very useful when inspecting datasets with large numbers of variables:
+For example, there is a set of stats for correlation heatmaps and the likes, which can be very useful when inspecting datasets with large numbers of variables:
 
 ```{r}
 select(mtcars, mpg, disp:qsec) %>% 
 ggcorrm() +
-  utri(geom_heatmap(alpha = 0.5)) +
-  lotri(geom_heatcircle(alpha = 0.5, col = 1)) +
-  utri(geom_corrtext()) +
+  utri_heatmap(alpha = 0.5) +
+  lotri_heatcircle(alpha = 0.5, col = 1) +
+  utri_corrtext() +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
   scale_fill_corr() 
 ```
 
 
-With `geom_heatpoint()`, you can scale the diameter of any character you want by correlation strength.
+With `lotri_/utri_heatpoint()`, you can scale the diameter of any character you want by correlation strength.
 And yes, your right, this means you can display correlation strength with purple skulls and angry cat faces:
 
 ```{r, warning = FALSE}
 airquality %>% 
 ggcorrm(aes(col = .corr)) +
-  lotri(geom_heatpoint(pch = "\U1F63E")) +
-  utri(geom_heatpoint(pch = "\U2620", col = "#660066")) +
+  lotri_heatpoint(pch = "\U1F63E") +
+  utri_heatpoint(pch = "\U2620", col = "#660066") +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, fill = "#89DFA3", color = 1) +
-  scale_size(range = c(1, 15))
+  scale_size(range = c(1, 15)) + 
+  scale_color_corr(option = "C")
 ```
 
