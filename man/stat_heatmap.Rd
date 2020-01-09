@@ -77,5 +77,5 @@ An object of class \code{Layer}.
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer}},
-  \code{\link{geom_heatmap}}
+  \code{\link{add_heatmap}}
 }
