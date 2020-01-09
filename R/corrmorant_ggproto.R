@@ -20,8 +20,8 @@
 #' @seealso
 #'  \code{\link[ggplot2]{ggplot2-ggproto}},
 #'  \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}},
-#'  \code{\link{geom_heatmap}},
-#'  \code{\link{geom_heatcircle}},
+#'  \code{\link{lotri_heatmap}} and \code{\link{utri_heatmap}},
+#'  \code{\link{lotri_heatcircle}} and \code{\link{utri_heatcircle}},
 #'  \code{\link{dia_names}},
 #'  \code{\link{dia_density}},
 #'  \code{\link{dia_histogram}}
