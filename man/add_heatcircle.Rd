@@ -24,9 +24,9 @@ utri_heatcircle(
 }
 \arguments{
 \item{corr_method}{character string with the correlation method passed
-to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson" (or is inherited from the setting
-in \code{\link[ggcorrm]{ggcorrm()}}).}
+to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
+in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{rmin}{numeric (0 - 1). Minimum radius for the "heat circles" (as a
 proportion of panel width). Defaults to 0.1.}
@@ -38,29 +38,29 @@ proportion of panel width). Defaults to 0.9.}
 circles by correlation strength, \code{scale_by = "radius"} scales by
 radius. Defaults to "area".}
 
-\item{...}{Additional arguments to \code{\link{stat_heatcircle}}.}
+\item{...}{Additional arguments to \link{stat_heatcircle}.}
 }
 \value{
 A \code{ggplot2} layer with circles displaying correlation strength.
 }
 \description{
 \code{lotri_heatcircle()} and \code{utri_heatcircle()} are used
-  to display circles whose fill and  size aesthetics depend on correlation
-  strength in the lower/upper off-diagonal facets of \code{\link{ggcorrm}}
-  plots.
+to display circles whose fill and  size aesthetics depend on correlation
+strength in the lower/upper off-diagonal facets of \link{ggcorrm}
+plots.
 }
 \details{
 \code{lotri_heatcircle()} and \code{utri_heatcircle()} are wrappers
-  around \code{\link[stat_heatcircle]{stat_heatcircle()}} that additionally
-  take care of the right specification of aesthetics.
+around \code{\link[=stat_heatcircle]{stat_heatcircle()}} that additionally
+take care of the right specification of aesthetics.
 
- \code{stat_heatcircle()} computes the outlines of circles that
- are centered around the midpoint of \code{gcorrm} facets and whose radius
- or area is modified in dependence of correlation strength. \code{rmin} and
- \code{rmax} allow to modify the range in which the radii of the circles may
- vary.
+\code{stat_heatcircle()} computes the outlines of circles that
+are centered around the midpoint of \code{ggcorrm} facets and whose radius
+or area is modified in dependence of correlation strength. \code{rmin} and
+\code{rmax} allow to modify the range in which the radii of the circles may
+vary.
 }
 \seealso{
-\code{\link{stat_heatcircle}},
-  \code{\link{stat_heatmap}}
+\link{stat_heatcircle},
+\link{stat_heatmap}
 }

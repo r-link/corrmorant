@@ -14,53 +14,53 @@ utri(layer)
 dia(layer)
 }
 \arguments{
-\item{layer}{A \code{ggplot} \code{\link[ggplot2]{layer}} (created by a call
-to a geom or a stat, or to the \code{\link[ggplot2]{layer}} function).}
+\item{layer}{A \code{ggplot} layer (created by a call
+to a geom or a stat, or to the \code{\link[ggplot2:layer]{ggplot2::layer()}}).}
 }
 \value{
-A ggplot2 \code{\link[ggplot2]{layer}} with modified data.
+A ggplot2 \link[=layer]{ggplot2} with modified data.
 }
 \description{
 Selector functions that can be used to modify the mapping of
-    \code{ggplot} \code{\link[ggplot2:layer]{layers}} to a subset of panels
-    in \code{ggcorrm} plots.
+\code{ggplot} \link[=ggplot2:layer]{layers} to a subset of panels
+in \code{ggcorrm} plots.
 }
 \details{
 The corrmorant selector functions \code{lotri()}, \code{utri()}
-    and \code{dia()} modify the data slot of \code{ggplot} layers
-    (invoked by a call to a geom, a stat or
-    \code{\link[ggplot2:layer]{layer()}}) to make sure that they
-    are only displayed in the desired panels of \code{ggcorrm} plot.
+and \code{dia()} modify the data slot of \code{ggplot} layers
+(invoked by a call to a geom, a stat or
+\link[=ggplot2:layer]{layer()}) to make sure that they
+are only displayed in the desired panels of \code{ggcorrm} plot.
 
-   \code{lotri()} shows the layer only in panels of the lower triangle,
-    \code{utri()} in  the upper triangle and \code{dia()} in the panels
-    of the plot diagonal.
+\code{lotri()} shows the layer only in panels of the lower triangle,
+\code{utri()} in  the upper triangle and \code{dia()} in the panels
+of the plot diagonal.
 
-   If no data are specified explicitly in the layer, the selectors filter the
-   data for the desired panels from the \code{\link{tidy_corrm}} data the
-   plot is based upon. If data are specified in \code{layer} via its \code{data}
-   argument, it either plots it to all upper/lower triangle or diagonal panels
-   (depending on the type of selector) or matches it to the desired rows/columns
-   if any variables named \code{var_x}, \code{var_y} and/or \code{type} are
-   present in the new dataset.
+If no data are specified explicitly in the layer, the selectors filter the
+data for the desired panels from the \link{tidy_corrm} data the
+plot is based upon. If data are specified in \code{layer} via its \code{data}
+argument, it either plots it to all upper/lower triangle or diagonal panels
+(depending on the type of selector) or matches it to the desired rows/columns
+if any variables named \code{var_x}, \code{var_y} and/or \code{type} are
+present in the new dataset.
 
-   The combination of \code{lotri()} and \code{utri()} in combination
-   with  regular ggplot2 geoms should be sufficient for the a large number of
-   use cases for data displa in the lower and upper triangle of a correlation
-   plot.
-   However, \code{dia()} in combination with regular
-   geoms is often problematic for useful displays on the diagonal facets,
-   as they are often reserved for data summaries that are difficult to place
-   correctly in the facets when the data have different ranges.
-   A series of common data summaries for
-   the plot diagonal are provided with the functions \code{\link{dia_names}},
-   \code{\link{dia_density}}, \code{\link{dia_histogram}} and
-   \code{\link{dia_freqpoly}}, which automatically take care of the correct
-   placement.
+The combination of \code{lotri()} and \code{utri()} in combination
+with  regular ggplot2 geoms should be sufficient for the a large number of
+use cases for data displa in the lower and upper triangle of a correlation
+plot.
+However, \code{dia()} in combination with regular
+geoms is often problematic for useful displays on the diagonal facets,
+as they are often reserved for data summaries that are difficult to place
+correctly in the facets when the data have different ranges.
+A series of common data summaries for
+the plot diagonal are provided with the functions \link{dia_names},
+\link{dia_density}, \link{dia_histogram} and
+\link{dia_freqpoly}, which automatically take care of the correct
+placement.
 
-   In addition, there are plenty of stats specifically designed for the use
-   in offdiagonal corrmorant facets that all exist in two versions, e.g.
-   \code{\link{lotri_corrtext}} and  \code{\link{utri_corrtext}}.
+In addition, there are plenty of stats specifically designed for the use
+in offdiagonal corrmorant facets that all exist in two versions, e.g.
+\link{lotri_corrtext} and  \link{utri_corrtext}.
 }
 \examples{
 \dontrun{
@@ -82,11 +82,7 @@ ggcorrm(iris) +
 }
 }
 \seealso{
-\code{\link{ggcorrm}},
-  \code{\link{tidy_corrm}},
-  \code{\link{corrmorant}},
-  \code{\link{dia_names}},
-  \code{\link{dia_density}},
-  \code{\link{dia_histogram}},
-  \code{\link{dia_freqpoly}}
+\link{ggcorrm},
+\link{tidy_corrm},
+\link{corrmorant}
 }

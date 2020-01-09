@@ -61,25 +61,24 @@ axis. Defaults to 0.25.}
 histograms/frequency polygons relative to the range of the \code{y}
 axis. Defaults to 1.}
 
-\item{...}{Additional arguments passed to
-\code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
-\code{\link[ggplot2:stat_density]{stat_density()}} are permitted).}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments
+for \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
-code{stat_dia_density()} computes the density curves for the
-    diagonal panels of \code{\link{ggcorrm}} plots that are created with
-    \code{\link{dia_density}}.
+\code{stat_dia_density()} computes the density curves for the
+diagonal panels of \link{ggcorrm} plots that are created with
+\code{\link[=dia_density]{dia_density()}}.
 }
 \details{
 \code{stat_density()} computes density curves for display
-    in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
-    \code{upper} arguments can be used to offset the density curves from
-    zero and optimally fit them to the range of each panel.
+in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
+\code{upper} arguments can be used to offset the density curves from
+zero and optimally fit them to the range of each panel.
 }
 \seealso{
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_density}},
-    \code{\link{dia_density}}
+\code{\link[ggplot2:stat_density]{ggplot2::stat_density()}},
+\link{dia_density}
 }

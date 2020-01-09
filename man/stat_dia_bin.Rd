@@ -65,26 +65,25 @@ axis. Defaults to 1.}
 \item{barwidth}{Width of the histograms relative to the maximum possible
 width. Defaults to 0.9.}
 
-\item{...}{Additional arguments passed to
-\code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
-\code{\link[ggplot2:stat_bin]{stat_bin()}} are permitted).}
+\item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}}
+(arguments for \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
 \code{stat_dia_bin()} computes the binned data summaries for
-    the diagonal panels of \code{\link{ggcorrm}} plots that are created with
-    \code{\link{dia_histogram}} and \code{\link{dia_freqpoly}}.
+the diagonal panels of \link{ggcorrm} plots that are created with
+\link{dia_histogram} and \link{dia_freqpoly}.
 }
 \details{
 \code{stat_dia_bin()} computes binned data summaries for display
-    in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
-    \code{upper} arguments can be used to offset the histograms/frequency
-    polygons from zero and optimally fit them to the range of each panel.
+in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
+\code{upper} arguments can be used to offset the histograms/frequency
+polygons from zero and optimally fit them to the range of each panel.
 }
 \seealso{
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
-    \code{\link{dia_histogram}},
-    \code{\link{dia_freqpoly}}
+\link[ggplot2:stat_bin]{ggplot2:stat_bin},
+\link{dia_histogram},
+\link{dia_freqpoly}
 }

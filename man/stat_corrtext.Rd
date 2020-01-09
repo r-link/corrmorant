@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_corrtext.R
 \name{stat_corrtext}
 \alias{stat_corrtext}
-\title{Compute correlation strength in ggcorrm plots}
+\title{Compute correlation strength for text labels in ggcorrm plots}
 \usage{
 stat_corrtext(
   mapping = NULL,
@@ -21,24 +21,23 @@ stat_corrtext(
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by
-\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed,  but all other aesthetics
-may be manipulated. Defaults to \code{NULL} (use standard mapping).}
+\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
+\code{x} and \code{y} are set automatically and must not be changed,  but
+all other aesthetics may be manipulated. Defaults to \code{NULL}
+(use standard \code{ggcorrm} mapping).}
 
-\item{data}{The data to be displayed in this layer. There are three
-options:
-
-If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
-
-A \code{data.frame}, or other object, will override the plot
-data. All objects will be fortified to produce a data frame. See
-\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
-
-A \code{function} will be called with a single argument,
-the plot data. The return value must be a \code{data.frame}, and
-will be used as the layer data. A \code{function} can be created
-from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
+\item{data}{Dataset used to compute the correlation matrix. Can be either a
+\code{data.frame} or \code{matrix}, or an object of class \code{tidy_corrm}.
+If specifying a \code{data.frame} or \code{matrix}, it will internally be
+passed to \code{\link[=tidy_corrm]{tidy_corrm()}} with the settings for \code{labels},
+\code{rescale}, \code{corr_group}, \code{corr_method} and \code{mutates}
+specified in the \code{ggcorrm()} call. \code{\link[=tidy_corrm]{tidy_corrm()}}
+prepares the data for plotting by creating a \code{data.frame} with
+all possible combinations of all numeric variables, while retaining all
+discrete variables in additional columns. If a \code{tidy_corrm} object
+is supplied, all arguments passed to \code{\link[=tidy_corrm]{tidy_corrm()}} will be
+ignored and the \code{tidy_corrm} object wil be used directly to
+initialize the \code{ggcorrm} plot.}
 
 \item{geom}{The geometric object to use display the data}
 
@@ -57,43 +56,44 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{nrow}{integer - the number of rows for the correlation labels if
-grouping aesthetics are present (defaults to NULL - automatic setting
+grouping aesthetics are present (defaults to \code{NULL} - automatic setting
 of \code{nrow}).}
 
 \item{ncol}{integer - the number of columns for the correlation labels if
-grouping aesthetics are present (defaults to NULL - automatic
+grouping aesthetics are present (defaults to \code{NULL} - automatic
 setting of \code{ncol}).}
 
 \item{digits}{integer: Number of digits the correlations are rounded to
 (defaults to 2).}
 
-\item{corr_method}{character string with the correlation method passed
-to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson" (or is inherited from the setting
-in \code{\link[ggcorrm]{ggcorrm()}}).}
+\item{corr_method}{character string with the correlation method passed to
+\code{\link[stats:cor]{stats::cor()}}. Used for the \code{.corr} variable appended to
+the \code{tidy_corr} dataset and passed on to
+\code{\link[=lotri_corrtext]{lotri_corrtext()}}/ \code{\link[=utri_corrtext]{utri_corrtext()}}  layers. Can be one of
+\code{"pearson"}, \code{"kendall"}  and \code{"spearman"}. Defaults to
+\code{"pearson"}.}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet
 width/height the facet labels are restricted to when multiple labels
-are present (defaults to 0.7 - labels extend over 70\% of the extent
+are present (defaults to 0.7 - labels extend over 70\\% of the extent
 of the plot).}
 
 \item{...}{additional arguments passed to
-\code{\link[ggplot2:layer]{ggplot2::layer}}.}
+\code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
 \code{stat_corrtext()} is used to compute bivariate correlations
-    and appropriate positions of text labels indicating correlation strength
-    for the facets of \code{\link{ggcorrm}} plots.
+and appropriate positions of text labels indicating correlation strength
+for the facets of \link{ggcorrm} plots.
 }
 \details{
 \code{stat_corrtext()} computes the correlation between variables in
-    the facets of \code{ggcorrm} plots and places text labels indicating the
-    strength of correlation in appropriate positions within the facets.
+the facets of \code{ggcorrm} plots and places text labels indicating the
+strength of correlation in appropriate positions within the facets.
 }
 \seealso{
-\code{\link[ggplot2:layer]{ggplot2::layer}},
-  \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}}
+\code{\link[=lotri_corrtext]{lotri_corrtext()}} and \code{\link[=utri_corrtext]{utri_corrtext()}}
 }

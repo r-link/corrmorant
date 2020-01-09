@@ -10,14 +10,14 @@ dia_names(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE)
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
 text labels along the x axis (defaults to 0.2).}
 
-\item{mapping}{(optional) mapping for the internal call to
-\code{\link[stat_dia_names]{stat_dia_names()}}. Must be created with
-\code{\link[ggplot2:aes]{aes()}}, and must not contain \code{x} or
-\code{y}. Can e.g. be used to color text labels by groups (see example).
-Defaults to \code{NULL} (use standard mapping).}
+\item{mapping}{Set of aesthetic mappings created by
+\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
+\code{x} and \code{y} are set automatically and must not be changed,  but
+all other aesthetics may be manipulated. Defaults to \code{NULL}
+(use standard \code{ggcorrm} mapping).}
 
 \item{...}{Additional parameters passed to
-\code{\link[stat_dia_names]{stat_dia_names()}}.}
+\link[=stat_dia_names]{stat_dia_names}.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
@@ -28,22 +28,18 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A \code{ggplot2} layer containing text labels on the diagonal facets.
 }
 \description{
-\code{dia_names()} is a wrapper around
-   \code{\link[stat_dia_names]{stat_dia_names()}}
-   which plots the names of variables in a \code{ggcorrm} plot at
-   appropriate positions in the diagonal facets.
+\code{dia_names()} is a wrapper around \code{\link[=stat_dia_names]{stat_dia_names()}}
+which plots the names of variables in a \code{ggcorrm} plot at
+appropriate positions in the diagonal facets.
 }
 \details{
 \code{dia_names()} plots text labels on the plot diagonal and takes
-   care of the often complicated positioning in plots with different x and y
-   ranges.
+care of the often complicated positioning in plots with different x and y
+ranges.
 
-   On default, `inherit.aes` is set to `FALSE` as in most cases this is the
-   preferred behavior for the labels for variable names.
+On default, \code{inherit.aes} is set to \code{FALSE} as in most cases this is the
+preferred behavior for the labels for variable names.
 }
 \seealso{
-\code{\link{stat_dia_names}},
-  \code{\link{dia_density}},
-  \code{\link{dia_histogram}},
-  \code{\link{dia_freqpoly}}
+\link{stat_dia_names}
 }

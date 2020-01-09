@@ -14,11 +14,11 @@
 #'    for legend with discrete values). Defaults to "colourbar".
 #' @param aesthetics Character string or vector of character strings with the
 #'     aesthetics linked to the scale.  Defaults to  "color" for
-#'     \code{scale_color_corr()} and "fill" for \code{scale_fill_corr()}.
+#'     `scale_color_corr()` and "fill" for `scale_fill_corr()`.
 #' @param direction Numeric indicating the order of the scale. Defaults to 1;
 #'     negative values reverse the order of the scale.
-#' @details The color and fill scales specified via \code{option} are built upon
-#'     \code{\link[ggplot2:scale_colour_gradient]{ggplot2::scale_color_gradient1}},
+#' @details The color and fill scales specified via `option` are built upon
+#'     [ggplot2:scale_colour_gradient2()],
 #'     which can easily be used to set up additional scales if the available
 #'     options are not sufficient.
 #' @examples
@@ -36,10 +36,7 @@
 #'   }
 #' }
 #' @seealso
-#'   \code{\link[ggplot2:scale_colour_gradient]{ggplot2::scale_color_gradient1}},
-#'   \code{\link{ggcorrm}},
-#'   \code{\link{tidy_corrm}},
-#'   \code{\link{corrmorant}}
+#'   [ggplot2::scale_color_gradient2]
 #' @name corrmorant_scales
 NULL
 

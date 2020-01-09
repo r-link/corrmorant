@@ -18,8 +18,8 @@ for the correlation plot. If a \code{data.frame}, all numeric variables
 are used as rows/columns of the correlation plot, while all other
 variables are appended to the reshaped dataset as additional columns.}
 
-\item{style}{Character string defining the plot style. One of "dark", "light"
-or "blue_red".}
+\item{style}{Character string defining the plot style. One of \code{"dark"}, \code{"light"}
+or \code{"blue_red"}.}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
@@ -34,21 +34,21 @@ axis and text labels. Must be of the same length as the number of
 numeric columns displayed in the plot. Defaults to \code{NULL} (use
 original column names as labels).}
 
-\item{...}{Additional arguments to \code{\link{ggcorrm}()}.}
+\item{...}{Additional arguments to \code{\link[=ggcorrm]{ggcorrm()}}.}
 }
 \value{
 An object of class \code{ggcorrm}.
 }
 \description{
-\code{corrmorant()} is a wrapper around \code{\link[ggcorrm]{ggcorrm()}}
-   that creates scatterplot matrices with correlation output using
-   reasonable standard values for initial data inspection.
+\code{corrmorant()} is a wrapper around \code{\link[=ggcorrm]{ggcorrm()}}
+that creates scatterplot matrices with correlation output using
+reasonable standard values for initial data inspection.
 }
 \details{
-\code{corrmorant()} is a simplified wrapper around \code{\link[ggcorrm]{ggcorrm()}}
-   that creates scatterplot matrices with reasonable standard settings.
-   Refer to the documentation of\code{\link[ggcorrm]{ggcorrm()}} and
-   \code{\link[tidy_corrm]{tidy_corrm()}} for details.
+\code{corrmorant()} is a simplified wrapper around \code{\link[=ggcorrm]{ggcorrm()}}
+that creates scatterplot matrices with reasonable standard settings.
+Refer to the documentation of\code{\link[=ggcorrm]{ggcorrm()}} and
+\code{\link[=tidy_corrm]{tidy_corrm()}} for details.
 }
 \examples{
 \dontrun{
@@ -61,6 +61,6 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link{ggcorrm}},
-  \code{\link{tidy_corrm}}
+\link{ggcorrm},
+\link{tidy_corrm}
 }

@@ -1,16 +1,16 @@
 #' @title Simple automated correlation plots
-#' @description \code{corrmorant()} is a wrapper around \code{\link[ggcorrm]{ggcorrm()}}
+#' @description `corrmorant()` is a wrapper around [ggcorrm()]
 #'    that creates scatterplot matrices with correlation output using
 #'    reasonable standard values for initial data inspection.
-#' @param style Character string defining the plot style. One of "dark", "light"
-#'      or "blue_red".
-#' @param ... Additional arguments to \code{\link{ggcorrm}()}.
+#' @param style Character string defining the plot style. One of `"dark"`, `"light"`
+#'    or `"blue_red"`.
+#' @param ... Additional arguments to [ggcorrm()].
 #' @inheritParams tidy_corrm
-#' @return An object of class \code{ggcorrm}.
-#' @details \code{corrmorant()} is a simplified wrapper around \code{\link[ggcorrm]{ggcorrm()}}
+#' @return An object of class `ggcorrm`.
+#' @details `corrmorant()` is a simplified wrapper around [ggcorrm()]
 #'    that creates scatterplot matrices with reasonable standard settings.
-#'    Refer to the documentation of\code{\link[ggcorrm]{ggcorrm()}} and
-#'    \code{\link[tidy_corrm]{tidy_corrm()}} for details.
+#'    Refer to the documentation of[ggcorrm()] and
+#'    [tidy_corrm()] for details.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
@@ -21,8 +21,8 @@
 #'  }
 #' }
 #' @seealso
-#'   \code{\link{ggcorrm}},
-#'   \code{\link{tidy_corrm}}
+#'   [ggcorrm],
+#'   [tidy_corrm]
 #' @rdname corrmorant
 #' @export
 corrmorant <- function(data, style = c("dark", "light", "blue_red"),

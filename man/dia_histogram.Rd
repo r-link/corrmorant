@@ -17,10 +17,10 @@ dia_histogram(
 dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, ...)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by
-\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed, but all other aesthetics
-may be manipulated. Defaults to \code{NULL} (use standard mapping).}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
 \item{lower}{numeric between 0 and 1. Lower limit of the
 histograms/frequency polygons relative to the range of the \code{y}
@@ -36,30 +36,30 @@ width. Defaults to 0.9.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Additional parameters for \code{\link{stat_dia_bin}}.}
+\item{...}{Additional parameters for \link{stat_dia_bin}.}
 }
 \value{
 A \code{ggplot2} layer with histograms or frequency polygons for the
-   variables on the plot diagonal of \code{ggcorrm} plots.
+variables on the plot diagonal of \code{ggcorrm} plots.
 }
 \description{
 Add histograms or frequency polygons to the diagonal panels of
-     \code{\link{ggcorrm}} plots
+\link{ggcorrm} plots
 }
 \details{
 The \code{lower} and\code{upper} arguments can be used to offset
-    the histograms/frequency polygons from zero and optimally fit them to
-    the range of each panel.
-    The standard values are chosen to work well when placing text labels
-    under the histograms/frequency polygons with \code{\link{dia_names}}.
+the histograms/frequency polygons from zero and optimally fit them to
+the range of each panel.
+The standard values are chosen to work well when placing text labels
+under the histograms/frequency polygons with \link{dia_names}.
 
-   \code{dia_histogram()} adds histograms of the numeric variables in a
-   \code{ggcorrm} plot to the plot diagonal. The bar width can be adjusted
-   with \code{barwidth}. Frequency polygons can be created with
-   \code{dia_freqpoly()}. Both functions use the same stat,
-   \code{\link{stat_dia_bin}}.
+\code{dia_histogram()} adds histograms of the numeric variables in a
+\code{ggcorrm} plot to the plot diagonal. The bar width can be adjusted
+with \code{barwidth}. Frequency polygons can be created with
+\code{dia_freqpoly()}. Both functions use the same stat,
+\link{stat_dia_bin}.
 }
 \seealso{
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
-    \code{\link{stat_dia_bin}}
+\link[ggplot2:stat_bin]{ggplot2::stat_bin},
+\link{stat_dia_bin}
 }

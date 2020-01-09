@@ -30,16 +30,17 @@ utri_corrtext(
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by
-\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed,  but all other aesthetics
-may be manipulated. Defaults to \code{NULL} (use standard mapping).}
+\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
+\code{x} and \code{y} are set automatically and must not be changed,  but
+all other aesthetics may be manipulated. Defaults to \code{NULL}
+(use standard \code{ggcorrm} mapping).}
 
 \item{nrow}{integer - the number of rows for the correlation labels if
-grouping aesthetics are present (defaults to NULL - automatic setting
+grouping aesthetics are present (defaults to \code{NULL} - automatic setting
 of \code{nrow}).}
 
 \item{ncol}{integer - the number of columns for the correlation labels if
-grouping aesthetics are present (defaults to NULL - automatic
+grouping aesthetics are present (defaults to \code{NULL} - automatic
 setting of \code{ncol}).}
 
 \item{digits}{integer: Number of digits the correlations are rounded to
@@ -53,38 +54,38 @@ expressions can be used to access the correlation calculated by
 \code{TRUE}.}
 
 \item{corr_method}{character string with the correlation method passed
-to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson" (or is inherited from the setting
-in \code{\link[ggcorrm]{ggcorrm()}}).}
+to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
+in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet
 width/height the facet labels are restricted to when multiple labels
-are present (defaults to 0.7 - labels extend over 70\% of the extent
+are present (defaults to 0.7 - labels extend over 70\\% of the extent
 of the plot).}
 
-\item{...}{Additional arguments to \code{\link{stat_corrtext}}.}
+\item{...}{Additional arguments to \link{stat_corrtext}.}
 }
 \value{
 A \code{ggplot2} layer with text labels for correlation strength.
 }
 \description{
 \code{lotri_corrtext()} and \code{utri_corrtext()} are
-  used to display text labels for the strength of bivariate correlations
-  in the off-diagonal facets of \code{\link{ggcorrm}} plots.
+used to display text labels for the strength of bivariate correlations
+in the off-diagonal facets of \link{ggcorrm} plots.
 }
 \details{
 \code{lotri_corrtext()} and \code{utri_corrtext()} can be used
-  to display the correlation  between variables in the lower or upper
-  triangular facets of \code{ggcorrm} plots, respectively.
-  Correlations can be calculated for single groups
-  by using grouping aesthetics such as \code{aes(color = group)}.
+to display the correlation  between variables in the lower or upper
+triangular facets of \code{ggcorrm} plots, respectively.
+Correlations can be calculated for single groups
+by using grouping aesthetics such as \code{aes(color = group)}.
 
- code{lotri_corrtext()} and \code{utri_corrtext()} are wrappers around
- \code{\link[stat_corrtext]{stat_corrtext()}} that additionally take
- care of the right specification of aesthetics and allows to easily
- adjust size by correlation strength via \code{corr_size}.
+\code{lotri_corrtext()} and \code{utri_corrtext()} are wrappers around
+\code{\link[=stat_corrtext]{stat_corrtext()}} that additionally take
+\code{\link[=stat_corrtext]{stat_corrtext()}} that additionally take
+care of the right specification of aesthetics and allows to easily
+adjust size by correlation strength via \code{corr_size}.
 }
 \seealso{
-\code{\link[ggplot2:geom_text]{ggplot2::geom_text}},
-  \code{\link{stat_corrtext}}
+\link{stat_corrtext}
 }

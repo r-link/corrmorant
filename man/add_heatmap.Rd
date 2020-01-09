@@ -18,47 +18,45 @@ utri_heatpoint(corr_size = TRUE, corr_method = "pearson", ...)
 }
 \arguments{
 \item{corr_method}{character string with the correlation method passed
-to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson" (or is inherited from the setting
-in \code{\link[ggcorrm]{ggcorrm()}}).}
+to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
+in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
-\item{...}{Additional arguments to \code{\link{stat_heatmap}}.}
+\item{...}{Additional arguments to \code{\link[=stat_heatmap]{stat_heatmap()}}.}
 
 \item{corr_size}{logical - should the \code{size} aesthetic of the
-points in `lotri/utri_heatpoint()` be expressed as a function of correlation
+points in \code{lotri/utri_heatpoint()} be expressed as a function of correlation
 strength? \code{corr_size = TRUE} Defaults to \code{TRUE}.}
 }
 \value{
 A \code{ggplot2} layer with correlation heatmaps / points indicating
-  correlation strength.
+correlation strength.
 }
 \description{
 \code{lotri_heatmap()} and \code{utri_heatmap()} are used to
-  display correlation heatmaps in the lower/upper off-diagonal facets of
-  \code{\link{ggcorrm}} plots.
-  \code{lotri_heatpoint()} and \code{utri_heatpoint()} scale the and colour
-  of a single centered \code{\link[ggplot2]{geom_point}} by correlation
-  strength.
+display correlation heatmaps in the lower/upper off-diagonal facets of
+\link{ggcorrm} plots.
+\code{lotri_heatpoint()} and \code{utri_heatpoint()} scale the and colour
+of a single centered \link[=ggplot2]{geom_point()} by correlation
+strength.
 }
 \details{
 \code{lotri_/utri_heatmap()} can be used to display correlation heat maps
-  in the facets of \code{ggcorrm} plots.
+in the facets of \code{ggcorrm} plots.
 
-  \code{lotri/utri_heatmap()} are a wrapper around
-  \code{\link[stat_heatmap]{stat_heatmap()}} that additionally take
-  care of the right specification of aesthetics.
+\code{lotri/utri_heatmap()} are a wrapper around \code{\link[=stat_heatmap]{stat_heatmap()}} that
+additionally take care of the right specification of aesthetics.
 
-  \code{lotri/utri_heatpoint()} instead plots a single point in the middle of the
-  layer whose size on default depends on the strength of correlation. The
-  shape parameter as well as transparency etc. can be adjusted via the
-  \code{...} argument.
-  The range of sizes covered by the 'heatpoints' can be adjusted by
-  \code{\link[ggplot2:scale_size]{scale_size()}}.
+\code{lotri/utri_heatpoint()} instead plots a single point in the middle of the
+layer whose size on default depends on the strength of correlation. The
+shape parameter as well as transparency etc. can be adjusted via the
+\code{...} argument.
+The range of sizes covered by the 'heatpoints' can be adjusted by
+\link[=ggplot2:scale_size]{scale_size()}.
 
-  For larger circles that scale with correlation, see
-  \code{\link{add_heatcircle}}.
+For larger circles that scale with correlation, see
+\link{add_heatcircle}.
 }
 \seealso{
-\code{\link{stat_heatmap}},
-  \code{\link{add_heatcircle}}
+Similar corrmorant stats: \link{stat_heatmap}, \link{add_heatcircle}
 }

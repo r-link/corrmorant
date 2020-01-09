@@ -23,22 +23,18 @@ theme_corrm(
 }
 \description{
 ggplot themes controlling all non-data display meant
-    for the use with \code{ggcorrm}. Single elements of a theme can
-    be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+for the use with\code{ggcorrm}. Single elements of a theme can
+be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \details{
 Available themes:
-    \describe{
-        \item{theme_corrm()}{The standard corrmorant theme with white background and
-              strong black facet outlines. \emph{So far the only available
-              corrmorant theme.}
-              }
-           }
+\itemize{
+\item theme_corrm()}{The standard corrmorant theme with white background and
+strong black facet outlines. \emph{So far the only available
+corrmorant theme.}
+}
 }
 \seealso{
-\code{\link[ggplot2:ggtheme]{ggplot2::ggtheme}},
-  \code{\link[ggplot2:theme]{ggplot2::theme}},
-  \code{\link{ggcorrm}},
-  \code{\link{tidy_corrm}},
-  \code{\link{corrmorant}}
+\link[ggplot2:ggtheme]{ggplot2::ggtheme},
+\code{\link[ggplot2:theme]{ggplot2::theme()}}
 }

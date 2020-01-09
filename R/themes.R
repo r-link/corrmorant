@@ -1,24 +1,21 @@
 #' @title Themes for ggcorrm plots
+#'
 #' @description ggplot themes controlling all non-data display meant
-#'     for the use with \code{ggcorrm}. Single elements of a theme can
-#'     be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+#'   for the use with`ggcorrm`. Single elements of a theme can
+#'   be modified with [ggplot2::theme()].
+#'
 #' @param base_size Base font size (defaults to 9).
 #' @param base_family Base font family (defaults to "").
 #' @param base_line_size Base size for line elements (defaults to base_size/22).
 #' @param base_rect_size Base sie for rect elements (defaults to base_size/22).
 #' @details Available themes:
-#'     \describe{
-#'         \item{theme_corrm()}{The standard corrmorant theme with white background and
-#'               strong black facet outlines. \emph{So far the only available
-#'               corrmorant theme.}
-#'               }
-#'            }
+#'   * theme_corrm()}{The standard corrmorant theme with white background and
+#'     strong black facet outlines. _So far the only available
+#'     corrmorant theme._
+#'
 #' @seealso
-#'   \code{\link[ggplot2:ggtheme]{ggplot2::ggtheme}},
-#'   \code{\link[ggplot2:theme]{ggplot2::theme}},
-#'   \code{\link{ggcorrm}},
-#'   \code{\link{tidy_corrm}},
-#'   \code{\link{corrmorant}}
+#'   [ggplot2::ggtheme],
+#'   [ggplot2::theme()]
 #' @name corrmoran_themes
 NULL
 

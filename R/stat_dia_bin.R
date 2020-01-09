@@ -99,30 +99,31 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
 
 # stat_dia_bin() - stat function for StatDiaBin -------------------------------
 #' @title Compute histograms and frequency polygons for ggcorrm plots.
-#' @description \code{stat_dia_bin()} computes the binned data summaries for
-#'     the diagonal panels of \code{\link{ggcorrm}} plots that are created with
-#'     \code{\link{dia_histogram}} and \code{\link{dia_freqpoly}}.
+#'
+#' @description `stat_dia_bin()` computes the binned data summaries for
+#'   the diagonal panels of [ggcorrm] plots that are created with
+#'   [dia_histogram] and [dia_freqpoly].
+#'
 #' @inheritParams ggplot2::layer
 #' @param lower numeric between 0 and 1. Lower limit of the
-#'     histograms/frequency polygons relative to the range of the \code{y}
-#'     axis. Defaults to 0.25.
+#'   histograms/frequency polygons relative to the range of the `y`
+#'   axis. Defaults to 0.25.
 #' @param upper numeric between 0 and 1. Upper limit of the
-#'     histograms/frequency polygons relative to the range of the \code{y}
-#'     axis. Defaults to 1.
+#'   histograms/frequency polygons relative to the range of the `y`
+#'   axis. Defaults to 1.
 #' @param barwidth Width of the histograms relative to the maximum possible
-#'     width. Defaults to 0.9.
-#' @param ... Additional arguments passed to
-#'     \code{\link[ggplot2:layer]{ggplot2::layer}} (arguments for
-#'     \code{\link[ggplot2:stat_bin]{stat_bin()}} are permitted).
-#' @return An object of class \code{Layer}.
-#' @details \code{stat_dia_bin()} computes binned data summaries for display
-#'     in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
-#'     \code{upper} arguments can be used to offset the histograms/frequency
-#'     polygons from zero and optimally fit them to the range of each panel.
+#'   width. Defaults to 0.9.
+#' @param ... Additional arguments passed [ggplot2::layer()]
+#'   (arguments for [ggplot2::stat_bin()] are permitted).
+#' @return An object of class `Layer`.
+#' @details `stat_dia_bin()` computes binned data summaries for display
+#'    in the diagonal facets of `ggcorrm` plots. The `lower` and
+#'    `upper` arguments can be used to offset the histograms/frequency
+#'    polygons from zero and optimally fit them to the range of each panel.
 #' @seealso
-#'     \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
-#'     \code{\link{dia_histogram}},
-#'     \code{\link{dia_freqpoly}}
+#'    [ggplot2:stat_bin][ggplot2::stat_bin],
+#'    [dia_histogram],
+#'    [dia_freqpoly]
 #' @rdname stat_dia_bin
 #' @export
 stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
@@ -138,30 +139,29 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 
 # dia_histogram() - wrapper around stat_dia_bin -------------------------------
 #' @title Histograms and frequency polygons for ggcorrm plots
-#' @description Add histograms or frequency polygons to the diagonal panels of
-#'      \code{\link{ggcorrm}} plots
-#' @inheritParams stat_dia_bin
-#' @param mapping Set of aesthetic mappings created by
-#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-#'    automatically and must not be changed, but all other aesthetics
-#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
-#' @param ... Additional parameters for \code{\link{stat_dia_bin}}.
-#' @return A \code{ggplot2} layer with histograms or frequency polygons for the
-#'    variables on the plot diagonal of \code{ggcorrm} plots.
-#' @details  The \code{lower} and\code{upper} arguments can be used to offset
-#'     the histograms/frequency polygons from zero and optimally fit them to
-#'     the range of each panel.
-#'     The standard values are chosen to work well when placing text labels
-#'     under the histograms/frequency polygons with \code{\link{dia_names}}.
 #'
-#'    \code{dia_histogram()} adds histograms of the numeric variables in a
-#'    \code{ggcorrm} plot to the plot diagonal. The bar width can be adjusted
-#'    with \code{barwidth}. Frequency polygons can be created with
-#'    \code{dia_freqpoly()}. Both functions use the same stat,
-#'    \code{\link{stat_dia_bin}}.
+#' @description Add histograms or frequency polygons to the diagonal panels of
+#'    [ggcorrm] plots
+#'
+#' @inheritParams stat_dia_bin
+#' @inheritParams ggcorrm
+#' @param ... Additional parameters for [stat_dia_bin].
+#' @return A `ggplot2` layer with histograms or frequency polygons for the
+#'    variables on the plot diagonal of `ggcorrm` plots.
+#' @details  The `lower` and`upper` arguments can be used to offset
+#'   the histograms/frequency polygons from zero and optimally fit them to
+#'   the range of each panel.
+#'   The standard values are chosen to work well when placing text labels
+#'   under the histograms/frequency polygons with [dia_names].
+#'
+#'   `dia_histogram()` adds histograms of the numeric variables in a
+#'   `ggcorrm` plot to the plot diagonal. The bar width can be adjusted
+#'   with `barwidth`. Frequency polygons can be created with
+#'   `dia_freqpoly()`. Both functions use the same stat,
+#'   [stat_dia_bin].
 #' @seealso
-#'     \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin}},
-#'     \code{\link{stat_dia_bin}}
+#'   [ggplot2::stat_bin],
+#'   [stat_dia_bin]
 #' @rdname dia_histogram
 #' @export
 dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9,

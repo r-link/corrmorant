@@ -17,9 +17,10 @@ stat_heatmap(
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by
-\code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-automatically and must not be changed,  but all other aesthetics
-may be manipulated. Defaults to \code{NULL} (use standard mapping).}
+\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
+\code{x} and \code{y} are set automatically and must not be changed,  but
+all other aesthetics may be manipulated. Defaults to \code{NULL}
+(use standard \code{ggcorrm} mapping).}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -53,29 +54,28 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{corr_method}{character string with the correlation method passed
-to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-"spearman". Defaults to "pearson" (or is inherited from the setting
-in \code{\link[ggcorrm]{ggcorrm()}}).}
+to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
+in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
-\item{...}{additional arguments passed to
-\code{\link[ggplot2:layer]{ggplot2::layer}}.}
+\item{...}{additional arguments passed to \code{\link[=ggplot2:layer]{ggplot2:layer()}}.}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
 \code{stat_heatmap()} is used to compute bivariate correlations
-    and display them as correlation heat maps / point labels in the facets
-    of \code{\link{ggcorrm}} plots.
+and display them as correlation heat maps / point labels in the facets
+of \link{ggcorrm} plots.
 }
 \details{
 \code{stat_heatmap()} computes the correlation between variables
-    in the facets of \code{ggcorrm} plots and returns the aesthetics
-    necessary to either color the entire facet by correlation strength
-    (\code{geom = "rect"}) or place a single point in the midpoint of each facet
-    (\code{geom = "point"}).
+in the facets of \code{ggcorrm} plots and returns the aesthetics
+necessary to either color the entire facet by correlation strength
+(\code{geom = "rect"}) or place a single point in the midpoint of each facet
+(\code{geom = "point"}).
 }
 \seealso{
-\code{\link[ggplot2:layer]{ggplot2::layer}},
-  \code{\link{add_heatmap}}
+\code{\link[ggplot2:layer]{ggplot2::layer()}},
+\link{add_heatmap}
 }

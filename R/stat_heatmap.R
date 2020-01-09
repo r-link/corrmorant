@@ -25,30 +25,22 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 
 # stat_heatmap() - stat function based on heatmap -----------------------------
 #' @title Compute correlation heatmaps for ggcorrm plots
-#' @description \code{stat_heatmap()} is used to compute bivariate correlations
-#'     and display them as correlation heat maps / point labels in the facets
-#'     of \code{\link{ggcorrm}} plots.
+#' @description `stat_heatmap()` is used to compute bivariate correlations
+#'   and display them as correlation heat maps / point labels in the facets
+#'   of [ggcorrm] plots.
+#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
-#' @param mapping Set of aesthetic mappings created by
-#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-#'    automatically and must not be changed,  but all other aesthetics
-#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
-#' @param corr_method character string with the correlation method passed
-#'    to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-#'    "spearman". Defaults to "pearson" (or is inherited from the setting
-#'    in \code{\link[ggcorrm]{ggcorrm()}}).
-#' @param ... additional arguments passed to
-#'     \code{\link[ggplot2:layer]{ggplot2::layer}}.
-#' @return An object of class \code{Layer}.
-#' @details  \code{stat_heatmap()} computes the correlation between variables
-#'     in the facets of \code{ggcorrm} plots and returns the aesthetics
-#'     necessary to either color the entire facet by correlation strength
-#'     (\code{geom = "rect"}) or place a single point in the midpoint of each facet
-#'     (\code{geom = "point"}).
+#' @param ... additional arguments passed to [ggplot2:layer()].
+#' @return An object of class `Layer`.
+#' @details  `stat_heatmap()` computes the correlation between variables
+#'   in the facets of `ggcorrm` plots and returns the aesthetics
+#'   necessary to either color the entire facet by correlation strength
+#'   (`geom = "rect"`) or place a single point in the midpoint of each facet
+#'   (`geom = "point"`).
 #' @rdname stat_heatmap
 #'@seealso
-#'   \code{\link[ggplot2:layer]{ggplot2::layer}},
-#'   \code{\link{add_heatmap}}
+#'   [ggplot2::layer()],
+#'   [add_heatmap]
 #' @export
 stat_heatmap <- function(mapping = NULL, data = NULL, geom = "rect",
                          position = "identity", show.legend = NA,

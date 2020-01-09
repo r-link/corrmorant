@@ -63,37 +63,29 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 
 # stat_heatcircle() - stat function based on heatcircle -----------------------------
 #' @title Compute circles whose size represents correlation strength
-#' @description \code{stat_heatcircle()} is used to compute bivariate correlations
-#'     and display them in \code{\link{ggcorrm}} plots in form of circles whose color
-#'     and size indicate correlation strength.
+#' @description `stat_heatcircle()` is used to compute bivariate correlations
+#'   and display them in [ggcorrm] plots in form of circles whose color
+#'   and size indicate correlation strength.
+#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
-#' @param mapping Set of aesthetic mappings created by
-#'    \code{\link[ggplot2:aes]{aes()}}. \code{x} and \code{y} are set
-#'    automatically and must not be changed,  but all other aesthetics
-#'    may be manipulated. Defaults to \code{NULL} (use standard mapping).
-#' @param corr_method character string with the correlation method passed
-#'    to \code{\link[stats]{cor}}. Can be one of "pearson", "kendall" and
-#'    "spearman". Defaults to "pearson" (or is inherited from the setting
-#'    in \code{\link[ggcorrm]{ggcorrm()}}).
 #' @param rmin numeric (0 - 1). Minimum radius for the "heat circles" (as a
-#'    proportion of panel width). Defaults to 0.1.
+#'   proportion of panel width). Defaults to 0.1.
 #' @param rmax numeric (0 - 1). Maximum radius for the "heat circles" (as a
-#'    proportion of panel width). Defaults to 0.9.
-#' @param scale_by character.  \code{scale_by = "area"} scales the area of the
-#'    circles by correlation strength, \code{scale_by = "radius"} scales by
-#'    radius. Defaults to "area".
-#' @param ... additional arguments passed to
-#'     \code{\link[ggplot2:layer]{ggplot2::layer}}.
-#' @return An object of class \code{Layer}.
-#' @details  \code{stat_heatcircle()} computes the outlines of circles that
-#'    are centered around the midpoint of \code{gcorrm} facets and whose radius
-#'    or area is modified in dependence of correlation strength. \code{rmin} and
-#'    \code{rmax} allow to modify the range in which the radii of the circles may
-#'    vary. The circles are displayed using \code{\link[ggplot2]{geom_ribbon}}.
+#'   proportion of panel width). Defaults to 0.9.
+#' @param scale_by character.  `scale_by = "area"` scales the area of the
+#'   circles by correlation strength, `scale_by = "radius"` scales by
+#'   radius. Defaults to "area".
+#' @param ... additional arguments passed to [ggplot2::layer()].
+#' @return An object of class `Layer`.
+#' @details  `stat_heatcircle()` computes the outlines of circles that
+#'   are centered around the midpoint of `gcorrm` facets and whose radius
+#'   or area is modified in dependence of correlation strength. `rmin` and
+#'   `rmax` allow to modify the range in which the radii of the circles may
+#'   vary. The circles are displayed using [ggplot2::geom_ribbon()].
 #' @rdname stat_heatcircle
 #'@seealso
-#'   \code{\link[ggplot2:layer]{ggplot2::layer}},
-#'   \code{\link{geom_heatcircle}}
+#'   [ggplot2::layer()],
+#'   [geom_heatcircle()]
 #' @export
 stat_heatcircle <- function(mapping = NULL, data = NULL, geom = "ribbon",
                          position = "identity", show.legend = NA,

@@ -60,22 +60,22 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
 )
 
 # stat_corrtext() - stat function based on Corrtext -----------------------------
-#' @title Compute correlation strength in ggcorrm plots
-#' @description \code{stat_corrtext()} is used to compute bivariate correlations
+#' @title Compute correlation strength for text labels in ggcorrm plots
+#' @description `stat_corrtext()` is used to compute bivariate correlations
 #'     and appropriate positions of text labels indicating correlation strength
-#'     for the facets of \code{\link{ggcorrm}} plots.
+#'     for the facets of [ggcorrm] plots.
+#' @inheritParams ggcorrm
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
 #' @param ... additional arguments passed to
-#'     \code{\link[ggplot2:layer]{ggplot2::layer}}.
-#' @return An object of class \code{Layer}.
-#' @details  \code{stat_corrtext()} computes the correlation between variables in
-#'     the facets of \code{ggcorrm} plots and places text labels indicating the
+#'     [ggplot2::layer()].
+#' @return An object of class `Layer`.
+#' @details  `stat_corrtext()` computes the correlation between variables in
+#'     the facets of `ggcorrm` plots and places text labels indicating the
 #'     strength of correlation in appropriate positions within the facets.
 #' @rdname stat_corrtext
 #'@seealso
-#'   \code{\link[ggplot2:layer]{ggplot2::layer}},
-#'   \code{\link{lotri_corrtext}} and \code{\link{utri_corrtext}}
+#'   [lotri_corrtext()] and [utri_corrtext()]
 
 #' @export
 stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
