@@ -107,11 +107,8 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
 #' @rdname dia_density
 #' @export
 dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in dia_density() may not be manipulated.")
-  }
-  # update mapping with standard aesthetics
-  mapping <- modify_list(aes(x = x, y = y), mapping)
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
 
   # return plot with labels
   dia(geom_polygon(mapping = mapping, stat = "dia_density",

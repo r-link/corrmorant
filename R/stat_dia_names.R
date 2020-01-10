@@ -75,11 +75,10 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 #' @rdname dia_names
 #' @export
 dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
-  if (any(c("x", "y", "label") %in% names(mapping))) {
-    stop("x and y coordinates and labels in dia_names() may not be manipulated.")
-  }
-  # update mapping with standard aesthetics
-  mapping <- modify_list(aes(x = x, label = var_x), mapping)
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping,
+                              standard_aes = aes(x = x, label = var_x))
+
   # return plot with labels
   dia(stat_dia_names(mapping = mapping, geom = "text", y_pos = y_pos,
                      inherit.aes = inherit.aes, ...))

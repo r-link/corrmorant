@@ -166,9 +166,9 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 #' @export
 dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9,
                           position = "dodge", ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in dia_histogram() may not be manipulated.")
-  }
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
+
   # return plot with labels
   dia(geom_rect(..., mapping = mapping, stat = "dia_bin", position = position,
                 lower = lower, upper = upper, barwidth = barwidth))
@@ -179,14 +179,10 @@ dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9
 #' @rdname dia_histogram
 #' @export
 dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1, ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in dia_freqpoly() may not be manipulated.")
-  }
-
-  # update mapping
-  new_mapping <- modify_list(aes(x = x, y = ..ymax..), mapping)
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x, y = ..ymax..))
 
   # return plot with labels
-  dia(geom_path(..., mapping = new_mapping, stat = "dia_bin",
+  dia(geom_path(..., mapping = mapping, stat = "dia_bin",
                 lower = lower, upper = upper))
 }

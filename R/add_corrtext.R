@@ -51,9 +51,8 @@ NULL
 lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                            digits = 2, corr_size = TRUE,
                            corr_method = "pearson", squeeze = 0.7, ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in lotri_corrtext() may not be manipulated.")
-  }
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
 
   # print warning if size is specified more than once
   if ("size" %in% names(mapping) && corr_size){
@@ -78,9 +77,8 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                           digits = 2, corr_size = TRUE,
                           corr_method = "pearson", squeeze = 0.7, ...) {
-  if (any(c("x", "y") %in% names(mapping))) {
-    stop("x and y coordinates in utri_corrtext() may not be manipulated.")
-  }
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
 
   # print warning if size is specified more than once
   if ("size" %in% names(mapping) && corr_size){
