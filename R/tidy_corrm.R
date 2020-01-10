@@ -142,16 +142,19 @@ tidy_corrm <- function(data,
     names(data)[numerics] <- labels
   }
 
-  # print warning if there are more than 10 numeric variables
-  if (length(numerics) > 9)
-    warning("Correlation matrix contains ", length(numerics), " numeric variables:\n",
-            "Plotting may take very long.\n",call. = FALSE)
+  # print message if there are more than 10 numeric variables
+  if (length(numerics) > 9){
+    message("Correlation matrix contains ", length(numerics),
+            " numeric variables:\n",
+            "Plotting may take very long.\n")
+  }
 
-  # print warning if there are highly skewed variables
+  # print message if there are highly skewed variables
   skews <- apply(data[, numerics], 2, skew)
-  if (any(abs(skews) > 1))
-    warning("Some variables are highly skewed (abs(skew) > 1).\n",
-            "Consider transformation for better display.", call. = FALSE)
+  if (any(abs(skews) > 1)){
+    message("Some variables are highly skewed (abs(skew) > 1).\n",
+            "Consider transformation for better display.")
+    }
 
   # performe scale transformation if desired
   rescale <- arg_match(rescale)
