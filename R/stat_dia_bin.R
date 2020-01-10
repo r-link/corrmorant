@@ -169,7 +169,8 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9,
                           position = "dodge", ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping)
+  mapping <- update_aes_corrm(mapping,
+                              standard_aes = aes(x = x))
 
   # return plot with labels
   dia(geom_rect(..., mapping = mapping, stat = "dia_bin", position = position,
@@ -182,7 +183,8 @@ dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9
 #' @export
 dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x, y = ..ymax..))
+  mapping <- update_aes_corrm(mapping,
+                              standard_aes = aes(x = x, y = ..ymax..))
 
   # return plot with labels
   dia(geom_path(..., mapping = mapping, stat = "dia_bin",

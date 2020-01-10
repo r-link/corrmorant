@@ -109,7 +109,7 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
 #' @export
 dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping)
+  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x))
 
   # return plot with labels
   dia(geom_polygon(mapping = mapping, stat = "dia_density",
