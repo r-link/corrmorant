@@ -54,7 +54,7 @@ scale_color_corr <- function(...,
                              aesthetics = "colour",
                              direction = 1){
   # prepare option
-  option <- match.arg(option)
+  option <- rlang::arg_match(option)
 
   # choose desired color scheme
   values <- .corr_scales(option, direction)
@@ -74,14 +74,15 @@ scale_color_corr <- function(...,
 # scale_fill_corr() - color scales based on .corr_scales() --------------------
 #' @rdname corrmorant_scales
 #' @export
-scale_fill_corr <- function(..., option = c("A", "B", "C", "D"),
+scale_fill_corr <- function(...,
+                            option = c("A", "B", "C", "D"),
                             limits = c(-1, 1),
                             na.value = "#55FF55",
                             guide = "colourbar",
                             aesthetics = "fill",
                             direction = 1) {
   # prepare option
-  option <- match.arg(option)
+  option <- rlang::arg_match(option)
 
   # choose desired color scheme
   values <- .corr_scales(option, direction)

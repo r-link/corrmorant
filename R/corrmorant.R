@@ -34,8 +34,8 @@ corrmorant <- function(data, style = c("dark", "light", "blue_red"),
                        labels       = NULL,
                        ...){
   # match arguments
-  rescale <- match.arg(rescale)
-  style   <- match.arg(style)
+  rescale <- rlang::arg_match(rescale)
+  style   <- rlang::arg_match(style)
 
   # prepare plot
   p0 <- ggcorrm(data,
