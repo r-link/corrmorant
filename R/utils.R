@@ -38,6 +38,31 @@ skew <- function (x) {
   sqrt(n) * sum(x^3)/(sum(x^2)^(3/2))
 }
 
+# prepare_aes_corrm() - prepare aesthetics for plots in ggcorrm ---------------
+#' @keywords internal
+#' @importFrom stats na.omit
+update_aes_corrm <- function (new_aes, standard_aes = aes(x, y)) {
+  # warn if aesthetics are specified that are not permitted
+  if (any(c("x", "y") %in% names(new_aes))) {
+    # get call
+    call  <- deparse(sys.calls()[[sys.nframe()-1]][[1]])
+    # get problematic aesthetics
+    which <- paste(dplyr::intersect(c("x", "y"), names(new_aes)),
+                   collapse = " and ")
+    # issue warning
+    warning("x and y aesthetics are ignored in corrmorant functions.\n",
+            which, " in ", call, " overridden by default values.",
+            call. = FALSE)
+  }
+  # update permitted aesthetics
+  for (i in dplyr::setdiff(names(new_aes), names(standard_aes))){
+    standard_aes[[i]] <- new_aes[[i]]
+  }
+  # return updated aesthetics
+  standard_aes
+}
+
+
 # modify_list() - copied internal function from ggplot2 -----------------------
 #' @keywords internal
 modify_list <- function (old, new) {
