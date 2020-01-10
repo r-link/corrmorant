@@ -155,17 +155,19 @@ ggcorrm <- function(data,
     stop("x and y coordinates in ggcorrm() may not be manipulated.")
   }
 
-  # if rescale argument is not changed, pick first
-  rescale <- match.arg(rescale)
+  # match rescale argument
+  rescale <- arg_match(rescale)
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
     if (!is_quosures(mutates))
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
-  # if data is already in correct form, do not change...
+  # if data is already in correct form, keep as is and adjust global
+  # corr_method setting accordingly
   if (is(data, "tidy_corrm")){
     corrdat <- data
+    corr_method <- attr(data, "corr_method")
   } else { # ...else reshape to appropriate format
   # catch grouping variable
   corr_group <- enquo(corr_group)

@@ -154,7 +154,7 @@ tidy_corrm <- function(data,
             "Consider transformation for better display.", call. = FALSE)
 
   # performe scale transformation if desired
-  rescale <- match.arg(rescale)
+  rescale <- arg_match(rescale)
   if (rescale == "by_sd") {
     data <- dplyr::mutate_if(data, is.numeric,
                              function(x) (x - mean(x, na.rm = TRUE)) / stats::sd(x, na.rm = TRUE))
@@ -204,5 +204,9 @@ tidy_corrm <- function(data,
   if(!is.null(mutates)) out <- dplyr::mutate(out, !!!mutates)
 
   # return output with appended class (used for testing in corrmorant selectors)
-  return(structure(out, class = c(class(out), "tidy_corrm")))
+  return(structure(out,
+                   class = c(class(out), "tidy_corrm"),
+                   corr_method = corr_method,
+                   corr_group  = corr_group)
+         )
 }
