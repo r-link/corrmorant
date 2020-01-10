@@ -40,7 +40,7 @@ skew <- function (x) {
 
 # prepare_aes_corrm() - prepare aesthetics for plots in ggcorrm ---------------
 #' @keywords internal
-#' @importFrom stats na.omit
+#' @importFrom dplyr setdiff intersect
 update_aes_corrm <- function (new_aes, standard_aes = aes(x, y)) {
   # warn if aesthetics are specified that are not permitted
   if (any(c("x", "y") %in% names(new_aes))) {
