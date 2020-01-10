@@ -26,16 +26,20 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 
 # stat_dia_names() - stat function based on StatDiaNames ----------------------
 #' @title Positions for variable names in ggcorrm plots
-#' @description `stat_dia_names()` is used by
-#'   [dia_names()] to compute the positions of layer
-#'   names in the diagonal panels of [ggcorrm] plots.
-#' @param ... Additional arguments passed to[ggplot2:layer][layer()]
+#'
+#' @description `stat_dia_names()` is used by [dia_names()] to compute the
+#'   positions of layer names in the diagonal panels of [ggcorrm] plots.
+#'
+#' @param ... Additional arguments passed to[ggplot2:layer][layer()].
 #' @inheritParams ggplot2::layer
 #' @inheritParams dia_names
+#'
 #' @return An object of class `Layer`.
+#'
 #' @details `stat_dia_names()` uses the range of variables on the diagonal
-#'   facets of[ggcorrm] plots to compute appropriate positions
-#'   for text labels of variable names.
+#'   facets of[ggcorrm] plots to compute appropriate positions for text labels
+#'   of variable names.
+#'
 #'@seealso
 #'  [ggplot2:layer][ggplot2::layer],
 #'  [dia_names]
@@ -54,22 +58,27 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
 
 # dia_names() - label diagonal facets by variable names -----------------------
 #' @title Add variable names to diagonal facets
-#' @description `dia_names()` is a wrapper around [stat_dia_names()]
-#'   which plots the names of variables in a `ggcorrm` plot at
-#'   appropriate positions in the diagonal facets.
+#'
+#' @description `dia_names()` is a wrapper around [stat_dia_names()] which plots
+#'   the names of variables in a `ggcorrm` plot at appropriate positions in the
+#'   diagonal facets.
+#'
 #' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
 #' @param y_pos numeric between 0 and 1 specifying the relative position of the
 #'   text labels along the x axis (defaults to 0.2).
 #' @param ... Additional parameters passed to
 #'   [stat_dia_names][stat_dia_names()].
+#'
 #' @return A `ggplot2` layer containing text labels on the diagonal facets.
-#' @details `dia_names()` plots text labels on the plot diagonal and takes
-#'   care of the often complicated positioning in plots with different x and y
+#'
+#' @details `dia_names()` plots text labels on the plot diagonal and takes care
+#'   of the often complicated positioning in plots with different x and y
 #'   ranges.
 #'
 #'   On default, `inherit.aes` is set to `FALSE` as in most cases this is the
 #'   preferred behavior for the labels for variable names.
+#'
 #' @seealso
 #'  [stat_dia_names]
 #' @rdname dia_names

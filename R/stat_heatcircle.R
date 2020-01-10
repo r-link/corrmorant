@@ -61,11 +61,13 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 )
 
 
-# stat_heatcircle() - stat function based on heatcircle -----------------------------
-#' @title Compute circles whose size represents correlation strength
+# stat_heatcircle() - stat function based on heatcircle -----------------------
+#' @title Compute circles with correlation-dependent size
+#'
 #' @description `stat_heatcircle()` is used to compute bivariate correlations
-#'   and display them in [ggcorrm] plots in form of circles whose color
-#'   and size indicate correlation strength.
+#'   and display them in [ggcorrm] plots in form of circles whose color and size
+#'   indicate correlation strength.
+#'
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
 #' @param rmin numeric (0 - 1). Minimum radius for the "heat circles" (as a
@@ -73,15 +75,18 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 #' @param rmax numeric (0 - 1). Maximum radius for the "heat circles" (as a
 #'   proportion of panel width). Defaults to 0.9.
 #' @param scale_by character.  `scale_by = "area"` scales the area of the
-#'   circles by correlation strength, `scale_by = "radius"` scales by
-#'   radius. Defaults to "area".
+#'   circles by correlation strength, `scale_by = "radius"` scales by radius.
+#'   Defaults to "area".
 #' @param ... additional arguments passed to [ggplot2::layer()].
+#'
 #' @return An object of class `Layer`.
-#' @details  `stat_heatcircle()` computes the outlines of circles that
-#'   are centered around the midpoint of `gcorrm` facets and whose radius
-#'   or area is modified in dependence of correlation strength. `rmin` and
-#'   `rmax` allow to modify the range in which the radii of the circles may
-#'   vary. The circles are displayed using [ggplot2::geom_ribbon()].
+#'
+#' @details  `stat_heatcircle()` computes the outlines of circles that are
+#'   centered around the midpoint of `gcorrm` facets and whose radius or area is
+#'   modified in dependence of correlation strength. `rmin` and `rmax` allow to
+#'   modify the range in which the radii of the circles may vary. The circles
+#'   are displayed using [ggplot2::geom_ribbon()].
+#'
 #' @rdname stat_heatcircle
 #'@seealso
 #'   [ggplot2::layer()],

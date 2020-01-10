@@ -54,33 +54,31 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{lower}{numeric between 0 and 1. Lower limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 0.25.}
+\item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
-\item{upper}{numeric between 0 and 1. Upper limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 1.}
+\item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{barwidth}{Width of the histograms relative to the maximum possible
 width. Defaults to 0.9.}
 
-\item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}}
-(arguments for \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}} are permitted).}
+\item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
+\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
-\code{stat_dia_bin()} computes the binned data summaries for
-the diagonal panels of \link{ggcorrm} plots that are created with
-\link{dia_histogram} and \link{dia_freqpoly}.
+\code{stat_dia_bin()} computes the binned data summaries for the
+diagonal panels of \link{ggcorrm} plots that are created with \link{dia_histogram}
+and \link{dia_freqpoly}.
 }
 \details{
-\code{stat_dia_bin()} computes binned data summaries for display
-in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
-\code{upper} arguments can be used to offset the histograms/frequency
-polygons from zero and optimally fit them to the range of each panel.
+\code{stat_dia_bin()} computes binned data summaries for display in the
+diagonal facets of \code{ggcorrm} plots. The \code{lower} and \code{upper} arguments can
+be used to offset the histograms/frequency polygons from zero and optimally
+fit them to the range of each panel.
 }
 \seealso{
 \link[ggplot2:stat_bin]{ggplot2:stat_bin},

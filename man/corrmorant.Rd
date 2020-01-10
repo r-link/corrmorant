@@ -13,26 +13,26 @@ corrmorant(
 )
 }
 \arguments{
-\item{data}{\code{data.frame} or \code{matrix} with the raw data used
-for the correlation plot. If a \code{data.frame}, all numeric variables
-are used as rows/columns of the correlation plot, while all other
-variables are appended to the reshaped dataset as additional columns.}
+\item{data}{\code{data.frame} or \code{matrix} with the raw data used for the
+correlation plot. If a \code{data.frame}, all numeric variables are used as
+rows/columns of the correlation plot, while all other variables are
+appended to the reshaped dataset as additional columns.}
 
-\item{style}{Character string defining the plot style. One of \code{"dark"}, \code{"light"}
-or \code{"blue_red"}.}
+\item{style}{Character string defining the plot style. One of \code{"dark"},
+\code{"light"} or \code{"blue_red"}.}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
-\code{"by.sd"} scales by the standard deviation of the data and centers
-around zero.  \code{"by.range"} rescales the range of the data to the
-interval from 0 to 1. Use \code{rescale = NULL} to use the unchanged raw
-values. Defaults to \code{"by_sd"}.}
+\code{"by.sd"} scales by the standard deviation of the data and centers around
+zero.  \code{"by.range"} rescales the range of the data to the interval from 0
+to 1. Use \code{rescale = NULL} to use the unchanged raw values. Defaults to
+\code{"by_sd"}.}
 
 \item{labels}{(Optional) character vector with labels for the names of all
-numeric columns that are used to replace the column names in the plot
-axis and text labels. Must be of the same length as the number of
-numeric columns displayed in the plot. Defaults to \code{NULL} (use
-original column names as labels).}
+numeric columns that are used to replace the column names in the plot axis
+and text labels. Must be of the same length as the number of numeric
+columns displayed in the plot. Defaults to \code{NULL} (use original column
+names as labels).}
 
 \item{...}{Additional arguments to \code{\link[=ggcorrm]{ggcorrm()}}.}
 }
@@ -40,15 +40,14 @@ original column names as labels).}
 An object of class \code{ggcorrm}.
 }
 \description{
-\code{corrmorant()} is a wrapper around \code{\link[=ggcorrm]{ggcorrm()}}
-that creates scatterplot matrices with correlation output using
-reasonable standard values for initial data inspection.
+\code{corrmorant()} is a wrapper around \code{\link[=ggcorrm]{ggcorrm()}} that creates
+scatterplot matrices with correlation output using reasonable standard
+values for initial data inspection.
 }
 \details{
-\code{corrmorant()} is a simplified wrapper around \code{\link[=ggcorrm]{ggcorrm()}}
-that creates scatterplot matrices with reasonable standard settings.
-Refer to the documentation of\code{\link[=ggcorrm]{ggcorrm()}} and
-\code{\link[=tidy_corrm]{tidy_corrm()}} for details.
+\code{corrmorant()} is a simplified wrapper around \code{\link[=ggcorrm]{ggcorrm()}} that
+creates scatterplot matrices with reasonable standard settings. Refer to
+the documentation of\code{\link[=ggcorrm]{ggcorrm()}} and \code{\link[=tidy_corrm]{tidy_corrm()}} for details.
 }
 \examples{
 \dontrun{

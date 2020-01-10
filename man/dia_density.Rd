@@ -7,19 +7,16 @@
 dia_density(mapping = NULL, lower = 0.25, upper = 1, ...)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by
-\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
-\code{x} and \code{y} are set automatically and must not be changed,  but
-all other aesthetics may be manipulated. Defaults to \code{NULL}
-(use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
+are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
+must not be changed,  but all other aesthetics may be manipulated. Defaults
+to \code{NULL} (use standard \code{ggcorrm} mapping).}
 
-\item{lower}{numeric between 0 and 1. Lower limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 0.25.}
+\item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
-\item{upper}{numeric between 0 and 1. Upper limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 1.}
+\item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{...}{Additional parameters for \code{\link[=stat_dia_density]{stat_dia_density()}}.}
 }
@@ -28,18 +25,15 @@ A \code{ggplot2} layer with histograms or frequency polygons for the
 variables on the plot diagonal of \code{ggcorrm} plots.
 }
 \description{
-Add density curves to the diagonal panels of
-\link{ggcorrm} plots.
+Add density curves to the diagonal panels of \link{ggcorrm} plots.
 }
 \details{
-\code{dia_density()} adds density curves to the diagonal panels
-of \code{ggcorrm} plots. The placement of the curves is adjusted
-based on \code{\link[=stat_dia_density]{stat_dia_density()}}.
-The \code{lower} and\code{upper} arguments can be used to offset
-the density curves from zero and optimally fit them to
-the range of each panel.The standard values are chosen to work well
-when placing text labels under the histograms/frequency polygons with
-\link{dia_names}.
+\code{dia_density()} adds density curves to the diagonal panels of
+\code{ggcorrm} plots. The placement of the curves is adjusted based on
+\code{\link[=stat_dia_density]{stat_dia_density()}}. The \code{lower} and\code{upper} arguments can be used to
+offset the density curves from zero and optimally fit them to the range of
+each panel.The standard values are chosen to work well when placing text
+labels under the histograms/frequency polygons with \link{dia_names}.
 }
 \seealso{
 \code{\link[ggplot2:geom_density]{ggplot2::geom_density()}},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_heatcircle.R
 \name{stat_heatcircle}
 \alias{stat_heatcircle}
-\title{Compute circles whose size represents correlation strength}
+\title{Compute circles with correlation-dependent size}
 \usage{
 stat_heatcircle(
   mapping = NULL,
@@ -19,11 +19,10 @@ stat_heatcircle(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by
-\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
-\code{x} and \code{y} are set automatically and must not be changed,  but
-all other aesthetics may be manipulated. Defaults to \code{NULL}
-(use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
+are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
+must not be changed,  but all other aesthetics may be manipulated. Defaults
+to \code{NULL} (use standard \code{ggcorrm} mapping).}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -56,10 +55,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{corr_method}{character string with the correlation method passed
-to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
-\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
-in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\item{corr_method}{character string with the correlation method passed to
+\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
+Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{rmin}{numeric (0 - 1). Minimum radius for the "heat circles" (as a
 proportion of panel width). Defaults to 0.1.}
@@ -68,8 +66,8 @@ proportion of panel width). Defaults to 0.1.}
 proportion of panel width). Defaults to 0.9.}
 
 \item{scale_by}{character.  \code{scale_by = "area"} scales the area of the
-circles by correlation strength, \code{scale_by = "radius"} scales by
-radius. Defaults to "area".}
+circles by correlation strength, \code{scale_by = "radius"} scales by radius.
+Defaults to "area".}
 
 \item{...}{additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
@@ -78,15 +76,15 @@ An object of class \code{Layer}.
 }
 \description{
 \code{stat_heatcircle()} is used to compute bivariate correlations
-and display them in \link{ggcorrm} plots in form of circles whose color
-and size indicate correlation strength.
+and display them in \link{ggcorrm} plots in form of circles whose color and size
+indicate correlation strength.
 }
 \details{
-\code{stat_heatcircle()} computes the outlines of circles that
-are centered around the midpoint of \code{gcorrm} facets and whose radius
-or area is modified in dependence of correlation strength. \code{rmin} and
-\code{rmax} allow to modify the range in which the radii of the circles may
-vary. The circles are displayed using \code{\link[ggplot2:geom_ribbon]{ggplot2::geom_ribbon()}}.
+\code{stat_heatcircle()} computes the outlines of circles that are
+centered around the midpoint of \code{gcorrm} facets and whose radius or area is
+modified in dependence of correlation strength. \code{rmin} and \code{rmax} allow to
+modify the range in which the radii of the circles may vary. The circles
+are displayed using \code{\link[ggplot2:geom_ribbon]{ggplot2::geom_ribbon()}}.
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer()}},

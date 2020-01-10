@@ -22,13 +22,11 @@ dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, ...)
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{lower}{numeric between 0 and 1. Lower limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 0.25.}
+\item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
-\item{upper}{numeric between 0 and 1. Upper limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 1.}
+\item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{barwidth}{Width of the histograms relative to the maximum possible
 width. Defaults to 0.9.}
@@ -47,17 +45,15 @@ Add histograms or frequency polygons to the diagonal panels of
 \link{ggcorrm} plots
 }
 \details{
-The \code{lower} and\code{upper} arguments can be used to offset
-the histograms/frequency polygons from zero and optimally fit them to
-the range of each panel.
-The standard values are chosen to work well when placing text labels
-under the histograms/frequency polygons with \link{dia_names}.
+The \code{lower} and\code{upper} arguments can be used to offset the
+histograms/frequency polygons from zero and optimally fit them to the range
+of each panel. The standard values are chosen to work well when placing
+text labels under the histograms/frequency polygons with \link{dia_names}.
 
-\code{dia_histogram()} adds histograms of the numeric variables in a
-\code{ggcorrm} plot to the plot diagonal. The bar width can be adjusted
-with \code{barwidth}. Frequency polygons can be created with
-\code{dia_freqpoly()}. Both functions use the same stat,
-\link{stat_dia_bin}.
+\code{dia_histogram()} adds histograms of the numeric variables in a \code{ggcorrm}
+plot to the plot diagonal. The bar width can be adjusted with \code{barwidth}.
+Frequency polygons can be created with \code{dia_freqpoly()}. Both functions use
+the same stat, \link{stat_dia_bin}.
 }
 \seealso{
 \link[ggplot2:stat_bin]{ggplot2::stat_bin},

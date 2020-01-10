@@ -22,16 +22,15 @@ theme_corrm(
 \item{base_rect_size}{Base sie for rect elements (defaults to base_size/22).}
 }
 \description{
-ggplot themes controlling all non-data display meant
-for the use with\code{ggcorrm}. Single elements of a theme can
-be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+ggplot themes controlling all non-data display meant for the use
+with\code{ggcorrm}. Single elements of a theme can be modified with
+\code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \details{
 Available themes:
 \itemize{
-\item theme_corrm()}{The standard corrmorant theme with white background and
-strong black facet outlines. \emph{So far the only available
-corrmorant theme.}
+\item \code{theme_corrm()}: The standard corrmorant theme with white background and
+strong black facet outlines. \emph{So far the only available corrmorant theme.}
 }
 }
 \seealso{

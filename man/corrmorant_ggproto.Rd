@@ -13,16 +13,16 @@
 \alias{StatHeatmap}
 \title{ggproto classes for corrmorant}
 \description{
-Class definitions for the new \code{ggproto} classes defined in
-the \code{corrmorant} package.
+Class definitions for the new \code{ggproto} classes defined in the
+\code{corrmorant} package.
 }
 \section{New stats}{
 
 \itemize{
 \item \code{StatCorrtext}: create and position text labels for correlation strength
 (see \link{stat_corrtext} for details).
-\item \code{StatHeatmap}: create correlation heat maps (see \link{stat_heatmap}
-for details).
+\item \code{StatHeatmap}: create correlation heat maps (see \link{stat_heatmap} for
+details).
 \item \code{StatHeatcircle}: create circles indicating correlation strength (see
 \link{stat_heatcircle} for details).
 \item \code{StatDiaNames}: create and position text labels for variable names in the

@@ -4,7 +4,7 @@
 \alias{add_heatcircle}
 \alias{lotri_heatcircle}
 \alias{utri_heatcircle}
-\title{Add circles whose size represents correlation strength}
+\title{Add circles with correlation-dependent size}
 \usage{
 lotri_heatcircle(
   mapping = NULL,
@@ -25,17 +25,16 @@ utri_heatcircle(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()}.
-x and y are set automatically and must not bechanged, but all other
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()}. x
+and y are set automatically and must not bechanged, but all other
 aesthetics may be manipulated. By default, the \code{fill} aesthetic is mapped
 to \code{..corr..} internally (color by correlation strength), but this is
 overridden when explicitly specified. Defaults to \code{NULL} (use standard
 settings).}
 
-\item{corr_method}{character string with the correlation method passed
-to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
-\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
-in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\item{corr_method}{character string with the correlation method passed to
+\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
+Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{rmin}{numeric (0 - 1). Minimum radius for the "heat circles" (as a
 proportion of panel width). Defaults to 0.1.}
@@ -44,8 +43,8 @@ proportion of panel width). Defaults to 0.1.}
 proportion of panel width). Defaults to 0.9.}
 
 \item{scale_by}{character.  \code{scale_by = "area"} scales the area of the
-circles by correlation strength, \code{scale_by = "radius"} scales by
-radius. Defaults to "area".}
+circles by correlation strength, \code{scale_by = "radius"} scales by radius.
+Defaults to "area".}
 
 \item{...}{Additional arguments to \link{stat_heatcircle}.}
 }
@@ -53,21 +52,21 @@ radius. Defaults to "area".}
 A \code{ggplot2} layer with circles displaying correlation strength.
 }
 \description{
-\code{lotri_heatcircle()} and \code{utri_heatcircle()} are used
-to display circles whose fill and size aesthetics depend on correlation
-strength in the lower/upper off-diagonal facets of \link{ggcorrm} plots.
+\code{lotri_heatcircle()} and \code{utri_heatcircle()} are used to display
+circles whose fill and size aesthetics depend on correlation strength in
+the lower/upper off-diagonal facets of \link{ggcorrm} plots.
 }
 \details{
-\code{lotri_heatcircle()} and \code{utri_heatcircle()} are wrappers
-around \code{\link[=stat_heatcircle]{stat_heatcircle()}} that additionally
-take care of the right specification of aesthetics.
+\code{lotri_heatcircle()} and \code{utri_heatcircle()} are wrappers around
+\code{\link[=stat_heatcircle]{stat_heatcircle()}} that additionally take care of the right specification
+of aesthetics.
 
-\code{stat_heatcircle()} computes the outlines of circles that
-are centered around the midpoint of \code{ggcorrm} facets and whose radius
-or area is modified in dependence of correlation strength. \code{rmin} and
-\code{rmax} allow to modify the range in which the radii of the circles may
-vary. By standard, the \code{fill} aesthetic is mapped to \code{.corr}, but this
-can be overridden by specifying a different mapping.
+\code{stat_heatcircle()} computes the outlines of circles that are centered
+around the midpoint of \code{ggcorrm} facets and whose radius or area is
+modified in dependence of correlation strength. \code{rmin} and \code{rmax} allow to
+modify the range in which the radii of the circles may vary. By standard,
+the \code{fill} aesthetic is mapped to \code{.corr}, but this can be overridden by
+specifying a different mapping.
 }
 \seealso{
 \link{stat_heatcircle},

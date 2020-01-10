@@ -100,26 +100,27 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
 # stat_dia_bin() - stat function for StatDiaBin -------------------------------
 #' @title Compute histograms and frequency polygons for ggcorrm plots.
 #'
-#' @description `stat_dia_bin()` computes the binned data summaries for
-#'   the diagonal panels of [ggcorrm] plots that are created with
-#'   [dia_histogram] and [dia_freqpoly].
+#' @description `stat_dia_bin()` computes the binned data summaries for the
+#'   diagonal panels of [ggcorrm] plots that are created with [dia_histogram]
+#'   and [dia_freqpoly].
 #'
 #' @inheritParams ggplot2::layer
-#' @param lower numeric between 0 and 1. Lower limit of the
-#'   histograms/frequency polygons relative to the range of the `y`
-#'   axis. Defaults to 0.25.
-#' @param upper numeric between 0 and 1. Upper limit of the
-#'   histograms/frequency polygons relative to the range of the `y`
-#'   axis. Defaults to 1.
+#' @param lower numeric between 0 and 1. Lower limit of the histograms/frequency
+#'   polygons relative to the range of the `y` axis. Defaults to 0.25.
+#' @param upper numeric between 0 and 1. Upper limit of the histograms/frequency
+#'   polygons relative to the range of the `y` axis. Defaults to 1.
 #' @param barwidth Width of the histograms relative to the maximum possible
 #'   width. Defaults to 0.9.
-#' @param ... Additional arguments passed [ggplot2::layer()]
-#'   (arguments for [ggplot2::stat_bin()] are permitted).
+#' @param ... Additional arguments passed [ggplot2::layer()] (arguments for
+#'   [ggplot2::stat_bin()] are permitted).
+#'
 #' @return An object of class `Layer`.
-#' @details `stat_dia_bin()` computes binned data summaries for display
-#'    in the diagonal facets of `ggcorrm` plots. The `lower` and
-#'    `upper` arguments can be used to offset the histograms/frequency
-#'    polygons from zero and optimally fit them to the range of each panel.
+#'
+#' @details `stat_dia_bin()` computes binned data summaries for display in the
+#'   diagonal facets of `ggcorrm` plots. The `lower` and `upper` arguments can
+#'   be used to offset the histograms/frequency polygons from zero and optimally
+#'   fit them to the range of each panel.
+#'
 #' @seealso
 #'    [ggplot2:stat_bin][ggplot2::stat_bin],
 #'    [dia_histogram],
@@ -141,24 +142,25 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
 #' @title Histograms and frequency polygons for ggcorrm plots
 #'
 #' @description Add histograms or frequency polygons to the diagonal panels of
-#'    [ggcorrm] plots
+#'   [ggcorrm] plots
 #'
 #' @inheritParams stat_dia_bin
 #' @inheritParams ggcorrm
 #' @param ... Additional parameters for [stat_dia_bin].
-#' @return A `ggplot2` layer with histograms or frequency polygons for the
-#'    variables on the plot diagonal of `ggcorrm` plots.
-#' @details  The `lower` and`upper` arguments can be used to offset
-#'   the histograms/frequency polygons from zero and optimally fit them to
-#'   the range of each panel.
-#'   The standard values are chosen to work well when placing text labels
-#'   under the histograms/frequency polygons with [dia_names].
 #'
-#'   `dia_histogram()` adds histograms of the numeric variables in a
-#'   `ggcorrm` plot to the plot diagonal. The bar width can be adjusted
-#'   with `barwidth`. Frequency polygons can be created with
-#'   `dia_freqpoly()`. Both functions use the same stat,
-#'   [stat_dia_bin].
+#' @return A `ggplot2` layer with histograms or frequency polygons for the
+#'   variables on the plot diagonal of `ggcorrm` plots.
+#'
+#' @details  The `lower` and`upper` arguments can be used to offset the
+#'   histograms/frequency polygons from zero and optimally fit them to the range
+#'   of each panel. The standard values are chosen to work well when placing
+#'   text labels under the histograms/frequency polygons with [dia_names].
+#'
+#'   `dia_histogram()` adds histograms of the numeric variables in a `ggcorrm`
+#'   plot to the plot diagonal. The bar width can be adjusted with `barwidth`.
+#'   Frequency polygons can be created with `dia_freqpoly()`. Both functions use
+#'   the same stat, [stat_dia_bin].
+#'
 #' @seealso
 #'   [ggplot2::stat_bin],
 #'   [stat_dia_bin]

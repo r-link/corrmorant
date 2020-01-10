@@ -16,11 +16,10 @@ stat_heatmap(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by
-\link[ggplot2:aes]{aes} that are passed on to subsequent layers.
-\code{x} and \code{y} are set automatically and must not be changed,  but
-all other aesthetics may be manipulated. Defaults to \code{NULL}
-(use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
+are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
+must not be changed,  but all other aesthetics may be manipulated. Defaults
+to \code{NULL} (use standard \code{ggcorrm} mapping).}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -53,10 +52,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{corr_method}{character string with the correlation method passed
-to \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
-\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting
-in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\item{corr_method}{character string with the correlation method passed to
+\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
+Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{...}{additional arguments passed to \code{\link[=ggplot2:layer]{ggplot2:layer()}}.}
 }
@@ -64,16 +62,15 @@ in \code{\link[=ggcorrm]{ggcorrm()}}).}
 An object of class \code{Layer}.
 }
 \description{
-\code{stat_heatmap()} is used to compute bivariate correlations
-and display them as correlation heat maps / point labels in the facets
-of \link{ggcorrm} plots.
+\code{stat_heatmap()} is used to compute bivariate correlations and
+display them as correlation heat maps / point labels in the facets of
+\link{ggcorrm} plots.
 }
 \details{
-\code{stat_heatmap()} computes the correlation between variables
-in the facets of \code{ggcorrm} plots and returns the aesthetics
-necessary to either color the entire facet by correlation strength
-(\code{geom = "rect"}) or place a single point in the midpoint of each facet
-(\code{geom = "point"}).
+\code{stat_heatmap()} computes the correlation between variables in the
+facets of \code{ggcorrm} plots and returns the aesthetics necessary to either
+color the entire facet by correlation strength (\code{geom = "rect"}) or place a
+single point in the midpoint of each facet (\code{geom = "point"}).
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer()}},

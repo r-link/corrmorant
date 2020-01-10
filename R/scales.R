@@ -1,8 +1,9 @@
 # functions for color and fill scales for correlations ------------------------
-
 #' @title Color and fill scales for correlation plots
+#'
 #' @description Diverging color gradients for the illustration of correlation
 #'    strength.
+#'
 #' @param ... arguments passed to continuous scale
 #' @param option character in c("A", "B", "C", "D") specifying the desired
 #'    color scale. Defaults to "A".
@@ -17,10 +18,12 @@
 #'     `scale_color_corr()` and "fill" for `scale_fill_corr()`.
 #' @param direction Numeric indicating the order of the scale. Defaults to 1;
 #'     negative values reverse the order of the scale.
+#'
 #' @details The color and fill scales specified via `option` are built upon
 #'     [ggplot2:scale_colour_gradient2()],
 #'     which can easily be used to set up additional scales if the available
 #'     options are not sufficient.
+#'
 #' @examples
 #' \dontrun{
 #' if(interactive()){

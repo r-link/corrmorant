@@ -53,30 +53,27 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{lower}{numeric between 0 and 1. Lower limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 0.25.}
+\item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
-\item{upper}{numeric between 0 and 1. Upper limit of the
-histograms/frequency polygons relative to the range of the \code{y}
-axis. Defaults to 1.}
+\item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
+polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments
-for \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}} are permitted).}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
+\code{\link[ggplot2:stat_density]{ggplot2::stat_density()}} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
 \code{stat_dia_density()} computes the density curves for the
-diagonal panels of \link{ggcorrm} plots that are created with
-\code{\link[=dia_density]{dia_density()}}.
+diagonal panels of \link{ggcorrm} plots that are created with \code{\link[=dia_density]{dia_density()}}.
 }
 \details{
-\code{stat_density()} computes density curves for display
-in the diagonal facets of \code{ggcorrm} plots. The \code{lower} and
-\code{upper} arguments can be used to offset the density curves from
-zero and optimally fit them to the range of each panel.
+\code{stat_density()} computes density curves for display in the diagonal
+facets of \code{ggcorrm} plots. The \code{lower} and \code{upper} arguments can be used to
+offset the density curves from zero and optimally fit them to the range of
+each panel.
 }
 \seealso{
 \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}},

@@ -25,18 +25,22 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 
 # stat_heatmap() - stat function based on heatmap -----------------------------
 #' @title Compute correlation heatmaps for ggcorrm plots
-#' @description `stat_heatmap()` is used to compute bivariate correlations
-#'   and display them as correlation heat maps / point labels in the facets
-#'   of [ggcorrm] plots.
+#'
+#' @description `stat_heatmap()` is used to compute bivariate correlations and
+#'   display them as correlation heat maps / point labels in the facets of
+#'   [ggcorrm] plots.
+#'
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
 #' @param ... additional arguments passed to [ggplot2:layer()].
+#'
 #' @return An object of class `Layer`.
-#' @details  `stat_heatmap()` computes the correlation between variables
-#'   in the facets of `ggcorrm` plots and returns the aesthetics
-#'   necessary to either color the entire facet by correlation strength
-#'   (`geom = "rect"`) or place a single point in the midpoint of each facet
-#'   (`geom = "point"`).
+#'
+#' @details  `stat_heatmap()` computes the correlation between variables in the
+#'   facets of `ggcorrm` plots and returns the aesthetics necessary to either
+#'   color the entire facet by correlation strength (`geom = "rect"`) or place a
+#'   single point in the midpoint of each facet (`geom = "point"`).
+#'
 #' @rdname stat_heatmap
 #'@seealso
 #'   [ggplot2::layer()],

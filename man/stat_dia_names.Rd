@@ -55,20 +55,19 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
 text labels along the x axis (defaults to 0.2).}
 
-\item{...}{Additional arguments passed to\link[=layer]{ggplot2:layer}}
+\item{...}{Additional arguments passed to\link[=layer]{ggplot2:layer}.}
 }
 \value{
 An object of class \code{Layer}.
 }
 \description{
-\code{stat_dia_names()} is used by
-\code{\link[=dia_names]{dia_names()}} to compute the positions of layer
-names in the diagonal panels of \link{ggcorrm} plots.
+\code{stat_dia_names()} is used by \code{\link[=dia_names]{dia_names()}} to compute the
+positions of layer names in the diagonal panels of \link{ggcorrm} plots.
 }
 \details{
 \code{stat_dia_names()} uses the range of variables on the diagonal
-facets of\link{ggcorrm} plots to compute appropriate positions
-for text labels of variable names.
+facets of\link{ggcorrm} plots to compute appropriate positions for text labels
+of variable names.
 }
 \seealso{
 \link[ggplot2:layer]{ggplot2:layer},

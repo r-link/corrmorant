@@ -1,12 +1,13 @@
 # add_heatcircle  -------------------------------------------------------------
-#' @title Add circles whose size represents correlation strength
-#' @description `lotri_heatcircle()` and `utri_heatcircle()` are used
-#'   to display circles whose fill and size aesthetics depend on correlation
-#'   strength in the lower/upper off-diagonal facets of [ggcorrm] plots.
+#' @title Add circles with correlation-dependent size
+#'
+#' @description `lotri_heatcircle()` and `utri_heatcircle()` are used to display
+#'   circles whose fill and size aesthetics depend on correlation strength in
+#'   the lower/upper off-diagonal facets of [ggcorrm] plots.
 #'
 #' @inheritParams stat_heatcircle
-#' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes].
-#'   x and y are set automatically and must not bechanged, but all other
+#' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes]. x
+#'   and y are set automatically and must not bechanged, but all other
 #'   aesthetics may be manipulated. By default, the `fill` aesthetic is mapped
 #'   to `..corr..` internally (color by correlation strength), but this is
 #'   overridden when explicitly specified. Defaults to `NULL` (use standard
@@ -15,16 +16,16 @@
 #'
 #' @return A `ggplot2` layer with circles displaying correlation strength.
 #'
-#' @details `lotri_heatcircle()` and `utri_heatcircle()` are wrappers
-#'   around [stat_heatcircle()] that additionally
-#'   take care of the right specification of aesthetics.
+#' @details `lotri_heatcircle()` and `utri_heatcircle()` are wrappers around
+#'   [stat_heatcircle()] that additionally take care of the right specification
+#'   of aesthetics.
 #'
-#'  `stat_heatcircle()` computes the outlines of circles that
-#'  are centered around the midpoint of `ggcorrm` facets and whose radius
-#'  or area is modified in dependence of correlation strength. `rmin` and
-#'  `rmax` allow to modify the range in which the radii of the circles may
-#'  vary. By standard, the `fill` aesthetic is mapped to `.corr`, but this
-#'  can be overridden by specifying a different mapping.
+#'   `stat_heatcircle()` computes the outlines of circles that are centered
+#'   around the midpoint of `ggcorrm` facets and whose radius or area is
+#'   modified in dependence of correlation strength. `rmin` and `rmax` allow to
+#'   modify the range in which the radii of the circles may vary. By standard,
+#'   the `fill` aesthetic is mapped to `.corr`, but this can be overridden by
+#'   specifying a different mapping.
 #'
 #' @seealso
 #'   [stat_heatcircle],
