@@ -166,6 +166,14 @@ ggcorrm <- function(data,
   # if data is already in correct form, keep as is and adjust global
   # corr_method setting accordingly
   if (is(data, "tidy_corrm")){
+    if (any(c(corr_method != "pearson",
+              rescale != "by_sd",
+              !is.null(labels),
+              !is.null(corr_group),
+              !is.null(mutates)))) {
+      warning("All tidy_corrm() arguments are ignored if data is a tidy_corrm object.",
+              call. = FALSE)
+    }
     corrdat <- data
     corr_method <- attr(data, "corr_method")
   } else { # ...else reshape to appropriate format
