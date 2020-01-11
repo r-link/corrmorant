@@ -26,7 +26,7 @@ StatDiaDensity <- ggproto("StatDiaDensity", Stat,
                               dplyr::mutate(y = rescale_var(density,
                                                             lower = lower,
                                                             upper = upper,
-                                                            range = range(data$x, na.rm = TRUE),
+                                                            range = scales$x$get_limits(),
                                                             append_x = 0))
                           },
                           # compute_group - modified from StatDensity

@@ -24,8 +24,13 @@ StatDiaBin <- ggproto("StatDiaBin", Stat,
                         }, stats, groups, SIMPLIFY = FALSE)
                         # rescale computed stats to the diagonal panel size
                         ggplot2:::rbind_dfs(stats) %>%
-                          dplyr::mutate(ymin = rescale_var(0, lower, upper, range(data$x), append_x = ncount),
-                                        ymax = rescale_var(ncount, lower, upper, range(data$x), append_x = 0))
+                          dplyr::mutate(ymin = rescale_var(0, lower, upper,
+                                                           scales$x$get_limits(),
+                                                           append_x = ncount),
+                                        ymax = rescale_var(ncount, lower, upper,
+                                                           scales$x$get_limits(),
+                                                           append_x = 0)
+                                        )
                       },
                       # compute_group - slightly modified based on StatBin
                       compute_group =  function (data, scales, binwidth = NULL, bins = NULL, center = NULL,

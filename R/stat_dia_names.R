@@ -7,7 +7,7 @@
 StatDiaNames <- ggproto("StatDiaNames", Stat,
                         required_aes = c("x", "label"),
                         compute_panel = function(data, scales, y_pos = 0.2) {
-                          rx <- range(data$x, na.rm = TRUE)
+                          rx <- scales$x$get_limits()
                           out <- data %>%
                             filter(!duplicated(group)) %>%
                             mutate(x = rep(mean(rx)),

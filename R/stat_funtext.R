@@ -33,8 +33,8 @@ StatFuntext <- ggproto("StatFuntext", Stat,
                          get_corrtext_pos(stats = stats,
                                           nrow = nrow, ncol = ncol,
                                           squeeze = squeeze,
-                                          xrange = range(data$x, na.rm = TRUE),
-                                          yrange = range(data$y, na.rm = TRUE))
+                                          xrange = scales$x$get_limits(),
+                                          yrange = scales$y$get_limits())
                        },
                        # compute_group - modified from StatDensity
                        compute_group = function (data, scales,

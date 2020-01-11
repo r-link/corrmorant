@@ -25,8 +25,8 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
                                             use = "pairwise.complete.obs",
                                             method = corr_method)
                          # get ranges
-                         range_x <- range(data$x, na.rm = TRUE)
-                         range_y <- range(data$y, na.rm = TRUE)
+                         range_x <- scales$x$get_limits()
+                         range_y <- scales$y$get_limits()
                          # prepare center coordinates
                          xc <- mean(range_x)
                          yc <- mean(range_y)
