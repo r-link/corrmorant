@@ -7,7 +7,7 @@
 tidy_corrm(
   data,
   labels = NULL,
-  rescale = c("by_sd", "by_range", NULL),
+  rescale = c("by_sd", "by_range", "as_is"),
   corr_method = "pearson",
   corr_group = NULL,
   mutates = NULL
@@ -29,7 +29,7 @@ names as labels).}
 performed on the numeric variables in the plot. The standard argument
 \code{"by.sd"} scales by the standard deviation of the data and centers around
 zero.  \code{"by.range"} rescales the range of the data to the interval from 0
-to 1. Use \code{rescale = NULL} to use the unchanged raw values. Defaults to
+to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
 \code{"by_sd"}.}
 
 \item{corr_method}{character string with the correlation method passed to
@@ -89,9 +89,9 @@ appearance in the raw data. All other variables are appended to the
 reshaped data.frame and can be accessed in the plots.
 
 By default, the data are scaled and centered using their standard deviation
-(\code{rescale = "by.sd"}), but it is also possible to rescale them into the
-range from 0 to 1 (\code{rescale = "by.range"}) or to maintain the original
-scale of the data (\code{rescale = NULL}).
+(\code{rescale = "by_sd"}), but it is also possible to rescale them into the
+range from 0 to 1 (\code{rescale = "by_range"}) or to maintain the original
+scale of the data (\code{rescale = "as_is"}).
 
 An additional variable called \code{.corr} with the bivariate correlation of the
 two variables (by default, Pearson correlation, see \link[stats:cor]{cor()}) is

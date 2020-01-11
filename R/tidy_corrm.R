@@ -45,9 +45,9 @@
 #'   reshaped data.frame and can be accessed in the plots.
 #'
 #'   By default, the data are scaled and centered using their standard deviation
-#'   (`rescale = "by.sd"`), but it is also possible to rescale them into the
-#'   range from 0 to 1 (`rescale = "by.range"`) or to maintain the original
-#'   scale of the data (`rescale = NULL`).
+#'   (`rescale = "by_sd"`), but it is also possible to rescale them into the
+#'   range from 0 to 1 (`rescale = "by_range"`) or to maintain the original
+#'   scale of the data (`rescale = "as_is"`).
 #'
 #'   An additional variable called `.corr` with the bivariate correlation of the
 #'   two variables (by default, Pearson correlation, see [cor()][stats::cor]) is
@@ -102,7 +102,7 @@
 #' @importFrom tidyr gather expand_grid unnest
 tidy_corrm <- function(data,
                        labels = NULL,
-                       rescale = c("by_sd", "by_range", NULL),
+                       rescale = c("by_sd", "by_range", "as_is"),
                        corr_method = "pearson",
                        corr_group = NULL,
                        mutates = NULL) {

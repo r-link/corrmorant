@@ -25,7 +25,7 @@ appended to the reshaped dataset as additional columns.}
 performed on the numeric variables in the plot. The standard argument
 \code{"by.sd"} scales by the standard deviation of the data and centers around
 zero.  \code{"by.range"} rescales the range of the data to the interval from 0
-to 1. Use \code{rescale = NULL} to use the unchanged raw values. Defaults to
+to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
 \code{"by_sd"}.}
 
 \item{labels}{(Optional) character vector with labels for the names of all
