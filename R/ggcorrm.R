@@ -195,7 +195,6 @@ ggcorrm <- function(data,
   plot_out <- ggplot(data = corrdat, mapping = new_mapping,
                      corr_method = corr_method, corr_use = corr_use) +
     facet_grid(var_x ~ var_y, scales = "free") +
-    geom_blank() + # add geom_blank to set dimensions
     theme_corrm()
 
   # add background layer if desired
