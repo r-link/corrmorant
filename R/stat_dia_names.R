@@ -52,7 +52,7 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
   layer(
     stat = StatDiaNames, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(y_pos = 0.2, ...)
+    params = list(y_pos = y_pos, ...)
   )
 }
 
