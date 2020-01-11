@@ -26,7 +26,11 @@ Description
 Motivation
 ----------
 
-The inspection of correlation matrices is a central part of exploratory data analysis. As collinearity between predictors has the potential to seriously compromise the quality of regression results - as well as hinder a straightforward interpretation of regression coefficients - the inspection of the correlations among potential predictor variables as well as the desired response should precede fitting any regression model with more than one predictor. In addition, with structural equation models (and their cousins, confirmatory factor analysis and path analysis), there is an entire class of models that traditionally is estimated directly from the covariance matrix of a multivariate dataset.
+The inspection of correlation matrices is a central part of exploratory data analysis. As collinearity between predictors has the potential to seriously compromise the quality of regression results - as well as hinder a straightforward interpretation of regression coefficients - the inspection of the correlations among potential predictor variables as well as the desired response should precede fitting any regression model with more than one predictor.
+
+If you are using Bayesian methods, you will also often be faced with the necessity to inspect the correlation between parameters estimated from MCMC samples, which means you have to effectively visualize correlations in often huge datasets.
+
+In addition, with structural equation models (and their cousins, confirmatory factor analysis and path analysis), there is an entire class of models that traditionally is estimated directly from the covariance matrix of a multivariate dataset.
 
 Long story short - there are plenty of reasons why one might want to visually inspect the interrelationships between all variables in a dataset simultaneously. However, while R provides plenty of functions and packages to display correlations, so far (at least to my knowledge) all of them are only able to display certain types of correlation plots, and none of them truly leverages the full flexibility of `ggplot2`.
 
