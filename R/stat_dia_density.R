@@ -82,37 +82,3 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
     params = list(lower = lower, upper = upper, ...)
   )
 }
-# dia_density() - wrapper around stat_dia_density -----------------------------
-#' @title Density curves for ggcorrm plots
-#'
-#' @description Add density curves to the diagonal panels of [ggcorrm] plots.
-#'
-#' @inheritParams ggcorrm
-#' @inheritParams ggplot2::layer
-#' @inheritParams stat_dia_bin
-#' @param ... Additional parameters for [stat_dia_density()].
-#'
-#' @return A `ggplot2` layer with histograms or frequency polygons for the
-#'   variables on the plot diagonal of `ggcorrm` plots.
-#'
-#' @details `dia_density()` adds density curves to the diagonal panels of
-#'   `ggcorrm` plots. The placement of the curves is adjusted based on
-#'   [stat_dia_density()]. The `lower` and`upper` arguments can be used to
-#'   offset the density curves from zero and optimally fit them to the range of
-#'   each panel.The standard values are chosen to work well when placing text
-#'   labels under the histograms/frequency polygons with [dia_names].
-#'
-#' @seealso
-#'   [ggplot2::geom_density()],
-#'   [stat_dia_density()]
-#' @rdname dia_density
-#' @export
-dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
-  # update and check mapping
-  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x))
-
-  # return plot with labels
-  dia(geom_polygon(mapping = mapping, stat = "dia_density",
-                   lower = lower, upper = upper, ...))
-}
-
