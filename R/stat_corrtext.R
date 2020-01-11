@@ -84,7 +84,7 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
 #' @export
 stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
                          position = "identity", show.legend = NA,
-                         inherit.aes = TRUE, nrow = nrow, ncol = ncol,
+                         inherit.aes = TRUE, nrow = NULL, ncol = NULL,
                          digits = 2,
                          corr_method = "pearson", squeeze = 0.7,
                          ...) {
