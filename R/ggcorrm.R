@@ -147,7 +147,7 @@ ggcorrm <- function(data,
                     bg_lotri = NULL,
                     bg_utri = NULL){
   # control class of data
-  if (!inherits(data, "data.frame") | is.matrix(data)) {
+  if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
   }
   # check if mapping is appropriate

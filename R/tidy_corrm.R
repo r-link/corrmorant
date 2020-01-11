@@ -107,7 +107,7 @@ tidy_corrm <- function(data,
                        corr_group = NULL,
                        mutates = NULL) {
   # control class of data
-  if (!inherits(data, "data.frame") | is.matrix(data)) {
+  if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
   }
 
