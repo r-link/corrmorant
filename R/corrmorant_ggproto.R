@@ -8,6 +8,9 @@
 #'  * `StatCorrtext`: create and position text labels for correlation strength
 #'  (see [stat_corrtext] for details).
 #'
+#'  * `StatCorrtext`: create and position text labels for the outcome of user
+#'  defined functions (see [stat_funtext] for details).
+#'
 #'  * `StatHeatmap`: create correlation heat maps (see [stat_heatmap] for
 #'  details).
 #'
@@ -24,13 +27,16 @@
 #'  frequency polygons) of variables in the diagonal facets of `ggcorrm` plots
 #'  (see [stat_dia_bin] for details).
 #'
-#'@seealso [ggplot2-ggproto],
-#'  [lotri_corrtext] and [utri_corrtext],
-#'  [lotri_heatmap] and [utri_heatmap],
-#'  [lotri_heatcircle] and [utri_heatcircle],
-#'  [dia_names],
-#'  [dia_density],
-#'  [dia_histogram]
+#'@seealso
+#'  * [ggplot2-ggproto] for a description of the `ggproto` object orientation
+#'  system,
+#'  * [add_corrtext] for correlation text labels,
+#'  * [add_funtext] for user-defined text labels,
+#'  * [add_heatmap] for correlation heatmaps,
+#'  * [add_heatcircle] for circles witch correlation-dependent size and color,
+#'  * [dia_names] for variable names in the plot diagonal,
+#'  * [dia_density] for density plots in the plot diagonal,
+#'  * [dia_histogram] for histograms and frequency polygons in the plot diagonal
 #'
 #'@name corrmorant_ggproto
 NULL

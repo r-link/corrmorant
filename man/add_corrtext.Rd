@@ -76,9 +76,9 @@ correlation  between variables in the lower or upper triangular facets of
 groups by using grouping aesthetics such as \code{aes(color = group)}.
 
 \code{lotri_corrtext()} and \code{utri_corrtext()} are wrappers around
-\code{\link[=stat_corrtext]{stat_corrtext()}} that additionally take \code{\link[=stat_corrtext]{stat_corrtext()}} that
-additionally take care of the right specification of aesthetics and allows
-to easily adjust size by correlation strength via \code{corr_size}.
+\code{\link[=stat_corrtext]{stat_corrtext()}} that additionally take  care of the right specification
+of aesthetics and allows to easily adjust size by correlation strength via
+\code{corr_size}.
 }
 \seealso{
 \link{stat_corrtext}

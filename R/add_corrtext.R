@@ -33,9 +33,9 @@
 #'   groups by using grouping aesthetics such as `aes(color = group)`.
 #'
 #'   `lotri_corrtext()` and `utri_corrtext()` are wrappers around
-#'   [stat_corrtext()] that additionally take [stat_corrtext()] that
-#'   additionally take care of the right specification of aesthetics and allows
-#'   to easily adjust size by correlation strength via `corr_size`.
+#'   [stat_corrtext()] that additionally take  care of the right specification
+#'   of aesthetics and allows to easily adjust size by correlation strength via
+#'   `corr_size`.
 #'
 #' @seealso [stat_corrtext]
 #' @name add_corrtext
