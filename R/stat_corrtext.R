@@ -86,7 +86,7 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE, nrow = NULL, ncol = NULL,
                          digits = 2,
-                         corr_method = "pearson", squeeze = 0.7,
+                         corr_method = NULL, squeeze = 0.7,
                          ...) {
   layer(
     stat = StatCorrtext, data = data, mapping = mapping, geom = geom,

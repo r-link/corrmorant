@@ -145,7 +145,8 @@ ggcorrm <- function(data,
                     mutates = NULL,
                     bg_dia = NULL,
                     bg_lotri = NULL,
-                    bg_utri = NULL){
+                    bg_utri = NULL,
+                    ...){
   # control class of data
   if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
@@ -175,7 +176,9 @@ ggcorrm <- function(data,
               call. = FALSE)
     }
     corrdat <- data
+    # get correlation settings
     corr_method <- attr(data, "corr_method")
+    corr_group  <- attr(data, "corr_group")
   } else { # ...else reshape to appropriate format
   # catch grouping variable
   corr_group <- enquo(corr_group)
@@ -192,12 +195,13 @@ ggcorrm <- function(data,
   new_mapping <- modify_list(aes(x = x, y = y), mapping)
 
   # prepare plot
-  plot_out <- ggplot(data = corrdat, mapping = new_mapping,
-                     corr_method = corr_method, corr_use = corr_use) +
-    facet_grid(var_x ~ var_y, scales = "free") +
-    theme_corrm()
+  #plot_out <- ggplot(data = corrdat, mapping = new_mapping,
+  #                   corr_method = corr_method, corr_use = corr_use) +
+  #  facet_grid(var_x ~ var_y, scales = "free") +
+  #  theme_corrm()
 
   # add background layer if desired
+  layers <- list()
   if(any(!is.null(list(bg_dia, bg_lotri, bg_utri)))){
     bgdat <- dplyr::tibble(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
     bgs <- vector(mode = "list", length = 3)
@@ -213,10 +217,28 @@ ggcorrm <- function(data,
       bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                  data = bgdat, fill = bg_utri, inherit.aes = FALSE))
     }
-    plot_out <- plot_out + bgs
+    #plot_out <- plot_out + bgs
+    layers <- ggplot2:::compact(bgs)
   }
 
   # return plot with updated class
-  return(structure(plot_out,
-                   class = c(class(plot_out), "ggcorrm")))
+#  return(structure(plot_out,
+ #                  class = c(class(plot_out), "ggcorrm")))
+
+  plot_out <- structure(list(
+    data = corrdat,
+    layers = layers,
+    scales = ggplot2:::scales_list(),
+    mapping = new_mapping,
+    theme = theme_corrm(),
+    coordinates = coord_cartesian(default = TRUE),
+    facet = facet_grid(var_x ~ var_y, scales = "free"),
+    plot_param = c(corr_method, corr_group, ...),
+    plot_env = parent.frame()
+  ), class = c("gg", "ggplot", "ggcorrm"))
+
+  plot_out$labels <- ggplot2:::make_labels(new_mapping)
+
+  set_last_plot(plot_out)
+  plot_out
 }
