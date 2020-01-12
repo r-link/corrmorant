@@ -112,7 +112,7 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
     # get number of groups
     ngr <- sum(!duplicated(stats$group))
     # set dimensions of output (depending on which of nrow and ncol is set)
-    if (is.null(nrow) & !is.null(ncol)){
+    if (is.null(nrow) & is.null(ncol)) {
       nrow <-  round(sqrt(ngr))
       ncol <- ceiling(ngr / nrow)
     } else {
