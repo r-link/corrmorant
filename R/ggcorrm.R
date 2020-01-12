@@ -145,8 +145,8 @@ ggcorrm <- function(data,
                     mutates = NULL,
                     bg_dia = NULL,
                     bg_lotri = NULL,
-                    bg_utri = NULL,
-                    ...){
+                    bg_utri = NULL
+                    ){
   # control class of data
   if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
@@ -194,12 +194,6 @@ ggcorrm <- function(data,
   # update mapping
   new_mapping <- modify_list(aes(x = x, y = y), mapping)
 
-  # prepare plot
-  #plot_out <- ggplot(data = corrdat, mapping = new_mapping,
-  #                   corr_method = corr_method, corr_use = corr_use) +
-  #  facet_grid(var_x ~ var_y, scales = "free") +
-  #  theme_corrm()
-
   # add background layer if desired
   layers <- list()
   if(any(!is.null(list(bg_dia, bg_lotri, bg_utri)))){
@@ -217,14 +211,10 @@ ggcorrm <- function(data,
       bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                  data = bgdat, fill = bg_utri, inherit.aes = FALSE))
     }
-    #plot_out <- plot_out + bgs
     layers <- ggplot2:::compact(bgs)
   }
 
-  # return plot with updated class
-#  return(structure(plot_out,
- #                  class = c(class(plot_out), "ggcorrm")))
-
+  # prepare output
   plot_out <- structure(list(
     data = corrdat,
     layers = layers,
@@ -233,12 +223,84 @@ ggcorrm <- function(data,
     theme = theme_corrm(),
     coordinates = coord_cartesian(default = TRUE),
     facet = facet_grid(var_x ~ var_y, scales = "free"),
-    plot_param = c(corr_method, corr_group, ...),
+    plot_param = list(corr_method = corr_method, corr_group = corr_group),
     plot_env = parent.frame()
-  ), class = c("gg", "ggplot", "ggcorrm"))
+  ), class = c( "ggcorrm", "gg", "ggplot"))
 
   plot_out$labels <- ggplot2:::make_labels(new_mapping)
 
   set_last_plot(plot_out)
   plot_out
+}
+
+
+# ggplot_build method for ggcorrm objects -------------------------------------
+# copied from ggplot_build.ggplot except for first lines
+#' @keywords internal
+#' @export
+ggplot_build.ggcorrm <- function(plot){
+  # update layers to pass correlation parameters
+  plot$layers <- lapply(plot$layers,
+                   update_corrm_param,
+                   plot_param = plot$plot_param)
+
+  plot <- ggplot2:::plot_clone(plot)
+  if (length(plot$layers) == 0) {
+    plot <- plot + geom_blank()
+  }
+  layers <- plot$layers
+  layer_data <- lapply(layers, function(y) y$layer_data(plot$data))
+  scales <- plot$scales
+  by_layer <- function(f) {
+    out <- vector("list", length(data))
+    for (i in seq_along(data)) {
+      out[[i]] <- f(l = layers[[i]], d = data[[i]])
+    }
+    out
+  }
+  data <- layer_data
+  data <- by_layer(function(l, d) l$setup_layer(d, plot))
+  layout <- ggplot2:::create_layout(plot$facet, plot$coordinates)
+  data <- layout$setup(data, plot$data, plot$plot_env)
+  data <- by_layer(function(l, d) l$compute_aesthetics(d, plot))
+  data <- lapply(data, ggplot2:::scales_transform_df, scales = scales)
+  scale_x <- function() scales$get_scales("x")
+  scale_y <- function() scales$get_scales("y")
+  layout$train_position(data, scale_x(), scale_y())
+  data <- layout$map_position(data)
+  data <- by_layer(function(l, d) l$compute_statistic(d, layout))
+  data <- by_layer(function(l, d) l$map_statistic(d, plot))
+  ggplot2:::scales_add_missing(plot, c("x", "y"), plot$plot_env)
+  data <- by_layer(function(l, d) l$compute_geom_1(d))
+  data <- by_layer(function(l, d) l$compute_position(d, layout))
+  layout$reset_scales()
+  layout$train_position(data, scale_x(), scale_y())
+  layout$setup_panel_params()
+  data <- layout$map_position(data)
+  npscales <- scales$non_position_scales()
+  if (npscales$n() > 0) {
+    lapply(data, ggplot2:::scales_train_df, scales = npscales)
+    data <- lapply(data, ggplot2:::scales_map_df, scales = npscales)
+  }
+  data <- by_layer(function(l, d) l$compute_geom_2(d))
+  data <- by_layer(function(l, d) l$finish_statistics(d))
+  data <- layout$finish_data(data)
+  structure(list(data = data, layout = layout, plot = plot),
+            class = c("ggplot_built", "ggcorrm_built"))
+}
+
+
+# helper function for parameter update ----------------------------------------
+#' @keywords internal
+#' @importFrom dplyr intersect
+update_corrm_param <- function(layer, plot_param){
+  # test if parameters of corrmorant stats have to be updated
+  update_param <- dplyr::intersect(names(layer$stat_params),
+                                   names(plot_param))
+  # replace parameters that are not yet set
+  if (length(update_param) > 0) {
+    for (i in update_param)
+      layer$stat_params[[i]] <- layer$stat_params[[i]] %||% plot_param[[i]]
+  }
+  layer
 }
