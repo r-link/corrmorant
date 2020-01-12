@@ -195,7 +195,7 @@ ggcorrm <- function(data,
   new_mapping <- modify_list(aes(x = x, y = y), mapping)
 
   # prepare layers
-  layers <- make_corrm_layers(backgrounds = c(bg_dia, bg_lotri, bg_utri))
+  layers <- make_corrm_layers(backgrounds = list(bg_dia, bg_lotri, bg_utri))
 
   # prepare output
   plot_out <- structure(list(
@@ -221,13 +221,13 @@ make_corrm_layers <- function(backgrounds){
   # add initial empty layer (for correct dimensions)
   layers <- list(geom_blank())
   # get specified background colors
-  include <- sapply(backgrounds, is.null)
+  include <- !sapply(backgrounds, is.null)
   # create specified bacground layers
   if(any(include)){
-    selectors <- c(dia, lotri, utri)
-    bg <- mapply(FUN = make_corrm_background,
-                 fill = backgrounds[include],
-                 selector = selectors[include])
+    selectors <- list(dia, lotri, utri)
+    bg <- mapply(FUN      = make_corrm_background,
+                 backgrounds[include],
+                 selectors[include])
     layers <- c(layers, bg)
   }
   # return
@@ -235,7 +235,7 @@ make_corrm_layers <- function(backgrounds){
 }
 
 #' @keywords internal
-make_corrm_backgound <- function(fill, selector){
+make_corrm_background <- function(fill, selector){
     # create background layer for ggcorrm plots
     selector(
       geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
