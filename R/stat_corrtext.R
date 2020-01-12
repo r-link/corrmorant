@@ -1,62 +1,66 @@
+# this objects exists only to make use of ggproto inheritance rules
+# to avoid dependencies from ggplot internals
+#' @noRd
+#' @export
+StatCorrtextProto <- ggproto("StatCorrtextProto", Stat,
+  required_aes = c("x", "y"),
+  # compute_group
+  compute_group = function (data, scales,
+                            nrow = NULL, ncol = NULL,
+                            digits = 2,
+                            corr_method,
+                            squeeze, ...){
+    data.frame(corr = stats::cor(data$x, data$y,
+                                 use = "pairwise.complete.obs",
+                                 method = corr_method)) %>%
+      dplyr::mutate(label = format(x = corr, digits = digits))
+  }
+)
+
 # StatCorrtext - ggproto object for stat_Corrtext -------------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
-StatCorrtext <- ggproto("StatCorrtext", Stat,
-                       required_aes = c("x", "y"),
-                       # compute panel - standard function just slightly updated to pass ranges
-                       compute_panel = function (self, data, scales,
-                                                 nrow = NULL, ncol = NULL,
-                                                 digits = 2,
-                                                 corr_method,
-                                                 squeeze = 0.7, ...) {
-                         if (ggplot2:::empty(data)){
-                           return(ggplot2:::new_data_frame())}
-                         groups <- split(data, data$group)
-                         stats <- lapply(groups, function(group) {
-                           self$compute_group(data = group, scales = scales,
-                                              corr_method = corr_method, ...)
-                         })
-                         stats <- mapply(function(new, old) {
-                           if (ggplot2:::empty(new))
-                             return(ggplot2:::new_data_frame())
-                           unique <- ggplot2:::uniquecols(old)
-                           missing <- !(names(unique) %in% names(new))
-                           cbind(new, unique[rep(1, nrow(new)), missing,
-                                             drop = FALSE])
-                         }, stats, groups, SIMPLIFY = FALSE)
-
-                         # bind rows
-                         stats <- ggplot2:::rbind_dfs(stats)
-                         # return output
-                         get_corrtext_pos(stats = stats,
-                                         nrow = nrow, ncol = ncol,
-                                         squeeze = squeeze,
-                                         xrange = scales$x$get_limits(),
-                                         yrange = scales$y$get_limits())
-                       },
-                       # compute_group - modified from StatDensity
-                       compute_group = function (data, scales,
-                                                 nrow = NULL, ncol = NULL,
-                                                 digits = 2,
-                                                 corr_method,
-                                                 squeeze = 0.7, ...){
-                         data.frame(corr = stats::cor(data$x, data$y,
-                                               use = "pairwise.complete.obs",
-                                               method = corr_method)) %>%
-                           dplyr::mutate(label = format(x = corr, digits = digits))
-                       },
-                       setup_data = function(data, params){
-                         # check number of groups
-                         grouptab <- dplyr::group_by(data, PANEL) %>%
-                           dplyr::summarize(n = length(unique(group)))
-                         if (any(grouptab$n > 9)) {
-                           warning("Correlations calculated for very large number of groups per panel.\n",
-                                   "Is this really what you want to do?")
-                         }
-                         data
-                       }
+StatCorrtext <- ggproto("StatCorrtext", StatCorrtextProto,
+ # compute panel - standard function just slightly updated to pass ranges
+ compute_panel = function (self, data, scales,
+                           nrow = NULL, ncol = NULL,
+                           digits = 2,
+                           corr_method,
+                           squeeze = 0.7, ...) {
+   # compute stats with regular compute_panel function
+   stats <- StatCorrtextProto$compute_panel(data = data,
+                                            scales = scales,
+                                            corr_method = corr_method,
+                                            digits = digits,
+                                            ...)
+   # rescale output after computation
+   get_corrtext_pos(stats = stats,
+                    nrow = nrow, ncol = ncol,
+                    squeeze = squeeze,
+                    xrange = scales$x$get_limits(),
+                    yrange = scales$y$get_limits())
+ },
+ setup_data = function(data, params){
+   # check number of groups
+   grouptab <- dplyr::group_by(data, PANEL) %>%
+     dplyr::summarize(n = length(unique(group)))
+   if (any(grouptab$n > 9)) {
+     warning("Correlations calculated for very large number of groups per panel.\n",
+             "Is this really what you want to do?")
+   }
+   data
+ },
+ # will not be evaluated, but argument names are needed:
+ compute_group = function (data, scales,
+                           nrow = NULL, ncol = NULL,
+                           digits = 2,
+                           corr_method,
+                           squeeze, ...) {
+   StatCorrtextProto$compute_group(data, scales, nrow, ncol, digits,
+                                   corr_method, squeeze, ...)
+ }
 )
 
 # stat_corrtext() - stat function based on Corrtext -----------------------------

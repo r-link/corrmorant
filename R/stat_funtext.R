@@ -1,70 +1,70 @@
+# this objects exists only to make use of ggproto inheritance rules
+# to avoid dependencies from ggplot internals
+#' @noRd
+#' @export
+StatFuntextProto <- ggproto("StatFuntextProto", Stat,
+    required_aes = c("x", "y"),
+   # compute_group
+   compute_group = function (data, scales,
+                             fun,
+                             nrow = NULL, ncol = NULL,
+                             squeeze = 0.7, ...){
+     if(rlang::is_quosure(fun)){
+       data <- dplyr::summarize(data, fun_out = !!fun)
+     } else {
+       data <- dplyr::summarize(data, fun_out = as_function(fun)(x, y))
+     }
+     data
+   }
+)
+
+
 # Statfuntext - ggproto object for stat_funtext -------------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
-StatFuntext <- ggproto("StatFuntext", Stat,
-                       required_aes = c("x", "y"),
-                       # compute panel - standard function just slightly updated to pass ranges
-                       compute_panel = function (self, data, scales,
-                                                 fun,
-                                                 nrow = NULL, ncol = NULL,
-                                                 squeeze = 0.7, ...) {
-                         if (ggplot2:::empty(data)){
-                           return(ggplot2:::new_data_frame())}
-                         groups <- split(data, data$group)
-                         stats <- lapply(groups, function(group) {
-                           self$compute_group(data = group,
-                                              scales = scales,
-                                              fun = fun, ...)
-                         })
-                         stats <- mapply(function(new, old) {
-                           if (ggplot2:::empty(new))
-                             return(ggplot2:::new_data_frame())
-                           unique <- ggplot2:::uniquecols(old)
-                           missing <- !(names(unique) %in% names(new))
-                           cbind(new, unique[rep(1, nrow(new)), missing,
-                                             drop = FALSE])
-                         }, stats, groups, SIMPLIFY = FALSE)
+StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
+   required_aes = c("x", "y"),
+   # compute panel - standard function just slightly updated to pass ranges
+   compute_panel = function (self, data, scales, fun,
+                             nrow = NULL, ncol = NULL,
+                             squeeze = 0.7, ...) {
+     stats <- StatFuntextProto$compute_panel(data = data,
+                                             scales = scales,
+                                             fun = fun,
+                                             ...)
+     # rescale output after computation
+     get_corrtext_pos(stats = stats,
+                      nrow = nrow, ncol = ncol,
+                      squeeze = squeeze,
+                      xrange = scales$x$get_limits(),
+                      yrange = scales$y$get_limits())
+   },
+   # will not be evaluated, but argument names are needed:
+   compute_group =  function (data, scales,fun,
+                              nrow, ncol, squeeze = 0.7, ...){
+     StatFuntextProto$compute_group(data, scales,fun,
+                                    nrow, ncol, squeeze = 0.7,
+                                    ...)
+   },
+   setup_data = function(data, params){
+     # check if fun specification is valid
+     if (!is.function(params$fun) &&
+         !rlang::is_formula(params$fun) &&
+         !rlang::is_quosure(params$fun)) {
+       stop("fun argument in stat_funtext() must be a function, quosure or lambda expression.\n")
+     }
 
-                         # bind rows
-                         stats <- ggplot2:::rbind_dfs(stats)
-                         # return output
-                         get_corrtext_pos(stats = stats,
-                                          nrow = nrow, ncol = ncol,
-                                          squeeze = squeeze,
-                                          xrange = scales$x$get_limits(),
-                                          yrange = scales$y$get_limits())
-                       },
-                       # compute_group - modified from StatDensity
-                       compute_group = function (data, scales,
-                                                 fun,
-                                                 nrow = NULL, ncol = NULL,
-                                                 squeeze = 0.7, ...){
-                         if(rlang::is_quosure(fun)){
-                           data <- dplyr::summarize(data, fun_out = !!fun)
-                         } else {
-                           data <- dplyr::summarize(data, fun_out = as_function(fun)(x, y))
-                         }
-                         data
-                       },
-                       setup_data = function(data, params){
-                         # check if fun specification is valid
-                         if (!is.function(params$fun) &&
-                             !rlang::is_formula(params$fun) &&
-                             !rlang::is_quosure(params$fun)) {
-                           stop("fun argument in stat_funtext() must be a function, quosure or lambda expression.\n")
-                         }
-
-                         # check number of groups
-                         grouptab <- dplyr::group_by(data, PANEL) %>%
-                           dplyr::summarize(n = length(unique(group)))
-                         if (any(grouptab$n > 9)) {
-                           warning("stat_funtext() uses a very large number of groups per panel.\n",
-                                   "Is this really what you want to do?")
-                         }
-                         data
-                       }
+     # check number of groups
+     grouptab <- dplyr::group_by(data, PANEL) %>%
+       dplyr::summarize(n = length(unique(group)))
+     if (any(grouptab$n > 9)) {
+       warning("stat_funtext() uses a very large number of groups per panel.\n",
+               "Is this really what you want to do?")
+     }
+     data
+   }
 )
 
 # stat_funtext() - stat function based on funtext -----------------------------
