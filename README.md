@@ -18,7 +18,7 @@ Description
 </thead>
 <tbody>
 <tr class="odd">
-<td>I have just begun moving the project to this repository and converting it to a regular R package architecture, so expect lots of changes in the next weeks until I finish a workable version.</td>
+<td>This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may changes or disappear without further notice.</td>
 </tr>
 </tbody>
 </table>
@@ -158,5 +158,8 @@ ggcorrm(aes(col = .corr)) +
   scale_size(range = c(1, 15)) + 
   scale_color_corr(option = "C")
 ```
+
+    ## Some variables are highly skewed (abs(skew) > 1).
+    ## Consider transformation for better display.
 
 ![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
