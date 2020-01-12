@@ -3,50 +3,29 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-StatDiaDensity <- ggproto("StatDiaDensity", Stat,
-                          required_aes = "x",
-                          # compute panel - standard function just slightly updated to pass ranges
-                          compute_panel = function (self, data, scales,
-                                                    lower = .25, upper = 1, ...) {
-                            if (ggplot2:::empty(data))
-                              return(ggplot2:::new_data_frame())
-                            groups <- split(data, data$group)
-                            stats <- lapply(groups, function(group) {
-                              self$compute_group(data = group, scales = scales, ...)
-                            })
-                            stats <- mapply(function(new, old) {
-                              if (ggplot2:::empty(new))
-                                return(ggplot2:::new_data_frame())
-                              unique <- ggplot2:::uniquecols(old)
-                              missing <- !(names(unique) %in% names(new))
-                              cbind(new, unique[rep(1, nrow(new)), missing, drop = FALSE])
-                            }, stats, groups, SIMPLIFY = FALSE)
-                            # bind groups, rescale densities and return output
-                            ggplot2:::rbind_dfs(stats) %>%
+StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
+                          # compute panel - rescaled output from StatDensity standard
+                          compute_panel = function (self, data, scales, lower, upper,
+                                                    ...) {
+                              StatDensity$compute_panel(data = data,
+                                                      scales = scales, ...) %>%
+                              split(.$group) %>%
+                              lapply(density_pad) %>%
+                              dplyr::bind_rows() %>%
                               dplyr::mutate(y = rescale_var(density,
                                                             lower = lower,
                                                             upper = upper,
-                                                            range = scales$x$get_limits(),
+                                                            range = scales$y$get_limits(),
                                                             append_x = 0))
-                          },
-                          # compute_group - modified from StatDensity
-                          compute_group = function (data, scales, bw = "nrd0", adjust = 1, kernel = "gaussian",
-                                                    n = 512, trim = FALSE, na.rm = FALSE, lower = lower, upper = upper)
-                          {
-                            if (trim) {
-                              range <- range(data$x, na.rm = TRUE)
-                            }
-                            else {
-                              range <- scales$x$dimension()
-                            }
-                            dens <- ggplot2:::compute_density(data$x, data$weight, from = range[1], to = range[2],
-                                                              bw = bw, adjust = adjust, kernel = kernel, n = n)
-                            # for correct display as polygons, end points have to be set manually when trimming
-                            dens <- dplyr::bind_rows(data.frame(x = dens$x[1], density = 0),
-                                                     dens,
-                                                     data.frame(x = dens$x[nrow(dens)], density = 0))
-                            # return density
-                            return(dens)
+                            },
+                          # ...just here because lower and upper have to be in the names of
+                          # compute_group to make compute_layer and parameters() work well
+                          compute_group = function(data, scales, bw = "nrd0", adjust = 1,
+                                                   kernel = "gaussian", n = 512,
+                                                   trim = FALSE, na.rm = FALSE,
+                                                   lower = NULL, upper = NULL) {
+                            StatDensity$compute_group(data, scales, bw, adjust, kernel,
+                                                      n, trim,  na.rm)
                           }
 )
 
@@ -81,4 +60,14 @@ stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(lower = lower, upper = upper, ...)
   )
+}
+
+
+# internal function for the padding of density values (needed for display shifted
+# along the y axis)
+#' @keywords internal
+density_pad <- function(data){
+  dplyr::bind_rows(dplyr::mutate(data[1, ], density = 0),
+                   data,
+                   dplyr::mutate(data[nrow(data), ], density = 0))
 }
