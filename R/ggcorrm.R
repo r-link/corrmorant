@@ -194,25 +194,8 @@ ggcorrm <- function(data,
   # update mapping
   new_mapping <- modify_list(aes(x = x, y = y), mapping)
 
-  # add background layer if desired
-  layers <- list(geom_blank())
-  if(any(!is.null(list(bg_dia, bg_lotri, bg_utri)))){
-    bgdat <- dplyr::tibble(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
-    bgs <- vector(mode = "list", length = 3)
-    if(!is.null(bg_dia)){
-      bgs[[1]] <- dia(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-                                data = bgdat, fill = bg_dia, inherit.aes = FALSE))
-    }
-    if(!is.null(bg_lotri)){
-      bgs[[2]] <- lotri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-                                  data = bgdat, fill = bg_lotri, inherit.aes = FALSE))
-    }
-    if(!is.null(bg_utri)){
-      bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-                                 data = bgdat, fill = bg_utri, inherit.aes = FALSE))
-    }
-    layers <- c(layers, ggplot2:::compact(bgs))
-  }
+  # prepare layers
+  layers <- make_corrm_layers(backgrounds = c(bg_dia, bg_lotri, bg_utri))
 
   # prepare output
   plot_out <- structure(list(
@@ -231,4 +214,32 @@ ggcorrm <- function(data,
 
   set_last_plot(plot_out)
   plot_out
+}
+
+#' @keywords internal
+make_corrm_layers <- function(backgrounds){
+  # add initial empty layer (for correct dimensions)
+  layers <- list(geom_blank())
+  # get specified background colors
+  include <- sapply(backgrounds, is.null)
+  # create specified bacground layers
+  if(any(include)){
+    selectors <- c(dia, lotri, utri)
+    bg <- mapply(FUN = make_corrm_background,
+                 fill = backgrounds[include],
+                 selector = selectors[include])
+    layers <- c(layers, bg)
+  }
+  # return
+  layers
+}
+
+#' @keywords internal
+make_corrm_backgound <- function(fill, selector){
+    # create background layer for ggcorrm plots
+    selector(
+      geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+                data = data.frame(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf),
+                fill = fill, inherit.aes = FALSE)
+    )
 }
