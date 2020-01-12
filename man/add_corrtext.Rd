@@ -12,7 +12,7 @@ lotri_corrtext(
   ncol = NULL,
   digits = 2,
   corr_size = TRUE,
-  corr_method = "pearson",
+  corr_method = NULL,
   squeeze = 0.7,
   ...
 )
@@ -23,7 +23,7 @@ utri_corrtext(
   ncol = NULL,
   digits = 2,
   corr_size = TRUE,
-  corr_method = "pearson",
+  corr_method = NULL,
   squeeze = 0.7,
   ...
 )

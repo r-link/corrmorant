@@ -11,7 +11,7 @@ stat_heatmap(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
-  corr_method = "pearson",
+  corr_method = NULL,
   ...
 )
 }

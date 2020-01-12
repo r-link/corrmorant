@@ -6,7 +6,7 @@
 StatHeatmap <- ggproto("StatHeatmap", Stat,
                        required_aes = c("x", "y"),
                        compute_panel = function (self, data, scales,
-                                                 corr_method = "pearson", ...) {
+                                                 corr_method, ...) {
                          dplyr::mutate(data,
                                        corr = stats::cor(x, y, use = "pairwise.complete.obs",
                                                          method = corr_method),
@@ -49,7 +49,7 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 stat_heatmap <- function(mapping = NULL, data = NULL, geom = "rect",
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE,
-                         corr_method = "pearson",
+                         corr_method = NULL,
                          ...) {
   layer(
     stat = StatHeatmap, data = data, mapping = mapping, geom = geom,

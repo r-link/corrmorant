@@ -37,7 +37,7 @@ NULL
 #' @rdname add_heatcircle
 #' @export
 lotri_heatcircle <- function(mapping = NULL,
-                             corr_method = "pearson",
+                             corr_method = NULL,
                              rmin = 0.1, rmax = 0.9,
                              scale_by = c("area", "radius"), ...) {
   # update and check mapping
@@ -64,7 +64,7 @@ lotri_heatcircle <- function(mapping = NULL,
 #' @rdname add_heatcircle
 #' @export
 utri_heatcircle <- function(mapping = NULL,
-                            corr_method = "pearson",
+                            corr_method = NULL,
                             rmin = 0.1, rmax = 0.9,
                             scale_by = c("area", "radius"), ...) {
   # update and check mapping

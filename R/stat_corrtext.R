@@ -9,7 +9,7 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
                        compute_panel = function (self, data, scales,
                                                  nrow = NULL, ncol = NULL,
                                                  digits = 2,
-                                                 corr_method = "pearson",
+                                                 corr_method,
                                                  squeeze = 0.7, ...) {
                          if (ggplot2:::empty(data)){
                            return(ggplot2:::new_data_frame())}
@@ -40,7 +40,7 @@ StatCorrtext <- ggproto("StatCorrtext", Stat,
                        compute_group = function (data, scales,
                                                  nrow = NULL, ncol = NULL,
                                                  digits = 2,
-                                                 corr_method = "pearson",
+                                                 corr_method,
                                                  squeeze = 0.7, ...){
                          data.frame(corr = stats::cor(data$x, data$y,
                                                use = "pairwise.complete.obs",

@@ -11,7 +11,7 @@ stat_heatcircle(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
-  corr_method = "pearson",
+  corr_method = NULL,
   rmin = 0.1,
   rmax = 0.9,
   scale_by = c("area", "radius"),

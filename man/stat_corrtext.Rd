@@ -14,7 +14,7 @@ stat_corrtext(
   nrow = NULL,
   ncol = NULL,
   digits = 2,
-  corr_method = "pearson",
+  corr_method = NULL,
   squeeze = 0.7,
   ...
 )

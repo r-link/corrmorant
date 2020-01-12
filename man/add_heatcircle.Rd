@@ -8,7 +8,7 @@
 \usage{
 lotri_heatcircle(
   mapping = NULL,
-  corr_method = "pearson",
+  corr_method = NULL,
   rmin = 0.1,
   rmax = 0.9,
   scale_by = c("area", "radius"),
@@ -17,7 +17,7 @@ lotri_heatcircle(
 
 utri_heatcircle(
   mapping = NULL,
-  corr_method = "pearson",
+  corr_method = NULL,
   rmin = 0.1,
   rmax = 0.9,
   scale_by = c("area", "radius"),

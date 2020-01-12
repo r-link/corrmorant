@@ -34,7 +34,7 @@ NULL
 # lotri_heatmap ---------------------------------------------------------------
 #' @name add_heatmap
 #' @export
-lotri_heatmap <- function(corr_method = "pearson", ...) {
+lotri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   lotri(
     stat_heatmap(mapping = aes(fill = ..corr..),
@@ -46,7 +46,7 @@ lotri_heatmap <- function(corr_method = "pearson", ...) {
 # utri_heatmap ----------------------------------------------------------------
 #' @name add_heatmap
 #' @export
-utri_heatmap <- function(corr_method = "pearson", ...) {
+utri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   utri(
     stat_heatmap(mapping = aes(fill = ..corr..),

@@ -46,7 +46,7 @@ NULL
 #' @export
 lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                            digits = 2, corr_size = TRUE,
-                           corr_method = "pearson", squeeze = 0.7, ...) {
+                           corr_method = NULL, squeeze = 0.7, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 
@@ -72,7 +72,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 #' @export
 utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                           digits = 2, corr_size = TRUE,
-                          corr_method = "pearson", squeeze = 0.7, ...) {
+                          corr_method = NULL, squeeze = 0.7, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 

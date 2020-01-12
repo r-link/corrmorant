@@ -8,9 +8,9 @@
 \alias{utri_heatpoint}
 \title{Correlation heatmaps in ggcorrm plots.}
 \usage{
-lotri_heatmap(corr_method = "pearson", ...)
+lotri_heatmap(corr_method = NULL, ...)
 
-utri_heatmap(corr_method = "pearson", ...)
+utri_heatmap(corr_method = NULL, ...)
 
 lotri_heatpoint(corr_size = TRUE, corr_method = "pearson", ...)
 

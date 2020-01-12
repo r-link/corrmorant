@@ -6,7 +6,7 @@
 StatHeatcircle <- ggproto("StatHeatcircle", Stat,
                        required_aes = c("x", "y"),
                        compute_panel = function (self, data, scales,
-                                                 corr_method = "pearson",
+                                                 corr_method,
                                                  rmin = 0.1, rmax = 0.9,
                                                  scale_by = "area", ...) {
                          # get power for scale
@@ -95,7 +95,7 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 stat_heatcircle <- function(mapping = NULL, data = NULL, geom = "ribbon",
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE,
-                         corr_method = "pearson", rmin = 0.1, rmax = 0.9,
+                         corr_method = NULL, rmin = 0.1, rmax = 0.9,
                          scale_by = c("area", "radius"), ...) {
   # prepare scale argument
   scale_by <- arg_match(scale_by)
