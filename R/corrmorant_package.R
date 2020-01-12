@@ -64,4 +64,4 @@ NULL
 
 # standard build method for ggplot objects
 #' @keywords internal
-ggplot_build.ggplot <- getFromNamespace("ggplot_build.ggplot", "ggplot2")
+ggplot_build.ggplot <- utils::getFromNamespace("ggplot_build.ggplot", "ggplot2")
