@@ -12,20 +12,21 @@ is.nan.data.frame <- function(x) do.call(cbind, lapply(x, is.nan))
 # (e.g. histograms and densities start at zero by definition, so it has to be
 #  included in the range)
 #' @keywords internal
-rescale_var <- function(x, lower, upper, range, append_x = NULL){
+rescale_var <- function(x, lower, upper, range, append_x = NULL, na.rm = TRUE){
   # scale into the range from 0 to 1...
-    if (!any((x - mean(x)) > 1e-10)  && is.null(append_x)) {
+    if (!any((x - mean(x, na.rm = na.rm)) > 1e-10)  && is.null(append_x)) {
       # ... for vectors with identical values (or of length one)
       x1 <- rep(0.5, length(x))
       } else {
     # ... regular case with appended data
-    x1 <- (x - min(c(x, append_x))) / (max(c(x, append_x)) - min(c(x, append_x)))
+    x1 <- (x - min(c(x, append_x), na.rm = na.rm)) /
+      (max(c(x, append_x) , na.rm = na.rm) - min(c(x, append_x), na.rm = na.rm))
   }
   # rescale to the right percent range
   x2 <- lower + x1 * (upper - lower)
 
   # return rescaled variable
-  return(range[1] + x2 * diff(range))
+  return(range[1] + x2 * diff(range, na.rm = na.rm))
 }
 
 # skew() - function for skewness (based on e1071::skewness) -------------------
