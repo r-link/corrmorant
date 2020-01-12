@@ -195,7 +195,7 @@ ggcorrm <- function(data,
   new_mapping <- modify_list(aes(x = x, y = y), mapping)
 
   # add background layer if desired
-  layers <- list()
+  layers <- list(geom_blank())
   if(any(!is.null(list(bg_dia, bg_lotri, bg_utri)))){
     bgdat <- dplyr::tibble(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
     bgs <- vector(mode = "list", length = 3)
@@ -211,7 +211,7 @@ ggcorrm <- function(data,
       bgs[[3]] <- utri(geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
                                  data = bgdat, fill = bg_utri, inherit.aes = FALSE))
     }
-    layers <- ggplot2:::compact(bgs)
+    layers <- c(layers, ggplot2:::compact(bgs))
   }
 
   # prepare output
