@@ -5,23 +5,23 @@
 #' @usage NULL
 #' @export
 StatDiaNames <- ggproto("StatDiaNames", Stat,
-                        required_aes = c("x", "label"),
-                        compute_panel = function(data, scales, y_pos = 0.2) {
-                          rx <- scales$x$get_limits()
-                          out <- data %>%
-                            filter(!duplicated(group)) %>%
-                            mutate(x = rep(mean(rx)),
-                                   y = rx[1] + y_pos * diff(rx),
-                                   label = data$label[1])
-                          if (nrow(out) > 1){
-                            message("More than one group per panel detected in dia_names().\n",
-                                    "Is this really what you want to do?")
-                          }
-                          return(out)
-                          },
-                        compute_group = function(data, scales, y_pos = 0.2) {
-                          data
-                        }
+  required_aes = c("x", "label"),
+  compute_panel = function(data, scales, y_pos = 0.2) {
+    rx <- scales$x$get_limits()
+    out <- data %>%
+      dplyr::filter(!duplicated(group)) %>%
+      dplyr::mutate(x = rep(mean(rx)),
+                    y = rx[1] + y_pos * diff(rx),
+                    label = data$label[1])
+    if (nrow(out) > 1){
+      message("More than one group per panel detected in dia_names().\n",
+              "Is this really what you want to do?")
+    }
+    return(out)
+    },
+  compute_group = function(data, scales, y_pos = 0.2) {
+    data
+  }
 )
 
 # stat_dia_names() - stat function based on StatDiaNames ----------------------
