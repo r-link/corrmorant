@@ -58,6 +58,10 @@ NULL
 #' @importFrom magrittr `%>%`
 NULL
 
-# some non-standard evaluation from rlang (probably only quos is needed)
-#' @importFrom rlang quo quos enquo enquos
+# getFromNamespace for internal ggplot2 functions
+#' @importFrom utils getFromNamespace
 NULL
+
+# standard build method for ggplot objects
+#' @keywords internal
+ggplot_build.ggplot <- getFromNamespace("ggplot_build.ggplot", "ggplot2")

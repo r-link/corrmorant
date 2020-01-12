@@ -201,7 +201,7 @@ ggcorrm <- function(data,
   plot_out <- structure(list(
     data = corrdat,
     layers = layers,
-    scales = ggplot2:::scales_list(),
+    scales = ggplot()$scales, # cheap hack, must be improved
     mapping = new_mapping,
     theme = theme_corrm(),
     coordinates = coord_cartesian(default = TRUE),
@@ -210,7 +210,9 @@ ggcorrm <- function(data,
     plot_env = parent.frame()
   ), class = c( "ggcorrm", "gg", "ggplot"))
 
-  plot_out$labels <- ggplot2:::make_labels(new_mapping)
+  # get axis labels etc. without having to call ggplot internal
+  # function make_labels (all switched off in the plot theme anyway)
+  plot_out$labels <- names(new_mapping)
 
   set_last_plot(plot_out)
   plot_out

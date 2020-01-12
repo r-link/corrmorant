@@ -7,8 +7,8 @@ ggplot_build.ggcorrm <- function(plot){
   plot$layers <- lapply(plot$layers,
                         update_corrm_param,
                         plot_param = plot$plot_param)
-  # use standard ggplot_build method
-  ggplot2:::ggplot_build.ggplot(plot)
+  # use standard ggplot_build method (imported from ggplot2)
+  ggplot_build.ggplot(plot)
 }
 
 # helper function for parameter update ----------------------------------------
