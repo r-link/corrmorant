@@ -4,17 +4,18 @@
 #' @usage NULL
 #' @export
 StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
+  default_aes = aes(x = x, y = stat(density)),
   # rescaled output from StatDensity$compute_panel
   compute_panel = function (self, data, scales, lower, upper, ...) {
-     StatDensity$compute_panel(data = data, scales = scales, ...) %>%
-     split(.$group) %>%
-     lapply(density_pad) %>%
+    StatDensity$compute_panel(data = data, scales = scales, ...) %>%
+    split(.$group) %>%
+    lapply(density_pad) %>%
     dplyr::bind_rows() %>%
-    dplyr::mutate(y = rescale_var(density,
-                                  lower = lower,
-                                  upper = upper,
-                                  range = scales$y$get_limits(),
-                                  append_x = 0))
+    dplyr::mutate(density = rescale_var(density,
+                                        lower    = lower,
+                                        upper    = upper,
+                                        range    = scales$x$get_limits(),
+                                        append_x = 0))
   },
   # ...just here because lower and upper have to be in the names of
   # compute_group to make compute_layer and parameters() work well
@@ -22,8 +23,8 @@ StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
                            kernel = "gaussian", n = 512,
                            trim = FALSE, na.rm = FALSE,
                            lower = NULL, upper = NULL) {
-    StatDensity$compute_group(data, scales, bw, adjust, kernel,
-                              n, trim,  na.rm)
+    StatDiaDensity$compute_group(data, scales, bw, adjust, kernel,
+                                 n, trim,  na.rm, lower, upper)
   }
 )
 

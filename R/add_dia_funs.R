@@ -116,7 +116,8 @@ dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
 #' @export
 dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x))
+  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x,
+                                                          y = stat(density)))
 
   # return plot with labels
   dia(stat_dia_density(mapping = mapping, geom = "polygon",
