@@ -54,37 +54,39 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   text labels under the histograms/frequency polygons with [dia_names].
 #'
 #'   `dia_histogram()` adds histograms of the numeric variables in a `ggcorrm`
-#'   plot to the plot diagonal. The bar width can be adjusted with `barwidth`.
+#'   plot to the plot diagonal.
 #'   Frequency polygons can be created with `dia_freqpoly()`. Both functions use
-#'   the same stat, [stat_dia_bin].
+#'   the same stat, [stat_dia_bin()], which is built upon [ggplot2::stat_bin()].
 #'
 #' @seealso
 #'   [ggplot2::stat_bin],
 #'   [stat_dia_bin]
 #' @rdname dia_histogram
 #' @export
-dia_histogram <- function(mapping = NULL, lower = .25, upper = 1, barwidth = 0.9,
-                          position = "dodge", ...) {
+dia_histogram <- function(mapping = NULL, lower = .25, upper = 1,
+                         bins = 10, position = "dodge", ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
                               standard_aes = aes(x = x))
 
   # return plot with labels
-  dia(geom_rect(..., mapping = mapping, stat = "dia_bin", position = position,
-                lower = lower, upper = upper, barwidth = barwidth))
+  dia(stat_dia_bin(mapping = mapping, geom = "rect", position = position,
+                   lower = lower, upper = upper, bins = bins, ...))
 }
 
 # dia_freqpoly() - wrapper around stat_dia_bin --------------------------------
 #' @rdname dia_histogram
 #' @export
-dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1, ...) {
+dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
+                         bins = 15, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = ..ymax..))
+                              standard_aes = aes(x = x, y = stat(ymax)))
 
   # return plot with labels
-  dia(geom_path(..., mapping = mapping, stat = "dia_bin",
-                lower = lower, upper = upper))
+  dia(stat_dia_bin(mapping = mapping, geom = "path",
+                lower = lower, upper = upper, pad = TRUE,
+                bins = bins, ...))
 }
 
 # dia_density() - wrapper around stat_dia_density -----------------------------
@@ -117,8 +119,8 @@ dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
   mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x))
 
   # return plot with labels
-  dia(geom_polygon(mapping = mapping, stat = "dia_density",
-                   lower = lower, upper = upper, ...))
+  dia(stat_dia_density(mapping = mapping, geom = "polygon",
+                       lower = lower, upper = upper, ...))
 }
 
 

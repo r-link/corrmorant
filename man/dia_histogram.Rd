@@ -9,12 +9,12 @@ dia_histogram(
   mapping = NULL,
   lower = 0.25,
   upper = 1,
-  barwidth = 0.9,
+  bins = 10,
   position = "dodge",
   ...
 )
 
-dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, ...)
+dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, bins = 15, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
@@ -27,9 +27,6 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
 \item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
-
-\item{barwidth}{Width of the histograms relative to the maximum possible
-width. Defaults to 0.9.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
@@ -51,9 +48,9 @@ of each panel. The standard values are chosen to work well when placing
 text labels under the histograms/frequency polygons with \link{dia_names}.
 
 \code{dia_histogram()} adds histograms of the numeric variables in a \code{ggcorrm}
-plot to the plot diagonal. The bar width can be adjusted with \code{barwidth}.
+plot to the plot diagonal.
 Frequency polygons can be created with \code{dia_freqpoly()}. Both functions use
-the same stat, \link{stat_dia_bin}.
+the same stat, \code{\link[=stat_dia_bin]{stat_dia_bin()}}, which is built upon \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}}.
 }
 \seealso{
 \link[ggplot2:stat_bin]{ggplot2::stat_bin},

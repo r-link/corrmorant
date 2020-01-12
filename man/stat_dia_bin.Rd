@@ -11,9 +11,9 @@ stat_dia_bin(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  bins = 10,
   lower = 0.25,
   upper = 1,
-  barwidth = 0.9,
   ...
 )
 }
@@ -59,9 +59,6 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 
 \item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
-
-\item{barwidth}{Width of the histograms relative to the maximum possible
-width. Defaults to 0.9.}
 
 \item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
 \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}} are permitted).}
