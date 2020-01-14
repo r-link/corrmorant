@@ -212,7 +212,7 @@ ggcorrm <- function(data,
 
   # get axis labels etc. without having to call ggplot internal
   # function make_labels (all switched off in the plot theme anyway)
-  plot_out$labels <- names(new_mapping)
+  plot_out$labels <- as.list(names(new_mapping)) %>% set_names(.)
 
   set_last_plot(plot_out)
   plot_out
