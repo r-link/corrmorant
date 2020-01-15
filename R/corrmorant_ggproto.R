@@ -4,6 +4,7 @@
 #'  `corrmorant` package.
 #'
 #'@section New stats:
+#'  * `TidyCorrm`: prototype for [tidy_corrm()] constructor methods.
 #'
 #'  * `StatCorrtext`: create and position text labels for correlation strength
 #'  (see [stat_corrtext] for details).
@@ -30,6 +31,7 @@
 #'@seealso
 #'  * [ggplot2-ggproto] for a description of the `ggproto` object orientation
 #'  system,
+#'  * [tidy_corrm] for structured tidy correlation plot datasets,
 #'  * [add_corrtext] for correlation text labels,
 #'  * [add_funtext] for user-defined text labels,
 #'  * [add_heatmap] for correlation heatmaps,
