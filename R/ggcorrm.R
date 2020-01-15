@@ -210,11 +210,13 @@ ggcorrm <- function(data,
     plot_env = parent.frame()
   ), class = c( "ggcorrm", "gg", "ggplot"))
 
-  # get axis labels etc. without having to call ggplot internal
-  # function make_labels (all switched off in the plot theme anyway)
-  plot_out$labels <- as.list(names(new_mapping)) %>% set_names(.)
+  # get axis labels and scale names
+  plot_out$labels <- make_labels(new_mapping)
 
+  # update graphics device
   set_last_plot(plot_out)
+
+  # return output
   plot_out
 }
 
