@@ -2,13 +2,16 @@
 % Please edit documentation in R/tidy_corrm.R
 \name{tidy_corrm}
 \alias{tidy_corrm}
+\alias{tidy_corrm.default}
 \title{Reshape data for correlation matrices to a tidy format}
 \usage{
-tidy_corrm(
+tidy_corrm(data, ...)
+
+\method{tidy_corrm}{default}(
   data,
   labels = NULL,
   rescale = c("by_sd", "by_range", "as_is"),
-  corr_method = "pearson",
+  corr_method = c("pearson", "kendall", "spearman"),
   corr_group = NULL,
   mutates = NULL
 )
@@ -62,7 +65,7 @@ in the raw data (ordered factor)}
 
 \item{y}{Data of the variable on the y axis (numeric).}
 
-\item{type}{Type of panel (character, \code{"upper"}, \verb{"lower"`` or }"diag"`).}
+\item{type}{Type of panel (character, \code{"upper"}, \code{"lower"} or \code{"diag"}).}
 
 \item{.corr}{Correlation between x and y for the respective panel/group,
 calculated with \link[stats:cor]{cor()} using the method specified by

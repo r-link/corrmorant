@@ -1,3 +1,4 @@
+# tidy_corrm generic ----------------------------------------------------------
 # TODO: implement reordering by clustering algorithm as in corrplot
 
 #' @title Reshape data for correlation matrices to a tidy format
@@ -23,7 +24,7 @@
 #'
 #'   \item{y}{Data of the variable on the y axis (numeric).}
 #'
-#'   \item{type}{Type of panel (character, `"upper"`, `"lower"`` or `"diag"`).}
+#'   \item{type}{Type of panel (character, `"upper"`, `"lower"` or `"diag"`).}
 #'
 #'   \item{.corr}{Correlation between x and y for the respective panel/group,
 #'   calculated with [cor()][stats::cor] using the method specified by
@@ -100,12 +101,20 @@
 #'   case_when
 #' @importFrom stats sd
 #' @importFrom tidyr gather expand_grid unnest
-tidy_corrm <- function(data,
-                       labels = NULL,
-                       rescale = c("by_sd", "by_range", "as_is"),
-                       corr_method = "pearson",
-                       corr_group = NULL,
-                       mutates = NULL) {
+tidy_corrm <- function(data, ... ) {
+  UseMethod("tidy_corrm", data)
+}
+
+
+# tidy_corrm default method ---------------------------------------------------
+#' @export
+#' @rdname tidy_corrm
+tidy_corrm.default <- function(data,
+                               labels = NULL,
+                               rescale = c("by_sd", "by_range", "as_is"),
+                               corr_method = c("pearson", "kendall", "spearman"),
+                               corr_group = NULL,
+                               mutates = NULL) {
   # control class of data
   if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
@@ -117,99 +126,158 @@ tidy_corrm <- function(data,
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
-  # if data is a matrix, convert to data.frame
-  if (is.matrix(data)) data <- as.data.frame(data)
+  # match arguments for rescale and corr_method
+  rescale     <- arg_match(rescale)
+  corr_method <- arg_match(corr_method)
 
-  # replace infinite values and NaN values by NA values to avoid problems
-  # during transformation and when calculating correlations
-  data[is.infinite(data)] <- NA
-  data[is.nan(data)] <- NA
+  # catch grouping variable (if not called via ggcorrm)
+  if(!is_quosure(corr_group)) corr_group <- enquo(corr_group)
 
-  # get column numbers of numeric variables
-  numerics <- which(sapply(data, is.numeric))
+  # compute tidy output
+  TidyCorrm$compute(
+    data = data,
+    arg = list(labels = labels,
+               rescale = rescale,
+               corr_method = corr_method,
+               corr_group = corr_group,
+               mutates = mutates)
+  )
+}
 
-  # if labels were specified, check if they are of the right form
-  if(!is.null(labels)){
-    if (length(labels) != length(numerics))
-      stop("Number of labels must be equal to the number of numeric columns.")
+# TidyCorrm ggproto object ----------------------------------------------------
+#' @export
+#' @rdname corrmorant_ggproto
+TidyCorrm <- ggproto(
+  "TidyCorrm", NULL,
+  # ...Function for computing reshaped variables -----
+  compute = function(self, data, arg) {
+    # call preprocessing function
+    data <- self$preprocess_data(
+      data = data, arg = arg
+    )
 
-    # print changes of column names
-    cat("The following column names were replaced:\n",
-        paste(names(data)[numerics], labels, sep = "\t->\t", collapse = "\n"),
-        "\n",  sep = "")
+    # call reshaping function
+    data_long <- self$reshape_data(
+      data = data, arg = arg
+    )
 
-    # reset names of numeric columns
-    names(data)[numerics] <- labels
-  }
+    # call postprocessing function
+    data_out <- self$postprocess_data(
+      data = data_long, arg = arg
+    )
 
-  # print message if there are more than 10 numeric variables
-  if (length(numerics) > 9){
-    message("Correlation matrix contains ", length(numerics),
-            " numeric variables:\n",
-            "Plotting may take very long.\n")
-  }
+    # prepare output
+    structure(
+      data_out,
+      class = c("tidy_corrm", class(data_out)),
+      corr_method = arg$corr_method,
+      corr_group  = arg$corr_group
+    )
+  },
+  # ...Preprocessing function ----
+  preprocess_data = function(self, data, arg){
+    # if data is a matrix, convert to data.frame
+    if (is.matrix(data)) data <- as.data.frame(data)
 
-  # print message if there are highly skewed variables
-  skews <- apply(data[, numerics], 2, skew)
-  if (any(abs(skews) > 1)){
-    message("Some variables are highly skewed (abs(skew) > 1).\n",
-            "Consider transformation for better display.")
+    # replace infinite values and NaN values by NA values to avoid problems
+    # during transformation and when calculating correlations
+    data[is.infinite(data)] <- NA
+    data[is.nan(data)] <- NA
+    # return preprocessed data
+    data
+  },
+  # ...Reshaping function -----
+  reshape_data = function(self, data, arg){
+    # get column numbers of numeric variables
+    numerics <- which(sapply(data, is.numeric))
+
+    # if labels were specified, check if they have the right form and rename
+    if(!is.null(arg$labels)){
+      if (length(arg$labels) != length(numerics))
+        stop("Number of labels must be equal to the number of numeric columns.")
+
+      # print changes of column names
+      cat("The following column names were replaced:\n",
+          paste(names(data)[numerics], arg$labels, sep = "\t->\t", collapse = "\n"),
+          "\n",  sep = "")
+
+      # reset names of numeric columns
+      names(data)[numerics] <- arg$labels
     }
 
-  # performe scale transformation if desired
-  rescale <- arg_match(rescale)
-  if (rescale == "by_sd") {
-    data <- dplyr::mutate_if(data, is.numeric,
-                             function(x) (x - mean(x, na.rm = TRUE)) / stats::sd(x, na.rm = TRUE))
+    # print message if there are more than 10 numeric variables
+    if (length(numerics) > 9){
+      message("Correlation matrix contains ", length(numerics),
+              " numeric variables:\n",
+              "Plotting may take very long.\n")
+    }
+
+    # print message if there are highly skewed variables
+    skews <- apply(data[, numerics], 2, skew)
+    if (any(abs(skews) > 1)){
+      message("Some variables are highly skewed (abs(skew) > 1).\n",
+              "Consider transformation for better display.")
+    }
+
+    # performe scale transformation if desired
+    if (arg$rescale == "by_sd") {
+      data <- dplyr::mutate_if(data, is.numeric,
+                               function(x) (x - mean(x, na.rm = TRUE)) / stats::sd(x, na.rm = TRUE))
+    }
+    if (arg$rescale == "by_range") {
+      data <- dplyr::mutate_if(data, is.numeric,
+                               function(x) (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE)))
+    }
+
+    # group by correlation grouping variable
+    data <- dplyr::mutate(data, corr_group = !!arg$corr_group)
+    # if !!corr_group evaluated to NULL set uniform group
+    if (!has_name(data, "corr_group")) data$corr_group <- 1
+
+    # reshape dataset to long format
+    longtab <- tidyr::gather(data, key = "var", value = "x", numerics) %>%
+      # control order of levels
+      dplyr::mutate(var = factor(var, levels = names(data)[numerics],
+                                 ordered = TRUE)) %>%
+      # group by variable and nest
+      dplyr::group_nest(var) %>%
+      # add reduced nested dataset for y
+      dplyr::mutate(dat_y = lapply(data,
+                                   function(dat) dplyr::select(dat, y = x)
+      )
+      ) %>%
+      # assure correct oder (important for correct subsetting)
+      dplyr::arrange(var)
+
+    # prepare plotting output (all x and y and identifiers for everything else)
+    # get all combinations of x and y values
+    out <- tidyr::expand_grid(var_x = longtab$var, var_y = longtab$var) %>%
+      # create columns for the corresponding data
+      dplyr::mutate(dat_x = longtab$data[as.numeric(var_y)],
+                    dat_y = longtab$dat_y[as.numeric(var_x)]) %>%
+      # unnest data columns
+      tidyr::unnest(cols = c(dat_x, dat_y)) %>%
+      # get column with correlations (for use in plots)
+      dplyr::group_by(var_x, var_y, corr_group) %>%
+      dplyr::mutate(.corr = cor(x, y, method = arg$corr_method,
+                                use = "pairwise.complete.obs")
+      ) %>%
+      dplyr::ungroup() %>%
+      # get indicator for position
+      dplyr::mutate(type = dplyr::case_when(var_x <  var_y ~ "upper",
+                                            var_x >  var_y ~ "lower",
+                                            var_x == var_y ~ "diag")) %>%
+      dplyr::select(var_x, var_y, x, y, type, .corr, corr_group,
+                    tidyr::everything())
+
+    # return reshaped output
+    out
+  },
+  # ...Post-processing function -----
+  postprocess_data = function(self, data, arg){
+    # perform post-processing mutates if necessary
+    if(!is.null(arg$mutates)) data <- dplyr::mutate(data, !!!arg$mutates)
+    # return prost-processed data
+    data
   }
-  if (rescale == "by_range") {
-    data <- dplyr::mutate_if(data, is.numeric,
-                             function(x) (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE)))
-  }
-
-  # prepare grouping variable
-  if(!is_quosure(corr_group)) corr_group <- enquo(corr_group)
-  data <- dplyr::mutate(data, corr_group = !!corr_group)
-  # if !!corr_group evaluated to NULL set uniform group
-  if (!has_name(data, "corr_group")) data$corr_group <- 1
-
-  # reshape dataset to long format
-  longtab <- tidyr::gather(data, key = "var", value = "x", numerics) %>%
-    # control order of levels
-    dplyr::mutate(var = factor(var, levels = names(data)[numerics], ordered = TRUE)) %>%
-    # group by variable and nest
-    dplyr::group_nest(var) %>%
-    # add reduced nested dataset for y
-    dplyr::mutate(dat_y = lapply(data, function(dat) dplyr::select(dat, y = x))) %>%
-    # assure correct oder (important for correct subsetting)
-    dplyr::arrange(var)
-
-  # prepare plotting output (all x and y and identifiers for everything else)
-  # get all combinations of x and y values
-  out <- tidyr::expand_grid(var_x = longtab$var, var_y = longtab$var) %>%
-    # create columns for the corresponding data
-    dplyr::mutate(dat_x = longtab$data[as.numeric(var_y)],
-                  dat_y = longtab$dat_y[as.numeric(var_x)]) %>%
-    # unnest data columns
-    tidyr::unnest(cols = c(dat_x, dat_y)) %>%
-    # get column with correlations (for use in plots)
-    dplyr::group_by(var_x, var_y, corr_group) %>%
-    dplyr::mutate(.corr = cor(x, y, method = corr_method, use = "pairwise.complete.obs")) %>%
-    dplyr::ungroup() %>%
-    # get indicator for position
-    dplyr::mutate(type = dplyr::case_when(var_x <  var_y ~ "upper",
-                                          var_x >  var_y ~ "lower",
-                                          var_x == var_y ~ "diag")) %>%
-    dplyr::select(var_x, var_y, x, y, type, .corr, corr_group,
-                  tidyr::everything())
-
-  # if specified, perform desired mutations (must be list of quosures)
-  if(!is.null(mutates)) out <- dplyr::mutate(out, !!!mutates)
-
-  # return output with appended class (used for testing in corrmorant selectors)
-  return(structure(out,
-                   class = c(class(out), "tidy_corrm"),
-                   corr_method = corr_method,
-                   corr_group  = corr_group)
-         )
-}
+)
