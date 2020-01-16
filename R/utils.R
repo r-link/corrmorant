@@ -33,6 +33,9 @@ rescale_var <- function(x, lower, upper, range, append_x = NULL, na.rm = TRUE){
 #' @keywords internal
 #' @importFrom stats na.omit
 skew <- function (x) {
+  if (length(x) == 1) {
+    return(0)
+    }
   x <- stats::na.omit(x)
   n <- length(x)
   x <- x - mean(x)
