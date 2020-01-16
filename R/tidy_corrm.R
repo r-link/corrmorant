@@ -219,7 +219,7 @@ TidyCorrm <- ggproto(
               "Consider transformation for better display.")
     }
 
-    # performe scale transformation if desired
+    # perform scale transformation if specified
     if (arg$rescale == "by_sd") {
       data <- dplyr::mutate_if(data, is.numeric,
                                function(x) (x - mean(x, na.rm = TRUE)) / stats::sd(x, na.rm = TRUE))
