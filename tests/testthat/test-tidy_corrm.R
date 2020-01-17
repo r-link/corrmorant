@@ -10,7 +10,7 @@ test_that("matrix is correctly coerced to data frame", {
 
 })
 
-test_that("infinite values and NaN are handled correctly", {
+test_that("Infinite values and NaN are handled correctly", {
 
   expect_false({
     dat <- TidyCorrm$preprocess_data(data = data.frame(x = rep(NaN, 10), y = Inf), arg = list())
@@ -133,3 +133,11 @@ test_that("tidy_corrm fails for wrong object types", {
 
 })
 
+test_that("Misspecified mutates cause correct error", {
+
+  expect_error(
+    tidy_corrm(iris, mutates = ggcorrm),
+    regexp = "must be a named list of quosures"
+  )
+
+})
