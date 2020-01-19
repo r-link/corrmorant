@@ -65,16 +65,27 @@ test_that("get_corrtext_pos() computes correct row and column positions", {
                )
 
   # error when misspecified
-  expect_error(get_corrtext_pos(stats3, nrow = 3, ncol = 3, squeeze = 1,
+  expect_error(get_corrtext_pos(stats3, nrow = 1, ncol = 1, squeeze = 1,
                                 xrange = c(1, 3), yrange = 1:2),
-               regexp = "Check dimensions in stat_corrtext"
+               regexp = "Check dimensions in text labels"
                )
 
-  # different nrow specified
+  # three rows specified
   pos5 <- get_corrtext_pos(stats3, nrow = 3, ncol = NULL,
                            squeeze = 1, xrange = 1:2, yrange = c(1, 3))[,1:2]
   expect_equal(pos5$x, rep(1:2, 3))
-  expect_equal(pos5$y, rep(3:1, each = 2)
-  )
+  expect_equal(pos5$y, rep(3:1, each = 2))
+
+  # four rows specified, byrow
+  pos6 <- get_corrtext_pos(stats3, nrow = NULL, ncol = 4,
+                           squeeze = 1, xrange = c(1, 4), yrange = 1:2)[,1:2]
+  expect_equal(pos6$x, c(1:4, 1:2))
+  expect_equal(pos6$y, c(2,2,2,2,1,1))
+
+  # four cols specified, bycol
+  pos7 <- get_corrtext_pos(stats3, nrow = 4, ncol = NULL, byrow = FALSE,
+                           squeeze = 1, xrange = 1:2, yrange = c(1,4))[,1:2]
+  expect_equal(pos7$x, c(1,1,1,1,2,2))
+  expect_equal(pos7$y, c(4:1, 4:3))
 
 })
