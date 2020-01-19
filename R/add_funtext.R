@@ -63,7 +63,7 @@ NULL
 #' @export
 lotri_funtext <- function(fun, mapping = NULL,
                           nrow = NULL, ncol = NULL, squeeze = 0.7,
-                          ...) {
+                          byrow = TRUE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
                               standard_aes = aes(x = x, y = y,
@@ -72,7 +72,8 @@ lotri_funtext <- function(fun, mapping = NULL,
   # return plot with labels
   lotri(
     stat_funtext(mapping = mapping, geom = "text", show.legend = FALSE,
-                  fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze, ...)
+                  fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze,
+                 byrow = byrow, ...)
   )
 }
 
@@ -81,7 +82,7 @@ lotri_funtext <- function(fun, mapping = NULL,
 #' @export
 utri_funtext <- function(fun, mapping = NULL,
                          nrow = NULL, ncol = NULL, squeeze = 0.7,
-                         ...) {
+                         byrow = TRUE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
                               standard_aes = aes(x = x, y = y, label = ..fun_out..))
@@ -89,7 +90,8 @@ utri_funtext <- function(fun, mapping = NULL,
   # return plot with labels
   utri(
     stat_funtext(mapping = mapping, geom = "text", show.legend = FALSE,
-                 fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze, ...)
+                 fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze,
+                 byrow = byrow, ...)
   )
 }
 

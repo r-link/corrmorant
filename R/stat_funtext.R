@@ -8,7 +8,7 @@ StatFuntextProto <- ggproto("StatFuntextProto", Stat,
    compute_group = function (data, scales,
                              fun,
                              nrow = NULL, ncol = NULL,
-                             squeeze = 0.7, ...){
+                             squeeze = 0.7, byrow = byrow, ...){
      if(rlang::is_quosure(fun)){
        data <- dplyr::summarize(data, fun_out = !!fun)
      } else {
@@ -17,7 +17,6 @@ StatFuntextProto <- ggproto("StatFuntextProto", Stat,
      data
    }
 )
-
 
 # Statfuntext - ggproto object for stat_funtext -------------------------------
 #' @rdname corrmorant_ggproto
@@ -29,7 +28,7 @@ StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
    # compute panel - standard function just slightly updated to pass ranges
    compute_panel = function (self, data, scales, fun,
                              nrow = NULL, ncol = NULL,
-                             squeeze = 0.7, ...) {
+                             squeeze = 0.7, byrow = TRUE, ...) {
      stats <- StatFuntextProto$compute_panel(data = data,
                                              scales = scales,
                                              fun = fun,
@@ -39,13 +38,15 @@ StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
                       nrow = nrow, ncol = ncol,
                       squeeze = squeeze,
                       xrange = scales$x$get_limits(),
-                      yrange = scales$y$get_limits())
+                      yrange = scales$y$get_limits(),
+                      byrow = byrow)
    },
    # will not be evaluated, but argument names are needed:
    compute_group =  function (data, scales,fun,
-                              nrow, ncol, squeeze = 0.7, ...){
+                              nrow, ncol, squeeze = 0.7, byrow, ...){
      StatFuntextProto$compute_group(data, scales,fun,
                                     nrow, ncol, squeeze = 0.7,
+                                    byrow = byrow,
                                     ...)
    },
    setup_data = function(data, params){
@@ -108,11 +109,12 @@ stat_funtext <- function(mapping = NULL, data = NULL, geom = "text",
                          inherit.aes = TRUE, fun,
                          nrow = NULL, ncol = NULL,
                          squeeze = 0.7,
+                         byrow = TRUE,
                          ...) {
   layer(
     stat = StatFuntext, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(fun = fun, squeeze = squeeze,
-                  nrow = nrow, ncol = ncol, ...)
+                  nrow = nrow, ncol = ncol, byrow = byrow, ...)
   )
 }
