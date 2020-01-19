@@ -124,7 +124,7 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
       if (is.null(nrow)) nrow <- ceiling(ngr / ncol)
       if (is.null(ncol)) ncol <- ceiling(ngr / nrow)
       # throw an error if both nrow and ncol exist and do not add up to the right number
-      else if (ncol != ceiling(ngr / nrow)) stop("Check dimensions in stat_corrtext: nrow and ncol values do not match")
+      else if (ncol * nrow < ngr) stop("Check dimensions in text labels: nrow and ncol values do not match")
     }
     # edit stats
     if (byrow){
