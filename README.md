@@ -23,6 +23,43 @@ Description
 </tbody>
 </table>
 
+A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
+
+Here\`s a list of everyone else directly or indirectly implied in this package - thanks a lot for your invaluable contribution to the R community:
+
+``` r
+# Contributers to the packages used in corrmorant
+thankr::shoulders(package = "corrmorant") %>% 
+  # Remove number of packages 
+  select(-no_packages) %>% 
+  # Remove myself
+  dplyr::filter(!grepl("Roman M. Link", maintainer)) %>% 
+  # Remove email addresses 
+  mutate(maintainer = stringr::word(maintainer, end = -2)) %>% 
+  # Return as kable
+  knitr::kable()
+```
+
+| maintainer          | packages                                                                          |
+|:--------------------|:----------------------------------------------------------------------------------|
+| R Core Team         | base, compiler, datasets, graphics, grDevices, grid, methods, stats, tools, utils |
+| Hadley Wickham      | assertthat, dplyr, ggplot2, gtable, lazyeval, scales, stringr, tidyr, vctrs       |
+| Yihui Xie           | evaluate, knitr, rmarkdown, xfun                                                  |
+| Lionel Henry        | lifecycle, purrr, rlang, tidyselect                                               |
+| Dirk Eddelbuettel   | digest, Rcpp                                                                      |
+| Jim Hester          | glue, withr                                                                       |
+| Kirill Müller       | pillar, tibble                                                                    |
+| Gábor Csárdi        | crayon, pkgconfig                                                                 |
+| Stefan Milton Bache | magrittr                                                                          |
+| Charlotte Wickham   | munsell                                                                           |
+| Achim Zeileis       | colorspace                                                                        |
+| Winston Chang       | R6                                                                                |
+| Joe Cheng           | htmltools                                                                         |
+| Jeremy Stephens     | yaml                                                                              |
+| Nathan Teetor       | zeallot                                                                           |
+| Marek Gagolewski    | stringi                                                                           |
+| Michel Lang         | backports                                                                         |
+
 Motivation
 ----------
 
@@ -56,10 +93,6 @@ Afterwards, the package can be loaded regularly via `library()`:
 library(corrmorant)
 ```
 
-    ## Loading required package: ggplot2
-
-    ## Loading required package: rlang
-
 Simple plots with corrmorant()
 ------------------------------
 
@@ -70,14 +103,14 @@ The `corrmorant()` function is a simple wrapper function around the more complex
 corrmorant(iris, style = "light")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
 # the "dark" style has a dark background in the diagonal facets
 corrmorant(iris, style = "dark")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-2.png)
 
 ``` r
 # in the "blue_red" style, colors and correlation labels are colored by the strength of
@@ -85,7 +118,7 @@ corrmorant(iris, style = "dark")
 corrmorant(iris, style = "blue_red")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-3.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-3.png)
 
 Basic usage of ggcorrm()
 ------------------------
@@ -103,7 +136,7 @@ p1 <- ggcorrm(iris) +
 p1
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 If you want, you can add additional ggplot2 layers, using the appropriate corrmorant selectors to restrict them to the appropriate set of facets. For example, you might want to display a linear trend in the facets on the lower triangle:
 
@@ -111,7 +144,7 @@ If you want, you can add additional ggplot2 layers, using the appropriate corrmo
 p1 + lotri(geom_smooth(method = "lm"))
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
 
@@ -124,7 +157,7 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   dia_density(lower = 0.4, color = 1)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 Correlation heatmaps and more
 -----------------------------
@@ -144,7 +177,7 @@ ggcorrm() +
   scale_fill_corr() 
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 With `lotri_/utri_heatpoint()`, you can scale the diameter of any character you want by correlation strength. And yes, your right, this means you can display correlation strength with purple skulls and angry cat faces:
 
@@ -162,4 +195,4 @@ ggcorrm(aes(col = .corr)) +
     ## Some variables are highly skewed (abs(skew) > 1).
     ## Consider transformation for better display.
 
-![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
