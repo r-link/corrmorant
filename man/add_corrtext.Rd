@@ -14,6 +14,7 @@ lotri_corrtext(
   corr_size = TRUE,
   corr_method = NULL,
   squeeze = 0.7,
+  byrow = TRUE,
   ...
 )
 
@@ -25,6 +26,7 @@ utri_corrtext(
   corr_size = TRUE,
   corr_method = NULL,
   squeeze = 0.7,
+  byrow = TRUE,
   ...
 )
 }
@@ -58,6 +60,13 @@ Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=g
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet width/height
 the facet labels are restricted to when multiple labels are present
 (defaults to 0.7 - labels extend over 70\% of the extent of the plot).}
+
+\item{byrow}{logical. Should the correlation labels in plots with multiple
+groups be filled by rows (\code{byrow = TRUE}) or by columns (\code{byrow = FALSE})?
+Note that the actual number of rows or columns that are filled with values
+can be below the specified value of \code{nrow} or \code{ncol} when less rows/columns
+than specified are needed to reach the total number of groups. Defaults to
+\code{TRUE}.}
 
 \item{...}{Additional arguments to \link{stat_corrtext}.}
 }

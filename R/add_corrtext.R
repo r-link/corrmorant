@@ -25,6 +25,12 @@
 #' @param squeeze numeric between 0 an 1. Proportion of the facet width/height
 #'   the facet labels are restricted to when multiple labels are present
 #'   (defaults to 0.7 - labels extend over 70% of the extent of the plot).
+#' @param byrow logical. Should the correlation labels in plots with multiple
+#'   groups be filled by rows (`byrow = TRUE`) or by columns (`byrow = FALSE`)?
+#'   Note that the actual number of rows or columns that are filled with values
+#'   can be below the specified value of `nrow` or `ncol` when less rows/columns
+#'   than specified are needed to reach the total number of groups. Defaults to
+#'   `TRUE`.
 #' @param ... Additional arguments to [stat_corrtext].
 #' @return A `ggplot2` layer with text labels for correlation strength.
 #' @details `lotri_corrtext()` and `utri_corrtext()` can be used to display the
@@ -46,7 +52,8 @@ NULL
 #' @export
 lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                            digits = 2, corr_size = TRUE,
-                           corr_method = NULL, squeeze = 0.7, ...) {
+                           corr_method = NULL, squeeze = 0.7,
+                           byrow = TRUE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 
@@ -63,7 +70,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
   lotri(
     stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
-                  squeeze = squeeze, ...)
+                  squeeze = squeeze, byrow = byrow, ...)
   )
 }
 
@@ -72,7 +79,8 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 #' @export
 utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                           digits = 2, corr_size = TRUE,
-                          corr_method = NULL, squeeze = 0.7, ...) {
+                          corr_method = NULL, squeeze = 0.7,
+                          byrow = TRUE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 
@@ -89,7 +97,7 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
   utri(
     stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
-                  squeeze = squeeze, ...)
+                  squeeze = squeeze, byrow = byrow, ...)
   )
 }
 
