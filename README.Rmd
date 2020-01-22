@@ -141,3 +141,34 @@ ggcorrm(aes(col = .corr)) +
   scale_color_corr(option = "C")
 ```
 
+
+## Print output of arbitrary functions of the data
+If you want to place text labels for the output of arbitrary functions in your plots, you can use `lotri/utri_funtext()`, which uses the same placement rules as `stat_corrtext()`.
+
+For instance, you could add lables for the slope of the linear models in the lower triangle (note how y and x are swapped to account for the reverse axes in the upper triangle).
+
+```{r}
+# function to compute linear model slopes
+lmslope <- function(x, y)  round(coef(lm(x ~ y))[2], 2)
+
+# add slopes using a function
+ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
+  lotri(geom_point(alpha = 0.4)) +
+  lotri(geom_smooth(alpha = 0.4, method = "lm")) +
+  utri_funtext(fun = lmslope, squeeze = .6) +
+  dia_density(lower = .4, col = 1, alpha = 0.4) +
+  dia_names(y_pos = .1)
+```
+
+Besides using a two-parameter formula, `stat_funtext()`, the stat underlying `lotri/utri_funtext()`, also accepts rlang style lambda expressions describing functions and quosures generated with `quo()` (referring to the variable names `x` and `y`).
+
+Here are two ways to copy the output of `stat_corrtext()` - using a lambda expression (a formula containing `.x` and `.y`) in the upper and a quosure in the lower triangle:
+
+```{r}
+ggcorrm(iris, aes(col = .corr), rescale = "as_is") +
+  utri_funtext(fun = ~ round(cor(.x, .y), 2)) +
+  lotri_funtext(fun = quo(round(cor(x, y), 2))) +
+  dia_names(y_pos = .5) +
+  scale_color_corr()
+```
+
