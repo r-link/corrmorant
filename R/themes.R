@@ -16,11 +16,11 @@
 #' @seealso
 #'   [ggplot2::ggtheme],
 #'   [ggplot2::theme()]
-#' @name corrmoran_themes
+#' @name corrmorant_themes
 NULL
 
 
-#' @rdname corrmoran_themes
+#' @rdname corrmorant_themes
 #' @export
 #' @importFrom grid unit
 theme_corrm <- function(base_size = 9, base_family = "",
