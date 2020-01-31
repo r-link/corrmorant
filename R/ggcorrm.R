@@ -62,8 +62,9 @@
 #'   [colors][grDevices::colors], or an integer specifying a position in
 #'   [palette][grDevices::palette]. The default value of `NULL` uses the
 #'   standard background color defined in the current ggplot2 theme.
-#'
-#'
+#' @param facet_arg (Optional) list with additional arguments for the
+#'   [facet_grid()][ggplot2::facet_grid()] call that defines the structure of
+#'   the panels of the correlation matrix.
 #'
 #' @details `ggcorrm` creates the initial correlation plot object containing
 #'   information about panel placement, correlations, themes etc. Its output is
@@ -84,6 +85,11 @@
 #'   the correlation plot matrix, respectively. All other graphics settings can
 #'   be modified using regular ggplot2 [theme][ggplot2::theme] syntax, building
 #'   upon the corrmorant standard theme ([theme_corrm]).
+#'
+#'   `facet_arg` allows to change the settings in the [ggplot2::facet_grid()]
+#'   call underlying the facet structure of a corrmorant plot. This is likely
+#'   most helpful if you wish to parse facet labels as expressions with
+#'   `facet_arg = list(labeller = "label_parsed)`.
 #'
 #' @return An object of class `ggcorrm` containing the reshaped dataset for the
 #'   correlation plot and an empty `ggplot` object with appropriate facet and
@@ -145,7 +151,8 @@ ggcorrm <- function(data,
                     mutates = NULL,
                     bg_dia = NULL,
                     bg_lotri = NULL,
-                    bg_utri = NULL
+                    bg_utri = NULL,
+                    facet_arg = NULL
                     ){
   # control class of data
   if (!(inherits(data, "data.frame") | is.matrix(data))) {
@@ -197,6 +204,9 @@ ggcorrm <- function(data,
   # prepare layers
   layers <- make_corrm_layers(backgrounds = list(bg_dia, bg_lotri, bg_utri))
 
+  # get facet arguments
+  facet_arg <- modify_list(list(rows = var_x ~ var_y, scales = "free"), facet_arg)
+
   # prepare output
   plot_out <- structure(list(
     data = corrdat,
@@ -205,7 +215,7 @@ ggcorrm <- function(data,
     mapping = new_mapping,
     theme = theme_corrm(),
     coordinates = coord_cartesian(default = TRUE),
-    facet = facet_grid(var_x ~ var_y, scales = "free"),
+    facet = do.call(what = facet_grid, args = facet_arg),
     plot_param = list(corr_method = corr_method, corr_group = corr_group),
     plot_env = parent.frame()
   ), class = c( "ggcorrm", "gg", "ggplot"))

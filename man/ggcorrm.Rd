@@ -14,7 +14,8 @@ ggcorrm(
   mutates = NULL,
   bg_dia = NULL,
   bg_lotri = NULL,
-  bg_utri = NULL
+  bg_utri = NULL,
+  facet_arg = NULL
 )
 }
 \arguments{
@@ -83,6 +84,10 @@ code, a character string specifying a color name in
 \link[grDevices:colors]{colors}, or an integer specifying a position in
 \link[grDevices:palette]{palette}. The default value of \code{NULL} uses the
 standard background color defined in the current ggplot2 theme.}
+
+\item{facet_arg}{(Optional) list with additional arguments for the
+\link[ggplot2:facet_grid]{facet_grid()} call that defines the structure of
+the panels of the correlation matrix.}
 }
 \value{
 An object of class \code{ggcorrm} containing the reshaped dataset for the
@@ -116,6 +121,11 @@ color settings for the plot diagonal, the lower and the upper triangle of
 the correlation plot matrix, respectively. All other graphics settings can
 be modified using regular ggplot2 \link[ggplot2:theme]{theme} syntax, building
 upon the corrmorant standard theme (\link{theme_corrm}).
+
+\code{facet_arg} allows to change the settings in the \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}
+call underlying the facet structure of a corrmorant plot. This is likely
+most helpful if you wish to parse facet labels as expressions with
+\verb{facet_arg = list(labeller = "label_parsed)}.
 }
 \examples{
 \dontrun{
