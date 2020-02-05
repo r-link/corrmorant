@@ -104,7 +104,7 @@ The horrific fit of these linear regressions results from the fact that the iris
 ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   lotri(geom_smooth(method = "lm")) +
   lotri(geom_point(alpha = 0.5)) +
-  utri_corrtext(nrow = 2) +
+  utri_corrtext(nrow = 2, squeeze = 0.6) +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, color = 1)
 ```
