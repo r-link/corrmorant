@@ -33,8 +33,7 @@ test_that("corrmorant() and ggcorrm() create the same plots", {
     utri_corrtext(aes(col = .corr)) +
     dia_density(lower = .4, fill = "grey80", col = 1) +
     dia_names(y_pos = .1, colour = "black", size = 3) +
-    scale_color_corr(option = "A",
-                     aesthetics = c("fill", "color"))
+    scale_color_corr()
 
   p5$plot_env <- p6$plot_env <- NULL
 
