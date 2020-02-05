@@ -11,7 +11,7 @@ scale_color_corr(
   option = c("A", "B", "C", "D"),
   limits = c(-1, 1),
   na.value = "#55FF55",
-  guide = "colourbar",
+  guide = guide_colorbar(title = "Correlation"),
   aesthetics = "colour",
   direction = 1
 )
@@ -21,7 +21,7 @@ scale_fill_corr(
   option = c("A", "B", "C", "D"),
   limits = c(-1, 1),
   na.value = "#55FF55",
-  guide = "colourbar",
+  guide = guide_colorbar(title = "Correlation"),
   aesthetics = "fill",
   direction = 1
 )
@@ -39,7 +39,9 @@ over-emphasise weak correlations.}
 \item{na.value}{the color to use for missing values. Defaults to '#55FF55'.}
 
 \item{guide}{Type of legend ("colourbar" for continuous legend, "legend"
-for legend with discrete values). Defaults to "colourbar".}
+for legend with discrete values, or a \code{ggplot} guide function). Defaults
+to guide_colorbar(title = "Correlation") to have a reasonable standard
+scale title.}
 
 \item{aesthetics}{Character string or vector of character strings with the
 aesthetics linked to the scale.  Defaults to  "color" for

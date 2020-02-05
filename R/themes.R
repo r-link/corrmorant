@@ -38,7 +38,6 @@ theme_corrm <- function(base_size = 9, base_family = "",
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.spacing = grid::unit(0, "mm"),
-          legend.title = element_blank(),
           legend.key = element_rect(fill = NA, color = NA),
           strip.background = element_blank()
           )

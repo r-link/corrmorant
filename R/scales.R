@@ -12,7 +12,9 @@
 #'    over-emphasise weak correlations.
 #' @param na.value the color to use for missing values. Defaults to '#55FF55'.
 #' @param guide Type of legend ("colourbar" for continuous legend, "legend"
-#'    for legend with discrete values). Defaults to "colourbar".
+#'    for legend with discrete values, or a `ggplot` guide function). Defaults
+#'    to guide_colorbar(title = "Correlation") to have a reasonable standard
+#'    scale title.
 #' @param aesthetics Character string or vector of character strings with the
 #'     aesthetics linked to the scale.  Defaults to  "color" for
 #'     `scale_color_corr()` and "fill" for `scale_fill_corr()`.
@@ -50,7 +52,7 @@ scale_color_corr <- function(...,
                              option = c("A", "B", "C", "D"),
                              limits = c(-1, 1),
                              na.value = "#55FF55",
-                             guide = "colourbar",
+                             guide = guide_colorbar(title = "Correlation"),
                              aesthetics = "colour",
                              direction = 1){
   # prepare option
@@ -78,7 +80,7 @@ scale_fill_corr <- function(...,
                             option = c("A", "B", "C", "D"),
                             limits = c(-1, 1),
                             na.value = "#55FF55",
-                            guide = "colourbar",
+                            guide = guide_colorbar(title = "Correlation"),
                             aesthetics = "fill",
                             direction = 1) {
   # prepare option
