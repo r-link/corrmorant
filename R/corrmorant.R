@@ -47,12 +47,29 @@ corrmorant <- function(data, style = c("dark", "light", "blue_red"),
   # prepare layers
   layers <- list(
   lotri(geom_point(alpha = min(1 / log10(nrow(data)), 1),
-                   mapping = switch(style, blue_red = aes(col = .corr), NULL))),
-  utri_corrtext(mapping = switch(style, blue_red = aes(col = .corr), NULL)),
-  dia_density(lower = .4, fill = switch(style, dark = "grey90", "grey80"), col = 1),
-  dia_names(y_pos = .1, colour = switch(style, dark = "white", "black"), size = 3),
-  switch(style, blue_red = scale_color_corr(option = "A",
-                                            aesthetics = c("fill", "color")), NULL)
+                   mapping = switch(style,
+                                    blue_red = aes(col = .corr),
+                                    NULL)
+                   )
+        ),
+  utri_corrtext(mapping = switch(style,
+                                 blue_red = aes(col = .corr),
+                                 NULL)
+                ),
+  dia_density(lower = .4,
+              fill = switch(style,
+                            dark = "grey90",
+                            "grey80"),
+              col = 1
+              ),
+  dia_names(y_pos = .1,
+            colour = switch(style,
+                            dark = "white",
+                            "black"),
+            size = 3),
+  switch(style,
+         blue_red = scale_color_corr(),
+         NULL)
   )
 
   # return output
