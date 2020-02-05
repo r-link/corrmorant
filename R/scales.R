@@ -72,6 +72,10 @@ scale_color_corr <- function(...,
                         aesthetics = aesthetics)
 }
 
+# alias for scale_color_corr
+#' @rdname corrmorant_scales
+#' @export
+scale_colour_corr <- scale_color_corr
 
 # scale_fill_corr() - color scales based on .corr_scales() --------------------
 #' @rdname corrmorant_scales

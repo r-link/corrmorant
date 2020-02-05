@@ -3,10 +3,21 @@
 \name{corrmorant_scales}
 \alias{corrmorant_scales}
 \alias{scale_color_corr}
+\alias{scale_colour_corr}
 \alias{scale_fill_corr}
 \title{Color and fill scales for correlation plots}
 \usage{
 scale_color_corr(
+  ...,
+  option = c("A", "B", "C", "D"),
+  limits = c(-1, 1),
+  na.value = "#55FF55",
+  guide = guide_colorbar(title = "Correlation"),
+  aesthetics = "colour",
+  direction = 1
+)
+
+scale_colour_corr(
   ...,
   option = c("A", "B", "C", "D"),
   limits = c(-1, 1),
