@@ -29,18 +29,22 @@
 #'   [tidy_corrm]
 #' @rdname corrmorant
 #' @export
-corrmorant <- function(data, style = c("dark", "light", "blue_red"),
-                       rescale     = c("by_sd", "by_range", NULL),
-                       labels       = NULL,
+corrmorant <- function(data,
+                       style = c("blue_red", "dark", "light"),
+                       rescale     = c("by_sd", "by_range", "as_is"),
+                       corr_method = c("pearson", "kendall", "spearman"),
+                       labels      = NULL,
                        ...){
   # match arguments
-  rescale <- rlang::arg_match(rescale)
-  style   <- rlang::arg_match(style)
+  rescale     <- rlang::arg_match(rescale)
+  style       <- rlang::arg_match(style)
+  corr_method <- rlang::arg_match(corr_method)
 
   # prepare plot
   p0 <- ggcorrm(data,
                 rescale = rescale,
                 bg_dia =  switch(style, dark = "grey20", NULL),
+                corr_method = corr_method,
                 labels = labels,
                 ...)
 

@@ -126,9 +126,9 @@ tidy_corrm.default <- function(data,
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
-  # match arguments for rescale and corr_method
-  rescale     <- arg_match(rescale)
-  corr_method <- arg_match(corr_method)
+  # match arguments
+  rescale     <- rlang::arg_match(rescale)
+  corr_method <- rlang::arg_match(corr_method)
 
   # catch grouping variable (if not called via ggcorrm)
   if(!is_quosure(corr_group)) corr_group <- enquo(corr_group)

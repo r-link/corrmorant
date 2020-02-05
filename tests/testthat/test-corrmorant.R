@@ -2,8 +2,8 @@ context("Tests of corrmorant function")
 
 test_that("corrmorant() and ggcorrm() create the same plots", {
 
-  # regular ("dark") style
-  p1 <- corrmorant(iris)
+  # style = "dark"
+  p1 <- corrmorant(iris, style = "dark")
   p2 <- ggcorrm(iris, bg_dia = "grey20") +
     lotri(geom_point(alpha = min(1 / log10(nrow(iris)), 1))) +
     utri_corrtext() +
@@ -26,8 +26,8 @@ test_that("corrmorant() and ggcorrm() create the same plots", {
 
   expect_equal(p3,p4)
 
-  # style = "blue_red
-  p5 <- corrmorant(iris, style = "blue_red")
+  # style = "blue_red" (standard option)
+  p5 <- corrmorant(iris)
   p6 <- ggcorrm(iris) +
     lotri(geom_point( aes(col = .corr), alpha = min(1 / log10(nrow(iris)), 1))) +
     utri_corrtext(aes(col = .corr)) +

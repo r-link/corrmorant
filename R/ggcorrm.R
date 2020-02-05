@@ -146,7 +146,7 @@ ggcorrm <- function(data,
                     mapping = NULL,
                     labels = NULL,
                     rescale = c("by_sd", "by_max", "as_is"),
-                    corr_method = "pearson",
+                    corr_method = c("pearson", "kendall", "spearman"),
                     corr_group = NULL,
                     mutates = NULL,
                     bg_dia = NULL,
@@ -163,8 +163,10 @@ ggcorrm <- function(data,
     stop("x and y coordinates in ggcorrm() may not be manipulated.")
   }
 
-  # match rescale argument
+  # match arguments
   rescale <- arg_match(rescale)
+  corr_method <- rlang::arg_match(corr_method)
+
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
     if (!is_quosures(mutates))
