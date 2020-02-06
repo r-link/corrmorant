@@ -25,52 +25,6 @@ Description
 
 A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
 
-Here\`s a list of everyone else directly or indirectly implied in this package - thanks a lot for your invaluable contribution to the R community:
-
-``` r
-# Contributers to the packages used in corrmorant
-thankr::shoulders(package = "corrmorant") %>% 
-  # Remove number of packages 
-  select(-no_packages) %>% 
-  # Remove myself
-  dplyr::filter(!grepl("Roman M. Link", maintainer)) %>% 
-  # Remove email addresses 
-  mutate(maintainer = stringr::word(maintainer, end = -2)) %>% 
-  # Return as kable
-  knitr::kable()
-```
-
-| maintainer          | packages                                                                    |
-|:--------------------|:----------------------------------------------------------------------------|
-| R Core Team         | base, compiler, datasets, graphics, grDevices, methods, stats, tools, utils |
-| Yihui Xie           | evaluate, knitr, rmarkdown, xfun                                            |
-| Hadley Wickham      | assertthat, dplyr, stringr                                                  |
-| Lionel Henry        | purrr, rlang, tidyselect                                                    |
-| Dirk Eddelbuettel   | digest, Rcpp                                                                |
-| Gábor Csárdi        | crayon, pkgconfig                                                           |
-| Kirill Müller       | pillar, tibble                                                              |
-| Winston Chang       | R6                                                                          |
-| Stefan Milton Bache | magrittr                                                                    |
-| Marek Gagolewski    | stringi                                                                     |
-| Jim Hester          | glue                                                                        |
-| Jeremy Stephens     | yaml                                                                        |
-| Joe Cheng           | htmltools                                                                   |
-
-Motivation
-----------
-
-The inspection of correlation matrices is a central part of exploratory data analysis. As collinearity between predictors has the potential to seriously compromise the quality of regression results - as well as hinder a straightforward interpretation of regression coefficients - the inspection of the correlations among potential predictor variables as well as the desired response should precede fitting any regression model with more than one predictor.
-
-If you are using Bayesian methods, you will also often be faced with the necessity to inspect the correlation between parameters estimated from MCMC samples, which means you have to effectively visualize correlations in often huge datasets.
-
-In addition, with structural equation models (and their cousins, confirmatory factor analysis and path analysis), there is an entire class of models that traditionally is estimated directly from the covariance matrix of a multivariate dataset.
-
-Long story short - there are plenty of reasons why one might want to visually inspect the interrelationships between all variables in a dataset simultaneously. However, while R provides plenty of functions and packages to display correlations, so far (at least to my knowledge) all of them are only able to display certain types of correlation plots, and none of them truly leverages the full flexibility of `ggplot2`.
-
-`corrmorant` is meant to give you this flexibility. It is designed to blend in seamlessly in a data analysis framework based on the `tidyverse`. It offers a broad variety of functions that allow you to create a large number of different correlation plots, and can be extended easily with new geoms, stats and themes, just as `ggplot2` itself.
-
-In case you wonder about the name: One day when I was riding my bike to work and thinking about stupid puns related to **corr**elation **m**atrices, a shiny black bird appeared. In this very moment I knew that I'd have to take the loose collection of ideas concerning correlation plots that was haunting me for a while and convert it into a real package...
-
 Installation
 ------------
 
@@ -89,10 +43,6 @@ Afterwards, the package can be loaded regularly via `library()`:
 library(corrmorant)
 ```
 
-    ## Loading required package: ggplot2
-
-    ## Loading required package: rlang
-
 Simple plots with corrmorant()
 ------------------------------
 
@@ -103,14 +53,14 @@ The `corrmorant()` function is a simple wrapper function around the more complex
 corrmorant(iris, style = "light")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
 # the "dark" style has a dark background in the diagonal facets
 corrmorant(iris, style = "dark")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-3-2.png)
 
 ``` r
 # in the "blue_red" style, colors and correlation labels are colored by the strength of
@@ -118,7 +68,7 @@ corrmorant(iris, style = "dark")
 corrmorant(iris, style = "blue_red")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-3.png)
+![](README_files/figure-markdown_github/unnamed-chunk-3-3.png)
 
 Basic usage of ggcorrm()
 ------------------------
@@ -136,7 +86,7 @@ p1 <- ggcorrm(iris) +
 p1
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 If you want, you can add additional ggplot2 layers, using the appropriate corrmorant selectors to restrict them to the appropriate set of facets. For example, you might want to display a linear trend in the facets on the lower triangle:
 
@@ -144,7 +94,7 @@ If you want, you can add additional ggplot2 layers, using the appropriate corrmo
 p1 + lotri(geom_smooth(method = "lm"))
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
 
@@ -155,6 +105,31 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   utri_corrtext(nrow = 2, squeeze = 0.6) +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, color = 1)
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+Coloring data by correlation
+----------------------------
+
+To color a dataset by correlation strength, you can use the `.corr` column internally created in `tidy_corrm()` together with `scale_colour_corr()` or `scale_fill_corr()`:
+
+``` r
+# simulate some data from a multivariate normal distribution
+# (mtcars is only used as a shortcut to a positive definite covariance matrix)
+data1 <- MASS::mvrnorm(100, colMeans(mtcars),  cov(mtcars))[, 1:8]
+colnames(data1) <- paste("Var.", 1:ncol(data1))
+
+# create plot
+ggcorrm(data1, 
+        mapping = aes(col = .corr, fill = .corr),
+        bg_dia = "grey20") +
+  lotri(geom_smooth(method = "lm", size = .3)) +
+  lotri(geom_point(alpha = 0.5)) +
+  utri_corrtext(nrow = 2, squeeze = 0.6) +
+  dia_names(y_pos = 0.1, size = 3, color = "white") +
+  dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
+  scale_color_corr(aesthetics = c("fill", "color"))
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
