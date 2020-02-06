@@ -5,3 +5,4 @@
 sinew_workflow.R
 data-raw/
 README_cache/
+inst/doc
