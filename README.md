@@ -96,7 +96,7 @@ p1 + lotri(geom_smooth(method = "lm"))
 
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
+The horrific fit of these linear regressions results from the fact that the iris dataset contains data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
 
 ``` r
 ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
@@ -109,8 +109,8 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
 
 ![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-Coloring data by correlation
-----------------------------
+Coloring data by correlation strength
+-------------------------------------
 
 To color a dataset by correlation strength, you can use the `.corr` column internally created in `tidy_corrm()` together with `scale_colour_corr()` or `scale_fill_corr()`:
 
