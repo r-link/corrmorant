@@ -101,103 +101,57 @@ p1 <- ggcorrm(iris) +
 p1
 ```
 
-If you want, you can add additional ggplot2 layers, using the appropriate corrmorant selectors to restrict them to the appropriate set of facets. For example, you might want to display a linear trend in the facets on the lower triangle:
+Additional layers can than be easily added using`corrmorant` selector functions:
 
 ```{r}
 p1 + lotri(geom_smooth(method = "lm"))
 ```
 
-The horrific fit of these linear regressions results from the fact that the iris dataset contains data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
+## Working principle of ggcorrm()
+### Data preparation
+Under the hood, ggcorrm arranges the facets of the correlation matrix using `ggplot2::facet_grid()`. To be able to arrange a dataset across the facets, as a first step, `ggcorrm()` converts the data in a long-table format suitable for plotting. 
 
-```{r}
-ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
-  lotri(geom_smooth(method = "lm")) +
-  lotri(geom_point(alpha = 0.5)) +
-  utri_corrtext(nrow = 2, squeeze = 0.6) +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, color = 1)
+This is achieved by calling a `tidy_corrm` method, which automatically rearranges the columns in a suitable way and returns them in a tidy long form in a `tidy_corrm` object (a special type of tibble):
+
+``` {r}
+tidy_corrm(iris)
 ```
 
-## Coloring data by correlation strength
-To color a dataset by correlation strength, you can use the `.corr` column internally created in `tidy_corrm()` together with `scale_colour_corr()` or `scale_fill_corr()`:
-
-```{r}
-# simulate some data from a multivariate normal distribution
-# (mtcars is only used as a shortcut to a positive definite covariance matrix)
-data1 <- MASS::mvrnorm(100, colMeans(mtcars),  cov(mtcars))[, 1:8]
-colnames(data1) <- paste("Var.", 1:ncol(data1))
-
-# create plot
-ggcorrm(data1, 
-        mapping = aes(col = .corr, fill = .corr),
-        bg_dia = "grey20") +
-  lotri(geom_smooth(method = "lm", size = .3)) +
-  lotri(geom_point(alpha = 0.5)) +
-  utri_corrtext(nrow = 2, squeeze = 0.6) +
-  dia_names(y_pos = 0.1, size = 3, color = "white") +
-  dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
-  scale_color_corr(aesthetics = c("fill", "color"))
-```
-
-## Correlation heatmaps and more 
-`corrmorant` offers a series of new geoms and stats that are designed to improve the display of correlation strength.
-
-For example, there is a set of stats for correlation heatmaps and the likes, which can be very useful when inspecting datasets with large numbers of variables:
-
-```{r}
-select(mtcars, mpg, disp:qsec) %>% 
-ggcorrm() +
-  utri_heatmap(alpha = 0.5) +
-  lotri_heatcircle(alpha = 0.5, col = 1) +
-  utri_corrtext() +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
-  scale_fill_corr() 
-```
+As seen in the given example, there is a number of standard column names that describe the content of all numeric variables in the facets (`var_x:corr_group`), while all categorical variables are carried over with the dataset in their original form and can be used for grouping (in this case only `Species`). Additional columns can be created from these columns using the `mutates` argument (see below).
 
 
-With `lotri_/utri_heatpoint()`, you can scale the diameter of any character you want by correlation strength.
-And yes, your right, this means you can display correlation strength with purple skulls and angry cat faces:
+The content of the columns in a `tidy_corrm` object is as follows:
 
-```{r, warning = FALSE}
-airquality %>% 
-ggcorrm(aes(col = .corr)) +
-  lotri_heatpoint(pch = "\U1F63E") +
-  utri_heatpoint(pch = "\U2620", col = "#660066") +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, fill = "#89DFA3", color = 1) +
-  scale_size(range = c(1, 15)) + 
-  scale_color_corr(option = "C")
-```
+------------- -----------------------------------------------------------------
+`var_x`       Name of the variable on the x-axis in the order of
+              appearance in the raw data (ordered factor).
 
+`var_y`       Name of the variable on the y-axis in the order of appearance
+              in the raw data (ordered factor).
 
-## Print output of arbitrary functions of the data
-If you want to place text labels for the output of arbitrary functions in your plots, you can use `lotri/utri_funtext()`, which uses the same placement rules as `stat_corrtext()`.
+`x`           Data of the variable on the x axis (numeric).
 
-For instance, you could add lables for the slope of the linear models in the lower triangle (note how y and x are swapped to account for the reverse axes in the upper triangle).
+`y`           Data of the variable on the y axis (numeric).
 
-```{r}
-# function to compute linear model slopes
-lmslope <- function(x, y)  round(coef(lm(x ~ y))[2], 2)
+`type`        Type of panel (character, `"upper"`, `"lower"` or `"diag"`).
 
-# add slopes using a function
-ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
-  lotri(geom_point(alpha = 0.4)) +
-  lotri(geom_smooth(alpha = 0.4, method = "lm")) +
-  utri_funtext(fun = lmslope, squeeze = .6) +
-  dia_density(lower = .4, col = 1, alpha = 0.4) +
-  dia_names(y_pos = .1)
-```
+`.corr`       Correlation between x and y for the respective panel/group,
+              `stats::cor()` using the method specified by
+              `corr_method` and optionally within the groups specified with 
+              `corr_group` (numeric).
 
-Besides using a two-parameter formula, `stat_funtext()`, the stat underlying `lotri/utri_funtext()`, also accepts rlang style lambda expressions describing functions and quosures generated with `quo()` (referring to the variable names `x` and `y`).
+`corr_group`  grouping variable for `.corr` (1 for all observations if
+              no groups are specified).
 
-Here are two ways to copy the output of `stat_corrtext()` - using a lambda expression (a formula containing `.x` and `.y`) in the upper and a quosure in the lower triangle:
+Additional    All other columns specified in the dataset and/or 
+columns       created via `mutates`.
+------------- -----------------------------------------------------------------
 
-```{r}
-ggcorrm(iris, aes(col = .corr), rescale = "as_is") +
-  utri_funtext(fun = ~ round(cor(.x, .y), 2)) +
-  lotri_funtext(fun = quo(round(cor(x, y), 2))) +
-  dia_names(y_pos = .5) +
-  scale_color_corr()
-```
+It is also possible to call `ggcorrm()` directly on a `tidy_corrm` object. In this case, it will be directly plotted without reshaping of the data, and arguments that `ggcorrm()` passes to  `tidy_corrm()` are ignored. 
+
+`tidy_corrm()` provides a set of options;
+* labels
+* correlation
+* grouping
+* mutates
 
