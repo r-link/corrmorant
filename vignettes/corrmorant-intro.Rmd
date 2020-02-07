@@ -11,12 +11,12 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7,
-  fig.height = 7
+  fig.width = 6,
+  fig.height = 6
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(corrmorant)
 library(dplyr)
 ```
@@ -24,10 +24,6 @@ library(dplyr)
 
 ## Description
 `corrmorant` extends `ggplot2` by an automated framework for plots of correlation matrices that can be easily modified via regular `ggplot2` syntax. In addition, it provides a large set of visualization tools for exploratory data analysis based on correlation matrices.
-
-| Please note that this project is a work in progress!                        |
-|-----------------------------------------------------------------------------|
-| This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may changes or disappear without further notice. |
 
 A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
 
@@ -58,7 +54,7 @@ Long story short - there are plenty of reasons why one might want to visually in
 
 `corrmorant` is meant to give you this flexibility. It is designed to blend in seamlessly in a data analysis framework based on the `tidyverse`. It offers a broad variety of functions that allow you to create a large number of different correlation plots, and can be extended easily with new geoms, stats and themes, just as `ggplot2` itself. 
 
-In case you wonder about the name: One day when I was riding my bike to work and thinking about stupid puns related to **corr**elation **m**atrices, a shiny black bird appeared. In this very moment I knew that I'd have to take the loose collection of ideas concerning correlation plots that was haunting me for a while and convert it into a real package...
+In case you wonder about the name: One day when I was riding my bike to work and thinking about stupid puns related to **corr**elation **m**atrices, a shiny black bird appeared...
 
 
 ## Installation
@@ -111,7 +107,7 @@ If you want, you can add additional ggplot2 layers, using the appropriate corrmo
 p1 + lotri(geom_smooth(method = "lm"))
 ```
 
-The horrific fit of these linear regressions results from the fact that the iris dataset consists of data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
+The horrific fit of these linear regressions results from the fact that the iris dataset contains data from three different species. You might want to include this information into your plot by plotting the three species in different colours, which can easily be achieved by setting plot level aesthetics using the `mapping` argument of `ggcorrm()`:
 
 ```{r}
 ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
@@ -122,6 +118,26 @@ ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
   dia_density(lower = 0.4, color = 1)
 ```
 
+## Coloring data by correlation strength
+To color a dataset by correlation strength, you can use the `.corr` column internally created in `tidy_corrm()` together with `scale_colour_corr()` or `scale_fill_corr()`:
+
+```{r}
+# simulate some data from a multivariate normal distribution
+# (mtcars is only used as a shortcut to a positive definite covariance matrix)
+data1 <- MASS::mvrnorm(100, colMeans(mtcars),  cov(mtcars))[, 1:8]
+colnames(data1) <- paste("Var.", 1:ncol(data1))
+
+# create plot
+ggcorrm(data1, 
+        mapping = aes(col = .corr, fill = .corr),
+        bg_dia = "grey20") +
+  lotri(geom_smooth(method = "lm", size = .3)) +
+  lotri(geom_point(alpha = 0.5)) +
+  utri_corrtext(nrow = 2, squeeze = 0.6) +
+  dia_names(y_pos = 0.1, size = 3, color = "white") +
+  dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
+  scale_color_corr(aesthetics = c("fill", "color"))
+```
 
 ## Correlation heatmaps and more 
 `corrmorant` offers a series of new geoms and stats that are designed to improve the display of correlation strength.
