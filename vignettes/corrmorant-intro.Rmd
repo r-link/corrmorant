@@ -87,29 +87,87 @@ corrmorant(iris, style = "dark")
 corrmorant(iris, style = "blue_red")
 ```
 
+The`corrmorant()` interface is kept simple on purpose as this function is only intended for fast visual checks of datasets. If you want to modify single elements of the plot, it is always preferable to use `ggcorrm()` instead.
+
+
 ## Basic usage of ggcorrm()
-While `corrmorant()` may be useful for many basic data inspection tasks, its functionality is rather limited. If you want to take control of the elements in a plot, you can use `ggcorrm()` together with the corrmorant selector functions `lotri()`, `utri()` and `dia()` that direct ggplot layers to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. In addition, corrmorant offers a series of utility functions for readymade data summaries on the plot diagonal (`dia_names()`, `dia_density()`, `dia_histogram` and `dia_freqpoly()`) as well as a couple of new stats, e.g. `stat_corrtext()` for displaying correlation strength in correlation plot facets. The new `corrmorant` stats can generally be called in a simplified form by prefixing their name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and `utri_corrtext()`
+The `ggcorrm()` function allows to create correlation matrices with a syntax that gently extends regular `ggplot()` syntax. If calling `ggcorrm()` on a data.frame, it automatically rearranges it into the form needed for plotting, treating all numeric variables as columns/rows of the correlation matrix, and retains all other data as additional columns of the plotting dataset that can be used for grouping. 
+
+### Adding regular ggplot2 layers
+You can add new layers and other `ggplot2` plot elements (e.g. scales, themes etc.) to a `ggcorrm()` object as if it was a regular `ggplot()` call. However, adding layers to all panels of a correlation matrix is rarely useful:
+
+```{r}
+ggcorrm(iris) + geom_point(alpha = 0.5)
+```
+
+Usually, you will want to display different graphical elements in the plot diagonal, lower and upper triangular panels of the correlation matrix, respectively. This can be achieved with the three corrmorant selector functions `lotri()`, `utri()` and `dia()`, which can be used to modify ggplot layers (i.e. the output of calls to geoms, stats or the `layer()` function) and direct them only to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. To use them, you simply have to wrap the ggplot layer into one of the selector functions:
+
+```{r}
+ggcorrm(iris) + 
+  lotri(geom_point(alpha = 0.5))
+```
+
+### New corrmorant stats
+In addition to the default geoms and stats available in `ggplot2`, corrmorant introduces a series of new stats that are specifically geared towards the creation of correlation matrices. These can be grouped into a) stats for data summaries and information on the plot diagonal and b) stats for data display in the off-diagonal panels. To simplify their usage, all corrmorant stats can be called directly by prefixing their name with `dia_`, `lotri_` or `utri_` instead of calling them via the corresponding selector functions. The prefixed versions differ from calls to the underlying stats by having a set of reasonable standard values and are preferable in most cases.
+
+**corrmorant stats for the plot diagonal**
+
+---------------------- --------------------- ------------------------------------
+Stat                   Prefixed version      Description
+---------------------- --------------------- ------------------------------------
+`stat_dia_names()`     `dia_names()`         display text labels for variable 
+                                             names on the plot diagonal
+
+`stat_dia_density()`   `dia_density()`       display density plots in diagonal
+                                             panels
+
+`stat_dia_histogram()` `dia_histogram()`     display histograms in diagonal
+                                             panels
+
+`stat_dia_freqpoly()`  `dia_freqpoly()`      display frequency polygons in 
+                                             diagonal panels
+---------------------- --------------------- ------------------------------------
+
+
+**corrmorant stats for off-diagonal panels**
+
+---------------------- --------------------- ------------------------------------
+Stat                   Prefixed versions     Description
+---------------------- --------------------- ------------------------------------
+`stat_corrtext()`      `lotri_corrtext()`    place text labels indicating  
+                       `utri_corrtext()`     correlation strength 
+                       
+`stat_funtext()`       `lotri_funtext()`     place text labels based on                                   
+                       `utri_funtext()`      user-defined functions  
+
+`stat_heatmap()`       `lotri_heatmap()`     add correlation heatmap 
+                       `utri_heatmap()`      
+                       
+`stat_heatpoint()`     `lotri_heatpoint()`   add symbols whose size and color  
+                       `utri_heatpoint()`    indicates correlation strength
+
+`stat_heatcircle()`    `lotri_heatcircle()`  add circles whose area scales with
+                       `utri_heatcircle()`   correlation strength
+---------------------- --------------------- ------------------------------------
+
+Together with regular `ggplot2` geoms and stats, these new functions can be used as building blocks for more complex correlation matrix plots.
 
 For example, `corrmorant(iris, style = "light")` can be recreated by the following code:
 
 ```{r}
-p1 <- ggcorrm(iris) +
+ggcorrm(iris) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext() +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, fill = "grey80", color = 1)
-p1
 ```
 
-Additional layers can than be easily added using`corrmorant` selector functions:
 
-```{r}
-p1 + lotri(geom_smooth(method = "lm"))
-```
+
 
 ## Working principle of ggcorrm()
 ### Data preparation
-Under the hood, ggcorrm arranges the facets of the correlation matrix using `ggplot2::facet_grid()`. To be able to arrange a dataset across the facets, as a first step, `ggcorrm()` converts the data in a long-table format suitable for plotting. 
+Under the hood, ggcorrm arranges the facets of the correlation matrix using `ggplot2::facet_grid()`. To be able to arrange a dataset across the facets, as a first step, `ggcorrm()` converts the data in a long-table format suitable for bplotting. 
 
 This is achieved by calling a `tidy_corrm` method, which automatically rearranges the columns in a suitable way and returns them in a tidy long form in a `tidy_corrm` object (a special type of tibble):
 
@@ -122,6 +180,8 @@ As seen in the given example, there is a number of standard column names that de
 
 The content of the columns in a `tidy_corrm` object is as follows:
 
+------------- -----------------------------------------------------------------
+Column        Content
 ------------- -----------------------------------------------------------------
 `var_x`       Name of the variable on the x-axis in the order of
               appearance in the raw data (ordered factor).
