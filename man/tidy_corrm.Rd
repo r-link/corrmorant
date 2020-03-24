@@ -65,7 +65,7 @@ in the raw data (ordered factor)}
 
 \item{y}{Data of the variable on the y axis (numeric).}
 
-\item{type}{Type of panel (character, \code{"upper"}, \code{"lower"} or \code{"diag"}).}
+\item{pos}{Type of panel (character, \code{"utri"}, \code{"lotri"} or \code{"dia"}).}
 
 \item{.corr}{Correlation between x and y for the respective panel/group,
 calculated with \link[stats:cor]{cor()} using the method specified by

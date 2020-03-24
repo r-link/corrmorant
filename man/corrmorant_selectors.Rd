@@ -38,7 +38,7 @@ data for the desired panels from the \link{tidy_corrm} data the plot is based
 upon. If data are specified in \code{layer} via its \code{data} argument, it either
 plots it to all upper/lower triangle or diagonal panels (depending on the
 type of selector) or matches it to the desired rows/columns if any
-variables named \code{var_x}, \code{var_y} and/or \code{type} are present in the new
+variables named \code{var_x}, \code{var_y} and/or \code{pos} are present in the new
 dataset.
 
 The combination of \code{lotri()} and \code{utri()} in combination with  regular

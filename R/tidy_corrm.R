@@ -24,7 +24,7 @@
 #'
 #'   \item{y}{Data of the variable on the y axis (numeric).}
 #'
-#'   \item{type}{Type of panel (character, `"upper"`, `"lower"` or `"diag"`).}
+#'   \item{pos}{Type of panel (character, `"utri"`, `"lotri"` or `"dia"`).}
 #'
 #'   \item{.corr}{Correlation between x and y for the respective panel/group,
 #'   calculated with [cor()][stats::cor] using the method specified by
@@ -264,10 +264,10 @@ TidyCorrm <- ggproto(
       ) %>%
       dplyr::ungroup() %>%
       # get indicator for position
-      dplyr::mutate(type = dplyr::case_when(var_x <  var_y ~ "upper",
-                                            var_x >  var_y ~ "lower",
-                                            var_x == var_y ~ "diag")) %>%
-      dplyr::select(var_x, var_y, x, y, type, .corr, corr_group,
+      dplyr::mutate(pos = dplyr::case_when(var_x <  var_y ~ "utri",
+                                            var_x >  var_y ~ "lotri",
+                                            var_x == var_y ~ "dia")) %>%
+      dplyr::select(var_x, var_y, x, y, pos, .corr, corr_group,
                     tidyr::everything())
 
     # return reshaped output

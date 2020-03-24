@@ -19,7 +19,7 @@
 #'   upon. If data are specified in `layer` via its `data` argument, it either
 #'   plots it to all upper/lower triangle or diagonal panels (depending on the
 #'   type of selector) or matches it to the desired rows/columns if any
-#'   variables named `var_x`, `var_y` and/or `type` are present in the new
+#'   variables named `var_x`, `var_y` and/or `pos` are present in the new
 #'   dataset.
 #'
 #'   The combination of `lotri()` and `utri()` in combination with  regular
@@ -72,7 +72,7 @@ lotri <- function(layer) {
   if (!inherits(layer, "Layer")) {
     stop("lotri() has to be called on ggplot layers.")
   }
-  layer$data <- update_data(layer$data, "lower")
+  layer$data <- update_data(layer$data, "lotri")
   return(layer)
 }
 
@@ -83,7 +83,7 @@ utri <- function(layer) {
   if (!inherits(layer, "Layer")) {
     stop("utri() has to be called on ggplot layers.")
   }
-  layer$data <- update_data(layer$data, "upper")
+  layer$data <- update_data(layer$data, "utri")
   return(layer)
 }
 
@@ -94,18 +94,18 @@ dia <- function(layer) {
   if (!inherits(layer, "Layer")) {
     stop("dia() has to be called on ggplot layers.")
   }
-  layer$data <- update_data(layer$data, "diag")
+  layer$data <- update_data(layer$data, "dia")
   return(layer)
 }
 
 # update_data() - function factory for layer_data functions -------------------
 # returns a layer_data function that filters the data of a layer by the desired
-# type (upper, lower, diag)
+# position (utri, lotri, dia)
 #' @keywords internal
 #' @importFrom methods is
 #' @importFrom dplyr filter select full_join mutate group_by ungroup
 #' @importFrom tidyr unnest
-update_data <- function(data, pos){
+update_data <- function(data, target){
   # prepare function for subset computation if nothing is specified
   # (regular case)
   if (is.waive(data)) {
@@ -113,7 +113,7 @@ update_data <- function(data, pos){
       if(!methods::is(plot_data, "tidy_corrm")){
         stop("corrmorant selectors can only be used in ggcorrm() calls\n")
       }
-      dplyr::filter(plot_data, type == pos)
+      dplyr::filter(plot_data, pos == target)
     }
   } else {
     # specify updated function if there is already a function for data computation
@@ -123,7 +123,7 @@ update_data <- function(data, pos){
         if(!methods::is(plot_data, "tidy_corrm")){
           stop("corrmorant selectors can only be used in ggcorrm() calls\n")
         }
-        dplyr::filter(plot_data, type == pos) %>% data
+        dplyr::filter(plot_data, pos == target) %>% data
       }
     } else {
       # if there are user-specified data:
@@ -132,15 +132,15 @@ update_data <- function(data, pos){
           stop("corrmorant selectors can only be used in ggcorrm() calls\n")
         }
         # if columns for facet identification are there return filtered dataset
-        if (!any(!(c("var_x", "var_y", "type") %in% names(data)))){
-          dplyr::filter(data, type == pos)
+        if (!any(!(c("var_x", "var_y", "pos") %in% names(data)))){
+          dplyr::filter(data, pos == target)
         } else {
           # get identifiers for panels
           panel_ids <- plot_data %>%
-            dplyr::select(var_x, var_y, type) %>%
+            dplyr::select(var_x, var_y, pos) %>%
             dplyr::filter(!duplicated(paste(var_x, var_y)),
-                          type == pos)
-          if (any((c("var_x", "var_y", "type") %in% names(data)))){
+                          pos == target)
+          if (any((c("var_x", "var_y", "pos") %in% names(data)))){
             # if some are present, merge with correct identifiers
             panel_ids %>%
               dplyr::full_join(data)
@@ -148,7 +148,7 @@ update_data <- function(data, pos){
             # else combine with all levels
             dat <- replicate(nrow(panel_ids), data, simplify = FALSE)
             dplyr::mutate(panel_ids, dat = dat) %>%
-              dplyr::group_by(var_x, var_y, type) %>%
+              dplyr::group_by(var_x, var_y, pos) %>%
               tidyr::unnest(cols = c(dat)) %>%
               dplyr::ungroup()
           }
