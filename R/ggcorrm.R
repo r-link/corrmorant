@@ -107,7 +107,6 @@
 #'
 #' # iris data with conditional coloring by pearson correlation
 #' ggcorrm(iris, aes(col = .corr, fill = .corr)) +
-#' ggcorrm(iris, aes(col = .corr, fill = .corr)) +
 #'   lotri(geom_point(alpha = 0.6)) +
 #'   lotri(geom_smooth(method = "lm", size = 0.3, alpha = 0.6)) +
 #'   utri_corrtext() +
