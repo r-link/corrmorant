@@ -51,7 +51,7 @@ and \code{utri()}.
 \item \code{\link[=lotri]{lotri()}} - add arbitrary ggplot layers to the lower triangle.
 }
 
-\strong{Modifying the lower triangle}
+\strong{Modifying the upper triangle}
 \itemize{
 \item \code{\link[=utri_corrtext]{utri_corrtext()}} - add text labels for correlation strength.
 \item \code{\link[=utri_funtext]{utri_funtext()}} - add text labels for user-specified functions.
