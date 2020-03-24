@@ -98,7 +98,7 @@ stat_heatcircle <- function(mapping = NULL, data = NULL, geom = "ribbon",
                          corr_method = NULL, rmin = 0.1, rmax = 0.9,
                          scale_by = c("area", "radius"), ...) {
   # prepare scale argument
-  scale_by <- arg_match(scale_by)
+  scale_by <- rlang::arg_match(scale_by)
   layer(
     stat = StatHeatcircle, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,

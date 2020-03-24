@@ -6,8 +6,9 @@
 \usage{
 corrmorant(
   data,
-  style = c("dark", "light", "blue_red"),
-  rescale = c("by_sd", "by_range", NULL),
+  style = c("blue_red", "dark", "light"),
+  rescale = c("by_sd", "by_range", "as_is"),
+  corr_method = c("pearson", "kendall", "spearman"),
   labels = NULL,
   ...
 )
@@ -27,6 +28,12 @@ performed on the numeric variables in the plot. The standard argument
 zero.  \code{"by.range"} rescales the range of the data to the interval from 0
 to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
 \code{"by_sd"}.}
+
+\item{corr_method}{character string with the correlation method passed to
+\code{\link[stats:cor]{stats::cor()}}. Used for the \code{.corr} variable appended to the \code{tidy_corr}
+dataset and passed on to \code{\link[=lotri_corrtext]{lotri_corrtext()}}/ \code{\link[=utri_corrtext]{utri_corrtext()}}  layers. Can
+be one of \code{"pearson"}, \code{"kendall"}  and \code{"spearman"}. Defaults to
+\code{"pearson"}.}
 
 \item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot axis

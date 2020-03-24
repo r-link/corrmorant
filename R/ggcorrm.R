@@ -164,7 +164,7 @@ ggcorrm <- function(data,
   }
 
   # match arguments
-  rescale <- arg_match(rescale)
+  rescale     <- rlang::arg_match(rescale)
   corr_method <- rlang::arg_match(corr_method)
 
   # if post-rescaling transformations were specified, test if they are valid

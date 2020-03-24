@@ -9,7 +9,7 @@ ggcorrm(
   mapping = NULL,
   labels = NULL,
   rescale = c("by_sd", "by_max", "as_is"),
-  corr_method = "pearson",
+  corr_method = c("pearson", "kendall", "spearman"),
   corr_group = NULL,
   mutates = NULL,
   bg_dia = NULL,

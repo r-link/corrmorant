@@ -47,7 +47,7 @@ lotri_heatcircle <- function(mapping = NULL,
                               )
 
   # prepare scale argument
-  scale_by <- arg_match(scale_by)
+  scale_by <- rlang::arg_match(scale_by)
 
   # return plot with labels
   lotri(
@@ -74,7 +74,7 @@ utri_heatcircle <- function(mapping = NULL,
                               )
 
   # prepare scale argument
-  scale_by <- arg_match(scale_by)
+  scale_by <- rlang::arg_match(scale_by)
 
   # return plot with labels
   utri(
