@@ -36,7 +36,7 @@
 #'  * [lotri_heatcircle()] - add circles whose area scales with correlation strength.
 #'  * [lotri()] - add arbitrary ggplot layers to the lower triangle.
 #'
-#'  **Modifying the lower triangle**
+#'  **Modifying the upper triangle**
 #'  * [utri_corrtext()] - add text labels for correlation strength.
 #'  * [utri_funtext()] - add text labels for user-specified functions.
 #'  * [utri_heatmap()] - add correlation heatmaps.
