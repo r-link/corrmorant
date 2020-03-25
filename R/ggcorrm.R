@@ -168,7 +168,7 @@ ggcorrm <- function(data,
 
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
-    if (!is_quosures(mutates))
+    if (!rlang::is_quosures(mutates))
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
@@ -189,7 +189,7 @@ ggcorrm <- function(data,
     corr_group  <- attr(data, "corr_group")
   } else { # ...else reshape to appropriate format
   # catch grouping variable
-  corr_group <- enquo(corr_group)
+  corr_group <- rlang::enquo(corr_group)
   # prepare data
   corrdat <- tidy_corrm(data,
                         labels      = labels,

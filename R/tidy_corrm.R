@@ -122,7 +122,7 @@ tidy_corrm.default <- function(data,
 
   # if post-rescaling transformations were specified, test if they are valid
   if(!is.null(mutates)){
-    if (!is_quosures(mutates))
+    if (!rlang::is_quosures(mutates))
       stop("The transformation(s) specified as 'mutates' must be a named list of quosures\n created with quos()")
   }
 
@@ -131,7 +131,7 @@ tidy_corrm.default <- function(data,
   corr_method <- rlang::arg_match(corr_method)
 
   # catch grouping variable (if not called via ggcorrm)
-  if(!is_quosure(corr_group)) corr_group <- enquo(corr_group)
+  if(!rlang::is_quosure(corr_group)) corr_group <- rlang::enquo(corr_group)
 
   # compute tidy output
   TidyCorrm$compute(

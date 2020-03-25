@@ -58,6 +58,11 @@ NULL
 #' @importFrom magrittr `%>%`
 NULL
 
+# rlang quoting functions
+#' @export
+#' @importFrom rlang quo quos
+NULL
+
 # getFromNamespace for internal ggplot2 functions
 #' @importFrom utils getFromNamespace
 NULL
