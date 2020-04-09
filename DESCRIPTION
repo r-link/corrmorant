@@ -1,7 +1,8 @@
 Package: corrmorant
 Type: Package
 Title: Flexible Correlation Matrices Based on 'ggplot2'
-Version: 0.0.0.9002
+Version: 0.0.0.9003
+Date: 2020-04-09
 Authors@R:
     person(
       given = "Roman M.",
@@ -27,6 +28,8 @@ Imports:
     magrittr,
     stats
 License: GPL-2
+URL: http://github.com/r-link/corrmorant
+BugReports: http://github.com/r-link/corrmorant/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 LazyData: true
