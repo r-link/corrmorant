@@ -7,22 +7,26 @@ Roman M. Link
 `corrmorant` extends `ggplot2` by an automated framework for plots of
 correlation matrices that can be easily modified via regular `ggplot2`
 syntax. In addition, it provides a large set of visualization tools for
-exploratory data analysis based on correlation matrices.
+exploratory data analysis based on correlation
+matrices.
 
 | Please note that this project is a work in progress\!                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may change or disappear without further notice. |
+
+**Update 2020-04-28:** So far, the package seems to work fine with R. v.
+4.0.0. Keep me informed if you notice any unwanted behavior.
+
+**Update 2020-03-06:** The package passes all tests with the newest
+`ggplot2`version (v. 3.3.0), but I haven’t been able to check more
+thoroughly. I you notice any strange behavior with the new version,
+please let me know\!
 
 A big thank you goes out to the developers of the software without which
 this package would not be possible, especially [Hadley
 Wickham](https://github.com/hadley/) and the rest of the
 [ggplot2](https://github.com/tidyverse/ggplot2) development team for
 their incredible work.
-
-**Update:** The package passes all tests with the newest
-`ggplot2`version (v. 3.3.0), but I haven’t been able to check more
-thoroughly. I you notice any strange behavior with the new version,
-please let me know\!
 
 ## Installation
 
@@ -85,10 +89,10 @@ layers to the lower or upper triangle or the plot diagonal of a
 `ggcorrm()` plot, respectively. In addition, corrmorant offers a series
 of utility functions for readymade data summaries on the plot diagonal
 (`dia_names()`, `dia_density()`, `dia_histogram` and `dia_freqpoly()`)
-as well as a couple of new stats, e.g. `stat_corrtext()` for displaying
+as well as a couple of new stats, e.g. `stat_corrtext()` for displaying
 correlation strength in correlation plot facets. The new `corrmorant`
 stats can generally be called in a simplified form by prefixing their
-name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and
+name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and
 `utri_corrtext()`
 
 For example, `corrmorant(iris, style = "light")` can be recreated by the

@@ -16,9 +16,13 @@ library(dplyr)
 |-----------------------------------------------------------------------------|
 | This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may change or disappear without further notice. |
 
-A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
 
-**Update:** The package passes all tests with the newest `ggplot2`version (v. 3.3.0), but I haven't been able to check more thoroughly. I you notice any strange behavior with the new version, please let me know!
+**Update 2020-04-28:** So far, the package seems to work fine with R. v. 4.0.0. Keep me informed if you notice any unwanted behavior.
+
+**Update 2020-03-06:** The package passes all tests with the newest `ggplot2`version (v. 3.3.0), but I haven't been able to check more thoroughly. I you notice any strange behavior with the new version, please let me know!
+
+
+A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
 
 ## Installation
 The package can be installed from Github using `devtools::install_github()`:
