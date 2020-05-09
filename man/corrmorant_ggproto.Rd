@@ -14,7 +14,9 @@
 \alias{StatHeatmap}
 \alias{TidyCorrm}
 \title{ggproto classes for corrmorant}
-\format{An object of class \code{TidyCorrm} (inherits from \code{ggproto}, \code{gg}) of length 4.}
+\format{
+An object of class \code{TidyCorrm} (inherits from \code{ggproto}, \code{gg}) of length 4.
+}
 \usage{
 TidyCorrm
 }

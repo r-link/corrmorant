@@ -33,7 +33,7 @@ BugReports: http://github.com/r-link/corrmorant/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
     thankr,

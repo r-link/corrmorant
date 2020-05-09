@@ -98,7 +98,7 @@
 #' @rdname tidy_corrm
 #' @export
 #' @importFrom dplyr mutate_if mutate group_nest select arrange group_by ungroup
-#'   case_when
+#'   case_when group_vars
 #' @importFrom stats sd
 #' @importFrom tidyr gather expand_grid unnest
 tidy_corrm <- function(data, ... ) {
@@ -178,6 +178,14 @@ TidyCorrm <- ggproto(
   preprocess_data = function(self, data, arg){
     # if data is a matrix, convert to data.frame
     if (is.matrix(data)) data <- as.data.frame(data)
+
+    # if necessary, remove groups and issue a message
+    if (!is.null(dplyr::group_vars(data))){
+      message("Grouping variables are ignored in tidy_corrm().\n",
+              "The following grouping variables have been dropped: ",
+              paste(dplyr::group_vars(data), collapse = ", "), "\n")
+      data <- dplyr::ungroup(data)
+    }
 
     # replace infinite values and NaN values by NA values to avoid problems
     # during transformation and when calculating correlations
