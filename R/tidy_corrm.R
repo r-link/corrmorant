@@ -180,7 +180,7 @@ TidyCorrm <- ggproto(
     if (is.matrix(data)) data <- as.data.frame(data)
 
     # if necessary, remove groups and issue a message
-    if (!is.null(dplyr::group_vars(data))){
+    if (dplyr::is_grouped_df(data)){
       message("Grouping variables are ignored in tidy_corrm().\n",
               "The following grouping variables have been dropped: ",
               paste(dplyr::group_vars(data), collapse = ", "), "\n")
