@@ -1,7 +1,7 @@
 Package: corrmorant
 Type: Package
 Title: Flexible Correlation Matrices Based on 'ggplot2'
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Date: 2020-04-09
 Authors@R:
     person(
