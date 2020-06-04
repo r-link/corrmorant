@@ -7,7 +7,7 @@
 #'
 #'@section Author:
 #'
-#'  **Roman M. Link** (Maintainer, [roman.link@plant-ecology.de])
+#'  **Roman M. Link** (Maintainer, \email{roman.link@plant-ecology.de}).
 #'
 #'@section Where to start:
 #'
@@ -32,7 +32,7 @@
 #'  * [lotri_corrtext()] - add text labels for correlation strength.
 #'  * [lotri_funtext()] - add text labels for user-specified functions.
 #'  * [lotri_heatmap()] - add correlation heatmaps.
-#'  * [lotri_heatpoints()] - add symbols whose size and color indicates correlation strength.
+#'  * [lotri_heatpoint()] - add symbols whose size and color indicates correlation strength.
 #'  * [lotri_heatcircle()] - add circles whose area scales with correlation strength.
 #'  * [lotri()] - add arbitrary ggplot layers to the lower triangle.
 #'
@@ -40,7 +40,7 @@
 #'  * [utri_corrtext()] - add text labels for correlation strength.
 #'  * [utri_funtext()] - add text labels for user-specified functions.
 #'  * [utri_heatmap()] - add correlation heatmaps.
-#'  * [utri_heatpoints()] - add symbols whose size and color indicates correlation strength.
+#'  * [utri_heatpoint()] - add symbols whose size and color indicates correlation strength.
 #'  * [utri_heatcircle()] - add circles whose area scales with correlation strength.
 #'  * [utri()] - add arbitrary ggplot layers to the upper triangle.
 #'

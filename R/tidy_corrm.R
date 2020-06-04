@@ -51,7 +51,7 @@
 #'   scale of the data (`rescale = "as_is"`).
 #'
 #'   An additional variable called `.corr` with the bivariate correlation of the
-#'   two variables (by default, Pearson correlation, see [cor()][stats::cor]) is
+#'   two variables (by default, Pearson correlation, see [cor()][stats::cor()]) is
 #'   appended to the dataset. This variable can e.g. be used to specify the
 #'   colour or fill of geoms conditional of the strength of the correlation (see
 #'   examples in [ggcorrm()]). If the correlations displayed with
@@ -93,7 +93,7 @@
 #'    head(corrdat2)
 #'  }
 #' }
-#' @seealso [ggcorrm], [corrmorant]
+#' @seealso [ggcorrm()], [corrmorant()]
 #'
 #' @rdname tidy_corrm
 #' @export

@@ -31,7 +31,7 @@ polygons relative to the range of the \code{y} axis. Defaults to 1.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Additional parameters for \link{stat_dia_bin}.}
+\item{...}{Additional parameters for \code{\link[=stat_dia_bin]{stat_dia_bin()}}.}
 }
 \value{
 A \code{ggplot2} layer with histograms or frequency polygons for the
@@ -45,7 +45,7 @@ Add histograms or frequency polygons to the diagonal panels of
 The \code{lower} and\code{upper} arguments can be used to offset the
 histograms/frequency polygons from zero and optimally fit them to the range
 of each panel. The standard values are chosen to work well when placing
-text labels under the histograms/frequency polygons with \link{dia_names}.
+text labels under the histograms/frequency polygons with \code{\link[=dia_names]{dia_names()}}.
 
 \code{dia_histogram()} adds histograms of the numeric variables in a \code{ggcorrm}
 plot to the plot diagonal.
@@ -53,6 +53,6 @@ Frequency polygons can be created with \code{dia_freqpoly()}. Both functions use
 the same stat, \code{\link[=stat_dia_bin]{stat_dia_bin()}}, which is built upon \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}}.
 }
 \seealso{
-\link[ggplot2:stat_bin]{ggplot2::stat_bin},
-\link{stat_dia_bin}
+\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}},
+\code{\link[=stat_dia_bin]{stat_dia_bin()}}
 }

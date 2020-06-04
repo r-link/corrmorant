@@ -4,7 +4,7 @@
 #' @description `lotri_heatmap()` and `utri_heatmap()` are used to display
 #'   correlation heatmaps in the lower/upper off-diagonal facets of [ggcorrm]
 #'   plots. `lotri_heatpoint()` and `utri_heatpoint()` scale the and colour of a
-#'   single centered [geom_point()][ggplot2] by correlation strength.
+#'   single centered [geom_point()][ggplot2::geom_point()] by correlation strength.
 #'
 #' @inheritParams stat_heatmap
 #' @param corr_size logical - should the `size` aesthetic of the points in
@@ -23,11 +23,9 @@
 #'   layer whose size on default depends on the strength of correlation. The
 #'   shape parameter as well as transparency etc. can be adjusted via the `...`
 #'   argument. The range of sizes covered by the 'heatpoints' can be adjusted by
-#'   [scale_size()][ggplot2:scale_size].
+#'   [scale_size()][ggplot2::scale_size()].
 #'
-#'   For larger circles that scale with correlation, see [add_heatcircle].
-#'
-#' @seealso Similar corrmorant stats: [stat_heatmap], [add_heatcircle]
+#' @seealso Similar corrmorant stats: [stat_heatmap()], [stat_heatcircle()]
 #' @name add_heatmap
 NULL
 
@@ -74,7 +72,7 @@ lotri_heatpoint <- function(corr_size = TRUE, corr_method = "pearson", ...) {
   )
 }
 
-# lotri_heatpoint ---------------------------------------------------------------
+# utri_heatpoint ---------------------------------------------------------------
 #' @rdname add_heatmap
 #' @export
 utri_heatpoint <- function(corr_size = TRUE, corr_method = "pearson", ...) {

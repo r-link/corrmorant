@@ -35,7 +35,7 @@ correlation strength.
 \code{lotri_heatmap()} and \code{utri_heatmap()} are used to display
 correlation heatmaps in the lower/upper off-diagonal facets of \link{ggcorrm}
 plots. \code{lotri_heatpoint()} and \code{utri_heatpoint()} scale the and colour of a
-single centered \link[=ggplot2]{geom_point()} by correlation strength.
+single centered \link[ggplot2:geom_point]{geom_point()} by correlation strength.
 }
 \details{
 \code{lotri_/utri_heatmap()} can be used to display correlation heat maps
@@ -48,10 +48,8 @@ additionally take care of the right specification of aesthetics.
 layer whose size on default depends on the strength of correlation. The
 shape parameter as well as transparency etc. can be adjusted via the \code{...}
 argument. The range of sizes covered by the 'heatpoints' can be adjusted by
-\link[=ggplot2:scale_size]{scale_size()}.
-
-For larger circles that scale with correlation, see \link{add_heatcircle}.
+\link[ggplot2:scale_size]{scale_size()}.
 }
 \seealso{
-Similar corrmorant stats: \link{stat_heatmap}, \link{add_heatcircle}
+Similar corrmorant stats: \code{\link[=stat_heatmap]{stat_heatmap()}}, \code{\link[=stat_heatcircle]{stat_heatcircle()}}
 }

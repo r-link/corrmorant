@@ -53,7 +53,7 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{fun}{One of the following: * a) a function of \code{x} and \code{y}. * b) an
-rlang lambda style \link[=rlang:as_function]{one-sided formula} describing a
+rlang lambda style \link[rlang:as_function]{one-sided formula} describing a
 function of two parameters labeled\code{.x} and \code{.y} * c) an rlang quosure
 created with \code{quo()} that is evaluated in the context of the data analogous
 to the \code{mutates} argument in \code{\link[=tidy_corrm]{tidy_corrm()}}.
@@ -94,7 +94,7 @@ An object of class \code{Layer}.
 the facets of \link{ggcorrm} plots.
 }
 \details{
-\code{stat_funtext()} evaluates a function, rlang lambda style \link[=rlang:as_function]{one-sided formula} or a quosure in the context of the data used
+\code{stat_funtext()} evaluates a function, rlang lambda style \link[rlang:as_function]{one-sided formula} or a quosure in the context of the data used
 for plotting and computes positions in the plot using the same
 \code{nrow}/\code{ncol} based positioning as \code{\link[=stat_corrtext]{stat_corrtext()}}.
 }

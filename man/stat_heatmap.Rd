@@ -56,7 +56,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
 Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
 
-\item{...}{additional arguments passed to \code{\link[=ggplot2:layer]{ggplot2:layer()}}.}
+\item{...}{additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \value{
 An object of class \code{Layer}.
@@ -74,5 +74,5 @@ single point in the midpoint of each facet (\code{geom = "point"}).
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer()}},
-\link{add_heatmap}
+\code{\link[=add_heatmap]{add_heatmap()}}
 }

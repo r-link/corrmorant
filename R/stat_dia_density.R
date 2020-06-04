@@ -47,7 +47,7 @@ StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
 #'   each panel.
 #' @seealso
 #'   [ggplot2::stat_density()],
-#'   [dia_density]
+#'   [dia_density()]
 #' @rdname stat_dia_density
 #' @export
 stat_dia_density <- function(mapping = NULL, data = NULL, geom = "polygon",

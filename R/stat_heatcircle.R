@@ -90,7 +90,7 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 #' @rdname stat_heatcircle
 #'@seealso
 #'   [ggplot2::layer()],
-#'   [geom_heatcircle()]
+#'   [add_heatcircle()]
 #' @export
 stat_heatcircle <- function(mapping = NULL, data = NULL, geom = "ribbon",
                          position = "identity", show.legend = NA,

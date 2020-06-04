@@ -74,9 +74,9 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
 #'   fit them to the range of each panel.
 #'
 #' @seealso
-#'    [ggplot2:stat_bin][ggplot2::stat_bin],
-#'    [dia_histogram],
-#'    [dia_freqpoly]
+#'    [ggplot2::stat_bin()],
+#'    [dia_histogram()],
+#'    [dia_freqpoly()]
 #' @rdname stat_dia_bin
 #' @export
 stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",

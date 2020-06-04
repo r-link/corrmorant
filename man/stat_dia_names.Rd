@@ -55,7 +55,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
 text labels along the x axis (defaults to 0.2).}
 
-\item{...}{Additional arguments passed to\link[=layer]{ggplot2:layer}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \value{
 An object of class \code{Layer}.
@@ -70,6 +70,6 @@ facets of\link{ggcorrm} plots to compute appropriate positions for text labels
 of variable names.
 }
 \seealso{
-\link[ggplot2:layer]{ggplot2:layer},
+\code{\link[ggplot2:layer]{ggplot2::layer()}},
 \link{dia_names}
 }

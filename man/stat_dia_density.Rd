@@ -77,5 +77,5 @@ each panel.
 }
 \seealso{
 \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}},
-\link{dia_density}
+\code{\link[=dia_density]{dia_density()}}
 }

@@ -18,16 +18,16 @@ dia(layer)
 the \code{\link[ggplot2:layer]{ggplot2::layer()}}).}
 }
 \value{
-A ggplot2 \link[=layer]{ggplot2} with modified data.
+A ggplot2 \link[ggplot2:layer]{layer} with modified data.
 }
 \description{
 Selector functions that can be used to modify the mapping of
-\code{ggplot} \link[=ggplot2:layer]{layers} to a subset of panels in \code{ggcorrm} plots.
+\code{ggplot} \link[ggplot2:layer]{layers} to a subset of panels in \code{ggcorrm} plots.
 }
 \details{
 The corrmorant selector functions \code{lotri()}, \code{utri()} and \code{dia()}
 modify the data slot of \code{ggplot} layers (invoked by a call to a geom, a
-stat or \link[=ggplot2:layer]{layer()}) to make sure that they are only displayed
+stat or \link[ggplot2:layer]{layer()}) to make sure that they are only displayed
 in the desired panels of \code{ggcorrm} plot.
 
 \code{lotri()} shows the layer only in panels of the lower triangle, \code{utri()} in
@@ -76,7 +76,7 @@ ggcorrm(iris) +
 }
 }
 \seealso{
-\link{ggcorrm},
-\link{tidy_corrm},
-\link{corrmorant}
+\code{\link[=ggcorrm]{ggcorrm()}},
+\code{\link[=tidy_corrm]{tidy_corrm()}},
+\code{\link[=corrmorant]{corrmorant()}}
 }

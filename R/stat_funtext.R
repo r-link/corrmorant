@@ -78,7 +78,7 @@ StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
 #' @param fun One of the following: * a) a function of `x` and `y`. * b) an
-#'   rlang lambda style [one-sided formula][rlang:as_function] describing a
+#'   rlang lambda style [one-sided formula][rlang::as_function] describing a
 #'   function of two parameters labeled`.x` and `.y` * c) an rlang quosure
 #'   created with `quo()` that is evaluated in the context of the data analogous
 #'   to the `mutates` argument in [tidy_corrm()].
@@ -94,7 +94,7 @@ StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
 #' @return An object of class `Layer`.
 #'
 #' @details `stat_funtext()` evaluates a function, rlang lambda style [one-sided
-#'   formula][rlang:as_function] or a quosure in the context of the data used
+#'   formula][rlang::as_function()] or a quosure in the context of the data used
 #'   for plotting and computes positions in the plot using the same
 #'   `nrow`/`ncol` based positioning as [stat_corrtext()].
 #'

@@ -32,7 +32,7 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 #'
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
-#' @param ... additional arguments passed to [ggplot2:layer()].
+#' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.
 #'
@@ -44,7 +44,7 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 #' @rdname stat_heatmap
 #'@seealso
 #'   [ggplot2::layer()],
-#'   [add_heatmap]
+#'   [add_heatmap()]
 #' @export
 stat_heatmap <- function(mapping = NULL, data = NULL, geom = "rect",
                          position = "identity", show.legend = NA,

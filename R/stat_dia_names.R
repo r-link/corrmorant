@@ -30,7 +30,7 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 #' @description `stat_dia_names()` is used by [dia_names()] to compute the
 #'   positions of layer names in the diagonal panels of [ggcorrm] plots.
 #'
-#' @param ... Additional arguments passed to[ggplot2:layer][layer()].
+#' @param ... Additional arguments passed to [ggplot2::layer()].
 #' @inheritParams ggplot2::layer
 #' @inheritParams dia_names
 #'
@@ -41,7 +41,7 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
 #'   of variable names.
 #'
 #'@seealso
-#'  [ggplot2:layer][ggplot2::layer],
+#'  [ggplot2::layer()],
 #'  [dia_names]
 #' @rdname stat_dia_names
 #' @export

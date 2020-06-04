@@ -15,8 +15,7 @@ are passed on to subsequent layers. \code{x} and \code{y} are set automatically 
 must not be changed,  but all other aesthetics may be manipulated. Defaults
 to \code{NULL} (use standard \code{ggcorrm} mapping).}
 
-\item{...}{Additional parameters passed to
-\link[=stat_dia_names]{stat_dia_names}.}
+\item{...}{Additional parameters passed to \code{\link[=stat_dia_names]{stat_dia_names()}}.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
@@ -40,5 +39,5 @@ On default, \code{inherit.aes} is set to \code{FALSE} as in most cases this is t
 preferred behavior for the labels for variable names.
 }
 \seealso{
-\link{stat_dia_names}
+\code{\link[=stat_dia_names]{stat_dia_names()}}
 }

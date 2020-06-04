@@ -41,7 +41,7 @@
 #'   each of these groups (which may be useful for conditional coloring).
 #'   Defaults to `NULL`.
 #' @param mutates (Optional) list of named quosures created with
-#'   [rlang::quos()]. Can be any expressions that specify changes to the
+#'   [rlang::quos()][rlang::`nse-defuse`]. Can be any expressions that specify changes to the
 #'   `tidy_corrm` dataset _after_ reshaping, using regular [dplyr::mutate()]
 #'   syntax. Defaults to `NULL` (no `mutate` operations on the raw data).
 #' @param bg_dia (Optional) background color specification for the diagonal

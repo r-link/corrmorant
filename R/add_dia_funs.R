@@ -9,8 +9,7 @@
 #' @inheritParams ggplot2::layer
 #' @param y_pos numeric between 0 and 1 specifying the relative position of the
 #'   text labels along the x axis (defaults to 0.2).
-#' @param ... Additional parameters passed to
-#'   [stat_dia_names][stat_dia_names()].
+#' @param ... Additional parameters passed to [stat_dia_names()].
 #'
 #' @return A `ggplot2` layer containing text labels on the diagonal facets.
 #'
@@ -22,7 +21,7 @@
 #'   preferred behavior for the labels for variable names.
 #'
 #' @seealso
-#'  [stat_dia_names]
+#'  [stat_dia_names()]
 #' @rdname dia_names
 #' @export
 dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
@@ -43,7 +42,7 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'
 #' @inheritParams stat_dia_bin
 #' @inheritParams ggcorrm
-#' @param ... Additional parameters for [stat_dia_bin].
+#' @param ... Additional parameters for [stat_dia_bin()].
 #'
 #' @return A `ggplot2` layer with histograms or frequency polygons for the
 #'   variables on the plot diagonal of `ggcorrm` plots.
@@ -51,7 +50,7 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #' @details  The `lower` and`upper` arguments can be used to offset the
 #'   histograms/frequency polygons from zero and optimally fit them to the range
 #'   of each panel. The standard values are chosen to work well when placing
-#'   text labels under the histograms/frequency polygons with [dia_names].
+#'   text labels under the histograms/frequency polygons with [dia_names()].
 #'
 #'   `dia_histogram()` adds histograms of the numeric variables in a `ggcorrm`
 #'   plot to the plot diagonal.
@@ -59,8 +58,8 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   the same stat, [stat_dia_bin()], which is built upon [ggplot2::stat_bin()].
 #'
 #' @seealso
-#'   [ggplot2::stat_bin],
-#'   [stat_dia_bin]
+#'   [ggplot2::stat_bin()],
+#'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export
 dia_histogram <- function(mapping = NULL, lower = .25, upper = 1,

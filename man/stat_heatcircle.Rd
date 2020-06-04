@@ -88,5 +88,5 @@ are displayed using \code{\link[ggplot2:geom_ribbon]{ggplot2::geom_ribbon()}}.
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer()}},
-\code{\link[=geom_heatcircle]{geom_heatcircle()}}
+\code{\link[=add_heatcircle]{add_heatcircle()}}
 }

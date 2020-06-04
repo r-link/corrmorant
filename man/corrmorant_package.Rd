@@ -13,7 +13,7 @@ data analysis based on correlation matrices.
 \section{Author}{
 
 
-\strong{Roman M. Link} (Maintainer, \link{roman.link@plant-ecology.de})
+\strong{Roman M. Link} (Maintainer, \email{roman.link@plant-ecology.de}).
 }
 
 \section{Where to start}{
@@ -46,7 +46,7 @@ and \code{utri()}.
 \item \code{\link[=lotri_corrtext]{lotri_corrtext()}} - add text labels for correlation strength.
 \item \code{\link[=lotri_funtext]{lotri_funtext()}} - add text labels for user-specified functions.
 \item \code{\link[=lotri_heatmap]{lotri_heatmap()}} - add correlation heatmaps.
-\item \code{\link[=lotri_heatpoints]{lotri_heatpoints()}} - add symbols whose size and color indicates correlation strength.
+\item \code{\link[=lotri_heatpoint]{lotri_heatpoint()}} - add symbols whose size and color indicates correlation strength.
 \item \code{\link[=lotri_heatcircle]{lotri_heatcircle()}} - add circles whose area scales with correlation strength.
 \item \code{\link[=lotri]{lotri()}} - add arbitrary ggplot layers to the lower triangle.
 }
@@ -56,7 +56,7 @@ and \code{utri()}.
 \item \code{\link[=utri_corrtext]{utri_corrtext()}} - add text labels for correlation strength.
 \item \code{\link[=utri_funtext]{utri_funtext()}} - add text labels for user-specified functions.
 \item \code{\link[=utri_heatmap]{utri_heatmap()}} - add correlation heatmaps.
-\item \code{\link[=utri_heatpoints]{utri_heatpoints()}} - add symbols whose size and color indicates correlation strength.
+\item \code{\link[=utri_heatpoint]{utri_heatpoint()}} - add symbols whose size and color indicates correlation strength.
 \item \code{\link[=utri_heatcircle]{utri_heatcircle()}} - add circles whose area scales with correlation strength.
 \item \code{\link[=utri]{utri()}} - add arbitrary ggplot layers to the upper triangle.
 }
