@@ -14,10 +14,10 @@ corrmorant(
 )
 }
 \arguments{
-\item{data}{\code{data.frame} or \code{matrix} with the raw data used for the
-correlation plot. If a \code{data.frame}, all numeric variables are used as
-rows/columns of the correlation plot, while all other variables are
-appended to the reshaped dataset as additional columns.}
+\item{data}{For \code{tidy_corrm.default}, a \code{data.frame} or \code{matrix} with the
+raw data used for the correlation plot. If a \code{data.frame}, all numeric
+variables are used as rows/columns of the correlation plot, while all other
+variables are appended to the reshaped dataset as additional columns.}
 
 \item{style}{Character string defining the plot style. One of \code{"dark"},
 \code{"light"} or \code{"blue_red"}.}
@@ -54,7 +54,7 @@ values for initial data inspection.
 \details{
 \code{corrmorant()} is a simplified wrapper around \code{\link[=ggcorrm]{ggcorrm()}} that
 creates scatterplot matrices with reasonable standard settings. Refer to
-the documentation of\code{\link[=ggcorrm]{ggcorrm()}} and \code{\link[=tidy_corrm]{tidy_corrm()}} for details.
+the documentation of \code{\link[=ggcorrm]{ggcorrm()}} and \code{\link[=tidy_corrm]{tidy_corrm()}} for details.
 }
 \examples{
 \dontrun{

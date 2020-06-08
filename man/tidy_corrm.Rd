@@ -17,10 +17,10 @@ tidy_corrm(data, ...)
 )
 }
 \arguments{
-\item{data}{\code{data.frame} or \code{matrix} with the raw data used for the
-correlation plot. If a \code{data.frame}, all numeric variables are used as
-rows/columns of the correlation plot, while all other variables are
-appended to the reshaped dataset as additional columns.}
+\item{data}{For \code{tidy_corrm.default}, a \code{data.frame} or \code{matrix} with the
+raw data used for the correlation plot. If a \code{data.frame}, all numeric
+variables are used as rows/columns of the correlation plot, while all other
+variables are appended to the reshaped dataset as additional columns.}
 
 \item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot axis
@@ -79,17 +79,19 @@ no groups are specified).}
 created via \code{mutates}.} }
 }
 \description{
-\code{tidy_corrm()} takes a \code{data.frame} or \code{matrix} and reshapes it
-to a long-table format that enables plotting with \code{\link[=ggcorrm]{ggcorrm()}}.
+\code{tidy_corrm()} is a generic function with the purpose to take a
+dataset and reshape it to a long-table format that can be plotted with
+\code{\link[=ggcorrm]{ggcorrm()}}.
 }
 \details{
-\code{tidy_corrm()} is used to reshape a \code{data.frame} or \code{matrix} with
-raw data for a correlation plot to a long-table format that can be plotted
-with \code{\link[=ggcorrm]{ggcorrm()}}. The function creates a tibble with all combinations of
-all numeric variables in the dataset that are labelled with their column
-names (or, alternatively, a vector with new labels) in the order of their
-appearance in the raw data. All other variables are appended to the
-reshaped data.frame and can be accessed in the plots.
+\code{tidy_corrm()} is a generic S3 method that reshapes raw data for a
+correlation plot to a long-table format that can be plotted with
+\code{\link[=ggcorrm]{ggcorrm()}}. The default method takes a \code{data.frame} or \code{matrix} and
+creates a tibble with all combinations of all numeric variables in the
+dataset that are labelled with their column names (or, alternatively, a
+vector with new labels) in the order of their appearance in the raw data.
+All other variables are appended to the reshaped data.frame and can be
+accessed in the plots.
 
 By default, the data are scaled and centered using their standard deviation
 (\code{rescale = "by_sd"}), but it is also possible to rescale them into the
@@ -106,17 +108,18 @@ make sense to also calculate \code{.corr} separately for these groups. In this
 case, it is possible to specify a grouping variable for the calculation of
 \code{.corr} using \code{corr_group}.
 
-In many cases, the variables in the correlation matrix belong to different
-groups of variables. As the input for \code{tidy_corrm()} is based on a wide
-table format, it is usually not possible to include this information as an
-additional column in the raw data. There are two ways to include
-variable-specific information \emph{after the fact}: a) \code{tidy_corrm()} can be
-called directly, and its output can be modified manually before passing it
-to \code{ggcorrm()} or b) the \code{mutates} argument can be used to pass a list of
-named quosures created with \code{\link[rlang:quos]{rlang::quos()}} that contain a set of mutating
-operations based on regular \code{\link[dplyr:mutate]{dplyr::mutate()}} syntax that are evaluated
-inside the reshaped dataset (see examples). For the standard column names
-of \code{tidy_corr} objects see the Value section.
+In many cases, the columns of the \code{data.frame} used to construct the
+correlation matrix belong to different groups of variables. As the input
+for \code{tidy_corrm()} is based on a wide table format, it is often not easily
+possible to include this information as an additional column in the raw
+data. There are two ways to include variable-specific information \emph{after
+the fact}: a) \code{tidy_corrm()} can be called directly, and its output can be
+modified manually before passing it to \code{ggcorrm()} or b) the \code{mutates}
+argument can be used to pass a list of named quosures created with
+\code{\link[rlang:quos]{rlang::quos()}} that contain a set of mutating operations based on regular
+\code{\link[dplyr:mutate]{dplyr::mutate()}} syntax that are evaluated inside the reshaped dataset
+(see examples). For the standard column names of \code{tidy_corr} objects see
+the Value section.
 }
 \examples{
 \dontrun{

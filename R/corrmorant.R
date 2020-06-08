@@ -13,7 +13,7 @@
 #'
 #' @details `corrmorant()` is a simplified wrapper around [ggcorrm()] that
 #'   creates scatterplot matrices with reasonable standard settings. Refer to
-#'   the documentation of[ggcorrm()] and [tidy_corrm()] for details.
+#'   the documentation of [ggcorrm()] and [tidy_corrm()] for details.
 #'
 #' @examples
 #' \dontrun{
