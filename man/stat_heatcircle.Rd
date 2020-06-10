@@ -19,10 +19,10 @@ stat_heatcircle(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
-are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
-must not be changed,  but all other aesthetics may be manipulated. Defaults
-to \code{NULL} (use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:

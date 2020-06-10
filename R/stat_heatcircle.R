@@ -68,8 +68,8 @@ StatHeatcircle <- ggproto("StatHeatcircle", Stat,
 #'   and display them in [ggcorrm] plots in form of circles whose color and size
 #'   indicate correlation strength.
 #'
-#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
+#' @inheritParams add_corrtext
 #' @param rmin numeric (0 - 1). Minimum radius for the "heat circles" (as a
 #'   proportion of panel width). Defaults to 0.1.
 #' @param rmax numeric (0 - 1). Maximum radius for the "heat circles" (as a
