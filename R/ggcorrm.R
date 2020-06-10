@@ -89,7 +89,7 @@
 #'   `facet_arg` allows to change the settings in the [ggplot2::facet_grid()]
 #'   call underlying the facet structure of a corrmorant plot. This is likely
 #'   most helpful if you wish to parse facet labels as expressions with
-#'   `facet_arg = list(labeller = "label_parsed)`.
+#'   `facet_arg = list(labeller = "label_parsed")`.
 #'
 #' @return An object of class `ggcorrm` containing the reshaped dataset for the
 #'   correlation plot and an empty `ggplot` object with appropriate facet and
@@ -206,6 +206,10 @@ ggcorrm <- function(data,
   layers <- make_corrm_layers(backgrounds = list(bg_dia, bg_lotri, bg_utri))
 
   # get facet arguments
+  if (any(c("rows", "cols") %in% names(facet_arg))){
+    warning("Facet row/column specifications are overridden.\n")
+    facet_arg <- facet_arg[!(names(facet_arg) %in% c("rows", "cols"))]
+  }
   facet_arg <- modify_list(list(rows = var_x ~ var_y, scales = "free"), facet_arg)
 
   # prepare output

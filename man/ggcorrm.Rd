@@ -125,7 +125,7 @@ upon the corrmorant standard theme (\link{theme_corrm}).
 \code{facet_arg} allows to change the settings in the \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}
 call underlying the facet structure of a corrmorant plot. This is likely
 most helpful if you wish to parse facet labels as expressions with
-\verb{facet_arg = list(labeller = "label_parsed)}.
+\code{facet_arg = list(labeller = "label_parsed")}.
 }
 \examples{
 \dontrun{
