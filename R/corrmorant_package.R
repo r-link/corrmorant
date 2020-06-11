@@ -1,6 +1,8 @@
 #' @title corrmorant - Flexible correlation matrices based on ggplot2
 #'
-#'@description corrmorant extends ggplot2 by an automated framework for plots of
+#'@description
+#'  \if{html}{\figure{logo.png}{options: align='right' alt='logo' width=250}}
+#'  corrmorant extends ggplot2 by an automated framework for plots of
 #'  correlation matrices that can be easily modified via regular ggplot2 syntax.
 #'  In addition, it provides a large set of visualization tools for exploratory
 #'  data analysis based on correlation matrices.
@@ -11,7 +13,7 @@
 #'
 #'@section Where to start:
 #'
-#'  * [corrmorant()] - a simple, stripped down function for fast vizualization
+#'  * [corrmorant()] - a simple, stripped down function for fast visualization
 #'  of correlation matrices.
 #'  * [ggcorrm()] - the workhorse function for all corrmorant plots.
 #'  * [tidy_corrm()] - prepare datasets for plotting in corrmorant.
