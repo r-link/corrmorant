@@ -2,13 +2,14 @@ corrmorant: Flexible Correlation Matrices Based on ggplot2
 ================
 Roman M. Link
 
+# ggplot2 <img src="man/figures/logo.png" align="right" width="150" />
+
 ## Description
 
 `corrmorant` extends `ggplot2` by an automated framework for plots of
 correlation matrices that can be easily modified via regular `ggplot2`
 syntax. In addition, it provides a large set of visualization tools for
-exploratory data analysis based on correlation
-matrices.
+exploratory data analysis based on correlation matrices.
 
 | Please note that this project is a work in progress\!                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,10 +47,6 @@ Afterwards, the package can be loaded regularly via `library()`:
 library(corrmorant)
 ```
 
-    ## Loading required package: ggplot2
-
-    ## Loading required package: rlang
-
 ## Simple plots with corrmorant()
 
 The `corrmorant()` function is a simple wrapper function around the more
@@ -68,6 +65,8 @@ corrmorant(iris, style = "light")
 # the "dark" style has a dark background in the diagonal facets
 corrmorant(iris, style = "dark")
 ```
+
+    ## Joining, by = "pos"
 
 ![](README_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
@@ -89,10 +88,10 @@ layers to the lower or upper triangle or the plot diagonal of a
 `ggcorrm()` plot, respectively. In addition, corrmorant offers a series
 of utility functions for readymade data summaries on the plot diagonal
 (`dia_names()`, `dia_density()`, `dia_histogram` and `dia_freqpoly()`)
-as well as a couple of new stats, e.g. `stat_corrtext()` for displaying
+as well as a couple of new stats, e.g. `stat_corrtext()` for displaying
 correlation strength in correlation plot facets. The new `corrmorant`
 stats can generally be called in a simplified form by prefixing their
-name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and
+name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and
 `utri_corrtext()`
 
 For example, `corrmorant(iris, style = "light")` can be recreated by the
@@ -164,6 +163,8 @@ ggcorrm(data1,
   dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
   scale_color_corr(aesthetics = c("fill", "color"))
 ```
+
+    ## Joining, by = "pos"
 
     ## `geom_smooth()` using formula 'y ~ x'
 
