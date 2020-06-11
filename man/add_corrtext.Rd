@@ -15,6 +15,7 @@ lotri_corrtext(
   corr_method = NULL,
   squeeze = 0.7,
   byrow = TRUE,
+  show.legend = FALSE,
   ...
 )
 
@@ -27,6 +28,7 @@ utri_corrtext(
   corr_method = NULL,
   squeeze = 0.7,
   byrow = TRUE,
+  show.legend = FALSE,
   ...
 )
 }
@@ -67,6 +69,11 @@ Note that the actual number of rows or columns that are filled with values
 can be below the specified value of \code{nrow} or \code{ncol} when less rows/columns
 than specified are needed to reach the total number of groups. Defaults to
 \code{TRUE}.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?
+FALSE (the default) never includes, TRUE always includes, and NA includes
+only if aesthetics are mapped. It can also be a named logical vector
+to finely select the aesthetics to display.}
 
 \item{...}{Additional arguments to \link{stat_corrtext}.}
 }

@@ -31,6 +31,10 @@
 #'   can be below the specified value of `nrow` or `ncol` when less rows/columns
 #'   than specified are needed to reach the total number of groups. Defaults to
 #'   `TRUE`.
+#' @param show.legend logical. Should this layer be included in the legends?
+#'   FALSE (the default) never includes, TRUE always includes, and NA includes
+#'   only if aesthetics are mapped. It can also be a named logical vector
+#'   to finely select the aesthetics to display.
 #' @param ... Additional arguments to [stat_corrtext].
 #' @return A `ggplot2` layer with text labels for correlation strength.
 #' @details `lotri_corrtext()` and `utri_corrtext()` can be used to display the
@@ -53,7 +57,8 @@ NULL
 lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                            digits = 2, corr_size = TRUE,
                            corr_method = NULL, squeeze = 0.7,
-                           byrow = TRUE, ...) {
+                           byrow = TRUE, show.legend = FALSE,
+                           ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 
@@ -68,7 +73,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # return plot with labels
   lotri(
-    stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
+    stat_corrtext(mapping = mapping, geom = "text", show.legend = show.legend,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
                   squeeze = squeeze, byrow = byrow, ...)
   )
@@ -80,7 +85,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                           digits = 2, corr_size = TRUE,
                           corr_method = NULL, squeeze = 0.7,
-                          byrow = TRUE, ...) {
+                          byrow = TRUE, show.legend = FALSE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping)
 
@@ -95,7 +100,7 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # return plot with labels
   utri(
-    stat_corrtext(mapping = mapping, geom = "text", show.legend = FALSE,
+    stat_corrtext(mapping = mapping, geom = "text", show.legend = show.legend,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
                   squeeze = squeeze, byrow = byrow, ...)
   )
