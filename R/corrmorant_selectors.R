@@ -159,43 +159,18 @@ update_data <- function(data, target){
           if(any(test)){
             stop("Layer data contain variable names missing in the correlation matrix.\n")
           } else {
-            # return filtered data if "pos" is present
-            if ("pos" %in% tc_cols){
-              output <- dplyr::filter(data, pos == target) %>%
-                dplyr::left_join(panel_ids)
-              return(output)
-            } else {
-              # else return updated raw data
-              output <- dplyr::mutate(data, pos = target) %>%
-                dplyr::left_join(panel_ids)
-              return(output)
+            # get correct order of facets
+            ord <- levels(plot_data$var_x)
+            # reorder variables
+            for (cols in tc_cols){
+              data[, cols] <- factor(data[, cols], levels = ord, ordered = TRUE)
             }
+            # else return updated raw data
+            output <- dplyr::mutate(data, pos = target) %>%
+              dplyr::left_join(panel_ids)
+            return(output)
           }
         }
-
-
-        # # if columns for facet identification are there return filtered dataset
-        # if (!any(!(c("var_x", "var_y", "pos") %in% names(data)))){
-        #   dplyr::filter(data, pos == target)
-        # } else {
-        #   # get identifiers for panels
-        #   panel_ids <- plot_data %>%
-        #     dplyr::select(var_x, var_y, pos) %>%
-        #     dplyr::filter(!duplicated(paste(var_x, var_y)),
-        #                   pos == target)
-        #   if (any((c("var_x", "var_y", "pos") %in% names(data)))){
-        #     # if some are present, merge with correct identifiers
-        #     panel_ids %>%
-        #       dplyr::full_join(data)
-        #   } else {
-        #     # else combine with all levels
-        #     dat <- replicate(nrow(panel_ids), data, simplify = FALSE)
-        #     dplyr::mutate(panel_ids, dat = dat) %>%
-        #       dplyr::group_by(var_x, var_y, pos) %>%
-        #       tidyr::unnest(cols = c(dat)) %>%
-        #       dplyr::ungroup()
-        #   }
-        # }
       }
     }
   }
