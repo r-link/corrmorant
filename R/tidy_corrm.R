@@ -244,7 +244,7 @@ TidyCorrm <- ggproto(
     # group by correlation grouping variable
     data <- dplyr::mutate(data, corr_group = !!arg$corr_group)
     # if !!corr_group evaluated to NULL set uniform group
-    if (!has_name(data, "corr_group")) data$corr_group <- 1
+    if (!rlang::has_name(data, "corr_group")) data$corr_group <- 1
 
     # reshape dataset to long format
     longtab <- tidyr::gather(data, key = "var", value = "x", numerics) %>%

@@ -17,9 +17,9 @@ Description:
     based on correlation matrices.
 Depends: 
     R (>= 3.6.0),
-    ggplot2 (>= 3.2.1),
-    rlang
+    ggplot2 (>= 3.2.1)
 Imports:
+    rlang,
     grid,
     scales,
     utils,
