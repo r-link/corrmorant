@@ -2,7 +2,7 @@ corrmorant: Flexible Correlation Matrices Based on ggplot2
 ================
 Roman M. Link
 
-# ggplot2 <img src="man/figures/logo.png" align="right" width="150" />
+<img src="man/figures/logo.png" align="right" width="150" />
 
 ## Description
 
@@ -46,6 +46,10 @@ Afterwards, the package can be loaded regularly via `library()`:
 ``` r
 library(corrmorant)
 ```
+
+    ## Loading required package: ggplot2
+
+    ## Loading required package: rlang
 
 ## Simple plots with corrmorant()
 
@@ -163,8 +167,6 @@ ggcorrm(data1,
   dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
   scale_color_corr(aesthetics = c("fill", "color"))
 ```
-
-    ## Joining, by = "pos"
 
     ## `geom_smooth()` using formula 'y ~ x'
 
