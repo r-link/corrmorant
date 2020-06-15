@@ -165,6 +165,17 @@ ggcorrm(iris, rescale = "by_sd",
               mapping = aes(fill = leaftype)) +
   dia_names(y_pos = .1,
             mapping = aes(col = leaftype))
+
+
+# using facet_args and dia_names(parse = TRUE) to parse variable names
+data <- matrix(log(1:100), ncol = 5)
+ggcorrm(data,
+        labels = c("gamma", "beta", "alpha[3]", "phi^2", "B~(cm^2)"),
+        facet_arg = list(labeller = "label_parsed")) +
+  utri(geom_point()) +
+  lotri_corrtext() +
+  dia_names(y_pos = 0.5, parse = TRUE)
+
  }
 }
 }
