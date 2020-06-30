@@ -78,7 +78,7 @@ be used to offset the histograms/frequency polygons from zero and optimally
 fit them to the range of each panel.
 }
 \seealso{
-\preformatted{[ggplot2::stat_bin()][ggplot2::geom_freqpoly()],
+\preformatted{[ggplot2::stat_bin()][ggplot2::geom_histogram()],
 }
 
 \code{\link[=dia_histogram]{dia_histogram()}},

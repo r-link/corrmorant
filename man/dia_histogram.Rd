@@ -51,9 +51,9 @@ text labels under the histograms/frequency polygons with \code{\link[=dia_names]
 plot to the plot diagonal.
 Frequency polygons can be created with \code{dia_freqpoly()}. Both functions use
 the same stat, \code{\link[=stat_dia_bin]{stat_dia_bin()}}, which is built upon
-\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()}.
+\link[ggplot2:geom_histogram]{ggplot2::stat_bin()}.
 }
 \seealso{
-\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()},
+\link[ggplot2:geom_histogram]{ggplot2::stat_bin()},
 \code{\link[=stat_dia_bin]{stat_dia_bin()}}
 }

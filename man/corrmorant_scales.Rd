@@ -67,7 +67,7 @@ strength.
 }
 \details{
 The color and fill scales specified via \code{option} are built upon
-\link[ggplot2:scale_colour_gradient]{ggplot2::scale_colour_gradient2()},
+\link[ggplot2:scale_gradient]{ggplot2::scale_colour_gradient2()},
 which can easily be used to set up additional scales if the available
 options are not sufficient.
 }
@@ -87,5 +87,5 @@ ggcorrm(iris, rescale = "by_sd") +
 }
 }
 \seealso{
-\code{\link[ggplot2:scale_color_gradient]{ggplot2::scale_color_gradient()}}
+\code{\link[ggplot2:scale_gradient]{ggplot2::scale_gradient()}}
 }

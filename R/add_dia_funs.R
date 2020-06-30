@@ -56,10 +56,10 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   plot to the plot diagonal.
 #'   Frequency polygons can be created with `dia_freqpoly()`. Both functions use
 #'   the same stat, [stat_dia_bin()], which is built upon
-#'   [ggplot2::stat_bin()][ggplot2::geom_freqpoly()].
+#'   [ggplot2::stat_bin()][ggplot2::geom_histogram()].
 #'
 #' @seealso
-#'   [ggplot2::stat_bin()][ggplot2::geom_freqpoly()],
+#'   [ggplot2::stat_bin()][ggplot2::geom_histogram()],
 #'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export
