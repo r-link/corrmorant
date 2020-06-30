@@ -32,13 +32,13 @@ their incredible work.
 ## Installation
 
 The package can be installed from Github using
-`devtools::install_github()`:
+`remotes::install_github()`:
 
 ``` r
-# install devtools package if necessary
-install.packages("devtools")
+# install remotes package if necessary
+install.packages("remotes")
 # install corrmorant from the github repository
-devtools::install_github("r-link/corrmorant")
+remotes::install_github("r-link/corrmorant")
 ```
 
 Afterwards, the package can be loaded regularly via `library()`:

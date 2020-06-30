@@ -27,13 +27,13 @@ library(dplyr)
 A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
 
 ## Installation
-The package can be installed from Github using `devtools::install_github()`:
+The package can be installed from Github using `remotes::install_github()`:
 
 ``` {r, eval = FALSE}
-# install devtools package if necessary
-install.packages("devtools")
+# install remotes package if necessary
+install.packages("remotes")
 # install corrmorant from the github repository
-devtools::install_github("r-link/corrmorant")
+remotes::install_github("r-link/corrmorant")
 ```
 
 Afterwards, the package can be loaded regularly via `library()`:
