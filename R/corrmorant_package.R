@@ -62,7 +62,7 @@ NULL
 
 # rlang quoting functions
 #' @export
-#' @importFrom rlang quo quos
+#' @importFrom rlang quo quos `%||%`
 NULL
 
 # getFromNamespace for internal ggplot2 functions
