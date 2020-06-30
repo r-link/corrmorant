@@ -64,7 +64,7 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
 #' @param upper numeric between 0 and 1. Upper limit of the histograms/frequency
 #'   polygons relative to the range of the `y` axis. Defaults to 1.
 #' @param ... Additional arguments passed [ggplot2::layer()] (arguments for
-#'    [ggplot2::stat_bin()][ggplot2::geom_freqpoly()] are permitted).
+#'    [ggplot2::stat_bin()][ggplot2::geom_histogram()] are permitted).
 #'
 #' @return An object of class `Layer`.
 #'

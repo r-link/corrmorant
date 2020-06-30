@@ -61,7 +61,7 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
-\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()} are permitted).}
+\link[ggplot2:geom_histogram]{ggplot2::stat_bin()} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
