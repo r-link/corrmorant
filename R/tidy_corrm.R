@@ -71,7 +71,7 @@
 #'   the fact_: a) `tidy_corrm()` can be called directly, and its output can be
 #'   modified manually before passing it to `ggcorrm()` or b) the `mutates`
 #'   argument can be used to pass a list of named quosures created with
-#'   [rlang::quos()] that contain a set of mutating operations based on regular
+#'   [rlang::quos()][rlang::nse-defuse] that contain a set of mutating operations based on regular
 #'   [dplyr::mutate()] syntax that are evaluated inside the reshaped dataset
 #'   (see examples). For the standard column names of `tidy_corr` objects see
 #'   the Value section.

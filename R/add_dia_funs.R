@@ -55,10 +55,11 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   `dia_histogram()` adds histograms of the numeric variables in a `ggcorrm`
 #'   plot to the plot diagonal.
 #'   Frequency polygons can be created with `dia_freqpoly()`. Both functions use
-#'   the same stat, [stat_dia_bin()], which is built upon [ggplot2::stat_bin()].
+#'   the same stat, [stat_dia_bin()], which is built upon
+#'   [ggplot2::stat_bin()][ggplot2::geom_freqpoly()].
 #'
 #' @seealso
-#'   [ggplot2::stat_bin()],
+#'   [ggplot2::stat_bin()][ggplot2::geom_freqpoly()],
 #'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export

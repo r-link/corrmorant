@@ -74,7 +74,7 @@ defined text labels in the lower or upper triangular facets of
 \code{ggcorrm} plots, respectively. The functions can be evaluated separately
 for different groups by using grouping aesthetics such as \code{aes(color = group)}.
 
-If \code{fun} is a function or rlang lambda-style \link[rlang:is_lambda]{one-sided formula},
+If \code{fun} is a function or rlang lambda-style \link[rlang:as_function]{one-sided formula},
 it is called on the data in each group using the \code{x} coordinate as first and the \code{y}
 coordinate as second argument. If \code{fun} is a quosure, it is evaluated in the
 context of the data in the respective group.

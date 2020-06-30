@@ -37,7 +37,7 @@ StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
 #' @inheritParams ggplot2::layer
 #' @inheritParams stat_dia_bin
 #' @param ... Additional arguments passed to [ggplot2::layer()] (arguments for
-#'   [ggplot2::stat_density()] are permitted).
+#'   [ggplot2::stat_density()][ggplot2::geom_density()] are permitted).
 #'
 #' @return An object of class `Layer`.
 #'
@@ -46,7 +46,7 @@ StatDiaDensity <- ggproto("StatDiaDensity", StatDensity,
 #'   offset the density curves from zero and optimally fit them to the range of
 #'   each panel.
 #' @seealso
-#'   [ggplot2::stat_density()],
+#'   [ggplot2::stat_density()][ggplot2::geom_density()],
 #'   [dia_density()]
 #' @rdname stat_dia_density
 #' @export

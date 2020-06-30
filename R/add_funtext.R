@@ -20,7 +20,7 @@
 #'   `ggcorrm` plots, respectively. The functions can be evaluated separately
 #'   for different groups by using grouping aesthetics such as `aes(color = group)`.
 #'
-#'   If `fun` is a function or rlang lambda-style [one-sided formula][rlang::is_lambda()],
+#'   If `fun` is a function or rlang lambda-style [one-sided formula][rlang::as_function()],
 #'   it is called on the data in each group using the `x` coordinate as first and the `y`
 #'   coordinate as second argument. If `fun` is a quosure, it is evaluated in the
 #'   context of the data in the respective group.

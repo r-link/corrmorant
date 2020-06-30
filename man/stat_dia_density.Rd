@@ -60,7 +60,7 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
-\code{\link[ggplot2:stat_density]{ggplot2::stat_density()}} are permitted).}
+\link[ggplot2:geom_density]{ggplot2::stat_density()} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
@@ -76,6 +76,6 @@ offset the density curves from zero and optimally fit them to the range of
 each panel.
 }
 \seealso{
-\code{\link[ggplot2:stat_density]{ggplot2::stat_density()}},
+\link[ggplot2:geom_density]{ggplot2::stat_density()},
 \code{\link[=dia_density]{dia_density()}}
 }

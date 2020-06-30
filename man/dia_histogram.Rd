@@ -50,9 +50,10 @@ text labels under the histograms/frequency polygons with \code{\link[=dia_names]
 \code{dia_histogram()} adds histograms of the numeric variables in a \code{ggcorrm}
 plot to the plot diagonal.
 Frequency polygons can be created with \code{dia_freqpoly()}. Both functions use
-the same stat, \code{\link[=stat_dia_bin]{stat_dia_bin()}}, which is built upon \code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}}.
+the same stat, \code{\link[=stat_dia_bin]{stat_dia_bin()}}, which is built upon
+\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()}.
 }
 \seealso{
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}},
+\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()},
 \code{\link[=stat_dia_bin]{stat_dia_bin()}}
 }

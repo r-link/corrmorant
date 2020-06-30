@@ -60,7 +60,7 @@ each of these groups (which may be useful for conditional coloring).
 Defaults to \code{NULL}.}
 
 \item{mutates}{(Optional) list of named quosures created with
-\link[rlang:`nse-defuse`]{rlang::quos()}. Can be any expressions that specify changes to the
+\link[rlang:nse-defuse]{rlang::quos()}. Can be any expressions that specify changes to the
 \code{tidy_corrm} dataset \emph{after} reshaping, using regular \code{\link[dplyr:mutate]{dplyr::mutate()}}
 syntax. Defaults to \code{NULL} (no \code{mutate} operations on the raw data).}
 

@@ -47,7 +47,7 @@ each of these groups (which may be useful for conditional coloring).
 Defaults to \code{NULL}.}
 
 \item{mutates}{(Optional) list of named quosures created with
-\link[rlang:`nse-defuse`]{rlang::quos()}. Can be any expressions that specify changes to the
+\link[rlang:nse-defuse]{rlang::quos()}. Can be any expressions that specify changes to the
 \code{tidy_corrm} dataset \emph{after} reshaping, using regular \code{\link[dplyr:mutate]{dplyr::mutate()}}
 syntax. Defaults to \code{NULL} (no \code{mutate} operations on the raw data).}
 }
@@ -116,7 +116,7 @@ data. There are two ways to include variable-specific information \emph{after
 the fact}: a) \code{tidy_corrm()} can be called directly, and its output can be
 modified manually before passing it to \code{ggcorrm()} or b) the \code{mutates}
 argument can be used to pass a list of named quosures created with
-\code{\link[rlang:quos]{rlang::quos()}} that contain a set of mutating operations based on regular
+\link[rlang:nse-defuse]{rlang::quos()} that contain a set of mutating operations based on regular
 \code{\link[dplyr:mutate]{dplyr::mutate()}} syntax that are evaluated inside the reshaped dataset
 (see examples). For the standard column names of \code{tidy_corr} objects see
 the Value section.

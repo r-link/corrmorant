@@ -61,7 +61,7 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
 \item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}} are permitted).}
+\link[ggplot2:geom_freqpoly]{ggplot2::stat_bin()} are permitted).}
 }
 \value{
 An object of class \code{Layer}.
@@ -78,7 +78,9 @@ be used to offset the histograms/frequency polygons from zero and optimally
 fit them to the range of each panel.
 }
 \seealso{
-\code{\link[ggplot2:stat_bin]{ggplot2::stat_bin()}},
+\preformatted{[ggplot2::stat_bin()][ggplot2::geom_freqpoly()],
+}
+
 \code{\link[=dia_histogram]{dia_histogram()}},
 \code{\link[=dia_freqpoly]{dia_freqpoly()}}
 }
