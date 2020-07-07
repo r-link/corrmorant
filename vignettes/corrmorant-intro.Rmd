@@ -74,17 +74,18 @@ library(corrmorant)
 
 
 ## Simple plots with corrmorant()
-The `corrmorant()` function is a simple wrapper function around the more complex `gcorrm()` function that can be used to create first, simple plots of correlation matrices. Currently, 
-three different styles are available, "light", "dark" and "blue_red":
+The `corrmorant()` function is a simple wrapper function around the more complex `gcorrm()` function that can be used to create first, simple plots of correlation matrices. Currently, three different styles are available, "light", "dark" and "blue_red":
 
 ``` {r}
-# correlation plot of the iris data using style = 'light'
-corrmorant(iris, style = "light")
+# get subset of drosera dataset for Drosera capensis
+capensis <- filter(drosera, species == "capensis")
+# correlation plot of the drosera data using style = 'light'
+corrmorant(capensis, style = "light")
 # the "dark" style has a dark background in the diagonal facets
-corrmorant(iris, style = "dark")
+corrmorant(capensis, style = "dark")
 # in the "blue_red" style, colors and correlation labels are colored by the strength of
 # correlation
-corrmorant(iris, style = "blue_red")
+corrmorant(capensis, style = "blue_red")
 ```
 
 The`corrmorant()` interface is kept simple on purpose as this function is only intended for fast visual checks of datasets. If you want to modify single elements of the plot, it is always preferable to use `ggcorrm()` instead.
@@ -97,13 +98,13 @@ The `ggcorrm()` function allows to create correlation matrices with a syntax tha
 You can add new layers and other `ggplot2` plot elements (e.g. scales, themes etc.) to a `ggcorrm()` object as if it was a regular `ggplot()` call. However, adding layers to all panels of a correlation matrix is rarely useful:
 
 ```{r}
-ggcorrm(iris) + geom_point(alpha = 0.5)
+ggcorrm(capensis) + geom_point(alpha = 0.5)
 ```
 
 Usually, you will want to display different graphical elements in the plot diagonal, lower and upper triangular panels of the correlation matrix, respectively. This can be achieved with the three corrmorant selector functions `lotri()`, `utri()` and `dia()`, which can be used to modify ggplot layers (i.e. the output of calls to geoms, stats or the `layer()` function) and direct them only to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. To use them, you simply have to wrap the ggplot layer into one of the selector functions:
 
 ```{r}
-ggcorrm(iris) + 
+ggcorrm(capensis) + 
   lotri(geom_point(alpha = 0.5))
 ```
 
@@ -152,10 +153,10 @@ Stat                   Prefixed versions     Description
 
 Together with regular `ggplot2` geoms and stats, these new functions can be used as building blocks for more complex correlation matrix plots.
 
-For example, `corrmorant(iris, style = "light")` can be recreated by the following code:
+For example, `corrmorant(capensis, style = "light")` can be recreated by the following code:
 
 ```{r}
-ggcorrm(iris) +
+ggcorrm(capensis) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext() +
   dia_names(y_pos = 0.1, size = 3) +
@@ -167,12 +168,12 @@ ggcorrm(iris) +
 
 ## Working principle of ggcorrm()
 ### Data preparation
-Under the hood, ggcorrm arranges the facets of the correlation matrix using `ggplot2::facet_grid()`. To be able to arrange a dataset across the facets, as a first step, `ggcorrm()` converts the data in a long-table format suitable for bplotting. 
+Under the hood, ggcorrm arranges the facets of the correlation matrix using `ggplot2::facet_grid()`. To be able to arrange a dataset across the facets, as a first step, `ggcorrm()` converts the data in a long-table format suitable for plotting. 
 
 This is achieved by calling a `tidy_corrm` method, which automatically rearranges the columns in a suitable way and returns them in a tidy long form in a `tidy_corrm` object (a special type of tibble):
 
 ``` {r}
-tidy_corrm(iris)
+tidy_corrm(drosera)
 ```
 
 As seen in the given example, there is a number of standard column names that describe the content of all numeric variables in the facets (`var_x:corr_group`), while all categorical variables are carried over with the dataset in their original form and can be used for grouping (in this case only `Species`). Additional columns can be created from these columns using the `mutates` argument (see below).
