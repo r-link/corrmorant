@@ -15,6 +15,12 @@ exploratory data analysis based on correlation matrices.
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may change or disappear without further notice. |
 
+**Update 2020-07-07:** As of today, the `corrmorant` package will
+replace all uses of the `iris` dataset with the `drosera` dataset, which
+contains a set of (eugenics-free) biometric measurements of three
+African sundew species and is [available as a separate
+data-package](https://github.com/r-link/drosera).
+
 **Update 2020-04-28:** So far, the package seems to work fine with R. v.
 4.0.0. Keep me informed if you notice any unwanted behavior.
 
@@ -59,25 +65,23 @@ plots of correlation matrices. Currently, three different styles are
 available, “light”, “dark” and “blue\_red”:
 
 ``` r
-# correlation plot of the iris data using style = 'light'
-corrmorant(iris, style = "light")
+# correlation plot of the drosera data using style = 'light'
+corrmorant(drosera, style = "light")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
 # the "dark" style has a dark background in the diagonal facets
-corrmorant(iris, style = "dark")
+corrmorant(drosera, style = "dark")
 ```
-
-    ## Joining, by = "pos"
 
 ![](README_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
 # in the "blue_red" style, colors and correlation labels are colored by the strength of
 # correlation
-corrmorant(iris, style = "blue_red")
+corrmorant(drosera, style = "blue_red")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
@@ -98,11 +102,11 @@ stats can generally be called in a simplified form by prefixing their
 name with `lotri_` or `utri_`, e.g. `lotri_corrtext()` and
 `utri_corrtext()`
 
-For example, `corrmorant(iris, style = "light")` can be recreated by the
-following code:
+For example, `corrmorant(drosera, style = "light")` can be recreated by
+the following code:
 
 ``` r
-p1 <- ggcorrm(iris) +
+p1 <- ggcorrm(drosera) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext() +
   dia_names(y_pos = 0.1, size = 3) +
@@ -126,21 +130,20 @@ p1 + lotri(geom_smooth(method = "lm"))
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 The horrific fit of these linear regressions results from the fact that
-the iris dataset contains data from three different species. You might
-want to include this information into your plot by plotting the three
-species in different colours, which can easily be achieved by setting
-plot level aesthetics using the `mapping` argument of `ggcorrm()`:
+the `drosera` dataset contains data from three different sundew species.
+You might want to include this information into your plot by plotting
+the three species in different colours, which can easily be achieved by
+setting plot level aesthetics using the `mapping` argument of
+`ggcorrm()`:
 
 ``` r
-ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
+ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   lotri(geom_smooth(method = "lm")) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext(nrow = 2, squeeze = 0.6) +
   dia_names(y_pos = 0.1, size = 3) +
   dia_density(lower = 0.4, color = 1)
 ```
-
-    ## `geom_smooth()` using formula 'y ~ x'
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
@@ -230,15 +233,13 @@ reverse axes in the upper triangle).
 lmslope <- function(x, y)  round(coef(lm(x ~ y))[2], 2)
 
 # add slopes using a function
-ggcorrm(iris, mapping = aes(col = Species, fill = Species)) +
+ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   lotri(geom_point(alpha = 0.4)) +
   lotri(geom_smooth(alpha = 0.4, method = "lm")) +
   utri_funtext(fun = lmslope, squeeze = .6) +
   dia_density(lower = .4, col = 1, alpha = 0.4) +
   dia_names(y_pos = .1)
 ```
-
-    ## `geom_smooth()` using formula 'y ~ x'
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
@@ -252,7 +253,7 @@ lambda expression (a formula containing `.x` and `.y`) in the upper and
 a quosure in the lower triangle:
 
 ``` r
-ggcorrm(iris, aes(col = .corr), rescale = "as_is") +
+ggcorrm(drosera, aes(col = .corr), rescale = "as_is") +
   utri_funtext(fun = ~ round(cor(.x, .y), 2)) +
   lotri_funtext(fun = quo(round(cor(x, y), 2))) +
   dia_names(y_pos = .5) +
