@@ -12,7 +12,7 @@ StatFuntextProto <- ggproto("StatFuntextProto", Stat,
      if(rlang::is_quosure(fun)){
        data <- dplyr::summarize(data, fun_out = !!fun)
      } else {
-       data <- dplyr::summarize(data, fun_out = as_function(fun)(x, y))
+       data <- dplyr::summarize(data, fun_out = rlang::as_function(fun)(x, y))
      }
      data
    }
