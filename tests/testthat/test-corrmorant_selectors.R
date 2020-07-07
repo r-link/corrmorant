@@ -1,8 +1,7 @@
 context("corrmorant selectors")
 
 # temporary dataset
-testdat  <- tidy_corrm(iris)
-
+testdat  <- tidy_corrm(dplyr::mutate_if(drosera, is.numeric, log))
 
 test_that("update_data() works with globally defined data", {
   # lower triangle
@@ -53,16 +52,16 @@ test_that("update_data() works on user-specified data without tidycorrm columns"
 
 
 test_that("update_data() works on user-specified data with one tidycorrm columns", {
-  dat2 <- tibble(var_x = "Petal.Length",  x = 0, y = 0, label = "Text")
+  dat2 <- tibble(var_x = "petiole_length",  x = 0, y = 0, label = "Text")
   expect_equal(
     nrow(corrmorant:::update_data(dat2, "lotri")(testdat)),
-    2 # only the two rows containing Petal.Length should be included
+    3 # only the two rows containing petiole length should be included
   )
 })
 
 
 test_that("update_data() works on user-specified data with two tidycorrm columns", {
-  dat3 <- tibble(var_x = "Petal.Length", var_y = "Sepal.Width",  x = 0, y = 0, label = "Text")
+  dat3 <- tibble(var_x = "petiole_length", var_y = "blade_length",  x = 0, y = 0, label = "Text")
   expect_equal(
     nrow(corrmorant:::update_data(dat3, "lotri")(testdat)),
     1 # only one row should meet this conditions
@@ -71,14 +70,14 @@ test_that("update_data() works on user-specified data with two tidycorrm columns
 
 test_that("update_data() breaks when var_x or var_y contain variables that are not in data", {
   # var_x wrong
-  dat4 <- tibble(var_x = "Petal.Legs", var_y = "Sepal.Width",  x = 0, y = 0, label = "Text")
+  dat4 <- tibble(var_x = "oriole_length", var_y = "blade_length",  x = 0, y = 0, label = "Text")
   expect_error(
     corrmorant:::update_data(dat4, "lotri")(testdat),
     regexp = "variable names missing"
     )
 
   # var_y wrong
-  dat5 <- tibble(var_x = "Petal.Length", var_y = "Sepal.Wids",  x = 0, y = 0, label = "Text")
+  dat5 <- tibble(var_x = "petiole_length", var_y = "blade_strength",  x = 0, y = 0, label = "Text")
   expect_error(
     corrmorant:::update_data(dat5, "lotri")(testdat),
     regexp = "variable names missing"

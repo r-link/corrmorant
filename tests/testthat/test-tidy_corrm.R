@@ -1,5 +1,8 @@
 context("Tests of tidy_corrm() functionalities")
 
+# prepare dataset for testing
+ldros <- dplyr::mutate_if(drosera, is.numeric, log)
+
 # Preprocessing ---------------------------------------------------------------
 test_that("matrix is correctly coerced to data frame", {
 
@@ -23,7 +26,7 @@ test_that("Infinite values and NaN are handled correctly", {
 test_that("Reshape_data output has right dimensions", {
 
   test_out <- TidyCorrm$reshape_data(
-    iris,
+    ldros,
     arg = list(labels = NULL,
                rescale = "by_sd",
                corr_group = NULL,
@@ -32,14 +35,14 @@ test_that("Reshape_data output has right dimensions", {
 
   expect_equal(
     dim(test_out),
-    c(sum(sapply(iris, is.numeric)) ^ 2 * nrow(iris),  7 + 1)
+    c(sum(sapply(ldros, is.numeric)) ^ 2 * nrow(ldros),  7 + 2)
   )
 
 })
 
 test_that("Correlation coefficients calculated correctly", {
 
-  corrs <- tidy_corrm(iris[1:20, ]) %>%
+  corrs <- tidy_corrm(ldros[1:20, ]) %>%
     dplyr::select(var_x, var_y, .corr) %>%
     dplyr::filter(!duplicated(.)) %>%
     tidyr::spread(key = var_y, value = .corr) %>%
@@ -49,9 +52,8 @@ test_that("Correlation coefficients calculated correctly", {
 
   expect_equal(
     corrs,
-    cor(dplyr::select(iris[1:20, ], -Species))
+    cor(dplyr::select_if(ldros[1:20, ], is.numeric))
   )
-
 })
 
 test_that("Correct errors and messages are issued", {
@@ -113,13 +115,15 @@ test_that("Rescaling works", {
 test_that("Mutating works", {
 
   data <- tidy_corrm(
-    iris,
-    mutates = quos(leaf_type  = substr(var_x, 1, 5),
-                   dimension = substr(var_x, 7, 13))
-  )
+    ldros,
+    mutates = quos(
+      organ = ifelse(substr(var_x, 1, 1) == "p", "petiole", "leaf"),
+      dimension = ifelse(grepl("width", var_x), "width", "length")
+      )
+    )
 
-  expect_equal(unique(data$leaf_type), c("Sepal", "Petal"))
-  expect_equal(unique(data$dimension), c("Length", "Width"))
+  expect_equal(unique(data$organ), c("petiole", "leaf"))
+  expect_equal(unique(data$dimension), c("length", "width"))
 
 })
 
@@ -136,7 +140,7 @@ test_that("tidy_corrm fails for wrong object types", {
 test_that("Misspecified mutates cause correct error", {
 
   expect_error(
-    tidy_corrm(iris, mutates = ggcorrm),
+    tidy_corrm(ldros, mutates = ggcorrm),
     regexp = "must be a named list of quosures"
   )
 
