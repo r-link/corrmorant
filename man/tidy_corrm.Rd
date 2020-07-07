@@ -99,8 +99,8 @@ range from 0 to 1 (\code{rescale = "by_range"}) or to maintain the original
 scale of the data (\code{rescale = "as_is"}).
 
 An additional variable called \code{.corr} with the bivariate correlation of the
-two variables (by default, Pearson correlation, see \link[stats:cor]{cor()}) is
-appended to the dataset. This variable can e.g. be used to specify the
+two variables (by default, Pearson correlation, see \link[stats:cor]{cor()})
+is appended to the dataset. This variable can e.g. be used to specify the
 colour or fill of geoms conditional of the strength of the correlation (see
 examples in \code{\link[=ggcorrm]{ggcorrm()}}). If the correlations displayed with
 \code{\link[=lotri_corrtext]{lotri_corrtext()}} or \code{\link[=utri_corrtext]{utri_corrtext()}} are separated by groups, it may
@@ -116,27 +116,28 @@ data. There are two ways to include variable-specific information \emph{after
 the fact}: a) \code{tidy_corrm()} can be called directly, and its output can be
 modified manually before passing it to \code{ggcorrm()} or b) the \code{mutates}
 argument can be used to pass a list of named quosures created with
-\link[rlang:nse-defuse]{rlang::quos()} that contain a set of mutating operations based on regular
-\code{\link[dplyr:mutate]{dplyr::mutate()}} syntax that are evaluated inside the reshaped dataset
-(see examples). For the standard column names of \code{tidy_corr} objects see
-the Value section.
+\link[rlang:nse-defuse]{rlang::quos()} that contain a set of mutating
+operations based on regular \code{\link[dplyr:mutate]{dplyr::mutate()}} syntax that are evaluated
+inside the reshaped dataset (see examples). For the standard column names
+of \code{tidy_corr} objects see the Value section.
 }
 \examples{
 \dontrun{
 if(interactive()){
    # general shape of the output
-   corrdat <- tidy_corrm(iris)
+   corrdat <- tidy_corrm(drosera)
    head(corrdat)
 
    # relabeling variables
-   corrdat1 <- tidy_corrm(iris,
+   corrdat1 <- tidy_corrm(drosera,
      labels = c("Some", "very", "nice", "labels"))
    head(corrdat1)
 
    # use of mutates argument
-   corrdat2 <- tidy_corrm(iris,
-               mutates = quos(leaf_type  = substr(var_x, 1, 5),
-                               dimension = substr(var_x, 7, 13)
+   corrdat2 <- tidy_corrm(drosera,
+               mutates = quos(organ = ifelse(substr(var_x, 1, 1) == "p",
+                                             "petiole", "leaf"),
+                              dimension = ifelse(grepl("width", var_x), "width", "length")
                                )
                 )
    head(corrdat2)

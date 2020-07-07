@@ -74,8 +74,8 @@ options are not sufficient.
 \examples{
 \dontrun{
 if(interactive()){
-# iris data with conditional coloring by correlation strength
-ggcorrm(iris, rescale = "by_sd") +
+# drosera data with conditional coloring by correlation strength
+ggcorrm(drosera) +
   lotri(geom_point(aes(col = .corr), alpha = 0.6)) +
   lotri(geom_smooth(aes(fill = .corr, col = .corr),
                     method = "lm", size = 0.3, alpha = 0.6)) +

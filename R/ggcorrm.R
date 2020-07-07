@@ -98,15 +98,15 @@
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#' # correlation matrix for the iris dataset
-#' ggcorrm(iris, bg_dia = "grey20") +
+#' # correlation matrix for the drosera dataset
+#' ggcorrm(drosera, bg_dia = "grey20") +
 #'   lotri(geom_point(alpha = 0.4)) +
 #'   utri_corrtext() +
 #'   dia_histogram(lower = .3, fill = "grey90", col = 1) +
 #'   dia_names(y_pos = .1, col = "white", size = 3)
 #'
-#' # iris data with conditional coloring by pearson correlation
-#' ggcorrm(iris, aes(col = .corr, fill = .corr)) +
+#' # drosera data with conditional coloring by Pearson correlation
+#' ggcorrm(drosera, aes(col = .corr, fill = .corr)) +
 #'   lotri(geom_point(alpha = 0.6)) +
 #'   lotri(geom_smooth(method = "lm", size = 0.3, alpha = 0.6)) +
 #'   utri_corrtext() +
@@ -114,8 +114,8 @@
 #'   dia_names(y_pos = .1) +
 #'   scale_color_corr(option = "A", aesthetics = c("fill", "color"))
 #'
-#' # correlation separated by groups
-#' ggcorrm(iris, aes(col = Species, fill = Species),
+#' # correlation separated by species
+#' ggcorrm(drosera, aes(col = species, fill = species),
 #'         rescale = "by_sd", bg_dia = "grey95") +
 #'   lotri(geom_point(alpha = 0.4)) +
 #'   lotri(geom_smooth(col = 1, method = "lm"))  +
@@ -123,16 +123,16 @@
 #'   dia_density(col = 1, alpha = 0.5, lower = 0.4) +
 #'   dia_names(y_pos = 0.15)
 #'
-#' # using the 'mutates' argument to color diagonal panels by leaf type
-#' ggcorrm(iris, rescale = "by_sd",
-#'         mutates = quos(leaftype = ifelse(substr(var_x, 1, 1) == "S",
-#'                                          "Sepal", "Petal"))) +
+#' # using the 'mutates' argument to color diagonal panels by plant organ
+#' ggcorrm(drosera, rescale = "by_sd",
+#'         mutates = quos(organ = ifelse(substr(var_x, 1, 1) == "p",
+#'                                       "Petiole", "Leaf blade"))) +
 #'   lotri(geom_point(alpha = 0.4))+
 #'   utri_corrtext() +
 #'   dia_density(lower = .3,
-#'               mapping = aes(fill = leaftype)) +
+#'               mapping = aes(fill = organ)) +
 #'   dia_names(y_pos = .1,
-#'             mapping = aes(col = leaftype))
+#'             mapping = aes(col = organ))
 #'
 #'
 #' # using facet_args and dia_names(parse = TRUE) to parse variable names

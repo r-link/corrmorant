@@ -38,15 +38,15 @@
 #' lmslope <- function(y, x)  round(coef(lm(y ~ x))[2], 2)
 #'
 #' # add slopes using a function
-#' ggcorrm(iris, rescale = "as_is") +
+#' ggcorrm(drosera, rescale = "as_is") +
 #'   lotri(geom_point(alpha = 0.4)) +
 #'   utri_funtext(fun = lmslope) +
 #'   dia_density(fill = "steelblue", lower = .4) +
 #'   dia_names(y_pos = .1)
 #'
-#' # compute pearson correlations as a lambda expression (top)
+#' # compute Pearson correlations as a lambda expression (top)
 #' # and as a quosure(bottom)
-#' ggcorrm(iris, rescale = "as_is") +
+#' ggcorrm(drosera, rescale = "as_is") +
 #'   utri_funtext(fun = ~ round(cor(.x, .y), 3)) +
 #'   lotri_funtext(fun = quo(round(cor(x, y), 3))) +
 #'   dia_names(y_pos = .5)

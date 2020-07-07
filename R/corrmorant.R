@@ -18,10 +18,10 @@
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  # plot the iris dataset with 3 different styles
-#'  corrmorant(iris, style = "dark")
-#'  corrmorant(iris, style = "light")
-#'  corrmorant(iris, style = "blue_red")
+#'  # plot the drosera dataset with 3 different styles
+#'  corrmorant(drosera, style = "dark")
+#'  corrmorant(drosera, style = "light")
+#'  corrmorant(drosera, style = "blue_red")
 #'  }
 #' }
 #' @seealso

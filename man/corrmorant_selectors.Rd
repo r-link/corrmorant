@@ -60,14 +60,14 @@ offdiagonal corrmorant facets that all exist in two versions, e.g.
 \dontrun{
 if(interactive()){
 # plot with points on the lower triangle
-ggcorrm(iris) +
+ggcorrm(drosera) +
   utri(geom_point(alpha = 0.4)) +
   lotri_corrtext() +
   dia_density(fill = "grey50") +
   dia_names(size = 3)
 
 # same plot with inverted lower and upper triangle
-ggcorrm(iris) +
+ggcorrm(drosera) +
   lotri(geom_point(alpha = 0.4)) +
   utri_corrtext() +
   dia_density(fill = "grey50") +
