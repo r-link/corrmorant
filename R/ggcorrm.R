@@ -221,7 +221,7 @@ ggcorrm <- function(data,
     warning("Facet row/column specifications are overridden.\n")
     facet_arg <- facet_arg[!(names(facet_arg) %in% c("rows", "cols"))]
   }
-  facet_arg <- modify_list(list(rows = var_x ~ var_y, scales = "free"), facet_arg)
+  facet_arg <- modify_list(list(rows = var_y ~ var_x, scales = "free"), facet_arg)
 
   # prepare output
   plot_out <- structure(list(

@@ -134,12 +134,13 @@ if(interactive()){
    head(corrdat1)
 
    # use of mutates argument
-   corrdat2 <- tidy_corrm(drosera,
-               mutates = quos(organ = ifelse(substr(var_x, 1, 1) == "p",
-                                             "petiole", "leaf"),
-                              dimension = ifelse(grepl("width", var_x), "width", "length")
-                               )
-                )
+   corrdat2 <- tidy_corrm(
+     drosera,
+     mutates = quos(
+       organ = ifelse(substr(var_x, 1, 1) == "p", "petiole", "leaf"),
+       dimension = ifelse(grepl("width", var_x), "width", "length")
+       )
+    )
    head(corrdat2)
  }
 }

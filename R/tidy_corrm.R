@@ -260,15 +260,15 @@ TidyCorrm <- ggproto(
                                    function(dat) dplyr::select(dat, y = x)
       )
       ) %>%
-      # assure correct oder (important for correct subsetting)
+      # assure correct order (important for correct subsetting)
       dplyr::arrange(var)
 
     # prepare plotting output (all x and y and identifiers for everything else)
     # get all combinations of x and y values
     out <- tidyr::expand_grid(var_x = longtab$var, var_y = longtab$var) %>%
       # create columns for the corresponding data
-      dplyr::mutate(dat_x = longtab$data[as.numeric(var_y)],
-                    dat_y = longtab$dat_y[as.numeric(var_x)]) %>%
+      dplyr::mutate(dat_x = longtab$data[as.numeric(var_x)],
+                    dat_y = longtab$dat_y[as.numeric(var_y)]) %>%
       # unnest data columns
       tidyr::unnest(cols = c(dat_x, dat_y)) %>%
       # get column with correlations (for use in plots)
@@ -278,9 +278,9 @@ TidyCorrm <- ggproto(
       ) %>%
       dplyr::ungroup() %>%
       # get indicator for position
-      dplyr::mutate(pos = dplyr::case_when(var_x <  var_y ~ "utri",
-                                            var_x >  var_y ~ "lotri",
-                                            var_x == var_y ~ "dia")) %>%
+      dplyr::mutate(pos = dplyr::case_when(var_x >  var_y ~ "utri",
+                                           var_x <  var_y ~ "lotri",
+                                           var_x == var_y ~ "dia")) %>%
       dplyr::select(var_x, var_y, x, y, pos, .corr, corr_group,
                     tidyr::everything())
 
