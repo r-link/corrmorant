@@ -111,7 +111,10 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
 get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
                              xrange, yrange, byrow = TRUE){
   # return single group w/o computations if only one observation exists
-  if(nrow(stats) <= 1) return(dplyr::mutate(stats, x = mean(xrange),
+  if(nrow(stats) <= 1) return(dplyr::mutate(stats,
+                                            relx = 0.5,
+                                            rely = 0.5,
+                                            x = mean(xrange),
                                             y = mean(yrange)))
   else {
     # get number of groups
@@ -126,30 +129,37 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
       # throw an error if both nrow and ncol exist and do not add up to the right number
       else if (ncol * nrow < ngr) stop("Check dimensions in text labels: nrow and ncol values do not match")
     }
-    # edit stats
+    # compute coordinates
+    # (both relative and absolute coordinates are computed. the absolute coordinates may cause problems
+    #  in the presence of scale transformations or panel range extensions caused by other computed stats -
+    #  in these cases better work with geom_reltext and relative coordinates)
     if (byrow){
       out <- dplyr::mutate(
         stats,
-        x = rescale_var(x = rep(1:ncol, length.out = ngr),
+        relx = rescale_var(x = rep(1:ncol, length.out = ngr),
                         lower = (1 - squeeze)/2,
                         upper = (1 + squeeze)/2,
-                        range = xrange),
-        y = rescale_var(x = rep(nrow:1, each = ncol)[1:ngr],
+                        range = c(0, 1)),
+        rely = rescale_var(x = rep(nrow:1, each = ncol)[1:ngr],
                         lower = (1 - squeeze)/2,
                         upper = (1 + squeeze)/2,
-                        range = yrange)
+                        range = c(0, 1)),
+        x = xrange[1] + relx * diff(xrange),
+        y = yrange[1] + rely * diff(yrange)
         )
     } else {
       out <- dplyr::mutate(
         stats,
-        x = rescale_var(x = rep(1:ncol, each = nrow)[1:ngr],
+        relx = rescale_var(x = rep(1:ncol, each = nrow)[1:ngr],
                         lower = (1 - squeeze)/2,
                         upper = (1 + squeeze)/2,
-                        range = xrange),
-        y = rescale_var(x = rep(nrow:1, length.out = ngr),
+                        range = c(0, 1)),
+        rely = rescale_var(x = rep(nrow:1, length.out = ngr),
                         lower = (1 - squeeze)/2,
                         upper = (1 + squeeze)/2,
-                        range = yrange)
+                        range = c(0, 1)),
+        x = xrange[1] + relx * diff(xrange),
+        y = yrange[1] + rely * diff(yrange)
         )
     }
     # return output
