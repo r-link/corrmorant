@@ -30,7 +30,7 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
                               standard_aes = aes(x = x, label = var_x))
 
   # return plot with labels
-  dia(stat_dia_names(mapping = mapping, geom = "text", y_pos = y_pos,
+  dia(stat_dia_names(mapping = mapping, geom = "reltext", y_pos = y_pos,
                      inherit.aes = inherit.aes, ...))
 }
 

@@ -71,7 +71,7 @@ lotri_funtext <- function(fun, mapping = NULL,
 
   # return plot with labels
   lotri(
-    stat_funtext(mapping = mapping, geom = "text", show.legend = show.legend,
+    stat_funtext(mapping = mapping, geom = "reltext", show.legend = show.legend,
                   fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze,
                  byrow = byrow, ...)
   )
@@ -89,7 +89,7 @@ utri_funtext <- function(fun, mapping = NULL,
 
   # return plot with labels
   utri(
-    stat_funtext(mapping = mapping, geom = "text", show.legend = show.legend,
+    stat_funtext(mapping = mapping, geom = "reltext", show.legend = show.legend,
                  fun = fun, ncol = ncol, nrow = nrow, squeeze = squeeze,
                  byrow = byrow, ...)
   )

@@ -10,8 +10,10 @@ StatDiaNames <- ggproto("StatDiaNames", Stat,
     rx <- scales$x$get_limits()
     out <- data %>%
       dplyr::filter(!duplicated(group)) %>%
-      dplyr::mutate(x = rep(mean(rx)),
-                    y = rx[1] + y_pos * diff(rx),
+      dplyr::mutate(x = mean(rx),
+                    y = mean(rx),
+                    relx = 0.5,
+                    rely = y_pos,
                     label = data$label[1])
     if (nrow(out) > 1){
       message("More than one group per panel detected in dia_names().\n",

@@ -73,7 +73,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # return plot with labels
   lotri(
-    stat_corrtext(mapping = mapping, geom = "text", show.legend = show.legend,
+    stat_corrtext(mapping = mapping, geom = "reltext", show.legend = show.legend,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
                   squeeze = squeeze, byrow = byrow, ...)
   )
@@ -100,7 +100,7 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # return plot with labels
   utri(
-    stat_corrtext(mapping = mapping, geom = "text", show.legend = show.legend,
+    stat_corrtext(mapping = mapping, geom = "reltext", show.legend = show.legend,
                   ncol = ncol, nrow = nrow, corr_method = corr_method,
                   squeeze = squeeze, byrow = byrow, ...)
   )
