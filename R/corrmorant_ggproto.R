@@ -28,6 +28,11 @@
 #'  frequency polygons) of variables in the diagonal facets of `ggcorrm` plots
 #'  (see [stat_dia_bin] for details).
 #'
+#'
+#'@section New geoms:
+#'   * `GeomReltext`: text labels with relative positions (see [geom_reltext]
+#'   for details).
+#'
 #'@seealso
 #'  * [ggplot2-ggproto] for a description of the `ggproto` object orientation
 #'  system,
