@@ -9,7 +9,7 @@ GeomDiaDensity <- ggproto(
   default_aes =
     aes(fill = "grey80", weight = 1, colour = "black",
         linetype = 1, alpha = NA, size = 0.3,
-        lower = 0.3, upper = 0.98),
+        lwr = 0.3, upr = 0.98),
   setup_data = Geom$setup_data,
   draw_panel = function(self, data, panel_params, coord, ...) {
     # get x and y ranges
@@ -17,11 +17,11 @@ GeomDiaDensity <- ggproto(
 
     # rescale range of density values
     data$ymax <- corrmorant:::rescale_var(data$density,
-                                          lower = data$lower[1],
-                                          upper = data$upper[1],
+                                          lower = data$lwr[1],
+                                          upper = data$upr[1],
                                           range = range$y,
                                           append_x = 0)
-    data$ymin <- range$y[1] + 0.99 * data$lower[1] * diff(range$y)
+    data$ymin <- range$y[1] + 0.99 * data$lwr[1] * diff(range$y)
 
     # compute group-level grobs
     groups <- split(data, factor(data$group))
@@ -54,7 +54,7 @@ GeomDiaDensity <- ggproto(
 #' @return An object of class `Layer`.
 #'
 #' @details `stat_density()` computes density curves for display in the diagonal
-#'   facets of `ggcorrm` plots. The `lower` and `upper` arguments can be used to
+#'   facets of `ggcorrm` plots. Its `lwr` and `upr` aesthetics can be used to
 #'   offset the density curves from zero and optimally fit them to the range of
 #'   each panel.
 #' @seealso

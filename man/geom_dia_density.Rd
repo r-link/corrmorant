@@ -73,7 +73,7 @@ for the correct display of density curves on the plot diagonal of \link{ggcorrm}
 }
 \details{
 \code{stat_density()} computes density curves for display in the diagonal
-facets of \code{ggcorrm} plots. The \code{lower} and \code{upper} arguments can be used to
+facets of \code{ggcorrm} plots. Its \code{lwr} and \code{upr} aesthetics can be used to
 offset the density curves from zero and optimally fit them to the range of
 each panel.
 }
