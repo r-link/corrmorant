@@ -8,7 +8,7 @@ GeomReltext <- ggproto("GeomText", Geom,
                        required_aes = c("label"),
                        # define default aesthetics
                        default_aes = aes(
-                         colour = "black", size = 2.8, angle = 0, hjust = 0.5,
+                         colour = "black", size = 3.25, angle = 0, hjust = 0.5,
                          vjust = 0.5, alpha = NA, family = "", fontface = 1, lineheight = 1.2
                        ),
                        # define panel plotting function
