@@ -40,9 +40,7 @@ geom_dia_histogram <- function(mapping = NULL,
                                ...,
                                na.rm = TRUE,
                                show.legend = NA,
-                               inherit.aes = FALSE,
-                               outline.type = "full") {
-  outline.type <- match.arg(outline.type, c("both", "upper", "lower", "full"))
+                               inherit.aes = FALSE) {
 
   layer(
     data = data,
