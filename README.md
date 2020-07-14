@@ -155,7 +155,8 @@ colnames(data1) <- paste("Var.", 1:ncol(data1))
 # create plot
 ggcorrm(data1, 
         mapping = aes(col = .corr, fill = .corr),
-        bg_dia = "grey20") +
+        bg_dia = "grey20", 
+        rescale = "by_sd") +
   lotri(geom_smooth(method = "lm", size = .3)) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext(nrow = 2, squeeze = 0.6) +
@@ -181,7 +182,7 @@ of variables:
 
 ``` r
 select(mtcars, mpg, disp:qsec) %>% 
-ggcorrm() +
+ggcorrm(rescale = "by_range") +
   utri_heatmap(alpha = 0.5) +
   lotri_heatcircle(alpha = 0.5, col = 1) +
   utri_corrtext() +
