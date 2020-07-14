@@ -24,7 +24,7 @@
 #'  [stat_dia_names()]
 #' @rdname dia_names
 #' @export
-dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
+dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
                               standard_aes = aes(x = x, label = var_x))
@@ -63,7 +63,7 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export
-dia_histogram <- function(mapping = NULL, lower = .25, upper = 1,
+dia_histogram <- function(mapping = NULL, lower = .3, upper = 1,
                          bins = 10, position = "dodge", ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
@@ -77,7 +77,7 @@ dia_histogram <- function(mapping = NULL, lower = .25, upper = 1,
 # dia_freqpoly() - wrapper around stat_dia_bin --------------------------------
 #' @rdname dia_histogram
 #' @export
-dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
+dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 1,
                          bins = 15, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
@@ -117,8 +117,8 @@ dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
 dia_density <- function(mapping = NULL, lower = .3, upper = 0.98, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x,
-                                                          lower = lower,
-                                                          upper = upper))
+                                                          lwr = lower,
+                                                          upr = upper))
 
   # return plot with labels
   dia(

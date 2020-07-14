@@ -7,14 +7,14 @@
 \usage{
 dia_histogram(
   mapping = NULL,
-  lower = 0.25,
+  lower = 0.3,
   upper = 1,
   bins = 10,
   position = "dodge",
   ...
 )
 
-dia_freqpoly(mapping = NULL, lower = 0.25, upper = 1, bins = 15, ...)
+dia_freqpoly(mapping = NULL, lower = 0.3, upper = 1, bins = 15, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or

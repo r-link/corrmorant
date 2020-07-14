@@ -4,7 +4,7 @@
 \alias{dia_names}
 \title{Add variable names to diagonal facets}
 \usage{
-dia_names(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE)
+dia_names(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE)
 }
 \arguments{
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
