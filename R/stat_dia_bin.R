@@ -3,11 +3,13 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-StatDiaBin <- ggproto("StatDiaBin", StatBin,
+StatDiaBin <- ggproto(
+  "StatDiaBin", StatBin,
+  default_aes = aes(x = x, y = after_stat(y)),
   # some of the warnings in StatBin are retained
   setup_params  = function(data, params){
     if (is.integer(data$x)) {
-      stop("StatBin requires a continuous x variable: the x variable is discrete. Perhaps you want stat=\"count\"?",
+      stop("StatDiaBin requires a continuous x variable: the x variable is discrete.",
            call. = FALSE)
     }
     if (!is.null(params$boundary) && !is.null(params$center)) {
@@ -22,32 +24,33 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
   },
   # rescaled output from StatDensity$compute_panel
   compute_panel = function (self, data, scales,
-                            lower = 0.25, upper = 1,
                             bins = bins, ...) {
     StatBin$compute_panel(data = data, scales = scales,
                           bins = bins, ...) %>%
       dplyr::mutate(
-        xmin = x - width / 2,
-        xmax = x + width / 2,
         ymin = rescale_var(0,
-                           lower = lower,
-                           upper = upper,
+                           lower = 0,
+                           upper = 1,
                            scales$y$get_limits(),
                            append_x = ncount),
         ymax = rescale_var(ncount,
-                           lower = lower,
-                           upper = upper,
+                           lower = 0,
+                           upper = 1,
                            scales$y$get_limits(),
-                           append_x = 0)
-      )},
+                           append_x = 0),
+        y = ymax
+      ) %>%
+      dplyr::select(-density, -count, -ncount, -ndensity)
+
+  },
   # compute group: just called to make sure parameters() includes all important parameters
   compute_group = function (data, scales, binwidth = NULL, bins = NULL, center = NULL,
                             boundary = NULL, closed = c("right", "left"), pad = FALSE,
                             breaks = NULL, origin = NULL, right = NULL, drop = NULL,
                             width = NULL, lower = NULL, upper = NULL) {
-     StatBin$compute_group(data, scales, binwidth, bins, center, boundary, closed, pad,
-                           breaks, origin, right, drop, width)
-    }
+    StatBin$compute_group(data, scales, binwidth, bins, center, boundary, closed, pad,
+                          breaks, origin, right, drop, width)
+  }
 )
 
 
@@ -79,13 +82,13 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
 #'    [dia_freqpoly()]
 #' @rdname stat_dia_bin
 #' @export
-stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "rect",
+stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "dia_histogram",
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE, bins = 10,
-                         lower = 0.25, upper = 1,  ...) {
+                         ...) {
   layer(
     stat = StatDiaBin, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(bins = bins, lower = lower, upper = upper, ...)
+    params = list(bins = bins, ...)
   )
 }

@@ -29,7 +29,11 @@
 #'@section New geoms:
 #'   * `GeomReltext`: text labels with relative positions (see [geom_reltext]
 #'   for details).
+#'
 #'  * `GeomDiaDensity`: create and position density plots of variables in the
+#'  diagonal facets of `ggcorrm` plots (see [geom_dia_density] for details).
+#'
+#'  * `GeomDiaHistogram`: create and position histograms of variables in the
 #'  diagonal facets of `ggcorrm` plots (see [geom_dia_density] for details).
 #'
 #'@seealso

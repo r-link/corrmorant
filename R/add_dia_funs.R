@@ -63,15 +63,21 @@ dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export
-dia_histogram <- function(mapping = NULL, lower = .3, upper = 1,
-                         bins = 10, position = "dodge", ...) {
+dia_histogram <- function(mapping = NULL, lower = .3, upper = 0.98,
+                          bins = 10, position = "identity", ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x))
+                              standard_aes = aes(x = x, lwr = lower, upr = upper))
 
   # return plot with labels
-  dia(stat_dia_bin(mapping = mapping, geom = "rect", position = position,
-                   lower = lower, upper = upper, bins = bins, ...))
+  dia(
+    geom_dia_histogram(
+      mapping = mapping,
+      stat = "dia_bin",
+      position = position,
+      bins = bins,
+      ...)
+  )
 }
 
 # dia_freqpoly() - wrapper around stat_dia_bin --------------------------------

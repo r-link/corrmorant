@@ -8,9 +8,9 @@
 dia_histogram(
   mapping = NULL,
   lower = 0.3,
-  upper = 1,
+  upper = 0.98,
   bins = 10,
-  position = "dodge",
+  position = "identity",
   ...
 )
 
