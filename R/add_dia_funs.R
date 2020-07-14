@@ -83,16 +83,15 @@ dia_histogram <- function(mapping = NULL, lower = .3, upper = 0.98,
 # dia_freqpoly() - wrapper around stat_dia_bin --------------------------------
 #' @rdname dia_histogram
 #' @export
-dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 1,
+dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
                          bins = 15, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = stat(ymax)))
+                              standard_aes = aes(x = x, lwr = lower, upr = upper))
 
   # return plot with labels
-  dia(stat_dia_bin(mapping = mapping, geom = "path",
-                lower = lower, upper = upper, pad = TRUE,
-                bins = bins, ...))
+  dia(geom_dia_freqpoly(mapping = mapping, stat = "dia_bin",
+                        pad = TRUE, bins = bins, ...))
 }
 
 # dia_density() - wrapper around stat_dia_density -----------------------------

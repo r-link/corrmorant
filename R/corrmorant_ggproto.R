@@ -27,14 +27,17 @@
 #'
 #'
 #'@section New geoms:
-#'   * `GeomReltext`: text labels with relative positions (see [geom_reltext]
-#'   for details).
+#'  * `GeomReltext`: text labels with relative positions (see [geom_reltext] for
+#'  details).
 #'
-#'  * `GeomDiaDensity`: create and position density plots of variables in the
-#'  diagonal facets of `ggcorrm` plots (see [geom_dia_density] for details).
+#'  * `GeomDiaDensity`: create and position density plots in the diagonal facets
+#'  of `ggcorrm` plots (see [geom_dia_density] for details).
 #'
-#'  * `GeomDiaHistogram`: create and position histograms of variables in the
-#'  diagonal facets of `ggcorrm` plots (see [geom_dia_density] for details).
+#'  * `GeomDiaHistogram`: create and position histogramsin the diagonal facets
+#'  of `ggcorrm` plots (see [geom_dia_density] for details).
+#'
+#'  * `GeomDiaFreqpoly`: create and position frequency polygons  in the diagonal
+#'  facets of `ggcorrm` plots (see [geom_dia_density] for details).
 #'
 #'@seealso
 #'  * [ggplot2-ggproto] for a description of the `ggproto` object orientation
