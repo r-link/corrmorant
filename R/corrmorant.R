@@ -9,7 +9,6 @@
 #' @param ... Additional arguments to [ggcorrm()].
 #' @inheritParams tidy_corrm
 #'
-#' @return An object of class `ggcorrm`.
 #'
 #' @details `corrmorant()` is a simplified wrapper around [ggcorrm()] that
 #'   creates scatterplot matrices with reasonable standard settings. Refer to
@@ -31,7 +30,7 @@
 #' @export
 corrmorant <- function(data,
                        style = c("blue_red", "dark", "light"),
-                       rescale     = c("by_sd", "by_range", "as_is"),
+                       rescale     = c("as_is", "by_sd", "by_range"),
                        corr_method = c("pearson", "kendall", "spearman"),
                        labels      = NULL,
                        ...){

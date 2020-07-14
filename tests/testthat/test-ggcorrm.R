@@ -40,8 +40,8 @@ test_that("ggcorrm passes on correct arguments", {
 
   # throws warning if supplied with ignored parameters
   expect_warning(
-    ggcorrm(dat, rescale = "as_is"),
-    regexp = "*arguments are ignored*"
+    ggcorrm(dat, rescale = "by_sd"),
+    regexp = "*arguments are ignored if data is a tidy_corrm object*"
   )
 
   # 'mutates' passed on correctly
