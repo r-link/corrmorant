@@ -13,7 +13,7 @@ lotri_corrtext(
   digits = 2,
   corr_size = TRUE,
   corr_method = NULL,
-  squeeze = 0.7,
+  squeeze = 0.5,
   byrow = TRUE,
   show.legend = FALSE,
   ...
@@ -26,7 +26,7 @@ utri_corrtext(
   digits = 2,
   corr_size = TRUE,
   corr_method = NULL,
-  squeeze = 0.7,
+  squeeze = 0.5,
   byrow = TRUE,
   show.legend = FALSE,
   ...

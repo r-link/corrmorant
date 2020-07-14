@@ -62,7 +62,7 @@ NULL
 #' @rdname add_funtext
 #' @export
 lotri_funtext <- function(fun, mapping = NULL,
-                          nrow = NULL, ncol = NULL, squeeze = 0.7,
+                          nrow = NULL, ncol = NULL, squeeze = 0.5,
                           byrow = TRUE, show.legend = FALSE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
@@ -81,7 +81,7 @@ lotri_funtext <- function(fun, mapping = NULL,
 #' @rdname add_funtext
 #' @export
 utri_funtext <- function(fun, mapping = NULL,
-                         nrow = NULL, ncol = NULL, squeeze = 0.7,
+                         nrow = NULL, ncol = NULL, squeeze = 0.5,
                          byrow = TRUE,  show.legend = FALSE, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
