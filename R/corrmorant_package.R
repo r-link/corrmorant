@@ -69,6 +69,10 @@ NULL
 #' @importFrom utils getFromNamespace
 NULL
 
+# gList from grid for custom geoms
+#' @importFrom grid gList
+NULL
+
 # standard build method for ggplot objects
 #' @keywords internal
 ggplot_build.ggplot <- utils::getFromNamespace("ggplot_build.ggplot", "ggplot2")

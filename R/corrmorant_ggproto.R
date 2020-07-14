@@ -21,9 +21,6 @@
 #'  * `StatDiaNames`: create and position text labels for variable names in the
 #'  diagonal facets of `ggcorrm` plots (see [stat_dia_names] for details).
 #'
-#'  * `StatDiaDensity`: create and position density plots of variables in the
-#'  diagonal facets of `ggcorrm` plots (see [stat_dia_density] for details).
-#'
 #'  * `StatDiaBin`: create and position plots of binned data (histograms or
 #'  frequency polygons) of variables in the diagonal facets of `ggcorrm` plots
 #'  (see [stat_dia_bin] for details).
@@ -32,6 +29,8 @@
 #'@section New geoms:
 #'   * `GeomReltext`: text labels with relative positions (see [geom_reltext]
 #'   for details).
+#'  * `GeomDiaDensity`: create and position density plots of variables in the
+#'  diagonal facets of `ggcorrm` plots (see [geom_dia_density] for details).
 #'
 #'@seealso
 #'  * [ggplot2-ggproto] for a description of the `ggproto` object orientation

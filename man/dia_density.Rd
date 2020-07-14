@@ -4,7 +4,7 @@
 \alias{dia_density}
 \title{Density curves for ggcorrm plots}
 \usage{
-dia_density(mapping = NULL, lower = 0.25, upper = 1, ...)
+dia_density(mapping = NULL, lower = 0.3, upper = 0.98, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
