@@ -4,7 +4,7 @@
 \alias{dia_density}
 \title{Density curves for ggcorrm plots}
 \usage{
-dia_density(mapping = NULL, lower = 0.25, upper = 1, ...)
+dia_density(mapping = NULL, lower = 0.3, upper = 0.98, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
@@ -30,7 +30,7 @@ Add density curves to the diagonal panels of \link{ggcorrm} plots.
 \details{
 \code{dia_density()} adds density curves to the diagonal panels of
 \code{ggcorrm} plots. The placement of the curves is adjusted based on
-\code{\link[=stat_dia_density]{stat_dia_density()}}. The \code{lower} and\code{upper} arguments can be used to
+\code{\link[=geom_dia_density]{geom_dia_density()}}. The \code{lower} and\code{upper} arguments can be used to
 offset the density curves from zero and optimally fit them to the range of
 each panel.The standard values are chosen to work well when placing text
 labels under the histograms/frequency polygons with \link{dia_names}.

@@ -27,10 +27,9 @@
 #'   names as labels).
 #' @param rescale character string specifying the type of transformation
 #'   performed on the numeric variables in the plot. The standard argument
-#'   `"by.sd"` scales by the standard deviation of the data and centers around
-#'   zero.  `"by.range"` rescales the range of the data to the interval from 0
-#'   to 1. Use `rescale = "as_is"` to use the unchanged raw values. Defaults to
-#'   `"by_sd"`.
+#'   `as_is"` uses the unchanged raw values.`"by.sd"` scales by the standard
+#'   deviation of the data and centers around zero.  `"by.range"` rescales the
+#'   range of the data to the interval from 0 to 1.  Defaults to  `"as_is"`.
 #' @param corr_method character string with the correlation method passed to
 #'   [stats::cor()]. Used for the `.corr` variable appended to the `tidy_corr`
 #'   dataset and passed on to [lotri_corrtext()]/ [utri_corrtext()]  layers. Can
@@ -155,7 +154,7 @@
 ggcorrm <- function(data,
                     mapping = NULL,
                     labels = NULL,
-                    rescale = c("by_sd", "by_max", "as_is"),
+                    rescale = c("as_is", "by_sd", "by_range"),
                     corr_method = c("pearson", "kendall", "spearman"),
                     corr_group = NULL,
                     mutates = NULL,
@@ -187,7 +186,7 @@ ggcorrm <- function(data,
   # corr_method setting accordingly
   if (is(data, "tidy_corrm")){
     if (any(c(corr_method != "pearson",
-              rescale != "by_sd",
+              rescale != "as_is",
               !is.null(labels),
               !is.null(corr_group),
               !is.null(mutates)))) {

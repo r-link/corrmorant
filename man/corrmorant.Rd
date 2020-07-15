@@ -7,7 +7,7 @@
 corrmorant(
   data,
   style = c("blue_red", "dark", "light"),
-  rescale = c("by_sd", "by_range", "as_is"),
+  rescale = c("as_is", "by_sd", "by_range"),
   corr_method = c("pearson", "kendall", "spearman"),
   labels = NULL,
   ...
@@ -24,10 +24,9 @@ variables are appended to the reshaped dataset as additional columns.}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
-\code{"by.sd"} scales by the standard deviation of the data and centers around
-zero.  \code{"by.range"} rescales the range of the data to the interval from 0
-to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
-\code{"by_sd"}.}
+\verb{as_is"} uses the unchanged raw values.\code{"by.sd"} scales by the standard
+deviation of the data and centers around zero.  \code{"by.range"} rescales the
+range of the data to the interval from 0 to 1.  Defaults to  \code{"as_is"}.}
 
 \item{corr_method}{character string with the correlation method passed to
 \code{\link[stats:cor]{stats::cor()}}. Used for the \code{.corr} variable appended to the \code{tidy_corr}
@@ -42,9 +41,6 @@ columns displayed in the plot. Defaults to \code{NULL} (use original column
 names as labels).}
 
 \item{...}{Additional arguments to \code{\link[=ggcorrm]{ggcorrm()}}.}
-}
-\value{
-An object of class \code{ggcorrm}.
 }
 \description{
 \code{corrmorant()} is a wrapper around \code{\link[=ggcorrm]{ggcorrm()}} that creates

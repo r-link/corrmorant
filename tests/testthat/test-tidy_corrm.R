@@ -80,8 +80,8 @@ test_that("Correct errors and messages are issued", {
 
 test_that("Labeling works", {
   data <- data.frame(x = 1:10,
-                     y = 10:1,
-                     z = rep(3, 10))
+                     y = c(9,10:2),
+                     z = c(rep(3, 9), 1))
   expect_equal(
     unique(tidy_corrm(data, labels = letters[1:3])$var_x),
     factor(letters[1:3], ordered = TRUE)
@@ -93,7 +93,7 @@ test_that("Rescaling works", {
 
   data <- matrix(rnorm(50), ncol = 2)
 
-  t1 <- tidy_corrm(data)
+  t1 <- tidy_corrm(data, rescale = "by_sd")
   t2 <- tidy_corrm(data, rescale = "by_range")
   t3 <- tidy_corrm(data, rescale = "as_is")
 

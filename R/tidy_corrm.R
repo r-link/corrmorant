@@ -48,10 +48,10 @@
 #'   All other variables are appended to the reshaped data.frame and can be
 #'   accessed in the plots.
 #'
-#'   By default, the data are scaled and centered using their standard deviation
-#'   (`rescale = "by_sd"`), but it is also possible to rescale them into the
-#'   range from 0 to 1 (`rescale = "by_range"`) or to maintain the original
-#'   scale of the data (`rescale = "as_is"`).
+#'   By default, the data enter the plot unchanged  (`rescale = "as_is"`), but
+#'   it is also possible to scale and center using their standard deviation
+#'   (`rescale = "by_sd"`) or to rescale them into the range from 0 to 1
+#'   (`rescale = "by_range"`).
 #'
 #'   An additional variable called `.corr` with the bivariate correlation of the
 #'   two variables (by default, Pearson correlation, see [cor()][stats::cor()])
@@ -117,7 +117,7 @@ tidy_corrm <- function(data, ... ) {
 #' @rdname tidy_corrm
 tidy_corrm.default <- function(data,
                                labels = NULL,
-                               rescale = c("by_sd", "by_range", "as_is"),
+                               rescale = c( "as_is", "by_sd", "by_range"),
                                corr_method = c("pearson", "kendall", "spearman"),
                                corr_group = NULL,
                                mutates = NULL) {

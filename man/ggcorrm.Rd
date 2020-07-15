@@ -8,7 +8,7 @@ ggcorrm(
   data,
   mapping = NULL,
   labels = NULL,
-  rescale = c("by_sd", "by_max", "as_is"),
+  rescale = c("as_is", "by_sd", "by_range"),
   corr_method = c("pearson", "kendall", "spearman"),
   corr_group = NULL,
   mutates = NULL,
@@ -43,10 +43,9 @@ names as labels).}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
-\code{"by.sd"} scales by the standard deviation of the data and centers around
-zero.  \code{"by.range"} rescales the range of the data to the interval from 0
-to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
-\code{"by_sd"}.}
+\verb{as_is"} uses the unchanged raw values.\code{"by.sd"} scales by the standard
+deviation of the data and centers around zero.  \code{"by.range"} rescales the
+range of the data to the interval from 0 to 1.  Defaults to  \code{"as_is"}.}
 
 \item{corr_method}{character string with the correlation method passed to
 \code{\link[stats:cor]{stats::cor()}}. Used for the \code{.corr} variable appended to the \code{tidy_corr}

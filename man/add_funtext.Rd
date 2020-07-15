@@ -11,7 +11,7 @@ lotri_funtext(
   mapping = NULL,
   nrow = NULL,
   ncol = NULL,
-  squeeze = 0.7,
+  squeeze = 0.5,
   byrow = TRUE,
   show.legend = FALSE,
   ...
@@ -22,7 +22,7 @@ utri_funtext(
   mapping = NULL,
   nrow = NULL,
   ncol = NULL,
-  squeeze = 0.7,
+  squeeze = 0.5,
   byrow = TRUE,
   show.legend = FALSE,
   ...

@@ -55,14 +55,13 @@ library(corrmorant)
 
     ## Loading required package: ggplot2
 
-    ## Loading required package: rlang
-
 ## Simple plots with corrmorant()
 
 The `corrmorant()` function is a simple wrapper function around the more
 complex `gcorrm()` function that can be used to create first, simple
-plots of correlation matrices. Currently, three different styles are
-available, “light”, “dark” and “blue\_red”:
+plots of correlation matrices for initial data inspection. Currently,
+three different styles are available, “light”, “dark” and the default,
+“blue\_red”:
 
 ``` r
 # correlation plot of the drosera data using style = 'light'
@@ -74,7 +73,11 @@ corrmorant(drosera, style = "dark")
 corrmorant(drosera, style = "blue_red")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> It obvious
+that this illustration is not optimal because the three different
+*Drosera* species have remarkably different leaf morphologies. More
+complex plots (e.g. with different correlations for different groups)
+are possible with `ggcorrm()`.
 
 ## Basic usage of ggcorrm()
 
@@ -99,8 +102,8 @@ the following code:
 p1 <- ggcorrm(drosera) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext() +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, fill = "grey80", color = 1)
+  dia_names(y_pos = 0.15, size = 3) +
+  dia_density(lower = 0.3, fill = "grey80", color = 1)
 p1
 ```
 
@@ -131,8 +134,8 @@ ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   lotri(geom_smooth(method = "lm")) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext(nrow = 2, squeeze = 0.6) +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, color = 1)
+  dia_names(y_pos = 0.15, size = 3) +
+  dia_density(lower = 0.3, color = 1)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
@@ -152,12 +155,13 @@ colnames(data1) <- paste("Var.", 1:ncol(data1))
 # create plot
 ggcorrm(data1, 
         mapping = aes(col = .corr, fill = .corr),
-        bg_dia = "grey20") +
+        bg_dia = "grey20", 
+        rescale = "by_sd") +
   lotri(geom_smooth(method = "lm", size = .3)) +
   lotri(geom_point(alpha = 0.5)) +
   utri_corrtext(nrow = 2, squeeze = 0.6) +
-  dia_names(y_pos = 0.1, size = 3, color = "white") +
-  dia_histogram(lower = 0.4, color = "grey80", fill = "grey60", size = .3) +
+  dia_names(y_pos = 0.15, size = 3, color = "white") +
+  dia_histogram(lower = 0.3, color = "grey80", fill = "grey60", size = .3) +
   scale_color_corr(aesthetics = c("fill", "color"))
 ```
 
@@ -173,17 +177,17 @@ ggcorrm(data1,
 improve the display of correlation strength.
 
 For example, there is a set of stats for correlation heatmaps and the
-likes, which can be very useful when inspecting datasets with large
-numbers of variables:
+likes, which can be useful when inspecting datasets with large numbers
+of variables:
 
 ``` r
 select(mtcars, mpg, disp:qsec) %>% 
-ggcorrm() +
+ggcorrm(rescale = "by_range") +
   utri_heatmap(alpha = 0.5) +
   lotri_heatcircle(alpha = 0.5, col = 1) +
   utri_corrtext() +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, fill = "lightgrey", color = 1) +
+  dia_names(y_pos = 0.15, size = 3) +
+  dia_density(lower = 0.3, fill = "lightgrey", color = 1) +
   scale_fill_corr() 
 ```
 
@@ -199,8 +203,8 @@ airquality %>%
 ggcorrm(aes(col = .corr)) +
   lotri_heatpoint(pch = "\U1F63E") +
   utri_heatpoint(pch = "\U2620", col = "#660066") +
-  dia_names(y_pos = 0.1, size = 3) +
-  dia_density(lower = 0.4, fill = "#89DFA3", color = 1) +
+  dia_names(y_pos = 0.15, size = 3) +
+  dia_density(lower = 0.3, fill = "#89DFA3", color = 1) +
   scale_size(range = c(1, 15)) + 
   scale_color_corr(option = "C")
 ```
@@ -228,9 +232,9 @@ lmslope <- function(x, y)  round(coef(lm(x ~ y))[2], 2)
 ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   lotri(geom_point(alpha = 0.4)) +
   lotri(geom_smooth(alpha = 0.4, method = "lm")) +
-  utri_funtext(fun = lmslope, squeeze = .6) +
-  dia_density(lower = .4, col = 1, alpha = 0.4) +
-  dia_names(y_pos = .1)
+  utri_funtext(fun = lmslope, squeeze = 0.6) +
+  dia_density(lower = 0.3, col = 1, alpha = 0.4) +
+  dia_names(y_pos = 0.15)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
@@ -248,7 +252,7 @@ a quosure in the lower triangle:
 ggcorrm(drosera, aes(col = .corr), rescale = "as_is") +
   utri_funtext(fun = ~ round(cor(.x, .y), 2)) +
   lotri_funtext(fun = quo(round(cor(x, y), 2))) +
-  dia_names(y_pos = .5) +
+  dia_names(y_pos = 0.5) +
   scale_color_corr()
 ```
 

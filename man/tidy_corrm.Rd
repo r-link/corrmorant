@@ -10,7 +10,7 @@ tidy_corrm(data, ...)
 \method{tidy_corrm}{default}(
   data,
   labels = NULL,
-  rescale = c("by_sd", "by_range", "as_is"),
+  rescale = c("as_is", "by_sd", "by_range"),
   corr_method = c("pearson", "kendall", "spearman"),
   corr_group = NULL,
   mutates = NULL
@@ -30,10 +30,9 @@ names as labels).}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
-\code{"by.sd"} scales by the standard deviation of the data and centers around
-zero.  \code{"by.range"} rescales the range of the data to the interval from 0
-to 1. Use \code{rescale = "as_is"} to use the unchanged raw values. Defaults to
-\code{"by_sd"}.}
+\verb{as_is"} uses the unchanged raw values.\code{"by.sd"} scales by the standard
+deviation of the data and centers around zero.  \code{"by.range"} rescales the
+range of the data to the interval from 0 to 1.  Defaults to  \code{"as_is"}.}
 
 \item{corr_method}{character string with the correlation method passed to
 \code{\link[stats:cor]{stats::cor()}}. Used for the \code{.corr} variable appended to the \code{tidy_corr}
@@ -93,10 +92,10 @@ vector with new labels) in the order of their appearance in the raw data.
 All other variables are appended to the reshaped data.frame and can be
 accessed in the plots.
 
-By default, the data are scaled and centered using their standard deviation
-(\code{rescale = "by_sd"}), but it is also possible to rescale them into the
-range from 0 to 1 (\code{rescale = "by_range"}) or to maintain the original
-scale of the data (\code{rescale = "as_is"}).
+By default, the data enter the plot unchanged  (\code{rescale = "as_is"}), but
+it is also possible to scale and center using their standard deviation
+(\code{rescale = "by_sd"}) or to rescale them into the range from 0 to 1
+(\code{rescale = "by_range"}).
 
 An additional variable called \code{.corr} with the bivariate correlation of the
 two variables (by default, Pearson correlation, see \link[stats:cor]{cor()})

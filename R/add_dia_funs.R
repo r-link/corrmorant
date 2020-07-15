@@ -24,7 +24,7 @@
 #'  [stat_dia_names()]
 #' @rdname dia_names
 #' @export
-dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
+dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
                               standard_aes = aes(x = x, label = var_x))
@@ -63,30 +63,35 @@ dia_names <- function(y_pos = 0.2, mapping = NULL, ..., inherit.aes = FALSE) {
 #'   [stat_dia_bin()]
 #' @rdname dia_histogram
 #' @export
-dia_histogram <- function(mapping = NULL, lower = .25, upper = 1,
-                         bins = 10, position = "dodge", ...) {
+dia_histogram <- function(mapping = NULL, lower = .3, upper = 0.98,
+                          bins = 10, position = "identity", ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x))
+                              standard_aes = aes(x = x, lwr = lower, upr = upper))
 
   # return plot with labels
-  dia(stat_dia_bin(mapping = mapping, geom = "rect", position = position,
-                   lower = lower, upper = upper, bins = bins, ...))
+  dia(
+    geom_dia_histogram(
+      mapping = mapping,
+      stat = "dia_bin",
+      position = position,
+      bins = bins,
+      ...)
+  )
 }
 
 # dia_freqpoly() - wrapper around stat_dia_bin --------------------------------
 #' @rdname dia_histogram
 #' @export
-dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
+dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
                          bins = 15, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = stat(ymax)))
+                              standard_aes = aes(x = x, lwr = lower, upr = upper))
 
   # return plot with labels
-  dia(stat_dia_bin(mapping = mapping, geom = "path",
-                lower = lower, upper = upper, pad = TRUE,
-                bins = bins, ...))
+  dia(geom_dia_freqpoly(mapping = mapping, stat = "dia_bin",
+                        pad = TRUE, bins = bins, ...))
 }
 
 # dia_density() - wrapper around stat_dia_density -----------------------------
@@ -104,7 +109,7 @@ dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
 #'
 #' @details `dia_density()` adds density curves to the diagonal panels of
 #'   `ggcorrm` plots. The placement of the curves is adjusted based on
-#'   [stat_dia_density()]. The `lower` and`upper` arguments can be used to
+#'   [geom_dia_density()]. The `lower` and`upper` arguments can be used to
 #'   offset the density curves from zero and optimally fit them to the range of
 #'   each panel.The standard values are chosen to work well when placing text
 #'   labels under the histograms/frequency polygons with [dia_names].
@@ -114,14 +119,17 @@ dia_freqpoly <- function(mapping = NULL, lower = .25, upper = 1,
 #'   [stat_dia_density()]
 #' @rdname dia_density
 #' @export
-dia_density <- function(mapping = NULL, lower = .25, upper = 1, ...) {
+dia_density <- function(mapping = NULL, lower = .3, upper = 0.98, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x,
-                                                          y = stat(density)))
+                                                          lwr = lower,
+                                                          upr = upper))
 
   # return plot with labels
-  dia(stat_dia_density(mapping = mapping, geom = "polygon",
-                       lower = lower, upper = upper, ...))
+  dia(
+    geom_dia_density(
+      mapping = mapping, ...)
+    )
 }
 
 
