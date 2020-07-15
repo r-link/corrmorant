@@ -54,7 +54,7 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
 # stat_dia_bin() - stat function for StatDiaBin -------------------------------
 #' @title Compute histograms and frequency polygons for ggcorrm plots.
 #'
-#' @description `stat_dia_bin()` computes the binned data summaries for the
+#' @description `stat_dia_bin()` computes the binned data summaries and
 #'   diagonal panels of [ggcorrm] plots that are created with [dia_histogram]
 #'   and [dia_freqpoly].
 #'
@@ -68,10 +68,11 @@ StatDiaBin <- ggproto("StatDiaBin", StatBin,
 #'
 #' @return An object of class `Layer`.
 #'
-#' @details `stat_dia_bin()` computes binned data summaries for display in the
-#'   diagonal facets of `ggcorrm` plots. The `lower` and `upper` arguments can
-#'   be used to offset the histograms/frequency polygons from zero and optimally
-#'   fit them to the range of each panel.
+#' @details `stat_dia_bin()` computes binned data summaries and
+#'   `geom_dia_histogram()` / `geom_dia_freqpoly()` plot them in the diagonal
+#'   facets of `ggcorrm` plots. The `lower` and `upper` variables can be used to
+#'   offset the histograms/frequency polygons from zero and optimally fit them
+#'   to the range of each panel.
 #'
 #' @seealso
 #'     [ggplot2::stat_bin()][ggplot2::geom_histogram()],

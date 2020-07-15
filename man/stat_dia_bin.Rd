@@ -67,15 +67,16 @@ polygons relative to the range of the \code{y} axis. Defaults to 1.}
 An object of class \code{Layer}.
 }
 \description{
-\code{stat_dia_bin()} computes the binned data summaries for the
+\code{stat_dia_bin()} computes the binned data summaries and
 diagonal panels of \link{ggcorrm} plots that are created with \link{dia_histogram}
 and \link{dia_freqpoly}.
 }
 \details{
-\code{stat_dia_bin()} computes binned data summaries for display in the
-diagonal facets of \code{ggcorrm} plots. The \code{lower} and \code{upper} arguments can
-be used to offset the histograms/frequency polygons from zero and optimally
-fit them to the range of each panel.
+\code{stat_dia_bin()} computes binned data summaries and
+\code{geom_dia_histogram()} / \code{geom_dia_freqpoly()} plot them in the diagonal
+facets of \code{ggcorrm} plots. The \code{lower} and \code{upper} variables can be used to
+offset the histograms/frequency polygons from zero and optimally fit them
+to the range of each panel.
 }
 \seealso{
 \preformatted{[ggplot2::stat_bin()][ggplot2::geom_histogram()],
