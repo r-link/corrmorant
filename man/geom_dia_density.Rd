@@ -68,8 +68,9 @@ upper and lower lines, \code{"upper"}/\code{"lower"} draws the respective lines 
 An object of class \code{Layer}.
 }
 \description{
-\code{geom_dia_density()} rescales the output of \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}}
-for the correct display of density curves on the plot diagonal of \link{ggcorrm} plots.
+\code{geom_dia_density()} rescales the output of
+\link[ggplot2:geom_density]{ggplot2::stat_density()} for the correct display
+of density curves on the plot diagonal of \link{ggcorrm} plots.
 }
 \details{
 \code{geom_density()} computes density curves for display in the diagonal

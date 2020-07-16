@@ -42,8 +42,9 @@ GeomDiaDensity <- ggproto(
 # geom_dia_density() - geom function for GeomDiaDensity -----------------------
 #' @title Add density curves to the plot diagonal of ggcorrm plots
 #'
-#' @description `geom_dia_density()` rescales the output of [ggplot2::stat_density()]
-#'   for the correct display of density curves on the plot diagonal of [ggcorrm] plots.
+#' @description `geom_dia_density()` rescales the output of
+#'   [ggplot2::stat_density()][ggplot2::geom_density()] for the correct display
+#'   of density curves on the plot diagonal of [ggcorrm] plots.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams stat_dia_bin
