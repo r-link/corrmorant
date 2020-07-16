@@ -102,7 +102,7 @@ dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
 #' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
 #' @inheritParams stat_dia_bin
-#' @param ... Additional parameters for [stat_dia_density()].
+#' @param ... Additional parameters for [geom_dia_density()].
 #'
 #' @return A `ggplot2` layer with histograms or frequency polygons for the
 #'   variables on the plot diagonal of `ggcorrm` plots.
@@ -116,7 +116,7 @@ dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
 #'
 #' @seealso
 #'   [ggplot2::geom_density()],
-#'   [stat_dia_density()]
+#'   [geom_dia_density()]
 #' @rdname dia_density
 #' @export
 dia_density <- function(mapping = NULL, lower = .3, upper = 0.98, ...) {

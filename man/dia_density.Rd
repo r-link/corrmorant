@@ -18,7 +18,7 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 \item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
-\item{...}{Additional parameters for \code{\link[=stat_dia_density]{stat_dia_density()}}.}
+\item{...}{Additional parameters for \code{\link[=geom_dia_density]{geom_dia_density()}}.}
 }
 \value{
 A \code{ggplot2} layer with histograms or frequency polygons for the
@@ -37,5 +37,5 @@ labels under the histograms/frequency polygons with \link{dia_names}.
 }
 \seealso{
 \code{\link[ggplot2:geom_density]{ggplot2::geom_density()}},
-\code{\link[=stat_dia_density]{stat_dia_density()}}
+\code{\link[=geom_dia_density]{geom_dia_density()}}
 }

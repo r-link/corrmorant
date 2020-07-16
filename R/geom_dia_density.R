@@ -49,16 +49,16 @@ GeomDiaDensity <- ggproto(
 #' @inheritParams stat_dia_bin
 #' @inheritParams ggplot2::geom_density
 #' @param ... Additional arguments passed to [ggplot2::layer()] (arguments for
-#'   [ggplot2::stat_density()][ggplot2::geom_density()] are permitted).
+#'   [ggplot2::geom_density()] are permitted).
 #'
 #' @return An object of class `Layer`.
 #'
-#' @details `stat_density()` computes density curves for display in the diagonal
+#' @details `geom_density()` computes density curves for display in the diagonal
 #'   facets of `ggcorrm` plots. Its `lwr` and `upr` aesthetics can be used to
 #'   offset the density curves from zero and optimally fit them to the range of
 #'   each panel.
 #' @seealso
-#'   [ggplot2::stat_density()][ggplot2::geom_density()],
+#'   [ggplot2::geom_density()],
 #'   [dia_density()]
 #' @rdname geom_dia_density
 #' @export

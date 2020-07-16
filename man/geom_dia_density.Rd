@@ -44,7 +44,7 @@ layer, as a string.}
 a call to a position adjustment function.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
-\link[ggplot2:geom_density]{ggplot2::stat_density()} are permitted).}
+\code{\link[ggplot2:geom_density]{ggplot2::geom_density()}} are permitted).}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -72,12 +72,12 @@ An object of class \code{Layer}.
 for the correct display of density curves on the plot diagonal of \link{ggcorrm} plots.
 }
 \details{
-\code{stat_density()} computes density curves for display in the diagonal
+\code{geom_density()} computes density curves for display in the diagonal
 facets of \code{ggcorrm} plots. Its \code{lwr} and \code{upr} aesthetics can be used to
 offset the density curves from zero and optimally fit them to the range of
 each panel.
 }
 \seealso{
-\link[ggplot2:geom_density]{ggplot2::stat_density()},
+\code{\link[ggplot2:geom_density]{ggplot2::geom_density()}},
 \code{\link[=dia_density]{dia_density()}}
 }
