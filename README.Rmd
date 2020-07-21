@@ -136,7 +136,7 @@ ggcorrm(rescale = "by_sd") +
 
 
 With `lotri_/utri_heatpoint()`, you can scale the diameter of any character you want by correlation strength.
-And yes, your right, this means you can display correlation strength with purple skulls and angry cat faces:
+And yes, you're right, this means you can display correlation strength with purple skulls and angry cat faces (at least if your graphical device allows Unicode characters, which might or might not work on Windows):
 
 ```{r, warning = FALSE}
 airquality %>% 
@@ -153,7 +153,7 @@ ggcorrm(aes(col = .corr)) +
 ## Print output of arbitrary functions of the data
 If you want to place text labels for the output of arbitrary functions in your plots, you can use `lotri/utri_funtext()`, which uses the same placement rules as `stat_corrtext()`.
 
-For instance, you could add lables for the slope of the linear models in the lower triangle (note how y and x are swapped to account for the reverse axes in the upper triangle).
+For instance, you could add labels for the slope of the linear models in the lower triangle (note how y and x are swapped to account for the reverse axes in the upper triangle).
 
 ```{r, message=FALSE}
 # function to compute linear model slopes

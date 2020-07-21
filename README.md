@@ -182,7 +182,7 @@ of variables:
 
 ``` r
 select(mtcars, mpg, disp:qsec) %>% 
-ggcorrm(rescale = "by_range") +
+ggcorrm(rescale = "by_sd") +
   utri_heatmap(alpha = 0.5) +
   lotri_heatcircle(alpha = 0.5, col = 1) +
   utri_corrtext() +
@@ -194,9 +194,10 @@ ggcorrm(rescale = "by_range") +
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 With `lotri_/utri_heatpoint()`, you can scale the diameter of any
-character you want by correlation strength. And yes, your right, this
+character you want by correlation strength. And yes, you’re right, this
 means you can display correlation strength with purple skulls and angry
-cat faces:
+cat faces (at least if your graphical device allows Unicode characters,
+which might or might not work on Windows):
 
 ``` r
 airquality %>% 
@@ -220,7 +221,7 @@ If you want to place text labels for the output of arbitrary functions
 in your plots, you can use `lotri/utri_funtext()`, which uses the same
 placement rules as `stat_corrtext()`.
 
-For instance, you could add lables for the slope of the linear models in
+For instance, you could add labels for the slope of the linear models in
 the lower triangle (note how y and x are swapped to account for the
 reverse axes in the upper triangle).
 
