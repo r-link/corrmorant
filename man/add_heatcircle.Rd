@@ -25,12 +25,10 @@ utri_heatcircle(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()}. x
-and y are set automatically and must not bechanged, but all other
-aesthetics may be manipulated. By default, the \code{fill} aesthetic is mapped
-to \code{..corr..} internally (color by correlation strength), but this is
-overridden when explicitly specified. Defaults to \code{NULL} (use standard
-settings).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes}. \code{x}
+and \code{y} are set automatically and must not be changed,  but all other
+aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcorrm}
+mapping).}
 
 \item{corr_method}{character string with the correlation method passed to
 \link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.

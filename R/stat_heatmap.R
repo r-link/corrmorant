@@ -30,8 +30,8 @@ StatHeatmap <- ggproto("StatHeatmap", Stat,
 #'   display them as correlation heat maps / point labels in the facets of
 #'   [ggcorrm] plots.
 #'
-#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
+#' @inheritParams add_corrtext
 #' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.

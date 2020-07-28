@@ -33,10 +33,10 @@ utri_corrtext(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
-are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
-must not be changed,  but all other aesthetics may be manipulated. Defaults
-to \code{NULL} (use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes}. \code{x}
+and \code{y} are set automatically and must not be changed,  but all other
+aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcorrm}
+mapping).}
 
 \item{nrow}{integer - the number of rows for the correlation labels if
 grouping aesthetics are present (defaults to \code{NULL} - automatic setting of

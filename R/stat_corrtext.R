@@ -74,9 +74,9 @@ StatCorrtext <- ggproto("StatCorrtext", StatCorrtextProto,
 #'   appropriate positions of text labels indicating correlation strength for
 #'   the facets of [ggcorrm] plots.
 #'
-#' @inheritParams ggcorrm
 #' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
+#' @inheritParams ggcorrm
 #' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.

@@ -10,10 +10,10 @@ dia_names(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE)
 \item{y_pos}{numeric between 0 and 1 specifying the relative position of the
 text labels along the x axis (defaults to 0.2).}
 
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
-are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
-must not be changed,  but all other aesthetics may be manipulated. Defaults
-to \code{NULL} (use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes}. \code{x}
+and \code{y} are set automatically and must not be changed,  but all other
+aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcorrm}
+mapping).}
 
 \item{...}{Additional parameters passed to \code{\link[=stat_dia_names]{stat_dia_names()}}.}
 

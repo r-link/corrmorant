@@ -39,8 +39,9 @@ GeomReltext <- ggproto("GeomText", Geom,
 #' @description `geom_reltext()` adds text labels to relative positions in a
 #'   ggplot panel.
 #'
-#' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
+#' @inheritParams ggcorrm
+
 #' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.
