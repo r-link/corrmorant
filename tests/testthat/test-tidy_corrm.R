@@ -83,7 +83,9 @@ test_that("Labeling works", {
                      y = c(9,10:2),
                      z = c(rep(3, 9), 1))
   expect_equal(
-    unique(tidy_corrm(data, labels = letters[1:3])$var_x),
+    suppressMessages(
+      unique(tidy_corrm(data, labels = letters[1:3])$var_x)
+      ),
     factor(letters[1:3], ordered = TRUE)
   )
 

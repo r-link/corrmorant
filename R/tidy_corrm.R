@@ -211,9 +211,9 @@ TidyCorrm <- ggproto(
         stop("Number of labels must be equal to the number of numeric columns.")
 
       # print changes of column names
-      cat("The following column names were replaced:\n",
-          paste(names(data)[numerics], arg$labels, sep = "\t->\t", collapse = "\n"),
-          "\n",  sep = "")
+      message("The following column names were replaced:\n",
+              paste(names(data)[numerics], arg$labels, sep = "\t->\t", collapse = "\n"),
+              "\n",  sep = "")
 
       # reset names of numeric columns
       names(data)[numerics] <- arg$labels
