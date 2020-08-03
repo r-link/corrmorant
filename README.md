@@ -165,8 +165,6 @@ ggcorrm(data1,
   scale_color_corr(aesthetics = c("fill", "color"))
 ```
 
-    ## Joining, by = "pos"
-
     ## `geom_smooth()` using formula 'y ~ x'
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
@@ -195,13 +193,13 @@ ggcorrm(rescale = "by_sd") +
 
 With `lotri_/utri_heatpoint()`, you can scale the diameter of any
 character you want by correlation strength. And yes, you’re right, this
-means you can display correlation strength with purple skulls and angry
-cat faces (at least if your graphical device allows Unicode characters,
-which might or might not work on Windows):
+means you can display correlation strength by the size of purple skulls
+and angry cat faces (at least if your graphical device allows Unicode
+characters, which might or might not work on Windows):
 
 ``` r
 airquality %>% 
-ggcorrm(aes(col = .corr)) +
+ggcorrm() +
   lotri_heatpoint(pch = "\U1F63E") +
   utri_heatpoint(pch = "\U2620", col = "#660066") +
   dia_names(y_pos = 0.15, size = 3) +
