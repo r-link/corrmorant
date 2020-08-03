@@ -6,12 +6,6 @@ GeomRelpoint <- ggplot2::ggproto(
   "GeomRelpoint", GeomPoint,
   # define required aesthetics
   required_aes = c("relx", "rely"),
-  # define default aesthetics
-  default_aes = aes(
-    colour = 1, size = 5,
-    fill   = NA, shape = 19,
-    alpha  = NA, stroke = 1
-  ),
   # define panel plotting function
   draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
 
@@ -60,7 +54,7 @@ GeomRelpoint <- ggplot2::ggproto(
 #'   [ggplot2::geom_point()]
 #' @export
 geom_relpoint <- function(mapping = NULL, data = NULL,
-                           stat = "corrtext",
+                           stat = "identity",
                            position = "identity",
                            ...,
                            na.rm = FALSE,

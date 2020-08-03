@@ -7,7 +7,7 @@
 geom_relpoint(
   mapping = NULL,
   data = NULL,
-  stat = "corrtext",
+  stat = "identity",
   position = "identity",
   ...,
   na.rm = FALSE,
