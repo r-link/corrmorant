@@ -6,6 +6,8 @@
 #'
 #' @inheritParams add_corrtext
 #' @inheritParams ggcorrm
+#' @inheritParams ggplot2::layer
+#'
 #' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes()]. x
 #'   and y are set automatically and must not bechanged, but all other
 #'   aesthetics may be manipulated. By default, the `fill` aesthetic is mapped

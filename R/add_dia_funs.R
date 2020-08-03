@@ -5,6 +5,7 @@
 #'   the names of variables in a `ggcorrm` plot at appropriate positions in the
 #'   diagonal facets.
 #'
+#' @inheritParams add_corrtext
 #' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
 #' @param y_pos numeric between 0 and 1 specifying the relative position of the
@@ -40,8 +41,11 @@ dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
 #' @description Add histograms or frequency polygons to the diagonal panels of
 #'   [ggcorrm] plots
 #'
+#' @inheritParams add_corrtext
 #' @inheritParams stat_dia_bin
 #' @inheritParams ggcorrm
+#' @inheritParams ggplot2::layer
+#'
 #' @param ... Additional parameters for [stat_dia_bin()].
 #'
 #' @return A `ggplot2` layer with histograms or frequency polygons for the
@@ -99,6 +103,7 @@ dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
 #'
 #' @description Add density curves to the diagonal panels of [ggcorrm] plots.
 #'
+#' @inheritParams add_corrtext
 #' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
 #' @inheritParams stat_dia_bin

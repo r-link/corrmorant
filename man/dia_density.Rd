@@ -7,10 +7,10 @@
 dia_density(mapping = NULL, lower = 0.3, upper = 0.98, ...)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes} that
-are passed on to subsequent layers. \code{x} and \code{y} are set automatically and
-must not be changed,  but all other aesthetics may be manipulated. Defaults
-to \code{NULL} (use standard \code{ggcorrm} mapping).}
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes}. \code{x}
+and \code{y} are set automatically and must not be changed,  but all other
+aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcorrm}
+mapping).}
 
 \item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 0.25.}

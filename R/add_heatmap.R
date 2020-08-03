@@ -6,7 +6,10 @@
 #'   plots. `lotri_heatpoint()` and `utri_heatpoint()` scale the and colour of a
 #'   single centered [geom_point()][ggplot2::geom_point()] by correlation strength.
 #'
+#' @inheritParams add_corrtext
 #' @inheritParams stat_heatmap
+#' @inheritParams ggplot2::layer
+#'
 #' @param corr_size logical - should the `size` aesthetic of the points in
 #'   `lotri/utri_heatpoint()` be expressed as a function of correlation
 #'   strength? `corr_size = TRUE` Defaults to `TRUE`.

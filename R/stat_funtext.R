@@ -74,9 +74,9 @@ StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
 #' @description `stat_funtext()` is used to compute
 #'   the facets of [ggcorrm] plots.
 #'
-#' @inheritParams ggcorrm
-#' @inheritParams add_corrtext
 #' @inheritParams ggplot2::layer
+#' @inheritParams add_corrtext
+#' @inheritParams ggcorrm
 #' @param fun One of the following: * a) a function of `x` and `y`. * b) an
 #'   rlang lambda style [one-sided formula][rlang::as_function] describing a
 #'   function of two parameters labeled`.x` and `.y` * c) an rlang quosure

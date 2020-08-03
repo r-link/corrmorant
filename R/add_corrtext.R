@@ -5,7 +5,10 @@
 #'   text labels for the strength of bivariate correlations in the off-diagonal
 #'   facets of [ggcorrm] plots.
 #'
-#' @inheritParams ggcorrm
+#' @param mapping Set of aesthetic mappings created by [aes][ggplot2::aes]. `x`
+#'   and `y` are set automatically and must not be changed,  but all other
+#'   aesthetics may be manipulated. Defaults to `NULL` (use standard `ggcorrm`
+#'   mapping).
 #' @param nrow integer - the number of rows for the correlation labels if
 #'   grouping aesthetics are present (defaults to `NULL` - automatic setting of
 #'   `nrow`).

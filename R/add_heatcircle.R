@@ -5,13 +5,10 @@
 #'   circles whose fill and size aesthetics depend on correlation strength in
 #'   the lower/upper off-diagonal facets of [ggcorrm] plots.
 #'
+#' @inheritParams add_corrtext
 #' @inheritParams stat_heatcircle
-#' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes]. x
-#'   and y are set automatically and must not bechanged, but all other
-#'   aesthetics may be manipulated. By default, the `fill` aesthetic is mapped
-#'   to `..corr..` internally (color by correlation strength), but this is
-#'   overridden when explicitly specified. Defaults to `NULL` (use standard
-#'   settings).
+#' @inheritParams ggplot2::layer
+#'
 #' @param ... Additional arguments to [stat_heatcircle].
 #'
 #' @return A `ggplot2` layer with circles displaying correlation strength.
