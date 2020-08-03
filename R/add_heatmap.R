@@ -35,9 +35,11 @@ NULL
 lotri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   lotri(
-    stat_heatmap(mapping = aes(fill = ..corr..),
+    stat_heatmap(mapping = aes(x = x, y = y, fill = ..corr..),
                  geom = "rect",
-                 corr_method = corr_method, ...)
+                 corr_method = corr_method,
+                 inherit.aes = FALSE,
+                 ...)
   )
 }
 
@@ -47,9 +49,11 @@ lotri_heatmap <- function(corr_method = NULL, ...) {
 utri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   utri(
-    stat_heatmap(mapping = aes(fill = ..corr..),
+    stat_heatmap(mapping = aes(x = x, y = y, fill = ..corr..),
                  geom = "rect",
-                 corr_method = corr_method, ...)
+                 corr_method = corr_method,
+                 inherit.aes = FALSE,
+                 ...)
   )
 }
 
