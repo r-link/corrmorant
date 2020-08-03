@@ -22,13 +22,13 @@
 #'   `lotri/utri_heatmap()` are a wrapper around [stat_heatmap()] that
 #'   additionally take care of the right specification of aesthetics.
 #'
-#'   `lotri/utri_heatpoint()` instead plots a single point in the middle of the
-#'   layer whose size on default depends on the strength of correlation. The
-#'   shape parameter as well as transparency etc. can be adjusted via the `...`
-#'   argument. The range of sizes covered by the 'heatpoints' can be adjusted by
-#'   [scale_size()][ggplot2::scale_size()].
+#'   `lotri/utri_heatpoint()` instead plots points positioned as in
+#'   [stat_corrtext()] whose size on default depends on the strength of
+#'   correlation. The shape parameter as well as transparency etc. can be
+#'   adjusted via the `...` argument. The range of sizes covered by the
+#'   'heatpoints' can be adjusted by [scale_size()][ggplot2::scale_size()].
 #'
-#' @seealso Similar corrmorant stats: [stat_heatmap()], [stat_heatcircle()]
+#' @seealso [stat_heatmap()], [stat_heatcircle()], [geom_relpoint()]
 #' @name add_heatmap
 NULL
 
@@ -63,37 +63,37 @@ utri_heatmap <- function(corr_method = NULL, ...) {
 # lotri_heatpoint ---------------------------------------------------------------
 #' @rdname add_heatmap
 #' @export
-lotri_heatpoint <- function(corr_size = TRUE, corr_method = "pearson", ...) {
+lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
 
-  # define and update mapping
-  mapping <- aes(color = ..corr..)
-  if(corr_size) mapping <- modify_list(mapping, aes(size = abs(..corr..)))
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
+  if(corr_size) mapping <- modify_list(mapping, aes(size = ..corr..))
 
-  # return plot with labels
+  # return layer
   lotri(
-    stat_heatmap(mapping = mapping,
-                 geom = "point",
-                 corr_method = corr_method,
-                 show.legend = c(size = FALSE, colour = TRUE),
-                 ...)
+    geom_relpoint(mapping = mapping,
+                   stat = "corrtext",
+                   corr_method = corr_method,
+                   show.legend = c(size = FALSE, colour = TRUE),
+                   ...)
   )
 }
 
 # utri_heatpoint ---------------------------------------------------------------
 #' @rdname add_heatmap
 #' @export
-utri_heatpoint <- function(corr_size = TRUE, corr_method = "pearson", ...) {
+utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
 
-  # define and update mapping
-  mapping <- aes(color = ..corr..)
-  if(corr_size) mapping <- modify_list(mapping, aes(size = abs(..corr..)))
+  # update and check mapping
+  mapping <- update_aes_corrm(mapping)
+  if(corr_size) mapping <- modify_list(mapping, aes(size = ..corr..))
 
-  # return plot with labels
+  # return layer
   utri(
-    stat_heatmap(mapping = mapping,
-                 geom = "point",
-                 corr_method = corr_method,
-                 show.legend = c(size = FALSE, colour = TRUE),
-                 ...)
+    geom_relpoint(mapping = mapping,
+                   stat = "corrtext",
+                   corr_method = corr_method,
+                   show.legend = c(size = FALSE, colour = TRUE),
+                   ...)
   )
 }

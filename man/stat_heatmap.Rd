@@ -63,14 +63,12 @@ An object of class \code{Layer}.
 }
 \description{
 \code{stat_heatmap()} is used to compute bivariate correlations and
-display them as correlation heat maps / point labels in the facets of
-\link{ggcorrm} plots.
+display them as correlation heat maps in the facets of \link{ggcorrm} plots.
 }
 \details{
 \code{stat_heatmap()} computes the correlation between variables in the
-facets of \code{ggcorrm} plots and returns the aesthetics necessary to either
-color the entire facet by correlation strength (\code{geom = "rect"}) or place a
-single point in the midpoint of each facet (\code{geom = "point"}).
+facets of \code{ggcorrm} plots and returns the aesthetics necessary to
+color facets by correlation strength-
 }
 \seealso{
 \code{\link[ggplot2:layer]{ggplot2::layer()}},

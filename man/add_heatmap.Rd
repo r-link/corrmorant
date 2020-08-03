@@ -12,9 +12,9 @@ lotri_heatmap(corr_method = NULL, ...)
 
 utri_heatmap(corr_method = NULL, ...)
 
-lotri_heatpoint(corr_size = TRUE, corr_method = "pearson", ...)
+lotri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...)
 
-utri_heatpoint(corr_size = TRUE, corr_method = "pearson", ...)
+utri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...)
 }
 \arguments{
 \item{corr_method}{character string with the correlation method passed to
@@ -26,6 +26,11 @@ Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=g
 \item{corr_size}{logical - should the \code{size} aesthetic of the points in
 \code{lotri/utri_heatpoint()} be expressed as a function of correlation
 strength? \code{corr_size = TRUE} Defaults to \code{TRUE}.}
+
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes}. \code{x}
+and \code{y} are set automatically and must not be changed,  but all other
+aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcorrm}
+mapping).}
 }
 \value{
 A \code{ggplot2} layer with correlation heatmaps / points indicating
@@ -44,12 +49,12 @@ in the facets of \code{ggcorrm} plots.
 \code{lotri/utri_heatmap()} are a wrapper around \code{\link[=stat_heatmap]{stat_heatmap()}} that
 additionally take care of the right specification of aesthetics.
 
-\code{lotri/utri_heatpoint()} instead plots a single point in the middle of the
-layer whose size on default depends on the strength of correlation. The
-shape parameter as well as transparency etc. can be adjusted via the \code{...}
-argument. The range of sizes covered by the 'heatpoints' can be adjusted by
-\link[ggplot2:scale_size]{scale_size()}.
+\code{lotri/utri_heatpoint()} instead plots points positioned as in
+\code{\link[=stat_corrtext]{stat_corrtext()}} whose size on default depends on the strength of
+correlation. The shape parameter as well as transparency etc. can be
+adjusted via the \code{...} argument. The range of sizes covered by the
+'heatpoints' can be adjusted by \link[ggplot2:scale_size]{scale_size()}.
 }
 \seealso{
-Similar corrmorant stats: \code{\link[=stat_heatmap]{stat_heatmap()}}, \code{\link[=stat_heatcircle]{stat_heatcircle()}}
+\code{\link[=stat_heatmap]{stat_heatmap()}}, \code{\link[=stat_heatcircle]{stat_heatcircle()}}, \code{\link[=geom_relpoint]{geom_relpoint()}}
 }
