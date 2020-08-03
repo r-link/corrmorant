@@ -5,7 +5,7 @@
 #' @export
 GeomReltext <- ggproto("GeomText", Geom,
                        # define required aesthetics
-                       required_aes = c("label"),
+                       required_aes = c("relx", "rely", "label"),
                        # define default aesthetics
                        default_aes = aes(
                          colour = "black", size = 3.25, angle = 0, hjust = 0.5,
