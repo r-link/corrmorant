@@ -2,20 +2,21 @@
 # to avoid dependencies from ggplot internals
 #' @noRd
 #' @export
-StatCorrtextProto <- ggproto("StatCorrtextProto", Stat,
-                             required_aes = c("x", "y"),
-                             # compute_group
-                             compute_group = function (data, scales,
-                                                       nrow = NULL, ncol = NULL,
-                                                       digits = 2,
-                                                       corr_method,
-                                                       squeeze,
-                                                       byrow = TRUE, ...){
-                               data.frame(corr = stats::cor(data$x, data$y,
-                                                            use = "pairwise.complete.obs",
-                                                            method = corr_method)) %>%
-                               dplyr::mutate(label = format(x = corr, digits = digits))
-                             }
+StatCorrtextProto <- ggplot2::ggproto(
+  "StatCorrtextProto", Stat,
+  required_aes = c("x", "y"),
+  # compute_group
+  compute_group = function (data, scales,
+                            nrow = NULL, ncol = NULL,
+                            digits = 2,
+                            corr_method,
+                            squeeze,
+                            byrow = TRUE, ...){
+    data.frame(corr = stats::cor(data$x, data$y,
+                                 use = "pairwise.complete.obs",
+                                 method = corr_method)) %>%
+      dplyr::mutate(label = format(x = corr, digits = digits))
+  }
 )
 
 # StatCorrtext - ggproto object for stat_Corrtext -------------------------------
@@ -23,48 +24,49 @@ StatCorrtextProto <- ggproto("StatCorrtextProto", Stat,
 #' @format NULL
 #' @usage NULL
 #' @export
-StatCorrtext <- ggproto("StatCorrtext", StatCorrtextProto,
-                        # compute panel - standard function just slightly updated to pass ranges
-                        compute_panel = function (self, data, scales,
-                                                  nrow = NULL, ncol = NULL,
-                                                  digits = 2,
-                                                  corr_method,
-                                                  squeeze = 0.7,
-                                                  byrow = TRUE, ...) {
-                          # compute stats with regular compute_panel function
-                          stats <- StatCorrtextProto$compute_panel(data = data,
-                                                                   scales = scales,
-                                                                   corr_method = corr_method,
-                                                                   digits = digits,
-                                                                   ...)
-                          # rescale output after computation
-                          get_corrtext_pos(stats = stats,
-                                           nrow = nrow, ncol = ncol,
-                                           squeeze = squeeze,
-                                           xrange = scales$x$get_limits(),
-                                           yrange = scales$y$get_limits(),
-                                           byrow = byrow)
-                        },
-                        setup_data = function(data, params){
-                          # check number of groups
-                          grouptab <- dplyr::group_by(data, PANEL) %>%
-                            dplyr::summarize(n = length(unique(group)))
-                          if (any(grouptab$n > 9)) {
-                            warning("Correlations calculated for very large number of groups per panel.\n",
-                                    "Is this really what you want to do?")
-                          }
-                          data
-                        },
-                        # will not be evaluated, but argument names are needed:
-                        compute_group = function (data, scales,
-                                                  nrow = NULL, ncol = NULL,
-                                                  digits = 2,
-                                                  corr_method,
-                                                  squeeze,
-                                                  byrow = TRUE, ...) {
-                          StatCorrtextProto$compute_group(data, scales, nrow, ncol, digits,
-                                                          corr_method, squeeze, ...)
-                        }
+StatCorrtext <- ggplot2::ggproto(
+  "StatCorrtext", StatCorrtextProto,
+  # compute panel - standard function just slightly updated to pass ranges
+  compute_panel = function (self, data, scales,
+                            nrow = NULL, ncol = NULL,
+                            digits = 2,
+                            corr_method,
+                            squeeze = 0.7,
+                            byrow = TRUE, ...) {
+    # compute stats with regular compute_panel function
+    stats <- StatCorrtextProto$compute_panel(data = data,
+                                             scales = scales,
+                                             corr_method = corr_method,
+                                             digits = digits,
+                                             ...)
+    # rescale output after computation
+    get_corrtext_pos(stats = stats,
+                     nrow = nrow, ncol = ncol,
+                     squeeze = squeeze,
+                     xrange = scales$x$get_limits(),
+                     yrange = scales$y$get_limits(),
+                     byrow = byrow)
+  },
+  setup_data = function(data, params){
+    # check number of groups
+    grouptab <- dplyr::group_by(data, PANEL) %>%
+      dplyr::summarize(n = length(unique(group)))
+    if (any(grouptab$n > 9)) {
+      warning("Correlations calculated for very large number of groups per panel.\n",
+              "Is this really what you want to do?")
+    }
+    data
+  },
+  # will not be evaluated, but argument names are needed:
+  compute_group = function (data, scales,
+                            nrow = NULL, ncol = NULL,
+                            digits = 2,
+                            corr_method,
+                            squeeze,
+                            byrow = TRUE, ...) {
+    StatCorrtextProto$compute_group(data, scales, nrow, ncol, digits,
+                                    corr_method, squeeze, ...)
+  }
 )
 
 # stat_corrtext() - stat function based on Corrtext -----------------------------
@@ -97,7 +99,7 @@ stat_corrtext <- function(mapping = NULL, data = NULL, geom = "text",
                           corr_method = NULL, squeeze = 0.7,
                           byrow = TRUE,
                           ...) {
-  layer(
+  ggplot2::layer(
     stat = StatCorrtext, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(digits = digits, corr_method = corr_method, squeeze = squeeze,
@@ -137,30 +139,30 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
       out <- dplyr::mutate(
         stats,
         relx = rescale_var(x = rep(1:ncol, length.out = ngr),
-                        lower = (1 - squeeze)/2,
-                        upper = (1 + squeeze)/2,
-                        range = c(0, 1)),
+                           lower = (1 - squeeze)/2,
+                           upper = (1 + squeeze)/2,
+                           range = c(0, 1)),
         rely = rescale_var(x = rep(nrow:1, each = ncol)[1:ngr],
-                        lower = (1 - squeeze)/2,
-                        upper = (1 + squeeze)/2,
-                        range = c(0, 1)),
+                           lower = (1 - squeeze)/2,
+                           upper = (1 + squeeze)/2,
+                           range = c(0, 1)),
         x = xrange[1] + relx * diff(xrange),
         y = yrange[1] + rely * diff(yrange)
-        )
+      )
     } else {
       out <- dplyr::mutate(
         stats,
         relx = rescale_var(x = rep(1:ncol, each = nrow)[1:ngr],
-                        lower = (1 - squeeze)/2,
-                        upper = (1 + squeeze)/2,
-                        range = c(0, 1)),
+                           lower = (1 - squeeze)/2,
+                           upper = (1 + squeeze)/2,
+                           range = c(0, 1)),
         rely = rescale_var(x = rep(nrow:1, length.out = ngr),
-                        lower = (1 - squeeze)/2,
-                        upper = (1 + squeeze)/2,
-                        range = c(0, 1)),
+                           lower = (1 - squeeze)/2,
+                           upper = (1 + squeeze)/2,
+                           range = c(0, 1)),
         x = xrange[1] + relx * diff(xrange),
         y = yrange[1] + rely * diff(yrange)
-        )
+      )
     }
     # return output
     out

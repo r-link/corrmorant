@@ -2,7 +2,7 @@
 # to avoid dependencies from ggplot internals
 #' @noRd
 #' @export
-StatFuntextProto <- ggproto("StatFuntextProto", Stat,
+StatFuntextProto <- ggplot2::ggproto("StatFuntextProto", Stat,
     required_aes = c("x", "y"),
    # compute_group
    compute_group = function (data, scales,
@@ -23,7 +23,7 @@ StatFuntextProto <- ggproto("StatFuntextProto", Stat,
 #' @format NULL
 #' @usage NULL
 #' @export
-StatFuntext <- ggproto("StatFuntext", StatFuntextProto,
+StatFuntext <- ggplot2::ggproto("StatFuntext", StatFuntextProto,
    required_aes = c("x", "y"),
    # compute panel - standard function just slightly updated to pass ranges
    compute_panel = function (self, data, scales, fun,
@@ -111,7 +111,7 @@ stat_funtext <- function(mapping = NULL, data = NULL, geom = "text",
                          squeeze = 0.7,
                          byrow = TRUE,
                          ...) {
-  layer(
+   ggplot2::layer(
     stat = StatFuntext, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(fun = fun, squeeze = squeeze,

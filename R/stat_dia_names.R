@@ -4,7 +4,7 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-StatDiaNames <- ggproto("StatDiaNames", Stat,
+StatDiaNames <- ggplot2::ggproto("StatDiaNames", Stat,
   required_aes = c("x", "label"),
   compute_panel = function(data, scales, y_pos = 0.2) {
     rx <- scales$x$get_limits()
@@ -51,7 +51,7 @@ stat_dia_names <- function(mapping = NULL, data = NULL, geom = "text",
                            position = "identity", show.legend = NA,
                            inherit.aes = TRUE, y_pos = 0.2,
                            ...) {
-  layer(
+  ggplot2::layer(
     stat = StatDiaNames, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(y_pos = y_pos, ...)

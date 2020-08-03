@@ -3,7 +3,7 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomDiaHistogram <- ggproto(
+GeomDiaHistogram <- ggplot2::ggproto(
   "GeomDiaHistogram", GeomBar,
   required_aes = "x",
   default_aes =
@@ -42,7 +42,7 @@ geom_dia_histogram <- function(mapping = NULL,
                                show.legend = NA,
                                inherit.aes = FALSE) {
 
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,

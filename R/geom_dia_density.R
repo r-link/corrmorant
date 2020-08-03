@@ -3,7 +3,7 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomDiaDensity <- ggproto(
+GeomDiaDensity <-  ggplot2::ggproto(
   "GeomDiaDensity", GeomDensity,
   required_aes = c("x"),
   default_aes =
@@ -74,7 +74,7 @@ geom_dia_density <- function(mapping = NULL,
                           outline.type = "full") {
   outline.type <- match.arg(outline.type, c("both", "upper", "lower", "full"))
 
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,

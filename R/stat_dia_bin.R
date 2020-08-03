@@ -3,7 +3,7 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-StatDiaBin <- ggproto(
+StatDiaBin <- ggplot2::ggproto(
   "StatDiaBin", StatBin,
   default_aes = aes(x = x, y = after_stat(y)),
   # some of the warnings in StatBin are retained
@@ -87,7 +87,7 @@ stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "dia_histogram",
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE, bins = 10,
                          ...) {
-  layer(
+  ggplot2::layer(
     stat = StatDiaBin, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(bins = bins, ...)

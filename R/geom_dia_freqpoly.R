@@ -3,7 +3,7 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomDiaFreqpoly <- ggproto(
+GeomDiaFreqpoly <-  ggplot2::ggproto(
   "GeomDiaFreqpoly", GeomPath,
   required_aes = "x",
   default_aes =
@@ -42,7 +42,7 @@ geom_dia_freqpoly <- function(mapping = NULL,
                                show.legend = NA,
                                inherit.aes = FALSE) {
 
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,
