@@ -103,7 +103,7 @@ dia <- function(layer) {
 # position (utri, lotri, dia)
 #' @keywords internal
 #' @importFrom methods is
-#' @importFrom dplyr filter select full_join mutate group_by ungroup
+#' @importFrom dplyr filter select left_join mutate group_by ungroup
 #' @importFrom tidyr unnest
 update_data <- function(data, target){
   # prepare function for subset computation if nothing is specified
@@ -147,9 +147,8 @@ update_data <- function(data, target){
 
         # if no tidycorrm columns are specified, return updated input
         if (length(tc_cols) == 0) {
-          output <- dplyr::mutate(data, pos = target) %>%
-            dplyr::left_join(panel_ids)
-          return(output)
+          output <- dplyr::mutate(data, pos = target)
+          return(suppressMessages(dplyr::left_join(output, panel_ids)))
         } else {
           # test if all specified columns are valid
           # (i.e. there are no levels that do not occur in the data)
@@ -166,9 +165,8 @@ update_data <- function(data, target){
               data[, cols] <- factor(data[, cols], levels = ord, ordered = TRUE)
             }
             # else return updated raw data
-            output <- dplyr::mutate(data, pos = target) %>%
-              dplyr::left_join(panel_ids)
-            return(output)
+            output <- dplyr::mutate(data, pos = target)
+            return(suppressMessages(dplyr::left_join(output, panel_ids)))
           }
         }
       }
