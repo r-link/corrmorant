@@ -1,4 +1,4 @@
-context("Utilities")
+context("Tests of utility functions")
 
 test_that("rescale_var works", {
   # rescale to 20% - 80% of the range from 0 to 20

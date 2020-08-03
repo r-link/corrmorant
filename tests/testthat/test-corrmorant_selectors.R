@@ -1,4 +1,4 @@
-context("corrmorant selectors")
+context("Tests of corrmorant selectors")
 
 # temporary dataset
 testdat  <- tidy_corrm(dplyr::mutate_if(drosera, is.numeric, log))
