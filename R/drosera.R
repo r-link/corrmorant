@@ -29,7 +29,7 @@
 #'
 #'   However, it would be kind if you add a link to the package's Github page in
 #'   case you decide to use it (and maybe drop me a line so I can link your
-#'   project in the repository), but I won’t be mad if you don’t.
+#'   project in the repository), but I won't be mad if you don't.
 #'
 #' @format A data.frame with 150 rows and 6 variables: \describe{
 #'   \item{species}{a factor denoting the sundew species (_Drosera capensis_,
