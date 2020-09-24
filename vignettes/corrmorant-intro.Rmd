@@ -26,18 +26,13 @@ library(dplyr)
 `corrmorant` extends `ggplot2` by an automated framework for plots of correlation matrices that can be easily modified via regular `ggplot2` syntax. In addition, it provides a large set of visualization tools for exploratory data analysis based on correlation matrices.
 
 ## Motivation
-The inspection of correlation matrices is a central part of exploratory data analysis. As collinearity between predictors has the potential to seriously compromise the quality of regression results - as well as hinder a straightforward interpretation of regression coefficients - the inspection of the correlations among potential predictor variables as well as the desired response should precede fitting any regression model with more than one predictor. 
+The inspection of scatterplot matrices and correlations between variables is a central part of exploratory data analysis. 
+As collinearity between predictors has the potential to seriously compromise the interpretability of regression results and to blow up the standard errors of regression coefficients, the inspection of the correlations among potential predictor variables is recommended before fitting any regression model with more than one predictor. 
+Moreover, in Bayesian data analysis, it often makes sense to inspect posterior correlations between model parameters to identify convergence issues.
 
-If you are using Bayesian methods, you will also often be faced with the necessity to inspect the correlation between parameters estimated from MCMC samples, which means you have to effectively visualize correlations in often huge datasets.
+There are plenty of reasons why one might want to visually inspect correlation matrices. However, while R provides plenty of functions and packages to display correlations, so far most of them are limited in their flexibility, and none truly leverage the full flexibility of `ggplot2`. 
 
-In addition, with structural equation models (and their cousins, confirmatory factor analysis and path analysis), there is an entire class of models that traditionally is estimated directly from the covariance matrix of a multivariate dataset. 
-
-Long story short - there are plenty of reasons why one might want to visually inspect the interrelationships between all variables in a dataset simultaneously. However, while R provides plenty of functions and packages to display correlations, so far (at least to my knowledge) all of them are only able to display certain types of correlation plots, and none of them truly leverages the full flexibility of `ggplot2`. 
-
-`corrmorant` is meant to give you this flexibility. It is designed to blend in seamlessly in a data analysis framework based on the `tidyverse`. It offers a broad variety of functions that allow you to create a large number of different correlation plots, and can be extended easily with new geoms, stats and themes, just as `ggplot2` itself. 
-
-In case you wonder about the name: One day when I was riding my bike to work and thinking about stupid puns related to **corr**elation **m**atrices, a shiny black bird appeared...
-
+`corrmorant` is meant to give you this flexibility. It is designed to blend in seamlessly in a data analysis workflow based on the `tidyverse`. It offers a broad variety of functions that allow you to create a large number of different correlation plots, and can be extended easily with new geoms, stats and themes, just as `ggplot2` itself. 
 
 ## Installation
 The package can be installed from Github using `devtools::install_github()`:
