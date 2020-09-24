@@ -25,24 +25,6 @@ library(dplyr)
 ## Description
 `corrmorant` extends `ggplot2` by an automated framework for plots of correlation matrices that can be easily modified via regular `ggplot2` syntax. In addition, it provides a large set of visualization tools for exploratory data analysis based on correlation matrices.
 
-A big thank you goes out to the developers of the software without which this package would not be possible, especially [Hadley Wickham](https://github.com/hadley/) and the rest of the [ggplot2](https://github.com/tidyverse/ggplot2) development team for their incredible work.
-
-Here`s a list of everyone else directly or indirectly implied in this package - thanks a lot for your invaluable contribution to the R community:
-
-``` {r}
-# Contributers to the packages used in corrmorant
-thankr::shoulders(package = "corrmorant") %>% 
-  # Remove number of packages 
-  select(-no_packages) %>% 
-  # Remove myself
-  dplyr::filter(!grepl("Roman M. Link", maintainer)) %>% 
-  # Remove email addresses 
-  mutate(maintainer = stringr::word(maintainer, end = -2)) %>% 
-  # Return as kable
-  knitr::kable()
-```
-
-
 ## Motivation
 The inspection of correlation matrices is a central part of exploratory data analysis. As collinearity between predictors has the potential to seriously compromise the quality of regression results - as well as hinder a straightforward interpretation of regression coefficients - the inspection of the correlations among potential predictor variables as well as the desired response should precede fitting any regression model with more than one predictor. 
 
