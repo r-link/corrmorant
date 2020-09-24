@@ -6,10 +6,11 @@
 \usage{
 corrmorant(
   data,
-  style = c("blue_red", "dark", "light"),
+  style = c("blue_red", "dark", "light", "binned"),
   rescale = c("as_is", "by_sd", "by_range"),
   corr_method = c("pearson", "kendall", "spearman"),
   labels = NULL,
+  bins = 10,
   ...
 )
 }
@@ -20,7 +21,7 @@ variables are used as rows/columns of the correlation plot, while all other
 variables are appended to the reshaped dataset as additional columns.}
 
 \item{style}{Character string defining the plot style. One of \code{"dark"},
-\code{"light"} or \code{"blue_red"}.}
+\code{"light"}, \code{"blue_red"} or \code{"binned"}.}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument
@@ -40,6 +41,9 @@ and text labels. Must be of the same length as the number of numeric
 columns displayed in the plot. Defaults to \code{NULL} (use original column
 names as labels).}
 
+\item{bins}{Integer. Number of bins for \code{style = "binned"} (ignored if using
+other styles). Defaults to 10.}
+
 \item{...}{Additional arguments to \code{\link[=ggcorrm]{ggcorrm()}}.}
 }
 \description{
@@ -49,8 +53,13 @@ values for initial data inspection.
 }
 \details{
 \code{corrmorant()} is a simplified wrapper around \code{\link[=ggcorrm]{ggcorrm()}} that
-creates scatterplot matrices with reasonable standard settings. Refer to
-the documentation of \code{\link[=ggcorrm]{ggcorrm()}} and \code{\link[=tidy_corrm]{tidy_corrm()}} for details.
+creates scatterplot matrices with reasonable standard settings. Setting the
+\code{style} argument to \code{"dark"}, \code{"light"} or \code{"blue_red"} produces regular
+scatterplots with different color schemes. \code{style = "binned"} replicates
+\code{style = "blue_red"} with a binned scatterplot (the number of bins defaults
+to 10, but can be changed with the \code{bins} argument), which can be very
+useful to reduce the plotting time for large datasets. Refer to the
+documentation of \code{\link[=ggcorrm]{ggcorrm()}} and \code{\link[=tidy_corrm]{tidy_corrm()}} for more details.
 }
 \examples{
 \dontrun{
@@ -63,6 +72,5 @@ if(interactive()){
 }
 }
 \seealso{
-\link{ggcorrm},
-\link{tidy_corrm}
+\link{ggcorrm}, \link{tidy_corrm}
 }
