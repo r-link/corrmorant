@@ -11,9 +11,11 @@
 \alias{GeomDiaHistogram}
 \alias{GeomRelpoint}
 \alias{GeomReltext}
+\alias{StatCorrtextProto}
 \alias{StatCorrtext}
 \alias{StatDiaBin}
 \alias{StatDiaNames}
+\alias{StatFuntextProto}
 \alias{StatFuntext}
 \alias{StatHeatcircle}
 \alias{StatHeatmap}
@@ -30,9 +32,9 @@ Class definitions for the new \code{ggproto} classes defined in the
 \code{corrmorant} package.
 }
 \section{New stats}{
- * \code{TidyCorrm}: prototype for \code{\link[=tidy_corrm]{tidy_corrm()}} constructor
-methods.
+
 \itemize{
+\item \code{TidyCorrm}: prototype for \code{\link[=tidy_corrm]{tidy_corrm()}} constructor methods.
 \item \code{StatCorrtext}: create and position text labels for correlation strength
 (see \link{stat_corrtext} for details).
 \item \code{StatCorrtext}: create and position text labels for the outcome of user
@@ -50,9 +52,10 @@ frequency polygons) of variables in the diagonal facets of \code{ggcorrm} plots
 }
 
 \section{New geoms}{
- * \code{GeomDiaDensity}: create and position density plots in
-the diagonal facets of \code{ggcorrm} plots (see \link{geom_dia_density} for details).
+
 \itemize{
+\item \code{GeomDiaDensity}: create and position density plots in the diagonal facets
+of \code{ggcorrm} plots (see \link{geom_dia_density} for details).
 \item \code{GeomDiaHistogram}: create and position histogramsin the diagonal facets
 of \code{ggcorrm} plots (see \link{geom_dia_density} for details).
 \item \code{GeomDiaFreqpoly}: create and position frequency polygons in the diagonal
@@ -66,14 +69,16 @@ details).
 
 \seealso{
 \itemize{
-\item \link{ggplot2-ggproto} for a description of the \code{ggproto} object
-orientation system, * \link{tidy_corrm} for structured tidy correlation plot
-datasets, * \link{add_corrtext} for correlation text labels, * \link{add_funtext} for
-user-defined text labels, * \link{add_heatmap} for correlation heatmaps, *
-\link{add_heatcircle} for circles witch correlation-dependent size and color, *
-\link{dia_names} for variable names in the plot diagonal, * \link{dia_density} for
-density plots in the plot diagonal, * \link{dia_histogram} for histograms and
-frequency polygons in the plot diagonal
+\item \link{ggplot2-ggproto} for a description of the \code{ggproto} object orientation
+system,
+\item \link{tidy_corrm} for structured tidy correlation plot datasets,
+\item \link{add_corrtext} for correlation text labels,
+\item \link{add_funtext} for user-defined text labels,
+\item \link{add_heatmap} for correlation heatmaps,
+\item \link{add_heatcircle} for circles witch correlation-dependent size and color,
+\item \link{dia_names} for variable names in the plot diagonal,
+\item \link{dia_density} for density plots in the plot diagonal,
+\item \link{dia_histogram} for histograms and frequency polygons in the plot diagonal
 }
 }
 \keyword{datasets}

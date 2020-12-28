@@ -1,6 +1,8 @@
 # this objects exists only to make use of ggproto inheritance rules
 # to avoid dependencies from ggplot internals
-#' @noRd
+#' @rdname corrmorant_ggproto
+#' @format NULL
+#' @usage NULL
 #' @export
 StatCorrtextProto <- ggplot2::ggproto(
   "StatCorrtextProto", Stat,
