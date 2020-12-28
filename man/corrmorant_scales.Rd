@@ -67,7 +67,7 @@ strength.
 }
 \details{
 The color and fill scales specified via \code{option} are built upon
-\link[ggplot2:scale_gradient]{ggplot2::scale_colour_gradient2()},
+\code{\link[ggplot2:scale_gradient]{ggplot2::scale_colour_gradient2()}} and [ggplot2::scale_fill_gradient2(),
 which can easily be used to set up additional scales if the available
 options are not sufficient.
 }
@@ -87,5 +87,8 @@ ggcorrm(drosera) +
 }
 }
 \seealso{
-\code{\link[ggplot2:scale_gradient]{ggplot2::scale_gradient()}}
+\itemize{
+\item \code{\link[ggplot2:scale_gradient]{ggplot2::scale_colour_gradient2()}} - basic colour gradient scales
+\item \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradient2()}} - basic fill gradient scales
+}
 }

@@ -34,6 +34,5 @@ strong black facet outlines. \emph{So far the only available corrmorant theme.}
 }
 }
 \seealso{
-\link[ggplot2:ggtheme]{ggplot2::ggtheme},
 \code{\link[ggplot2:theme]{ggplot2::theme()}}
 }

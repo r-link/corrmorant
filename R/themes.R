@@ -14,7 +14,6 @@
 #'   strong black facet outlines. _So far the only available corrmorant theme._
 #'
 #' @seealso
-#'   [ggplot2::ggtheme],
 #'   [ggplot2::theme()]
 #' @name corrmorant_themes
 NULL

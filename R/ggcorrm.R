@@ -73,7 +73,7 @@
 #'   the raw data and additional arguments to [tidy_corrm()] before plotting
 #'   (see documentation of this function for details).
 #'
-#'   New layers can be added using standard [ggplot::ggplot_add()] syntax,
+#'   New layers can be added using standard [ggplot2::ggplot_add()] syntax,
 #'   though in most cases it will be more useful to add layers using the
 #'   [corrmorant selector functions][corrmorant_selectors] which allow to map
 #'   geoms to a subset of panels on the plot diagonal, lower or upper triangle

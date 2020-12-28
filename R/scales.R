@@ -22,7 +22,7 @@
 #'     negative values reverse the order of the scale.
 #'
 #' @details The color and fill scales specified via `option` are built upon
-#'     [ggplot2::scale_colour_gradient2()][ggplot2::scale_gradient()],
+#'     [ggplot2::scale_colour_gradient2()] and [ggplot2::scale_fill_gradient2(),
 #'     which can easily be used to set up additional scales if the available
 #'     options are not sufficient.
 #'
@@ -41,7 +41,8 @@
 #'   }
 #' }
 #' @seealso
-#'   [ggplot2::scale_gradient()]
+#'   * [ggplot2::scale_colour_gradient2()] - basic colour gradient scales
+#'   * [ggplot2::scale_fill_gradient2()] - basic fill gradient scales
 #' @name corrmorant_scales
 NULL
 

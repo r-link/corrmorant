@@ -109,7 +109,7 @@ directly plotted without invoking \code{\link[=tidy_corrm]{tidy_corrm()}}, else,
 the raw data and additional arguments to \code{\link[=tidy_corrm]{tidy_corrm()}} before plotting
 (see documentation of this function for details).
 
-New layers can be added using standard \code{\link[ggplot:ggplot_add]{ggplot::ggplot_add()}} syntax,
+New layers can be added using standard \code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} syntax,
 though in most cases it will be more useful to add layers using the
 \link[=corrmorant_selectors]{corrmorant selector functions} which allow to map
 geoms to a subset of panels on the plot diagonal, lower or upper triangle
