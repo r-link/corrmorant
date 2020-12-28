@@ -13,7 +13,8 @@ tidy_corrm(data, ...)
   rescale = c("as_is", "by_sd", "by_range"),
   corr_method = c("pearson", "kendall", "spearman"),
   corr_group = NULL,
-  mutates = NULL
+  mutates = NULL,
+  ...
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ tidy_corrm(data, ...)
 raw data used for the correlation plot. If a \code{data.frame}, all numeric
 variables are used as rows/columns of the correlation plot, while all other
 variables are appended to the reshaped dataset as additional columns.}
+
+\item{...}{Further arguments (currently ignored in \code{tidy_corrm.default})}
 
 \item{labels}{(Optional) character vector with labels for the names of all
 numeric columns that are used to replace the column names in the plot axis

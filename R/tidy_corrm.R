@@ -11,6 +11,7 @@
 #'   raw data used for the correlation plot. If a `data.frame`, all numeric
 #'   variables are used as rows/columns of the correlation plot, while all other
 #'   variables are appended to the reshaped dataset as additional columns.
+#' @param ... Further arguments (currently ignored in `tidy_corrm.default`)
 #' @inheritParams ggcorrm
 #' @return An object of class `tidy_corrm` (a tibble with structured correlation
 #'   data) containing the following columns:
@@ -120,7 +121,8 @@ tidy_corrm.default <- function(data,
                                rescale = c( "as_is", "by_sd", "by_range"),
                                corr_method = c("pearson", "kendall", "spearman"),
                                corr_group = NULL,
-                               mutates = NULL) {
+                               mutates = NULL,
+                               ...) { # for consistency with the generic, currently unused
   # control class of data
   if (!(inherits(data, "data.frame") | is.matrix(data))) {
     stop("data must be a data.frame or matrix.")
