@@ -66,6 +66,10 @@ NULL
 NULL
 
 # getFromNamespace for internal ggplot2 functions
+#' @importFrom stats density
+NULL
+
+# getFromNamespace for internal ggplot2 functions
 #' @importFrom utils getFromNamespace
 NULL
 
