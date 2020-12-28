@@ -28,7 +28,7 @@ Imports:
     magrittr,
     stats,
     methods
-License: GPL-2
+License: GPL-2 | file LICENSE
 URL: http://github.com/r-link/corrmorant
 BugReports: http://github.com/r-link/corrmorant/issues
 Encoding: UTF-8
