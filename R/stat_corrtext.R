@@ -148,8 +148,8 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
                            lower = (1 - squeeze)/2,
                            upper = (1 + squeeze)/2,
                            range = c(0, 1)),
-        x = xrange[1] + relx * diff(xrange),
-        y = yrange[1] + rely * diff(yrange)
+        x = xrange[1] + .data$relx * diff(xrange),
+        y = yrange[1] + .data$rely * diff(yrange)
       )
     } else {
       out <- dplyr::mutate(
@@ -162,8 +162,8 @@ get_corrtext_pos <- function(stats, nrow = NULL, ncol = NULL, squeeze,
                            lower = (1 - squeeze)/2,
                            upper = (1 + squeeze)/2,
                            range = c(0, 1)),
-        x = xrange[1] + relx * diff(xrange),
-        y = yrange[1] + rely * diff(yrange)
+        x = xrange[1] + .data$relx * diff(xrange),
+        y = yrange[1] + .data$rely * diff(yrange)
       )
     }
     # return output

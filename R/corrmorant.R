@@ -58,10 +58,10 @@ corrmorant <- function(data,
     style,
     blue_red = list(
       lotri(
-        geom_point(mapping = aes(col = .corr),
+        geom_point(mapping = aes(col = .data$.corr),
                    alpha   = min(1 / log10(nrow(data)), 1))
       ),
-      utri_corrtext(mapping = aes(col = .corr)),
+      utri_corrtext(mapping = aes(col = .data$.corr)),
       dia_density(lower  = .3,
                   fill   = "grey80",
                   col    = 1),
@@ -95,13 +95,13 @@ corrmorant <- function(data,
                 size   = 3)
     ),
     binned = list(
-      lotri(stat_bin2d(aes(col = .corr, size = after_stat(density)),
+      lotri(stat_bin2d(aes(col = .data$.corr, size = after_stat(density)),
                        geom = "point",
                        alpha = 0.666,
                        bins = bins,
                        fill = NA,
                        show.legend = c(size = FALSE, colour = TRUE))),
-      utri_corrtext(mapping = aes(col = .corr)),
+      utri_corrtext(mapping = aes(col = .data$.corr)),
       dia_density(lower  = .3,
                   fill   = "grey80",
                   col    = 1),

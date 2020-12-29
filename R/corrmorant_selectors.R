@@ -113,7 +113,7 @@ update_data <- function(data, target){
       if(!methods::is(plot_data, "tidy_corrm")){
         stop("corrmorant selectors can only be used in ggcorrm() calls\n")
       }
-      dplyr::filter(plot_data, pos == target)
+      dplyr::filter(plot_data, .data$pos == target)
     }
   } else {
     # specify updated function if there is already a function for data computation
@@ -123,7 +123,7 @@ update_data <- function(data, target){
         if(!methods::is(plot_data, "tidy_corrm")){
           stop("corrmorant selectors can only be used in ggcorrm() calls\n")
         }
-        dplyr::filter(plot_data, pos == target) %>%
+        dplyr::filter(plot_data, .data$pos == target) %>%
           data()
       }
     } else {
@@ -141,9 +141,9 @@ update_data <- function(data, target){
 
         # get panel_ids in the plot dataset
         panel_ids <- plot_data %>%
-          dplyr::select(var_x, var_y, pos) %>%
-          dplyr::filter(!duplicated(paste(var_x, var_y)),
-                        pos == target)
+          dplyr::select(.data$var_x, .data$var_y, .data$pos) %>%
+          dplyr::filter(!duplicated(paste(.data$var_x, .data$var_y)),
+                        .data$pos == target)
 
         # if no tidycorrm columns are specified, return updated input
         if (length(tc_cols) == 0) {
