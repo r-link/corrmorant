@@ -29,6 +29,19 @@ utri_funtext(
 )
 }
 \arguments{
+\item{fun}{One of the following: * a) a function of \code{x} and \code{y}. * b) an
+rlang lambda style \link[rlang:as_function]{one-sided formula} describing a
+function of two parameters labeled\code{.x} and \code{.y} * c) an rlang quosure
+created with \code{quo()} that is evaluated in the context of the data analogous
+to the \code{mutates} argument in \code{\link[=tidy_corrm]{tidy_corrm()}}.
+
+The functions in a) and b) are evaluated using the \code{x} and \code{y}coordinates
+of the plot as first and second argument, respectively. The quosure in c)
+is evaluated in the context of the raw data and may contain x and y.
+
+One outcome of the computation per group is stored in a new column called
+\code{fun_out} that can be accessed in the aesthetics using\code{..fun_out..}.}
+
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()}. x
 and y are set automatically and must not bechanged, but all other
 aesthetics may be manipulated. By default, the \code{fill} aesthetic is mapped

@@ -37,6 +37,8 @@ stat_dia_bin(
   show.legend = NA,
   inherit.aes = TRUE,
   bins = 10,
+  lower = 0.3,
+  upper = 0.98,
   ...
 )
 }
@@ -70,6 +72,9 @@ a call to a position adjustment function.}
 \item{...}{Additional arguments passed \code{\link[ggplot2:layer]{ggplot2::layer()}} (arguments for
 \link[ggplot2:geom_histogram]{ggplot2::stat_bin()} are permitted).}
 
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
+
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -82,6 +87,8 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{geom}{The geometric object to use display the data}
+
+\item{bins}{Number of bins. Overridden by \code{binwidth}. Defaults to 30.}
 
 \item{lower}{numeric between 0 and 1. Lower limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 0.25.}

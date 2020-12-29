@@ -28,6 +28,8 @@ polygons relative to the range of the \code{y} axis. Defaults to 0.25.}
 \item{upper}{numeric between 0 and 1. Upper limit of the histograms/frequency
 polygons relative to the range of the \code{y} axis. Defaults to 1.}
 
+\item{bins}{Number of bins. Overridden by \code{binwidth}. Defaults to 30.}
+
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
