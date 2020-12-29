@@ -62,6 +62,7 @@ StatDiaBin <- ggplot2::ggproto(
 #'   and [dia_freqpoly].
 #'
 #' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::stat_bin
 #' @param lower numeric between 0 and 1. Lower limit of the histograms/frequency
 #'   polygons relative to the range of the `y` axis. Defaults to 0.25.
 #' @param upper numeric between 0 and 1. Upper limit of the histograms/frequency
@@ -85,11 +86,11 @@ StatDiaBin <- ggplot2::ggproto(
 #' @export
 stat_dia_bin <- function(mapping = NULL, data = NULL, geom = "dia_histogram",
                          position = "identity", show.legend = NA,
-                         inherit.aes = TRUE, bins = 10,
+                         inherit.aes = TRUE, bins = 10, lower = .3, upper = 0.98,
                          ...) {
   ggplot2::layer(
     stat = StatDiaBin, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(bins = bins, ...)
+    params = list(bins = bins, lower = lower, upper = upper, ...)
   )
 }
