@@ -45,7 +45,7 @@ skew <- function (x) {
 # prepare_aes_corrm() - prepare aesthetics for plots in ggcorrm ---------------
 #' @keywords internal
 #' @importFrom dplyr setdiff intersect
-update_aes_corrm <- function (new_aes, standard_aes = aes(x, y)) {
+update_aes_corrm <- function (new_aes, passed_aes = NULL, standard_aes = c(x = "x", y = "y")) {
   # warn if aesthetics are specified that are not permitted
   if (any(c("x", "y") %in% names(new_aes))) {
     # get call
@@ -58,12 +58,17 @@ update_aes_corrm <- function (new_aes, standard_aes = aes(x, y)) {
             which, " in ", call, " overridden by default values.",
             call. = FALSE)
   }
-  # update permitted aesthetics
-  for (i in dplyr::setdiff(names(new_aes), names(standard_aes))){
-    standard_aes[[i]] <- new_aes[[i]]
+
+  # parse standard aesthetics
+  aes_call  <- paste0("aes(", paste(names(standard_aes), "=", standard_aes, collapse = ", "), ")")
+  standards <- eval(parse(text = aes_call))
+
+  # update permitted aesthetics with parsed standards
+  for (i in dplyr::setdiff(names(new_aes), names(standards))){
+    standards[[i]] <- new_aes[[i]]
   }
-  # return updated aesthetics
-  standard_aes
+  # update with parsed aesthetics and return
+  modify_list(standards, passed_aes)
 }
 
 
