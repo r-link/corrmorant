@@ -210,7 +210,7 @@ ggcorrm <- function(data,
   }
 
   # update mapping
-  new_mapping <- modify_list(aes(x = x, y = y), mapping)
+  new_mapping <- update_aes_corrm(mapping)
 
   # prepare layers
   layers <- make_corrm_layers(backgrounds = list(bg_dia, bg_lotri, bg_utri))
@@ -267,8 +267,6 @@ make_corrm_layers <- function(backgrounds){
 make_corrm_background <- function(fill, selector){
     # create background layer for ggcorrm plots
     selector(
-      geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-                data = data.frame(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf),
-                fill = fill, inherit.aes = FALSE)
+      annotate("rect", xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, fill = fill)
     )
 }
