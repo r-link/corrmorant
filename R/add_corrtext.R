@@ -69,7 +69,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }
@@ -97,7 +97,7 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }

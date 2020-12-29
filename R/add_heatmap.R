@@ -79,7 +79,7 @@ lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pea
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }
@@ -101,7 +101,7 @@ utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pear
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }
