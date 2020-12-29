@@ -62,17 +62,17 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                            corr_method = NULL, squeeze = 0.5,
                            byrow = TRUE, show.legend = FALSE,
                            ...) {
-  # update and check mapping
-  mapping <- update_aes_corrm(mapping)
-
-  # print warning if size is specified more than once
+   # print warning if size is specified more than once
   if ("size" %in% names(mapping) && corr_size){
     warning("corr_size overridden by manually specified size.")
   }
 
-  # add size by correlation manually if specified
-  if(corr_size) mapping <- modify_list(aes(size = abs(..corr..)),
-                                       mapping)
+  # update and check mapping
+  if(corr_size) {
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+  } else {
+    mapping <- update_aes_corrm(mapping)
+  }
 
   # return plot with labels
   lotri(
@@ -89,17 +89,18 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
                           digits = 2, corr_size = TRUE,
                           corr_method = NULL, squeeze = 0.5,
                           byrow = TRUE, show.legend = FALSE, ...) {
-  # update and check mapping
-  mapping <- update_aes_corrm(mapping)
 
   # print warning if size is specified more than once
   if ("size" %in% names(mapping) && corr_size){
     warning("corr_size overridden by manually specified size.")
   }
 
-  # add size by correlation manually if specified
-  if(corr_size) mapping <- modify_list(aes(size = abs(..corr..)),
-                                       mapping)
+  # update and check mapping
+  if(corr_size) {
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+  } else {
+    mapping <- update_aes_corrm(mapping)
+  }
 
   # return plot with labels
   utri(

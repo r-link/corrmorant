@@ -27,8 +27,10 @@
 #' @export
 dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, label = var_x))
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    standard_aes = c(x = "x", label = "var_x")
+  )
 
   # return plot with labels
   dia(stat_dia_names(mapping = mapping, geom = "reltext", y_pos = y_pos,
@@ -44,6 +46,7 @@ dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
 #' @inheritParams add_corrtext
 #' @inheritParams stat_dia_bin
 #' @inheritParams ggcorrm
+#' @inheritParams ggplot2::stat_bin
 #' @inheritParams ggplot2::layer
 #'
 #' @param ... Additional parameters for [stat_dia_bin()].
@@ -70,8 +73,11 @@ dia_names <- function(y_pos = 0.15, mapping = NULL, ..., inherit.aes = FALSE) {
 dia_histogram <- function(mapping = NULL, lower = .3, upper = 0.98,
                           bins = 10, position = "identity", ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, lwr = lower, upr = upper))
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    passed_aes   = aes(lwr = lower, upr = upper),
+    standard_aes = c(x = "x")
+  )
 
   # return plot with labels
   dia(
@@ -90,8 +96,11 @@ dia_histogram <- function(mapping = NULL, lower = .3, upper = 0.98,
 dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
                          bins = 15, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, lwr = lower, upr = upper))
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    passed_aes   = aes( lwr = lower, upr = upper),
+    standard_aes = c(x = "x")
+  )
 
   # return plot with labels
   dia(geom_dia_freqpoly(mapping = mapping, stat = "dia_bin",
@@ -125,16 +134,18 @@ dia_freqpoly <- function(mapping = NULL, lower = .3, upper = 0.98,
 #' @rdname dia_density
 #' @export
 dia_density <- function(mapping = NULL, lower = .3, upper = 0.98, ...) {
-  # update and check mapping
-  mapping <- update_aes_corrm(mapping, standard_aes = aes(x = x,
-                                                          lwr = lower,
-                                                          upr = upper))
+  # combine user-defined aesthetics and check mapping
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    passed_aes   = aes( lwr = lower, upr = upper),
+    standard_aes = c(x = "x")
+  )
 
   # return plot with labels
   dia(
     geom_dia_density(
       mapping = mapping, ...)
-    )
+  )
 }
 
 

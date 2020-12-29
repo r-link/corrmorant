@@ -36,9 +36,15 @@ NULL
 #' @name add_heatmap
 #' @export
 lotri_heatmap <- function(corr_method = NULL, ...) {
+  # update and check mapping
+  mapping <- update_aes_corrm(
+    new_aes = NULL,
+    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+  )
+
   # return plot with labels
   lotri(
-    stat_heatmap(mapping = aes(x = x, y = y, fill = ..corr..),
+    stat_heatmap(mapping = mapping,
                  geom = "rect",
                  corr_method = corr_method,
                  inherit.aes = FALSE,
@@ -50,9 +56,15 @@ lotri_heatmap <- function(corr_method = NULL, ...) {
 #' @name add_heatmap
 #' @export
 utri_heatmap <- function(corr_method = NULL, ...) {
+  # update and check mapping
+  mapping <- update_aes_corrm(
+    new_aes = NULL,
+    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+    )
+
   # return plot with labels
   utri(
-    stat_heatmap(mapping = aes(x = x, y = y, fill = ..corr..),
+    stat_heatmap(mapping = mapping,
                  geom = "rect",
                  corr_method = corr_method,
                  inherit.aes = FALSE,
@@ -66,16 +78,19 @@ utri_heatmap <- function(corr_method = NULL, ...) {
 lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
 
   # update and check mapping
-  mapping <- update_aes_corrm(mapping)
-  if(corr_size) mapping <- modify_list(mapping, aes(size = ..corr..))
+  if(corr_size) {
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+  } else {
+    mapping <- update_aes_corrm(mapping)
+  }
 
   # return layer
   lotri(
     geom_relpoint(mapping = mapping,
-                   stat = "corrtext",
-                   corr_method = corr_method,
-                   show.legend = c(size = FALSE, colour = TRUE),
-                   ...)
+                  stat = "corrtext",
+                  corr_method = corr_method,
+                  show.legend = c(size = FALSE, colour = TRUE),
+                  ...)
   )
 }
 
@@ -85,15 +100,18 @@ lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pea
 utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
 
   # update and check mapping
-  mapping <- update_aes_corrm(mapping)
-  if(corr_size) mapping <- modify_list(mapping, aes(size = ..corr..))
+  if(corr_size) {
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "..corr.."))
+  } else {
+    mapping <- update_aes_corrm(mapping)
+  }
 
   # return layer
   utri(
     geom_relpoint(mapping = mapping,
-                   stat = "corrtext",
-                   corr_method = corr_method,
-                   show.legend = c(size = FALSE, colour = TRUE),
-                   ...)
+                  stat = "corrtext",
+                  corr_method = corr_method,
+                  show.legend = c(size = FALSE, colour = TRUE),
+                  ...)
   )
 }

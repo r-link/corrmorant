@@ -5,6 +5,7 @@
 #'   user-specified text labels in the off-diagonal facets of [ggcorrm] plots.
 #'
 #' @inheritParams add_corrtext
+#' @inheritParams stat_funtext
 #' @inheritParams ggcorrm
 #' @inheritParams ggplot2::layer
 #'
@@ -67,9 +68,11 @@ lotri_funtext <- function(fun, mapping = NULL,
                           nrow = NULL, ncol = NULL, squeeze = 0.5,
                           byrow = TRUE, show.legend = FALSE, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = y,
-                                                 label = ..fun_out..))
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    standard_aes = c(x = "x", y = "y", label = "..fun_out..")
+    )
+
 
   # return plot with labels
   lotri(
@@ -86,8 +89,10 @@ utri_funtext <- function(fun, mapping = NULL,
                          nrow = NULL, ncol = NULL, squeeze = 0.5,
                          byrow = TRUE,  show.legend = FALSE, ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = y, label = ..fun_out..))
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    standard_aes = c(x = "x", y = "y", label = "..fun_out..")
+  )
 
   # return plot with labels
   utri(

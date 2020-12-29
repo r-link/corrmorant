@@ -38,10 +38,10 @@ lotri_heatcircle <- function(mapping = NULL,
                              rmin = 0.1, rmax = 0.9,
                              scale_by = c("area", "radius"), ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = y,
-                                                 fill = ..corr..)
-                              )
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+  )
 
   # prepare scale argument
   scale_by <- rlang::arg_match(scale_by)
@@ -65,10 +65,10 @@ utri_heatcircle <- function(mapping = NULL,
                             rmin = 0.1, rmax = 0.9,
                             scale_by = c("area", "radius"), ...) {
   # update and check mapping
-  mapping <- update_aes_corrm(mapping,
-                              standard_aes = aes(x = x, y = y,
-                                                 fill = ..corr..)
-                              )
+  mapping <- update_aes_corrm(
+    new_aes      = mapping,
+    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+  )
 
   # prepare scale argument
   scale_by <- rlang::arg_match(scale_by)
