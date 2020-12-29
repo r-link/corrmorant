@@ -41,6 +41,7 @@ GeomReltext <- ggplot2::ggproto(
 #'   ggplot panel.
 #'
 #' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_label
 #' @inheritParams ggcorrm
 
 #' @param ... additional arguments passed to [ggplot2::layer()].
@@ -82,7 +83,7 @@ geom_reltext <- function(mapping = NULL, data = NULL,
 {
   if (!missing(nudge_x) || !missing(nudge_y)) {
     if (!missing(position)) {
-      abort("You must specify either `position` or `nudge_x`/`nudge_y`.")
+      rlang::abort("You must specify either `position` or `nudge_x`/`nudge_y`.")
     }
 
     position <- position_nudge(nudge_x, nudge_y)
