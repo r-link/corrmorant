@@ -65,6 +65,11 @@ NULL
 #' @importFrom rlang quo quos `%||%`
 NULL
 
+# rlang::.data to avoid problems with notes about  "no visible binding for global
+# variable"
+#' @importFrom rlang .data
+NULL
+
 # getFromNamespace for internal ggplot2 functions
 #' @importFrom stats density
 NULL
