@@ -32,8 +32,8 @@ test_that("corrmorant() and ggcorrm() create the same plots", {
   # style = "blue_red" (standard option)
   p5 <- corrmorant(ldros)
   p6 <- ggcorrm(ldros) +
-    lotri(geom_point( aes(col = .corr), alpha = min(1 / log10(nrow(ldros)), 1))) +
-    utri_corrtext(aes(col = .corr)) +
+    lotri(geom_point( aes(col = .data$.corr), alpha = min(1 / log10(nrow(ldros)), 1))) +
+    utri_corrtext(aes(col = .data$.corr)) +
     dia_density(lower = .3, fill = "grey80", col = 1) +
     dia_names(y_pos = .15, colour = "black", size = 3) +
     scale_color_corr()

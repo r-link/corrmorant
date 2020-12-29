@@ -45,15 +45,23 @@ test_that("prepare_aes_corrm behaves correctly", {
 
   # only one standard argument
   expect_equal(
-    update_aes_corrm(new_aes = NULL, standard_aes = aes(x = x)),
+    update_aes_corrm(new_aes = NULL, standard_aes = c(x = "x")),
     aes(x = x)
   )
 
   # additional standard argument
   expect_equal(
     update_aes_corrm(new_aes = NULL,
-                     standard_aes = aes(x, y, col = abc)),
+                     standard_aes = c(x = "x", y = "y", col = "abc")),
     aes(x = x, y = y, colour = abc)
+  )
+
+  # additional standard argument plus passed-on top level aesthetics
+  expect_equal(
+    update_aes_corrm(new_aes = NULL,
+                     passed_aes = aes(fill = blue),
+                     standard_aes = c(x = "x", y = "y", col = "abc")),
+    aes(x = x, y = y, colour = abc, fill = blue)
   )
 
 })
