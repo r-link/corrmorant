@@ -53,8 +53,6 @@ Afterwards, the package can be loaded regularly via `library()`:
 library(corrmorant)
 ```
 
-    ## Loading required package: ggplot2
-
 ## Simple plots with corrmorant()
 
 The `corrmorant()` function is a simple wrapper function around the more
@@ -73,11 +71,12 @@ corrmorant(drosera, style = "dark")
 corrmorant(drosera, style = "blue_red")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> It obvious
-that this illustration is not optimal because the three different
-*Drosera* species have remarkably different leaf morphologies. More
-complex plots (e.g. with different correlations for different groups)
-are possible with `ggcorrm()`.
+<img src="vignettes/corrmorant_examples.png"/>
+
+It obvious that this illustration is not optimal because the three
+different *Drosera* species have remarkably different leaf morphologies.
+More complex plots (e.g. with different correlations for different
+groups) are possible with `ggcorrm()`.
 
 ## Basic usage of ggcorrm()
 
@@ -107,7 +106,7 @@ p1 <- ggcorrm(drosera) +
 p1
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 If you want, you can add additional ggplot2 layers, using the
 appropriate corrmorant selectors to restrict them to the appropriate set
@@ -120,7 +119,7 @@ p1 + lotri(geom_smooth(method = "lm"))
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 The horrific fit of these linear regressions results from the fact that
 the `drosera` dataset contains data from three different sundew species.
@@ -138,7 +137,23 @@ ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   dia_density(lower = 0.3, color = 1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+## Special corrmorant stats and geoms
+
+| Panels       | Name                                     | Description                                                     |
+| :----------- | :--------------------------------------- | :-------------------------------------------------------------- |
+| Diagonal     | `dia_names()`                            | display text labels for variable names on the plot diagonal     |
+|              | `dia_density()`                          | display density plots in diagonal panels                        |
+|              | `dia_histogram()`                        | display histograms in diagonal panels                           |
+|              | `dia_freqpoly()`                         | display frequency polygons in diagonal panels                   |
+| Off-diagonal | `lotri_corrtext()` `utri_corrtext()`     | place text labels indicating correlation strength               |
+|              | `lotri_funtext()` `utri_funtext()`       | create text labels with the output of user-definedfunctions     |
+|              | `lotri_heatmap()` `utri_heatmap()`       | add correlation heatmap                                         |
+|              | `lotri_heatpoint()` `utri_heatpoint()`   | add symbols whose size and color indicates correlation strength |
+|              | `lotri_heatcircle()` `utri_heatcircle()` | add circles whose area scales with correlation strength         |
+
+<img src="vignettes/corrmorant_funs.png" width=700/>
 
 ## Coloring data by correlation strength
 
@@ -167,7 +182,7 @@ ggcorrm(data1,
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ## Correlation heatmaps and more
 
@@ -189,7 +204,7 @@ ggcorrm(rescale = "by_sd") +
   scale_fill_corr() 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 With `lotri_/utri_heatpoint()`, you can scale the diameter of any
 character you want by correlation strength. And yes, you’re right, this
@@ -211,7 +226,7 @@ ggcorrm() +
     ## Some variables are highly skewed (abs(skew) > 1).
     ## Consider transformation for better display.
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ## Print output of arbitrary functions of the data
 
@@ -236,7 +251,7 @@ ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   dia_names(y_pos = 0.15)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Besides using a two-parameter formula, `stat_funtext()`, the stat
 underlying `lotri/utri_funtext()`, also accepts rlang style lambda
@@ -255,4 +270,4 @@ ggcorrm(drosera, aes(col = .corr), rescale = "as_is") +
   scale_color_corr()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->

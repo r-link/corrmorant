@@ -8,6 +8,8 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE,
                       cache = FALSE)
 library(dplyr)
+# run script to update cowplot figures
+source("tools/create_cowplot_figures.R")
 ```
 <img src="man/figures/logo.png" align="right" width="150" />
 
@@ -56,13 +58,8 @@ corrmorant(drosera, style = "dark")
 corrmorant(drosera, style = "blue_red")
 ```
 
-``` {r, message=FALSE, echo=FALSE, fig.width = 12, fig.height = 4}
-c1 <- corrmorant(drosera, style = "light")
-c2 <- corrmorant(drosera, style = "dark")
-c3 <- corrmorant(drosera, style = "blue_red")
-cowplot::plot_grid(c1,c2,c3 + theme(legend.position = "none"), 
-                   cowplot::get_legend(c3), nrow = 1, rel_widths = c(1,1,1,0.3))
-```
+<img src="vignettes/corrmorant_examples.png"/>
+
 It obvious that this illustration is not optimal because the three different _Drosera_ species have remarkably different leaf morphologies. More complex plots (e.g. with different correlations for different groups) are possible with `ggcorrm()`.  
 
 ## Basic usage of ggcorrm()
@@ -95,6 +92,39 @@ ggcorrm(drosera, mapping = aes(col = species, fill = species)) +
   dia_names(y_pos = 0.15, size = 3) +
   dia_density(lower = 0.3, color = 1)
 ```
+
+## Special corrmorant stats and geoms
+
+------------ -------------------- ---------------------------------------------
+Panels       Name                 Description
+------------ -------------------- ---------------------------------------------
+Diagonal     `dia_names()`        display text labels for variable names on the  
+                                  plot diagonal
+
+             `dia_density()`      display density plots in diagonal panels
+
+             `dia_histogram()`    display histograms in diagonal panels
+
+             `dia_freqpoly()`     display frequency polygons in diagonal panels
+
+Off-diagonal `lotri_corrtext()`   place text labels indicating correlation  
+             `utri_corrtext()`    strength   
+                       
+             `lotri_funtext()`    create text labels with the output of         
+             `utri_funtext()`     user-definedfunctions
+             
+             `lotri_heatmap()`    add correlation heatmap 
+             `utri_heatmap()`      
+                       
+             `lotri_heatpoint()`  add symbols whose size and color indicates
+             `utri_heatpoint()`   correlation strength
+            
+             `lotri_heatcircle()` add circles whose area scales with 
+             `utri_heatcircle()`  correlation strength
+------------ -------------------- ---------------------------------------------
+
+<img src="vignettes/corrmorant_funs.png" width=700/>
+
 
 ## Coloring data by correlation strength
 To color a dataset by correlation strength, you can use the `.corr` column internally created in `tidy_corrm()` together with `scale_colour_corr()` or `scale_fill_corr()`:
