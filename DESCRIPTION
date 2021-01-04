@@ -27,7 +27,8 @@ Imports:
     tidyr (>= 1.0.0),
     magrittr,
     stats,
-    methods
+    methods,
+    MASS
 License: GPL-2 | file LICENSE
 URL: http://github.com/r-link/corrmorant
 BugReports: http://github.com/r-link/corrmorant/issues
