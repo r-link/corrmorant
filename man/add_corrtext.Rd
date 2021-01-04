@@ -56,8 +56,9 @@ access the correlation calculated by \code{stat_corrtext} manually in \code{aes(
 Defaults to \code{TRUE}.}
 
 \item{corr_method}{character string with the correlation method passed to
-\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
-Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\link[stats:cor]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting in
+\code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet width/height
 the facet labels are restricted to when multiple labels are present

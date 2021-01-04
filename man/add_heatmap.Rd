@@ -18,8 +18,9 @@ utri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...)
 }
 \arguments{
 \item{corr_method}{character string with the correlation method passed to
-\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
-Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\link[stats:cor]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting in
+\code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{...}{Additional arguments to \code{\link[=stat_heatmap]{stat_heatmap()}}.}
 

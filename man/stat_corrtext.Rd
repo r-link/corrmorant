@@ -68,8 +68,9 @@ grouping aesthetics are present (defaults to \code{NULL} - automatic setting of
 (defaults to 2).}
 
 \item{corr_method}{character string with the correlation method passed to
-\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
-Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\link[stats:cor]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting in
+\code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{squeeze}{numeric between 0 an 1. Proportion of the facet width/height
 the facet labels are restricted to when multiple labels are present

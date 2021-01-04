@@ -53,8 +53,9 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{corr_method}{character string with the correlation method passed to
-\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
-Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\link[stats:cor]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting in
+\code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{...}{additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }

@@ -31,8 +31,9 @@ aesthetics may be manipulated. Defaults to \code{NULL} (use standard \code{ggcor
 mapping).}
 
 \item{corr_method}{character string with the correlation method passed to
-\link[=stats]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and \code{"spearman"}.
-Defaults to \code{"pearson"} (or is inherited from the setting in \code{\link[=ggcorrm]{ggcorrm()}}).}
+\link[stats:cor]{cor()}. Can be one of \code{"pearson"}, \code{"kendall"} and
+\code{"spearman"}. Defaults to \code{"pearson"} (or is inherited from the setting in
+\code{\link[=ggcorrm]{ggcorrm()}}).}
 
 \item{rmin}{numeric (0 - 1). Minimum radius for the "heat circles" (as a
 proportion of panel width). Defaults to 0.1.}

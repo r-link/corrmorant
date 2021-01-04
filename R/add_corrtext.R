@@ -23,8 +23,9 @@
 #'   access the correlation calculated by `stat_corrtext` manually in `aes()`.
 #'   Defaults to `TRUE`.
 #' @param corr_method character string with the correlation method passed to
-#'   [cor()][stats]. Can be one of `"pearson"`, `"kendall"` and `"spearman"`.
-#'   Defaults to `"pearson"` (or is inherited from the setting in [ggcorrm()]).
+#'   [cor()][stats::cor()]. Can be one of `"pearson"`, `"kendall"` and
+#'   `"spearman"`. Defaults to `"pearson"` (or is inherited from the setting in
+#'   [ggcorrm()]).
 #' @param squeeze numeric between 0 an 1. Proportion of the facet width/height
 #'   the facet labels are restricted to when multiple labels are present
 #'   (defaults to 0.7 - labels extend over 70% of the extent of the plot).
