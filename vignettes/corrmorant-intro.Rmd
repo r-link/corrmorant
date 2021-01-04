@@ -11,8 +11,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 6,
-  fig.height = 6
+  fig.width = 5,
+  fig.height = 5
 )
 ```
 
@@ -23,7 +23,7 @@ library(dplyr)
 
 
 ## Introduction
-`corrmorant` is `ggplot2` extension that allows to create scatterplot matrices and correlation plots based on a slightly modified `ggplot2` syntax. The package both offers a simple standard function for creating scatterplot matrices with reasonable display settings using a minimum number of arguments (`corrmorant()`) and the possibility to create plots layer by layer using any kind of user-specified geoms based on `ggcorrm()`. Moreover, the package offers a large number of geoms and stats that automate common tasks in the display of scatterplot matrices. 
+corrmorant is a ggplot2 extension that allows to create scatterplot matrices and correlation plots based on a slightly modified ggplot2 syntax. The package both offers a simple standard function for creating scatterplot matrices with reasonable display settings using a minimum number of arguments (`corrmorant()`) and the possibility to create plots layer by layer using any kind of user-specified geoms based on `ggcorrm()`. Moreover, the package offers a large number of geoms and stats that automate common tasks in the display of scatterplot matrices. 
 
 ## Simple plots with corrmorant()
 The `corrmorant()` function is a simple wrapper function around the more complex `gcorrm()` function that can be used to create first, simple plots of correlation matrices. Currently, four different styles are available - "blue_red" (the default), "light", "dark", and "binned", here illustrated based on the `drosera` dataset accompanying the package:
@@ -39,6 +39,8 @@ corrmorant(drosera, style = "blue_red")
 ```
 
 <img src="corrmorant_examples.png" width=700/>
+
+It is clearly visible that none of the styles is very useful in the case of this dataset as the three sundew species in the drosera dataset differ considerably in their leaf morphology. For more appropriate displays of that dataset, see below in the **ggcorrm() examples** chapter.
 
 The "binned" style is a useful preset for very large datasets as it groups the data into bins (using a 10 by 10 grid in the standard settings) and plots them as points with a point size scaled by the number of observations, which speeds up plotting considerably. For this reason, the function is useful e.g. to inspect posterior correlations in MCMC draws.
 
@@ -57,26 +59,29 @@ The `corrmorant()` interface is kept simple on purpose as this function is mainl
 
 
 ## Basic usage of ggcorrm()
-The `ggcorrm()` function allows to create plots of correlation matrices layer by layer using a slightly extended regular `ggplot()` syntax. If `ggcorrm()` is called on a matrix or data.frame, it automatically rearranges it into the format required for plotting, treating all numeric variables as columns/rows of the correlation matrix, and retaining all other data as additional columns of the plotting dataset that can be used for grouping. 
+The `ggcorrm()` function allows to create plots of correlation matrices layer by layer using a slightly extended regular ggplot2 syntax. If `ggcorrm()` is called on a matrix or data.frame, it automatically rearranges it into the format required for plotting, treating all numeric variables as columns/rows of the correlation matrix, and retaining all other data as additional columns of the plotting dataset that can be used for grouping. 
 
 ### Adding regular ggplot2 layers
-You can add new layers and other `ggplot2` plot elements (e.g. scales, themes etc.) to a `ggcorrm()` object as if it was a regular `ggplot()` call. However, adding the same layers to all panels of a correlation matrix is rarely useful:
+You can add new layers and other ggplot2 plot elements (e.g. scales, themes etc.) to a `ggcorrm()` object as if it was a regular `ggplot()` call. However, adding the same layers to all panels of a correlation matrix is rarely useful:
 
 ```{r}
-ggcorrm(drosera) + geom_point(alpha = 0.5)
+# create subset of drosera dataset for a single species
+capensis <- filter(drosera, species == "capensis")
+# add scatterplot to all panels
+ggcorrm(capensis) + geom_point(alpha = 0.5)
 ```
 
 Usually, you will want to display different graphical elements in the plot diagonal, lower and upper triangular panels of the correlation matrix. This can be achieved with the three corrmorant selector functions `lotri()`, `utri()` and `dia()`, which can be used to modify ggplot layers (i.e. the output of calls to geoms, stats or the `layer()` function) and direct them only to the lower or upper triangle or the plot diagonal of a `ggcorrm()` plot, respectively. To use them, you simply have to wrap the ggplot layer into one of the selector functions:
 
 ```{r}
-ggcorrm(drosera) + 
+ggcorrm(capensis) + 
   lotri(geom_point(alpha = 0.5))
 ```
 
 Internally, the selector functions modify the data passed to the layer to make sure only a subset for the desired panels is passed on. 
 
 ### New corrmorant geoms and stats
-In addition to the default geoms and stats available in `ggplot2`, corrmorant introduces a series of new geoms and stats that simplify the creation of visually appealing correlation matrices. These can be grouped into a) data summaries and variable-specific information on the plot diagonal and b) data display and summaries in the off-diagonal panels. To simplify their usage, all corrmorant stats can be called directly by prefixing their name with `dia_`, `lotri_` or `utri_` instead of calling them via the corresponding selector functions. The prefixed versions differ from calls to the underlying stats by having a set of reasonable standard values and are preferable in most cases.
+In addition to the default geoms and stats available in ggplot2, corrmorant introduces a series of new geoms and stats that simplify the creation of visually appealing correlation matrices. These can be grouped into a) data summaries and variable-specific information on the plot diagonal and b) data display and summaries in the off-diagonal panels. To simplify their usage, all corrmorant stats can be called directly by prefixing their name with `dia_`, `lotri_` or `utri_` instead of calling them via the corresponding selector functions. The prefixed versions differ from calls to the underlying stats by having a set of reasonable standard values and are preferable in most cases.
 
 ------------ -------------------- ---------------------------------------------
 Panels       Name                 Description
@@ -109,16 +114,68 @@ Off-diagonal `lotri_corrtext()`   place text labels indicating correlation
 <img src="corrmorant_funs.png" width=700/>
 
 
-Together with regular `ggplot2` geoms and stats, these new functions can be used as building blocks for more complex correlation matrix plots.
+Together with regular ggplot2 geoms and stats called via `lotri()`, `utri()` and `dia()`, these new functions can be used as building blocks for more complex correlation matrix plots.
 
 For example, `corrmorant(drosera, style = "light")` can be recreated by the following code:
 
 ```{r}
 ggcorrm(drosera) +
-  lotri(geom_point(alpha = 0.5)) +
-  utri_corrtext() +
-  dia_names(size = 3) +
-  dia_density(fill = "grey80", color = 1)
+  lotri(geom_point(alpha = 0.5)) +        # scatterplots in lower triangle
+  utri_corrtext() +                       # correlation coef. in upper triangle
+  dia_names(size = 3) +                   # variable names in plot diagonal
+  dia_density(fill = "grey80", color = 1) # density plots in plot diagonal
+```
+
+## ggcorrm() examples
+### Grouping by categorical variables
+Often, there are groups in the data that differ considerably in their relationship. For example, the drosera dataset contains data from three different sundew species. Grouped corrmorant plots can easily be achieved by mapping the `fill` and/or `color` aesthetics to the grouping variable, either for the entire plot or in the calls of the respective geoms/stats.
+
+```{r, message=FALSE}
+ggcorrm(drosera,
+        mapping = aes(color = species, fill = species)) + # plot-level aesthetics
+  lotri(geom_point(alpha = 0.5)) +       # scatterplot in lower triangle
+  utri_corrtext(squeeze = 0.5) +         # correlation coef. in upper triangle
+  dia_names() +                          # variable names in plot diagonal
+  dia_density(color = 1, alpha = 0.5) +  # density plot in plot diagonal
+  scale_x_log10() +                      # log-transformed x axis
+  scale_y_log10()                        # log-transformed y axis
+```
+
+### Colouring by correlation strength
+corrmorant passes an additional data column to the layers with information about the correlation strength. This column is called `.corr` and can be used as an aesthetic on the plot and layer level. Different correlation metrics can be specified via the `corr_method` argument of `ggcorrm()`, and if desired the calculation can also be performed on sub-groups via the `corr_groups` argument. `scale_color_corr()` and `scale_fill_corr()` provide color and fill scales that are appropriate for the use of correlation matrices.
+The following plot displays a subset of the `large` dataset created above, colored by Kendall's tau:
+```{r, message=FALSE}
+ggcorrm(large[1:50,], # plot first 50 rows of the large dataset
+        mapping = aes(color = .corr, fill = .corr),  # plot-level aes by .corr
+        corr_method = "kendall") +
+  lotri(geom_smooth(method = "lm")) +     # regression line in lower triangle
+  lotri(geom_point(alpha = 0.3)) +        # scatterplot in lower triangle
+  utri_corrtext() +                       # correlation coef. in upper triangle
+  dia_names() +                           # variable names in plot diagonal
+  dia_histogram(color = 1, alpha = 0.5) + # histograms in plot diagonal
+  scale_color_corr(                       # colour/fill scale for correlations
+    aesthetics = c("colour", "fill"))
+```
+### Use of lotri/utri_funtext(): functions of variables
+Often it can be interesting to compute certain statistics for all combinations of variables in the scatterplot matrix. Examples include linear model slopes, elevation and slope from an SMA model, explained variance etc. `lotri_funtext()` and `utri_funtext()` compute pairwise data summaries based on user-specified functions that can be used to achieve this.
+
+The following example shows the use of `lotri_funtext()` to compute the number of complete pairs of variables in a dataset with missing data.
+
+``` {r}
+# add 10% missing data to the capensis dataset
+set.seed(1)
+capensis_missing <- capensis %>% 
+  mutate_if(is.numeric, ~ifelse(runif(50) < 0.9, .x, NA))
+
+# define function that computes number of complete pairs
+complete <- function(x, y) cbind(x, y) %>% 
+  na.omit() %>% 
+  nrow() %>%
+  paste("n =", .)
+
+# Add number of complete cases over a regular corrmorant plot
+corrmorant(capensis_missing) +
+  utri_funtext(fun = complete, vjust = 2.5)
 ```
 
 
