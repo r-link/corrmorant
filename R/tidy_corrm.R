@@ -209,16 +209,23 @@ TidyCorrm <- ggproto(
 
     # if labels were specified, check if they have the right form and rename
     if(!is.null(arg$labels)){
+      old <- names(data)[numerics]
+      if (is.function(arg$labels)){
+         new <- arg$labels(old)
+         if (!(is.character(new) & length(new) == length(old)))
+           stop("Labelling function must return a character vector with a length equal to the number of numeric columns.")
+      } else {
       if (length(arg$labels) != length(numerics))
         stop("Number of labels must be equal to the number of numeric columns.")
-
+        new <- arg$labels
+        }
       # print changes of column names
       message("The following column names were replaced:\n",
-              paste(names(data)[numerics], arg$labels, sep = "\t->\t", collapse = "\n"),
+              paste(old, new, sep = "\t->\t", collapse = "\n"),
               "\n",  sep = "")
 
       # reset names of numeric columns
-      names(data)[numerics] <- arg$labels
+      names(data)[numerics] <- new
     }
 
     # print message if there are more than 10 numeric variables

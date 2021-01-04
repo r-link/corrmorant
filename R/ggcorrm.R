@@ -20,11 +20,13 @@
 #'   are passed on to subsequent layers. `x` and `y` are set automatically and
 #'   must not be changed,  but all other aesthetics may be manipulated. Defaults
 #'   to `NULL` (use standard `ggcorrm` mapping).
-#' @param labels (Optional) character vector with labels for the names of all
-#'   numeric columns that are used to replace the column names in the plot axis
-#'   and text labels. Must be of the same length as the number of numeric
-#'   columns displayed in the plot. Defaults to `NULL` (use original column
-#'   names as labels).
+#' @param labels (Optional) character vector or function. If a character, must
+#'   contain labels for the names of all numeric columns that are used to
+#'   replace the column names in the plot axis and text labels and must be of
+#'   the same length as the number of numeric columns displayed in the plot. If
+#'   a function, must take the original names of the numeric columns as an
+#'   argument and return a character vector with the same length. Defaults to
+#'   `NULL` (use original column names as labels).
 #' @param rescale character string specifying the type of transformation
 #'   performed on the numeric variables in the plot. The standard argument
 #'   `as_is"` uses the unchanged raw values.`"by.sd"` scales by the standard

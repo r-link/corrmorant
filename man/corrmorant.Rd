@@ -35,11 +35,13 @@ dataset and passed on to \code{\link[=lotri_corrtext]{lotri_corrtext()}}/ \code{
 be one of \code{"pearson"}, \code{"kendall"}  and \code{"spearman"}. Defaults to
 \code{"pearson"}.}
 
-\item{labels}{(Optional) character vector with labels for the names of all
-numeric columns that are used to replace the column names in the plot axis
-and text labels. Must be of the same length as the number of numeric
-columns displayed in the plot. Defaults to \code{NULL} (use original column
-names as labels).}
+\item{labels}{(Optional) character vector or function. If a character, must
+contain labels for the names of all numeric columns that are used to
+replace the column names in the plot axis and text labels and must be of
+the same length as the number of numeric columns displayed in the plot. If
+a function, must take the original names of the numeric columns as an
+argument and return a character vector with the same length. Defaults to
+\code{NULL} (use original column names as labels).}
 
 \item{bins}{Integer. Number of bins for \code{style = "binned"} (ignored if using
 other styles). Defaults to 10.}

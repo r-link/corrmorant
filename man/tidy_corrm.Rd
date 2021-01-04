@@ -25,11 +25,13 @@ variables are appended to the reshaped dataset as additional columns.}
 
 \item{...}{Further arguments (currently ignored in \code{tidy_corrm.default})}
 
-\item{labels}{(Optional) character vector with labels for the names of all
-numeric columns that are used to replace the column names in the plot axis
-and text labels. Must be of the same length as the number of numeric
-columns displayed in the plot. Defaults to \code{NULL} (use original column
-names as labels).}
+\item{labels}{(Optional) character vector or function. If a character, must
+contain labels for the names of all numeric columns that are used to
+replace the column names in the plot axis and text labels and must be of
+the same length as the number of numeric columns displayed in the plot. If
+a function, must take the original names of the numeric columns as an
+argument and return a character vector with the same length. Defaults to
+\code{NULL} (use original column names as labels).}
 
 \item{rescale}{character string specifying the type of transformation
 performed on the numeric variables in the plot. The standard argument

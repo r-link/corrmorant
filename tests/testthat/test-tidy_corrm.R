@@ -76,6 +76,12 @@ test_that("Correct errors and messages are issued", {
     regexp = "Number of labels"
   )
 
+  # incorrect labeling function
+  expect_error(
+    tidy_corrm(matrix(c(rnorm(12), ncol = 3)), labels = function(x) 1:10),
+    regexp = "must return a character vector"
+  )
+
 })
 
 test_that("Labeling works", {
@@ -86,6 +92,13 @@ test_that("Labeling works", {
     suppressMessages(
       unique(tidy_corrm(data, labels = letters[1:3])$var_x)
       ),
+    factor(letters[1:3], ordered = TRUE)
+  )
+
+  expect_equal(
+    suppressMessages(
+      unique(tidy_corrm(data, labels = function(x) letters[1:3])$var_x)
+    ),
     factor(letters[1:3], ordered = TRUE)
   )
 
