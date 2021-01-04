@@ -179,6 +179,51 @@ corrmorant(capensis_missing) +
 ```
 
 
+### Modifying and parsing variable names
+The `labels` argument of `corrmorant()` and `ggcorrm()` makes it easy to replace the original column names of the numeric columns in a dataset by a set of labels, either by specifying them as a character vector or by supplying a function that returns a character vector of the desired length.
+
+For example, it is easy to convert the variable names in the `capensis` dataset in a more readable format:
+ 
+``` {r}
+#  function to remove underscores and capitalize first letter
+make_nice_labels <- function(x){
+  x <- gsub("_", " ", x)
+  paste0(toupper(substr(x, 1, 1)), substr(x, 2, nchar(x)))
+}
+
+# create plot
+corrmorant(capensis, labels = make_nice_labels)
+```
+
+Labels can also be supplied as a character vector:
+
+```{r}
+#  function to remove underscores and capitalize first letter using stringr
+labels <- make_nice_labels(names(capensis)[-c(1:2)]) %>% 
+  paste("(mm)")
+ 
+# create plot
+corrmorant(capensis, labels = labels)
+```
+
+Labels containing expressions can be parsed for proper display. The `parse` argument can be set to `TRUE` to parse labels in `dia_names()`. The `ggcorrm()` plot grid is created via facets. A new labeller function (like the built-in `label_parsed()`) can be passed to the grid via the `facet_arg` argument of `ggcorrm()`:
+
+``` {r}
+# using facet_args and dia_names(parse = TRUE) to parse variable names
+ggcorrm(large[1:50,],
+        labels = c("gamma", "beta", "alpha[3]", "phi^2", 
+                   "B~('cm'^2)", "sqrt(pi^2)"),
+        facet_arg = list(labeller = "label_parsed"), 
+        bg_dia = "grey30") +
+  utri_heatcircle(col = 1, size = .3) +
+  lotri_corrtext() +
+  dia_names(y_pos = 0.5, parse = TRUE,
+            col = "white") +
+  scale_fill_corr()
+```
+
+
+
 
 ## Working principle of ggcorrm()
 ### Data preparation
@@ -225,6 +270,7 @@ columns       created via `mutates`.
 It is also possible to call `ggcorrm()` directly on a `tidy_corrm` object. In this case, it will be directly plotted without reshaping of the data, and arguments that `ggcorrm()` passes to  `tidy_corrm()` are ignored. 
 
 `tidy_corrm()` provides a set of options;
+
 * labels
 * correlation
 * grouping
