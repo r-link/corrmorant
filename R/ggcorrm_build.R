@@ -16,7 +16,7 @@ ggplot_build.ggcorrm <- function(plot){
 #' @importFrom dplyr intersect
 update_corrm_param <- function(layer, plot_param){
   # test if parameters of corrmorant stats have to be updated
-  update_param <- dplyr::intersect(names(layer$stat_params),
+  update_param <- dplyr::intersect(layer$stat$extra_params,
                                    names(plot_param))
   # replace parameters that are not yet set
   if (length(update_param) > 0) {

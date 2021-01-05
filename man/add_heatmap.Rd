@@ -12,9 +12,9 @@ lotri_heatmap(corr_method = NULL, ...)
 
 utri_heatmap(corr_method = NULL, ...)
 
-lotri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...)
+lotri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = NULL, ...)
 
-utri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...)
+utri_heatpoint(corr_size = TRUE, mapping = NULL, corr_method = NULL, ...)
 }
 \arguments{
 \item{corr_method}{character string with the correlation method passed to

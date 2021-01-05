@@ -75,7 +75,7 @@ utri_heatmap <- function(corr_method = NULL, ...) {
 # lotri_heatpoint ---------------------------------------------------------------
 #' @rdname add_heatmap
 #' @export
-lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
+lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL, ...) {
 
   # update and check mapping
   if(corr_size) {
@@ -97,7 +97,7 @@ lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pea
 # utri_heatpoint ---------------------------------------------------------------
 #' @rdname add_heatmap
 #' @export
-utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = "pearson", ...) {
+utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL, ...) {
 
   # update and check mapping
   if(corr_size) {

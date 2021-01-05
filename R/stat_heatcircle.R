@@ -6,6 +6,7 @@
 StatHeatcircle <-  ggplot2::ggproto(
   "StatHeatcircle", Stat,
   required_aes = c("x", "y"),
+  extra_params  = c("na.rm", "corr_method"),
   compute_panel = function (self, data, scales,
                             corr_method,
                             rmin = 0.1, rmax = 0.9,

@@ -6,6 +6,7 @@
 StatHeatmap <- ggplot2::ggproto(
   "StatHeatmap", Stat,
   required_aes = c("x", "y"),
+  extra_params  = c("na.rm", "corr_method"),
   compute_panel = function (self, data, scales,
                             corr_method, ...) {
     dplyr::mutate(data,

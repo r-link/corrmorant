@@ -28,6 +28,7 @@ StatCorrtextProto <- ggplot2::ggproto(
 #' @export
 StatCorrtext <- ggplot2::ggproto(
   "StatCorrtext", StatCorrtextProto,
+  extra_params  = c("na.rm", "corr_method"),
   # compute panel - standard function just slightly updated to pass ranges
   compute_panel = function (self, data, scales,
                             nrow = NULL, ncol = NULL,
