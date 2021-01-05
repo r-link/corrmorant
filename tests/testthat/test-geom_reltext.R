@@ -5,7 +5,7 @@ d_abs <- matrix(c(rep(0, 3), 1:3), nrow = 2, byrow = TRUE)
 # create relative coordinates to add to each facet
 d_rel <- tibble(x = 2:8 / 10, y = 8:2 / 10, label = letters[1:7])
 
-# creat two analogous plots with different ranges
+# create two analogous plots with different ranges
 p1 <- ggcorrm(d_abs) +
   geom_reltext(aes(relx = x, rely = y, label = label),
                data = d_rel, inherit.aes = FALSE)
