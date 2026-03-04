@@ -12,7 +12,7 @@
 #' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes()]. x
 #'   and y are set automatically and must not bechanged, but all other
 #'   aesthetics may be manipulated. By default, the `fill` aesthetic is mapped
-#'   to `..fun_out..` internally, but this is overridden when explicitly
+#'   to `after_stat(fun_out)` internally, but this is overridden when explicitly
 #'   specified. Defaults to `NULL` (use standard settings).
 #' @param ... Additional arguments to [stat_funtext].
 #'
@@ -70,7 +70,7 @@ lotri_funtext <- function(fun, mapping = NULL,
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes      = mapping,
-    standard_aes = c(x = "x", y = "y", label = "..fun_out..")
+    standard_aes = c(x = "x", y = "y", label = "after_stat(fun_out)")
     )
 
 
@@ -91,7 +91,7 @@ utri_funtext <- function(fun, mapping = NULL,
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes      = mapping,
-    standard_aes = c(x = "x", y = "y", label = "..fun_out..")
+    standard_aes = c(x = "x", y = "y", label = "after_stat(fun_out)")
   )
 
   # return plot with labels

@@ -90,7 +90,7 @@ StatFuntext <- ggplot2::ggproto("StatFuntext", StatFuntextProto,
 #'   is evaluated in the context of the raw data and may contain x and y.
 #'
 #'   One outcome of the computation per group is stored in a new column called
-#'   `fun_out` that can be accessed in the aesthetics using`..fun_out..`.
+#'   `fun_out` that can be accessed in the aesthetics using `after_stat(fun_out)`.
 #' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.

@@ -40,7 +40,7 @@ lotri_heatcircle <- function(mapping = NULL,
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes      = mapping,
-    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+    standard_aes = c(x = "x", y = "y", fill = "after_stat(corr)")
   )
 
   # prepare scale argument
@@ -67,7 +67,7 @@ utri_heatcircle <- function(mapping = NULL,
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes      = mapping,
-    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+    standard_aes = c(x = "x", y = "y", fill = "after_stat(corr)")
   )
 
   # prepare scale argument

@@ -19,7 +19,7 @@
 #'   (defaults to 2).
 #' @param corr_size logical - should the `size` aesthetic be expressed as a
 #'   function of correlation strength? `corr_size = TRUE` is a shorthand for
-#'   setting `aes(size = abs(..corr..))`. Similar expressions can be used to
+#'   setting `aes(size = abs(after_stat(corr)))`. Similar expressions can be used to
 #'   access the correlation calculated by `stat_corrtext` manually in `aes()`.
 #'   Defaults to `TRUE`.
 #' @param corr_method character string with the correlation method passed to
@@ -70,7 +70,7 @@ lotri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(after_stat(corr))"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }
@@ -98,7 +98,7 @@ utri_corrtext <- function(mapping = NULL, nrow = NULL, ncol = NULL,
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(after_stat(corr))"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }

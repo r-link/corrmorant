@@ -7,7 +7,7 @@ GeomDiaFreqpoly <-  ggplot2::ggproto(
   "GeomDiaFreqpoly", GeomPath,
   required_aes = "x",
   default_aes =
-    aes(colour = "black", linetype = 1, alpha = NA, size = 0.5,
+    aes(colour = "black", linetype = 1, alpha = NA, linewidth = 0.5,
         lwr = 0.3, upr = 0.98),
   setup_data = Geom$setup_data,
   draw_panel = function(data, panel_params, coord, arrow = NULL,
@@ -17,7 +17,7 @@ GeomDiaFreqpoly <-  ggplot2::ggproto(
     range <- coord$backtransform_range(panel_params)
 
     # rescale range of frequency polygon
-    data$y <- corrmorant:::rescale_var(data$ymax,
+    data$y <- rescale_var(data$ymax,
                                        lower = data$lwr[1],
                                        upper = data$upr[1],
                                        range = range$y,

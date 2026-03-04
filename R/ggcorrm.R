@@ -224,21 +224,19 @@ ggcorrm <- function(data,
   }
   facet_arg <- modify_list(list(rows = var_y ~ var_x, scales = "free"), facet_arg)
 
-  # prepare output
-  plot_out <- structure(list(
-    data = corrdat,
-    layers = layers,
-    scales = ggplot()$scales, # cheap hack, must be improved
-    mapping = new_mapping,
-    theme = theme_corrm(),
-    coordinates = coord_cartesian(default = TRUE),
-    facet = do.call(what = facet_grid, args = facet_arg),
-    plot_param = list(corr_method = corr_method, corr_group = corr_group),
-    plot_env = parent.frame()
-  ), class = c( "ggcorrm", "gg", "ggplot"))
+  # prepare output using ggplot() constructor for S7 compatibility (ggplot2 v4+)
+  plot_out <- ggplot(data = corrdat, mapping = new_mapping)
+  plot_out$layers <- layers
+  plot_out$theme <- theme_corrm()
+  plot_out$coordinates <- coord_cartesian(default = TRUE)
+  plot_out$facet <- do.call(what = facet_grid, args = facet_arg)
+  plot_out$plot_env <- parent.frame()
 
-  # get axis labels and scale names
-  plot_out$labels <- make_labels(new_mapping)
+  # store corrmorant-specific parameters (routed to @meta in ggplot2 v4)
+  plot_out$plot_param <- list(corr_method = corr_method, corr_group = corr_group)
+
+  # prepend ggcorrm class for method dispatch
+  class(plot_out) <- c("ggcorrm", class(plot_out))
 
   # update graphics device
   set_last_plot(plot_out)
