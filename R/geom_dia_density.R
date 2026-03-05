@@ -8,7 +8,7 @@ GeomDiaDensity <-  ggplot2::ggproto(
   required_aes = c("x"),
   default_aes =
     aes(fill = "grey80", weight = 1, colour = "black",
-        linetype = 1, alpha = NA, size = 0.3,
+        linetype = 1, alpha = NA, linewidth = 0.3,
         lwr = 0.3, upr = 0.98),
   setup_data = Geom$setup_data,
   draw_panel = function(self, data, panel_params, coord, ...) {
@@ -16,7 +16,7 @@ GeomDiaDensity <-  ggplot2::ggproto(
     range <- coord$backtransform_range(panel_params)
 
     # rescale range of density values
-    data$ymax <- corrmorant:::rescale_var(data$density,
+    data$ymax <- rescale_var(data$density,
                                           lower = data$lwr[1],
                                           upper = data$upr[1],
                                           range = range$y,

@@ -74,19 +74,7 @@ NULL
 #' @importFrom stats density
 NULL
 
-# getFromNamespace for internal ggplot2 functions
-#' @importFrom utils getFromNamespace
-NULL
-
 # gList from grid for custom geoms
 #' @importFrom grid gList
 NULL
-
-# standard build method for ggplot objects
-#' @keywords internal
-ggplot_build.ggplot <- utils::getFromNamespace("ggplot_build.ggplot", "ggplot2")
-
-# construct labels for aesthetics
-#' @keywords internal
-make_labels <- utils::getFromNamespace("make_labels", "ggplot2")
 

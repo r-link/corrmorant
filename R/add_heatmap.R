@@ -39,7 +39,7 @@ lotri_heatmap <- function(corr_method = NULL, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes = NULL,
-    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+    standard_aes = c(x = "x", y = "y", fill = "after_stat(corr)")
   )
 
   # return plot with labels
@@ -59,7 +59,7 @@ utri_heatmap <- function(corr_method = NULL, ...) {
   # update and check mapping
   mapping <- update_aes_corrm(
     new_aes = NULL,
-    standard_aes = c(x = "x", y = "y", fill = "..corr..")
+    standard_aes = c(x = "x", y = "y", fill = "after_stat(corr)")
     )
 
   # return plot with labels
@@ -79,7 +79,7 @@ lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(after_stat(corr))"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }
@@ -101,7 +101,7 @@ utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL,
 
   # update and check mapping
   if(corr_size) {
-    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(..corr..)"))
+    mapping <- update_aes_corrm(mapping, standard_aes = c(x = "x", y = "y", size = "abs(after_stat(corr))"))
   } else {
     mapping <- update_aes_corrm(mapping)
   }

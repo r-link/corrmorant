@@ -26,14 +26,14 @@ theme_corrm <- function(base_size = 9, base_family = "",
                         base_line_size = base_size/22,
                         base_rect_size = base_size/22) {
   # built upon theme_grey (standard ggplot theme)
-  theme_grey(base_size,
-             base_family,
-             base_line_size,
-             base_rect_size) %+replace%
+  theme_grey(base_size = base_size,
+             base_family = base_family,
+             base_line_size = base_line_size,
+             base_rect_size = base_rect_size) %+replace%
     theme(aspect.ratio = 1,
           axis.title = element_blank(),
           panel.background = element_blank(),
-          panel.border = element_rect(fill = NA, color = 1),
+          panel.border = element_rect(fill = NA, color = "black"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.spacing = grid::unit(0, "mm"),

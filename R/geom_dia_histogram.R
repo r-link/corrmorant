@@ -8,7 +8,7 @@ GeomDiaHistogram <- ggplot2::ggproto(
   required_aes = "x",
   default_aes =
     aes(fill = "grey80", colour = NA,
-        linetype = 1, alpha = NA, size = 0.3,
+        linetype = 1, alpha = NA, linewidth = 0.3,
         lwr = 0.3, upr = 0.98),
   setup_data = Geom$setup_data,
   draw_panel = function(self, data, panel_params, coord, width = NULL, ...)
@@ -17,7 +17,7 @@ GeomDiaHistogram <- ggplot2::ggproto(
     range <- coord$backtransform_range(panel_params)
 
     # rescale range of histogram
-    data$ymax <- corrmorant:::rescale_var(data$ymax,
+    data$ymax <- rescale_var(data$ymax,
                                           lower = data$lwr[1],
                                           upper = data$upr[1],
                                           range = range$y,
