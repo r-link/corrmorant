@@ -43,7 +43,7 @@ GeomReltext <- ggplot2::ggproto(
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_label
 #' @inheritParams ggcorrm
-
+#' @param nudge_x,nudge_y Horizontal and vertical adjustment to nudge labels by.
 #' @param ... additional arguments passed to [ggplot2::layer()].
 #'
 #' @return An object of class `Layer`.

@@ -45,7 +45,7 @@ lotri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   lotri(
     stat_heatmap(mapping = mapping,
-                 geom = "rect",
+                 geom = GeomHeatmap,
                  corr_method = corr_method,
                  inherit.aes = FALSE,
                  ...)
@@ -65,7 +65,7 @@ utri_heatmap <- function(corr_method = NULL, ...) {
   # return plot with labels
   utri(
     stat_heatmap(mapping = mapping,
-                 geom = "rect",
+                 geom = GeomHeatmap,
                  corr_method = corr_method,
                  inherit.aes = FALSE,
                  ...)
@@ -86,11 +86,11 @@ lotri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL
 
   # return layer
   lotri(
-    geom_relpoint(mapping = mapping,
-                  stat = "corrtext",
-                  corr_method = corr_method,
-                  show.legend = c(size = FALSE, colour = TRUE),
-                  ...)
+    geom_heatpoint(mapping = mapping,
+                   stat = "heatmap",
+                   corr_method = corr_method,
+                   show.legend = c(size = FALSE, colour = TRUE),
+                   ...)
   )
 }
 
@@ -108,10 +108,10 @@ utri_heatpoint <- function(corr_size = TRUE, mapping = NULL, corr_method = NULL,
 
   # return layer
   utri(
-    geom_relpoint(mapping = mapping,
-                  stat = "corrtext",
-                  corr_method = corr_method,
-                  show.legend = c(size = FALSE, colour = TRUE),
-                  ...)
+    geom_heatpoint(mapping = mapping,
+                   stat = "heatmap",
+                   corr_method = corr_method,
+                   show.legend = c(size = FALSE, colour = TRUE),
+                   ...)
   )
 }

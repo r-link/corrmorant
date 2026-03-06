@@ -46,7 +46,7 @@ StatHeatmap <- ggplot2::ggproto(
 #'   [ggplot2::layer()],
 #'   [add_heatmap()]
 #' @export
-stat_heatmap <- function(mapping = NULL, data = NULL, geom = "rect",
+stat_heatmap <- function(mapping = NULL, data = NULL, geom = GeomHeatmap,
                          position = "identity", show.legend = NA,
                          inherit.aes = TRUE,
                          corr_method = NULL,

@@ -11,29 +11,24 @@ correlation matrices that can be easily modified via regular `ggplot2`
 syntax. In addition, it provides a large set of visualization tools for
 exploratory data analysis based on correlation matrices.
 
-| Please note that this project is a work in progress\!                                                                                                                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| This package is in steady development. Whenever I have time, I add or change some features. A somewhat stable version should not be too far away - look out for announcements over here. I will then begin with a regular versioning process. Until the package reaches this stage, please note that features may change or disappear without further notice. |
-
-**Update 2020-07-07:** As of today, the `corrmorant` package will
-replace all uses of the `iris` dataset with the `drosera` dataset, which
-contains a set of (eugenics-free) biometric measurements of three
-African sundew species and is [available as a separate
-data-package](https://github.com/r-link/drosera).
-
-**Update 2020-04-28:** So far, the package seems to work fine with R. v.
-4.0.0. Keep me informed if you notice any unwanted behavior.
-
-**Update 2020-03-06:** The package passes all tests with the newest
-`ggplot2`version (v. 3.3.0), but I haven’t been able to check more
-thoroughly. I you notice any strange behavior with the new version,
-please let me know\!
-
 A big thank you goes out to the developers of the software without which
 this package would not be possible, especially [Hadley
 Wickham](https://github.com/hadley/) and the rest of the
 [ggplot2](https://github.com/tidyverse/ggplot2) development team for
 their incredible work.
+
+### What’s new in v0.1.0
+
+* **ggplot2 v4.0.0 compatibility**: full migration to ggplot2’s S7
+  internals.
+* **New geom-based heat layers**: `geom_heatmap()`, `geom_heatcircle()`,
+  and `geom_heatpoint()` use `coord$backtransform_range()` in
+  `draw_panel()` for correct positioning even when other layers modify
+  the plot range.
+* **Expanded test suite**: 159 tests covering stats, geoms, scales, and
+  themes.
+
+See [NEWS.md](NEWS.md) for the full changelog.
 
 ## Installation
 

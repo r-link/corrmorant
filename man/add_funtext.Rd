@@ -40,12 +40,12 @@ of the plot as first and second argument, respectively. The quosure in c)
 is evaluated in the context of the raw data and may contain x and y.
 
 One outcome of the computation per group is stored in a new column called
-\code{fun_out} that can be accessed in the aesthetics using\code{..fun_out..}.}
+\code{fun_out} that can be accessed in the aesthetics using \code{after_stat(fun_out)}.}
 
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()}. x
 and y are set automatically and must not bechanged, but all other
 aesthetics may be manipulated. By default, the \code{fill} aesthetic is mapped
-to \code{..fun_out..} internally, but this is overridden when explicitly
+to \code{after_stat(fun_out)} internally, but this is overridden when explicitly
 specified. Defaults to \code{NULL} (use standard settings).}
 
 \item{nrow}{integer - the number of rows for the correlation labels if

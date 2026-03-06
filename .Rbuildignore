@@ -7,3 +7,5 @@
 ^README_cache$
 ^README_files$
 ^tools/*
+^\.claude$
+^Rplots\.pdf$

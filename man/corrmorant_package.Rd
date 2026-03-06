@@ -2,6 +2,7 @@
 % Please edit documentation in R/corrmorant_package.R
 \docType{package}
 \name{corrmorant_package}
+\alias{corrmorant-package}
 \alias{corrmorant_package}
 \title{corrmorant - Flexible correlation matrices based on ggplot2}
 \description{
@@ -63,3 +64,20 @@ and \code{utri()}.
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-link/corrmorant}
+  \item Report bugs at \url{https://github.com/r-link/corrmorant/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Roman M. Link \email{roman.link@uni-wuerzburg.de}
+
+Other contributors:
+\itemize{
+  \item Simon Dedman [contributor]
+}
+
+}
