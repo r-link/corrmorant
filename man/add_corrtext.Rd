@@ -51,7 +51,7 @@ grouping aesthetics are present (defaults to \code{NULL} - automatic setting of
 
 \item{corr_size}{logical - should the \code{size} aesthetic be expressed as a
 function of correlation strength? \code{corr_size = TRUE} is a shorthand for
-setting \code{aes(size = abs(..corr..))}. Similar expressions can be used to
+setting \code{aes(size = abs(after_stat(corr)))}. Similar expressions can be used to
 access the correlation calculated by \code{stat_corrtext} manually in \code{aes()}.
 Defaults to \code{TRUE}.}
 

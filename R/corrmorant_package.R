@@ -47,9 +47,8 @@
 #'  * [utri()] - add arbitrary ggplot layers to the upper triangle.
 #'
 #'
-#' @docType package
 #'@name corrmorant_package
-NULL
+"_PACKAGE"
 
 
 # import functions from other packages ----------------------------------------

@@ -1,19 +1,23 @@
 Package: corrmorant
 Type: Package
 Title: Flexible Correlation Matrices Based on 'ggplot2'
-Version: 0.0.0.9007
-Date: 2020-04-09
-Authors@R:
+Version: 0.1.0
+Authors@R: c(
     person(
       given = "Roman M.",
       family = "Link",
       role = c("aut", "cre"),
       email = "roman.link@uni-wuerzburg.de"
-    )
-Description: 
-    Extends ggplot2 by an automated framework for plots of correlation matrices
-    that can be easily modified via regular ggplot2 syntax. In addition, it 
-    provides a large set of visualization tools for exploratory data analysis 
+    ),
+    person(
+      given = "Simon",
+      family = "Dedman",
+      role = "ctb"
+    ))
+Description:
+    Extends 'ggplot2' by an automated framework for plots of correlation matrices
+    that can be easily modified via regular 'ggplot2' syntax. In addition, it
+    provides a large set of visualisation tools for exploratory data analysis
     based on correlation matrices.
 Depends:
     R (>= 4.1.0),
@@ -22,23 +26,22 @@ Imports:
     rlang,
     grid,
     scales,
-    utils,
     dplyr (>= 0.8.3),
     tidyr (>= 1.0.0),
     magrittr,
     stats,
-    methods,
-    MASS
+    methods
 License: GPL-2 | file LICENSE
-URL: http://github.com/r-link/corrmorant
-BugReports: http://github.com/r-link/corrmorant/issues
+URL: https://github.com/r-link/corrmorant
+BugReports: https://github.com/r-link/corrmorant/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 LazyData: true
-RoxygenNote: 7.1.1
-Suggests: 
+RoxygenNote: 7.3.3
+Suggests:
     testthat (>= 2.1.0),
     knitr,
     rmarkdown,
-    cowplot
+    cowplot,
+    MASS
 VignetteBuilder: knitr

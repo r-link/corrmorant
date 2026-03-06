@@ -49,7 +49,7 @@ lotri_heatcircle <- function(mapping = NULL,
   # return plot with labels
   lotri(
     stat_heatcircle(mapping = mapping,
-                    geom = "ribbon",
+                    geom = GeomHeatcircle,
                     corr_method = corr_method,
                     rmin = rmin, rmax = rmax,
                     scale_by = scale_by, ...)
@@ -76,7 +76,7 @@ utri_heatcircle <- function(mapping = NULL,
   # return plot with labels
   utri(
     stat_heatcircle(mapping = mapping,
-                    geom = "ribbon",
+                    geom = GeomHeatcircle,
                     corr_method = corr_method,
                     rmin = rmin, rmax = rmax,
                     scale_by = scale_by, ...)
