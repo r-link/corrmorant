@@ -258,7 +258,7 @@ TidyCorrm <- ggproto(
     if (!rlang::has_name(data, "corr_group")) data$corr_group <- 1
 
     # reshape dataset to long format
-    longtab <- tidyr::gather(data, key = "var", value = "x", numerics) %>%
+    longtab <- tidyr::gather(data, key = "var", value = "x", all_of(numerics)) %>%
       # control order of levels
       dplyr::mutate(var = factor(var, levels = names(data)[numerics],
                                  ordered = TRUE)) %>%
