@@ -1,3 +1,13 @@
+# StatDiaDensity - thin wrapper to suppress "y dropped" warning ---------------
+#' @rdname corrmorant_ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatDiaDensity <- ggplot2::ggproto(
+  "StatDiaDensity", ggplot2::StatDensity,
+  dropped_aes = c("y", "weight")
+)
+
 # GeomDiaDensity - ggproto object for geom_dia_density ------------------------
 #' @rdname corrmorant_ggproto
 #' @format NULL
@@ -65,7 +75,7 @@ GeomDiaDensity <-  ggplot2::ggproto(
 #' @export
 geom_dia_density <- function(mapping = NULL,
                           data = NULL,
-                          stat = "density",
+                          stat = StatDiaDensity,
                           position = "identity",
                           ...,
                           na.rm = FALSE,
