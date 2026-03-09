@@ -6,6 +6,7 @@
 #' @export
 StatFuntextProto <- ggplot2::ggproto("StatFuntextProto", Stat,
     required_aes = c("x", "y"),
+    dropped_aes  = c("x", "y"),
    # compute_group
    compute_group = function (data, scales,
                              fun,
@@ -26,6 +27,7 @@ StatFuntextProto <- ggplot2::ggproto("StatFuntextProto", Stat,
 #' @usage NULL
 #' @export
 StatFuntext <- ggplot2::ggproto("StatFuntext", StatFuntextProto,
+   dropped_aes  = c("x", "y"),
    required_aes = c("x", "y"),
    # compute panel - standard function just slightly updated to pass ranges
    compute_panel = function (self, data, scales, fun,

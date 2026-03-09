@@ -7,6 +7,7 @@
 StatCorrtextProto <- ggplot2::ggproto(
   "StatCorrtextProto", Stat,
   required_aes = c("x", "y"),
+  dropped_aes  = c("x", "y"),
   # compute_group
   compute_group = function (data, scales,
                             nrow = NULL, ncol = NULL,
@@ -28,6 +29,7 @@ StatCorrtextProto <- ggplot2::ggproto(
 #' @export
 StatCorrtext <- ggplot2::ggproto(
   "StatCorrtext", StatCorrtextProto,
+  dropped_aes   = c("x", "y"),
   extra_params  = c("na.rm", "corr_method"),
   # compute panel - standard function just slightly updated to pass ranges
   compute_panel = function (self, data, scales,
