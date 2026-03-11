@@ -41,17 +41,16 @@ GeomHeatcircle <- ggplot2::ggproto(
       xc <- mean(range_x)
       yc <- mean(range_y)
 
-      # get rescaled radii
-      rx <- rescale_var(abs(corr) ^ pow,
-                        lower = 0,
-                        upper = diff(range_x) / 2,
-                        range = c(rmin, rmax),
-                        append_x = c(0, 1))
-      ry <- rescale_var(abs(corr) ^ pow,
-                        lower = 0,
-                        upper = diff(range_y) / 2,
-                        range = c(rmin, rmax),
-                        append_x = c(0, 1))
+      # compute normalised radius (fraction of panel, 0 to 0.5)
+      r_norm <- rescale_var(abs(corr) ^ pow,
+                            lower = 0,
+                            upper = 0.5,
+                            range = c(rmin, rmax),
+                            append_x = c(0, 1))
+
+      # scale to data coordinates (preserves circularity after coord transform)
+      rx <- r_norm * diff(range_x)
+      ry <- r_norm * diff(range_y)
 
       # compute circle outline (100 points each half)
       theta <- seq(0, pi, length.out = 100)
