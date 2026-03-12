@@ -21,7 +21,7 @@ GeomDiaHistogram <- ggplot2::ggproto(
                                           lower = data$lwr[1],
                                           upper = data$upr[1],
                                           range = range$y,
-                                          append_x = 0)
+                                          append_x = range$y[1])
     data$ymin <- range$y[1] + 0.99 * data$lwr[1] * diff(range$y)
 
     # return grob
