@@ -7,7 +7,7 @@
 geom_dia_density(
   mapping = NULL,
   data = NULL,
-  stat = "density",
+  stat = StatDiaDensity,
   position = "identity",
   ...,
   na.rm = FALSE,

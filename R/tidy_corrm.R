@@ -290,7 +290,9 @@ TidyCorrm <- ggproto(
       dplyr::mutate(pos = dplyr::case_when(var_x >  var_y ~ "utri",
                                            var_x <  var_y ~ "lotri",
                                            var_x == var_y ~ "dia")) %>%
-      dplyr::select(var_x, var_y, x, y, pos, .corr, corr_group,
+      # select with characters instead of unquoted expressions to avoid CMD
+      # check notes because of "no visible bindings for global variables"
+      dplyr::select("var_x", "var_y", "x", "y", "pos", ".corr", "corr_group",
                     tidyr::everything())
 
     # return reshaped output

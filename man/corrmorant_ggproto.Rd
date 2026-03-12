@@ -7,6 +7,7 @@
 \docType{data}
 \name{corrmorant_ggproto}
 \alias{corrmorant_ggproto}
+\alias{StatDiaDensity}
 \alias{GeomDiaDensity}
 \alias{GeomDiaFreqpoly}
 \alias{GeomDiaHistogram}

@@ -141,7 +141,9 @@ update_data <- function(data, target){
 
         # get panel_ids in the plot dataset
         panel_ids <- plot_data %>%
-          dplyr::select(var_x, var_y, pos) %>%
+          # select with characters instead of unquoted expressions to avoid CMD
+          # check notes because of "no visible bindings for global variables"
+          dplyr::select("var_x", "var_y", "pos") %>%
           dplyr::filter(!duplicated(paste(.data$var_x, .data$var_y)),
                         .data$pos == target)
 
